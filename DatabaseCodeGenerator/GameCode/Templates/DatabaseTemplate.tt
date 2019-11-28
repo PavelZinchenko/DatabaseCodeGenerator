@@ -1,0 +1,165 @@
+﻿<#@ template language="C#" #>
+<#@ include file="GeneratedCodeWarning.tt" #>
+
+using System.Collections.Generic;
+using <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+
+namespace <#= Utils.RootNamespace #>
+{
+	public partial interface I<#= Utils.DatabaseClassName #>
+	{
+<#
+		foreach (var item in Schema.Configurations)
+        {
+#>
+		<#= Utils.DataClassName(item.name) + " " + item.name #> { get; }
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		IEnumerable<<#= Utils.DataClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> { get; }
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		<#= Utils.DataClassName(item.name) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item.name) #>> id);
+<#
+        }
+#>
+
+        Image GetImage(string name);
+        AudioClip GetAudioClip(string name);
+        string GetLocalization(string language);
+	}
+
+    public partial class <#= Utils.DatabaseClassName #> : I<#= Utils.DatabaseClassName #>
+    {
+        partial void OnDataLoaded();
+
+        protected void Load(IDataStorage storage, IJsonSerializer serializer)
+        {
+            Clear();
+            _storage = storage;
+            _content = new DatabaseContent(_storage, serializer);
+
+<#
+			foreach (var item in Schema.Objects)
+			{
+#>
+            foreach (var item in _content.<#= Utils.ObjectListPropertyName(item.name) #>)
+                <#= Utils.ObjectGetterName(item.name) #>(new ItemId<<#= Utils.DataClassName(item.name)#>>(item.Id));
+<#
+			}
+#>
+
+<#
+			foreach (var item in Schema.Configurations)
+			{
+#>
+			<#= item.name + " = " + Utils.DataClassName(item.name) #>.Create(_content.<#= item.name #>, this);
+<#
+			}
+#>
+
+            OnDataLoaded();
+        }
+
+<#
+		foreach (var item in Schema.Configurations)
+        {
+#>
+		public <#= Utils.DataClassName(item.name) + " " + item.name #> { get; private set; }
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		public IEnumerable<<#= Utils.DataClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> => <#= DataMember(item.name) #>.Values;
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		public <#= Utils.DataClassName(item.name) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item.name) #>> id) 
+		{
+            if (<#= DataMember(item.name) #>.TryGetValue(id.Value, out var item)) return item;
+            var serializable = _content?.<#= Utils.ObjectGetterName(item.name) #>(id.Value);
+            return serializable == null ? null : <#= Utils.DataClassName(item.name) #>.Create(serializable, this);
+		}
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		public void <#= Utils.ObjectSetterName(item.name) #>(int id, <#= Utils.DataClassName(item.name) #> item) { <#= DataMember(item.name) #>.Add(id, item); }
+<#
+        }
+#>
+
+        public Image GetImage(string name) { return _content?.GetImage(name) ?? Image.Empty; }
+        public AudioClip GetAudioClip(string name) { return _content?.GetAudioClip(name) ?? AudioClip.Empty; }
+        public string GetLocalization(string language) { return _content?.GetLocalization(language); }
+
+        private void Clear()
+        {
+            _content = null;
+            _storage = null;
+
+<#
+			foreach (var item in Schema.Objects)
+			{
+#>
+			<#= DataMember(item.name) #>.Clear();
+<#
+			}
+#>
+
+<#
+			foreach (var item in Schema.Configurations)
+			{
+#>
+			<#= item.name #> = null;
+<#
+			}
+#>
+        }
+
+<#
+		foreach (var item in Schema.Objects)
+        {
+#>
+		private readonly Dictionary<int, <#= Utils.DataClassName(item.name) #>> <#= DataMember(item.name) #> = new Dictionary<int, <#= Utils.DataClassName(item.name) #>>();
+<#
+        }
+#>
+
+        private DatabaseContent _content;
+        private IDataStorage _storage;
+	}
+}
+
+<#+ 
+	private static string DataMember(string name) 
+	{ 		
+		return "_" + char.ToLower(name[0]) + name.Substring(1) + "Map"; 
+	}
+#>

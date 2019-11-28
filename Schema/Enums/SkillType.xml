@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data type="enum" name="SkillType">
+    <item name="Undefined">0</item>
+    <item name="Blueprint">1</item>
+    <item name="Ship">2</item>
+    <item name="ShipAttack">4</item>
+    <item name="ShipDefense">5</item>
+    <item name="StarbaseAttack">6</item>
+    <item name="StarbaseDefense">7</item>
+    <item name="BetterPrices">10</item>
+    <item name="BetterLoot">12</item>
+</data>

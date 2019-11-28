@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data type="enum" name="PlatformType">
+    <item name="Common" />
+    <item name="AutoTarget" />
+    <item name="AutoTargetFrontal" />
+    <item name="TargetingUnit" />
+</data>

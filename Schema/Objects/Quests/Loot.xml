@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data name="Loot" type="object" typeid="Loot" >
+    <member name="Loot" type="struct" typeid="LootContent" />
+</data>

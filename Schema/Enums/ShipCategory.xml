@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data type="enum" name="ShipCategory">
+    <item name="Common" />
+    <item name="Rare" />
+    <item name="Flagship" />
+    <item name="Special" />
+    <item name="Starbase" />
+    <item name="Hidden" />
+    <item name="Drone" />
+</data>

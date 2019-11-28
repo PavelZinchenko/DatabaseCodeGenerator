@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data name="Requirement" type="struct" switch="Type" >
+    <member name="Type" type="enum" typeid="RequirementType" />
+    <member name="ItemId" type="object" case="HaveItemById" typeid="Loot" alias="Loot" />
+    <member name="ItemId" type="object" case="HaveQuestItem" typeid="QuestItem" alias="QuestItem" />
+    <member name="ItemId" type="object" case="QuestCompleted,QuestActive" typeid="Quest" alias="Quest" />
+    <member name="MinValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="1000" />
+    <member name="MaxValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="1000" />
+    <member name="MinValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-100" maxvalue="100" />
+    <member name="MaxValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-100" maxvalue="100" />
+    <member name="Character" type="object" typeid="Character" case="CharacterRelations" />
+    <member name="Faction" type="object" typeid="Faction" case="Faction" />
+    <member name="Loot" type="struct" typeid="LootContent" case="HaveItem" />
+    <member name="Requirements" type="struct_list" typeid="Requirement" case="All,Any,None" />
+</data>

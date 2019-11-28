@@ -1,0 +1,63 @@
+﻿<#@ template language="C#" #>
+<#@ include file="Serialization.tt" #>
+<#@ include file="GeneratedCodeWarning.tt" #>
+
+using System.Linq;
+using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.SerializableNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+
+namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
+{
+	public partial class <#= Utils.DataClassName(ObjectData.name) #>
+	{
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+
+		public static <#= Utils.DataClassName(ObjectData.name) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		{
+			return new <#= Utils.DataClassName(ObjectData.name) #>(serializable, database);
+		}
+
+		private <#= Utils.DataClassName(ObjectData.name) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		{
+<#
+			if (ObjectType == ObjectType.Class)
+            {
+#>
+			Id = new ItemId<<#= Utils.DataClassName(ObjectData.name) #>>(serializable.Id);
+			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
+
+<#
+			}
+#>
+<#
+			PushIndent("\t\t\t");
+
+			foreach (var item in ObjectData.members)
+				WriteDeserializationCode(item);
+
+			PopIndent();
+#>
+
+			OnDataDeserialized(serializable, database);
+		}
+
+<#
+		if (ObjectType == ObjectType.Class)
+        {
+#>
+		public readonly ItemId<<#= Utils.DataClassName(ObjectData.name) #>> Id;
+
+<#
+		}
+#>
+<#
+		PushIndent("\t\t");
+
+		foreach (var item in ObjectData.members) 
+			WriteDataClassMember(item, Schema);
+
+		PopIndent();
+#>
+	}
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data name="VisualEffectElement" type="struct" >
+    <member name="Type" type="enum" typeid="VisualEffectType" />
+    <member name="Image" type="image" />
+    <member name="ColorMode" type="enum" typeid="ColorMode" />
+    <member name="Color" type="color" />
+    <member name="Size" type="float" minvalue="0.001" maxvalue="100" />
+    <member name="StartTime" type="float" minvalue="0" maxvalue="100" />
+    <member name="Lifetime" type="float" minvalue="0" maxvalue="100" />
+</data>

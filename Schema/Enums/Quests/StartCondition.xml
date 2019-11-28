@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data type="enum" name="StartCondition">
+    <item name="Manual">0</item>
+    <item name="Beacon">1</item>
+    <item name="LocalEncounter">2</item>
+    <item name="FactionMission">2</item>
+    <item name="GameStart">2</item>
+    <item name="NewStarExplored">2</item>
+    <item name="ArrivedAtStar">2</item>
+</data>
