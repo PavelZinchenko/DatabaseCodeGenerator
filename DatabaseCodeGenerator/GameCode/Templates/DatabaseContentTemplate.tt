@@ -72,12 +72,12 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 
         public void LoadImage(string name, byte[] data)
         {
-            _images.Add(name, new Image(data));
+            _images.Add(name, new <#= Utils.ImageType #>(data));
         }
 
         public void LoadAudioClip(string name, byte[] data)
         {
-            _audioClips.Add(name, new AudioClip(data));
+            _audioClips.Add(name, new <#= Utils.AudioClipType #>(data));
         }
 
 <#
@@ -107,14 +107,14 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
         }
 #>
 
-        public Image GetImage(string name)
+        public <#= Utils.ImageType #> GetImage(string name)
         {
-            return _images.TryGetValue(name, out var image) ? image : Image.Empty;
+            return _images.TryGetValue(name, out var image) ? image : <#= Utils.ImageType #>.Empty;
         }
 
-        public AudioClip GetAudioClip(string name)
+        public <#= Utils.AudioClipType #> GetAudioClip(string name)
         {
-            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClip.Empty;
+            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : <#= Utils.AudioClipType #>.Empty;
         }
 
         public string GetLocalization(string language)
@@ -133,8 +133,8 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
         }
 #>
 
-        private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new Dictionary<string, <#= Utils.ImageType #>>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new Dictionary<string, <#= Utils.AudioClipType #>>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 	}
 }

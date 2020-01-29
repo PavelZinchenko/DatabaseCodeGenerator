@@ -8,14 +8,14 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
 	[Serializable]
 	public class FactionSerializable : SerializableItem
 	{
-		public string Type;
+		public string Name;
 		public string Color;
 		public int HomeStarDistance;
 		public int WanderingShipsDistance;

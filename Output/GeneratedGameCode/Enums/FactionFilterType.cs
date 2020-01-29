@@ -12,7 +12,7 @@ namespace GameDatabase.Enums
 	{
 		AllButList = 0,
 		ListOnly = 1,
-		CurrentStarOwners = 2,
+		StarOwnersAndList = 2,
 		AllAvailable = 3,
 	}
 }

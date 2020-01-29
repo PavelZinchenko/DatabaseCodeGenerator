@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data name="Ship" type="object" typeid="Ship" options="legacy" >
+<data name="Ship" type="object" typeid="Ship" >
     <member name="ShipCategory" type="enum" typeid="ShipCategory" />
     <member name="Name" type="string" />
     <member name="Faction" type="object" typeid="Faction" />
     <member name="SizeClass" type="enum" typeid="SizeClass" />
-    <member name="IconImage" type="image" />
+    <member name="IconImage" type="image" typeid="ShipIcon" />
     <member name="IconScale" type="float" minvalue="0.1" maxvalue="100" />
-    <member name="ModelImage" type="image" />
+    <member name="ModelImage" type="image" typeid="Ship" />
     <member name="ModelScale" type="float" minvalue="0.1" maxvalue="100" />
-    <member name="EnginePosition" type="vector" />
+    <member name="EnginePosition" type="vector" options="obsolete" />
     <member name="EngineColor" type="color" />
-    <member name="EngineSize" type="float" minvalue="0" maxvalue="1" />
+    <member name="EngineSize" type="float" minvalue="0" maxvalue="1" options="obsolete" />
     <member name="Engines" type="struct_list" typeid="Engine" />
     
     <member name="EnergyResistance" type="float" minvalue="0" maxvalue="100" />

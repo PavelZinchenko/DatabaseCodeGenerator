@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -16,9 +16,7 @@ namespace GameDatabase.Serializable
 	public class TechnologySerializable : SerializableItem
 	{
 		public TechType Type;
-		public int Component;
-		public int Satellite;
-		public int Ship;
+		public int ItemId;
 		public int Faction;
 		public int Price;
 		public bool Hidden;

@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -28,5 +28,6 @@ namespace GameDatabase.Serializable
 		public float Cooldown;
 		public float RandomFactor;
 		public float PowerMultiplier;
+		public int MaxNestingLevel;
 	}
 }

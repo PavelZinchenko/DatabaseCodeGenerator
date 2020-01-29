@@ -32,6 +32,10 @@ namespace DatabaseCodeGenerator.Schema
         public bool HasObject(string name) => _classes.ContainsKey(name);
         public bool HasStruct(string name) => _structs.ContainsKey(name);
 
+        public XmlEnumItem GetEnum(string name) => _enums.TryGetValue(name, out var item) ? item : null;
+        public XmlClassItem GetObject(string name) => _classes.TryGetValue(name, out var item) ? item : null;
+        public XmlClassItem GetStruct(string name) => _structs.TryGetValue(name, out var item) ? item : null;
+
         private void LoadResources(string path)
         {
             var files = Directory.EnumerateFiles(path, "*.xml", SearchOption.AllDirectories);

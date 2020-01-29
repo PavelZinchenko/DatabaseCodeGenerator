@@ -47,6 +47,8 @@ namespace DatabaseCodeGenerator.Schema
         public string alias = string.Empty;
         [XmlAttribute("case")]
         public string caseValue = string.Empty;
+        [XmlAttribute]
+        public string options = string.Empty;
     }
 
     [XmlRoot("data")]
@@ -54,6 +56,8 @@ namespace DatabaseCodeGenerator.Schema
     {
         [XmlAttribute]
         public string name = string.Empty;
+        [XmlAttribute]
+        public string alias = string.Empty;
         [XmlAttribute]
         public string typeid = string.Empty;
         [XmlAttribute("switch")]

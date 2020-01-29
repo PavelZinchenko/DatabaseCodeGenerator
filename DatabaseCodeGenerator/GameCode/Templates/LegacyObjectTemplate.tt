@@ -9,20 +9,20 @@ using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
-	public partial class <#= Utils.DataClassName(ObjectData.name) #>
+	public partial class <#= Utils.DataClassName(ObjectData) #>
 	{
-		public static <#= Utils.DataClassName(ObjectData.name) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
-			return new <#= Utils.DataClassName(ObjectData.name) #>(serializable, database);
+			return new <#= Utils.DataClassName(ObjectData) #>(serializable, database);
 		}
 
-		private <#= Utils.DataClassName(ObjectData.name) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
 <#
 			if (ObjectType == ObjectType.Class)
             {
 #>
-			Id = new ItemId<<#= Utils.DataClassName(ObjectData.name) #>>(serializable.Id);
+			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id);
 			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
 <#
 			}
@@ -34,11 +34,13 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 		if (ObjectType == ObjectType.Class)
         {
 #>
-		public readonly ItemId<<#= Utils.DataClassName(ObjectData.name) #>> Id;
+		public readonly ItemId<<#= Utils.DataClassName(ObjectData) #>> Id;
 <#
 		}
 #>
 		public readonly <#= ObjectData.name #>Stats Stats;
+
+		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
 	}
 
 	public partial struct <#= ObjectData.name #>Stats 
@@ -51,7 +53,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PushIndent("\t\t\t");
 
 			foreach (var item in ObjectData.members)
-				WriteDeserializationCode(item);
+				WriteLegacyDeserializationCode(item, Schema);
 
 			PopIndent();
 #>
@@ -63,7 +65,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 		PushIndent("\t\t");
 
 		foreach (var item in ObjectData.members) 
-			WriteDataClassMember(item, Schema, false);
+			WriteLegacyStructMember(item, Schema);
 
 		PopIndent();
 #>

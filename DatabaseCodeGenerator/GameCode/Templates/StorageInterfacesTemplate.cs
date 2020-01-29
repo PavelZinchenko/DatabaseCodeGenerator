@@ -95,7 +95,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
         string ToJson<T>(T item);
     }
 
-    public interface IDataStorage
+    public partial interface IDataStorage
     {
         void LoadContent(IContentLoader loader);
     }

@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -29,7 +29,7 @@ namespace GameDatabase.Serializable
 		public int DeviceId;
 		public int WeaponId;
 		public int AmmunitionId;
-		public string WeaponSlotType;
+		public WeaponSlotType WeaponSlotType;
 		public int DroneBayId;
 		public int DroneId;
 		public int[] PossibleModifications;

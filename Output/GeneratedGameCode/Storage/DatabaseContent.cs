@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using GameDatabase.Enums;
 using GameDatabase.Serializable;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Storage
 {
@@ -92,6 +92,12 @@ namespace GameDatabase.Storage
                 var data = _serializer.FromJson<ShipBuildSerializable>(content);
                 data.FileName = name;
                 _shipBuildMap.Add(data.Id, data);
+            }
+            else if (type == ItemType.Skill)
+            {
+                var data = _serializer.FromJson<SkillSerializable>(content);
+                data.FileName = name;
+                _skillMap.Add(data.Id, data);
             }
             else if (type == ItemType.Technology)
             {
@@ -184,12 +190,12 @@ namespace GameDatabase.Storage
 
         public void LoadImage(string name, byte[] data)
         {
-            _images.Add(name, new Image(data));
+            _images.Add(name, new ImageData(data));
         }
 
         public void LoadAudioClip(string name, byte[] data)
         {
-            _audioClips.Add(name, new AudioClip(data));
+            _audioClips.Add(name, new AudioClipData(data));
         }
 
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
@@ -206,6 +212,7 @@ namespace GameDatabase.Storage
 		public IEnumerable<SatelliteBuildSerializable> SatelliteBuildList => _satelliteBuildMap.Values;
 		public IEnumerable<ShipSerializable> ShipList => _shipMap.Values;
 		public IEnumerable<ShipBuildSerializable> ShipBuildList => _shipBuildMap.Values;
+		public IEnumerable<SkillSerializable> SkillList => _skillMap.Values;
 		public IEnumerable<TechnologySerializable> TechnologyList => _technologyMap.Values;
 		public IEnumerable<CharacterSerializable> CharacterList => _characterMap.Values;
 		public IEnumerable<FleetSerializable> FleetList => _fleetMap.Values;
@@ -228,6 +235,7 @@ namespace GameDatabase.Storage
 		public SatelliteBuildSerializable GetSatelliteBuild(int id) { return _satelliteBuildMap.TryGetValue(id, out var item) ? item : null; }
 		public ShipSerializable GetShip(int id) { return _shipMap.TryGetValue(id, out var item) ? item : null; }
 		public ShipBuildSerializable GetShipBuild(int id) { return _shipBuildMap.TryGetValue(id, out var item) ? item : null; }
+		public SkillSerializable GetSkill(int id) { return _skillMap.TryGetValue(id, out var item) ? item : null; }
 		public TechnologySerializable GetTechnology(int id) { return _technologyMap.TryGetValue(id, out var item) ? item : null; }
 		public CharacterSerializable GetCharacter(int id) { return _characterMap.TryGetValue(id, out var item) ? item : null; }
 		public FleetSerializable GetFleet(int id) { return _fleetMap.TryGetValue(id, out var item) ? item : null; }
@@ -239,14 +247,14 @@ namespace GameDatabase.Storage
 		public VisualEffectSerializable GetVisualEffect(int id) { return _visualEffectMap.TryGetValue(id, out var item) ? item : null; }
 		public WeaponSerializable GetWeapon(int id) { return _weaponMap.TryGetValue(id, out var item) ? item : null; }
 
-        public Image GetImage(string name)
+        public ImageData GetImage(string name)
         {
-            return _images.TryGetValue(name, out var image) ? image : Image.Empty;
+            return _images.TryGetValue(name, out var image) ? image : ImageData.Empty;
         }
 
-        public AudioClip GetAudioClip(string name)
+        public AudioClipData GetAudioClip(string name)
         {
-            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClip.Empty;
+            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClipData.Empty;
         }
 
         public string GetLocalization(string language)
@@ -267,6 +275,7 @@ namespace GameDatabase.Storage
 		private readonly Dictionary<int, SatelliteBuildSerializable> _satelliteBuildMap = new Dictionary<int, SatelliteBuildSerializable>();
 		private readonly Dictionary<int, ShipSerializable> _shipMap = new Dictionary<int, ShipSerializable>();
 		private readonly Dictionary<int, ShipBuildSerializable> _shipBuildMap = new Dictionary<int, ShipBuildSerializable>();
+		private readonly Dictionary<int, SkillSerializable> _skillMap = new Dictionary<int, SkillSerializable>();
 		private readonly Dictionary<int, TechnologySerializable> _technologyMap = new Dictionary<int, TechnologySerializable>();
 		private readonly Dictionary<int, CharacterSerializable> _characterMap = new Dictionary<int, CharacterSerializable>();
 		private readonly Dictionary<int, FleetSerializable> _fleetMap = new Dictionary<int, FleetSerializable>();
@@ -278,8 +287,8 @@ namespace GameDatabase.Storage
 		private readonly Dictionary<int, VisualEffectSerializable> _visualEffectMap = new Dictionary<int, VisualEffectSerializable>();
 		private readonly Dictionary<int, WeaponSerializable> _weaponMap = new Dictionary<int, WeaponSerializable>();
 
-        private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, ImageData> _images = new Dictionary<string, ImageData>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, AudioClipData> _audioClips = new Dictionary<string, AudioClipData>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 	}
 }

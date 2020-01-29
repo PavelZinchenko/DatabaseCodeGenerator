@@ -8,17 +8,19 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
 	[Serializable]
 	public struct BarrelSerializable
 	{
-		public Vector2 Position;
+		public UnityEngine.Vector2 Position;
 		public float Rotation;
 		public float Offset;
 		public PlatformType PlatformType;
+		public float AutoAimingArc;
+		public float RotationSpeed;
 		public string WeaponClass;
 		public string Image;
 		public float Size;

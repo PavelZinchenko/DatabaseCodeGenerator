@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -23,7 +23,7 @@ namespace GameDatabase.Serializable
 		public float IconScale;
 		public string ModelImage;
 		public float ModelScale;
-		public Vector2 EnginePosition;
+		public UnityEngine.Vector2 EnginePosition;
 		public string EngineColor;
 		public float EngineSize;
 		public EngineSerializable[] Engines;

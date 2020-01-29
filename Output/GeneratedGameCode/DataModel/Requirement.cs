@@ -1,0 +1,407 @@
+//-------------------------------------------------------------------------------
+//                                                                               
+//    This code was automatically generated.                                     
+//    Changes to this file may cause incorrect behavior and will be lost if      
+//    the code is regenerated.                                                   
+//                                                                               
+//-------------------------------------------------------------------------------
+
+using System.Linq;
+using GameDatabase.Enums;
+using GameDatabase.Serializable;
+using GameDatabase.Model;
+
+namespace GameDatabase.DataModel
+{
+	public abstract partial class Requirement
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public static Requirement Create(RequirementSerializable serializable, Database database)
+		{
+			switch (serializable.Type)
+		    {
+				case RequirementType.Empty:
+					return new Requirement_Empty(serializable, database);
+				case RequirementType.Any:
+					return new Requirement_Any(serializable, database);
+				case RequirementType.All:
+					return new Requirement_All(serializable, database);
+				case RequirementType.None:
+					return new Requirement_None(serializable, database);
+				case RequirementType.PlayerPosition:
+					return new Requirement_PlayerPosition(serializable, database);
+				case RequirementType.RandomStarSystem:
+					return new Requirement_RandomStarSystem(serializable, database);
+				case RequirementType.AggressiveOccupants:
+					return new Requirement_AggressiveOccupants(serializable, database);
+				case RequirementType.QuestCompleted:
+					return new Requirement_QuestCompleted(serializable, database);
+				case RequirementType.QuestActive:
+					return new Requirement_QuestActive(serializable, database);
+				case RequirementType.CharacterRelations:
+					return new Requirement_CharacterRelations(serializable, database);
+				case RequirementType.FactionRelations:
+					return new Requirement_FactionRelations(serializable, database);
+				case RequirementType.Faction:
+					return new Requirement_Faction(serializable, database);
+				case RequirementType.HaveQuestItem:
+					return new Requirement_HaveQuestItem(serializable, database);
+				case RequirementType.HaveItem:
+					return new Requirement_HaveItem(serializable, database);
+				case RequirementType.HaveItemById:
+					return new Requirement_HaveItemById(serializable, database);
+				case RequirementType.ComeBack:
+					return new Requirement_ComeBack(serializable, database);
+				default:
+                    throw new DatabaseException("Requirement: Invalid content type - " + serializable.Type);
+			}
+		}
+
+		public abstract T Create<T>(IRequirementFactory<T> factory);
+
+		protected Requirement(RequirementSerializable serializable, Database database)
+		{
+			Type = serializable.Type;
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public RequirementType Type { get; private set; }
+
+		public static Requirement DefaultValue { get; private set; }
+	}
+
+	public interface IRequirementFactory<T>
+    {
+	    T Create(Requirement_Empty content);
+	    T Create(Requirement_Any content);
+	    T Create(Requirement_All content);
+	    T Create(Requirement_None content);
+	    T Create(Requirement_PlayerPosition content);
+	    T Create(Requirement_RandomStarSystem content);
+	    T Create(Requirement_AggressiveOccupants content);
+	    T Create(Requirement_QuestCompleted content);
+	    T Create(Requirement_QuestActive content);
+	    T Create(Requirement_CharacterRelations content);
+	    T Create(Requirement_FactionRelations content);
+	    T Create(Requirement_Faction content);
+	    T Create(Requirement_HaveQuestItem content);
+	    T Create(Requirement_HaveItem content);
+	    T Create(Requirement_HaveItemById content);
+	    T Create(Requirement_ComeBack content);
+    }
+
+    public partial class Requirement_Empty : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_Empty(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+    }
+    public partial class Requirement_Any : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_Any(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Requirements = new ImmutableCollection<Requirement>(serializable.Requirements?.Select(item => Requirement.Create(item, database)));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public ImmutableCollection<Requirement> Requirements { get; private set; }
+    }
+    public partial class Requirement_All : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_All(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Requirements = new ImmutableCollection<Requirement>(serializable.Requirements?.Select(item => Requirement.Create(item, database)));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public ImmutableCollection<Requirement> Requirements { get; private set; }
+    }
+    public partial class Requirement_None : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_None(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Requirements = new ImmutableCollection<Requirement>(serializable.Requirements?.Select(item => Requirement.Create(item, database)));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public ImmutableCollection<Requirement> Requirements { get; private set; }
+    }
+    public partial class Requirement_PlayerPosition : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_PlayerPosition(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 1000);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 1000);
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int MinValue { get; private set; }
+		public int MaxValue { get; private set; }
+    }
+    public partial class Requirement_RandomStarSystem : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_RandomStarSystem(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 1000);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 1000);
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int MinValue { get; private set; }
+		public int MaxValue { get; private set; }
+    }
+    public partial class Requirement_AggressiveOccupants : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_AggressiveOccupants(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+    }
+    public partial class Requirement_QuestCompleted : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_QuestCompleted(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Quest = database.GetQuest(new ItemId<QuestModel>(serializable.ItemId));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public QuestModel Quest { get; private set; }
+    }
+    public partial class Requirement_QuestActive : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_QuestActive(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Quest = database.GetQuest(new ItemId<QuestModel>(serializable.ItemId));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public QuestModel Quest { get; private set; }
+    }
+    public partial class Requirement_CharacterRelations : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_CharacterRelations(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, -100, 100);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, -100, 100);
+			Character = database.GetCharacter(new ItemId<Character>(serializable.Character));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int MinValue { get; private set; }
+		public int MaxValue { get; private set; }
+		public Character Character { get; private set; }
+    }
+    public partial class Requirement_FactionRelations : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_FactionRelations(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, -100, 100);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, -100, 100);
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int MinValue { get; private set; }
+		public int MaxValue { get; private set; }
+    }
+    public partial class Requirement_Faction : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_Faction(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public Faction Faction { get; private set; }
+    }
+    public partial class Requirement_HaveQuestItem : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_HaveQuestItem(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			QuestItem = database.GetQuestItem(new ItemId<QuestItem>(serializable.ItemId));
+			Amount = UnityEngine.Mathf.Clamp(serializable.MinValue, 1, 1000000);
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public QuestItem QuestItem { get; private set; }
+		public int Amount { get; private set; }
+    }
+    public partial class Requirement_HaveItem : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_HaveItem(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Loot = LootContent.Create(serializable.Loot, database);
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public LootContent Loot { get; private set; }
+    }
+    public partial class Requirement_HaveItemById : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_HaveItemById(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+			Loot = database.GetLoot(new ItemId<LootModel>(serializable.ItemId));
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public LootModel Loot { get; private set; }
+    }
+    public partial class Requirement_ComeBack : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+  		public Requirement_ComeBack(RequirementSerializable serializable, Database database)
+            : base(serializable, database)
+        {
+
+            OnDataDeserialized(serializable, database);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+    }
+
+}
+

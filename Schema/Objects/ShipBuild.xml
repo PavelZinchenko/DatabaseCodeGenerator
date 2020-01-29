@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="ShipBuild" type="object" typeid="ShipBuild" >
-    <member name="ShipId" type="object" typeid="Ship" />
+    <member name="ShipId" type="object" typeid="Ship" alias="Ship" />
     <member name="NotAvailableInGame" type="bool" />
     <member name="DifficultyClass" type="enum" typeid="DifficultyClass" />
     <member name="BuildFaction" type="object" typeid="Faction" />

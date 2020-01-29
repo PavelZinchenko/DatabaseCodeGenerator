@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -20,7 +20,7 @@ namespace GameDatabase.Serializable
 		public float Impulse;
 		public float Recoil;
 		public float Size;
-		public Vector2 InitialPosition;
+		public UnityEngine.Vector2 InitialPosition;
 		public float AreaOfEffect;
 		public float Damage;
 		public float Range;
@@ -32,6 +32,7 @@ namespace GameDatabase.Serializable
 		public int CoupledAmmunitionId;
 		public string Color;
 		public string FireSound;
+		public string HitSound;
 		public string HitEffectPrefab;
 		public string BulletPrefab;
 	}

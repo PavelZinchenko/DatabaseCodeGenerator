@@ -17,5 +17,6 @@ namespace GameDatabase.Enums
 		Disarmed,
 		Expired,
 		Detonated,
+		OutOfAmmo,
 	}
 }

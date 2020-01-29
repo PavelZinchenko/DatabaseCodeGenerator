@@ -261,24 +261,25 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(@"        }
-
-		public void LoadLocalization(string name, string data)
-        {
-            _localizations.Add(name, data);
-        }
-
-        public void LoadImage(string name, byte[] data)
-        {
-            _images.Add(name, new Image(data));
-        }
-
-        public void LoadAudioClip(string name, byte[] data)
-        {
-            _audioClips.Add(name, new AudioClip(data));
-        }
-
-");
+            this.Write("        }\r\n\r\n\t\tpublic void LoadLocalization(string name, string data)\r\n        {\r" +
+                    "\n            _localizations.Add(name, data);\r\n        }\r\n\r\n        public void L" +
+                    "oadImage(string name, byte[] data)\r\n        {\r\n            _images.Add(name, new" +
+                    " ");
+            
+            #line 75 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write("(data));\r\n        }\r\n\r\n        public void LoadAudioClip(string name, byte[] data" +
+                    ")\r\n        {\r\n            _audioClips.Add(name, new ");
+            
+            #line 80 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write("(data));\r\n        }\r\n\r\n");
             
             #line 83 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
@@ -377,25 +378,40 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(@"
-        public Image GetImage(string name)
-        {
-            return _images.TryGetValue(name, out var image) ? image : Image.Empty;
-        }
-
-        public AudioClip GetAudioClip(string name)
-        {
-            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClip.Empty;
-        }
-
-        public string GetLocalization(string language)
-        {
-            return _localizations.TryGetValue(language, out var data) ? data : null;
-        }
-
-        private readonly IJsonSerializer _serializer;
-
-");
+            this.Write("\r\n        public ");
+            
+            #line 110 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write(" GetImage(string name)\r\n        {\r\n            return _images.TryGetValue(name, o" +
+                    "ut var image) ? image : ");
+            
+            #line 112 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write(".Empty;\r\n        }\r\n\r\n        public ");
+            
+            #line 115 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write(" GetAudioClip(string name)\r\n        {\r\n            return _audioClips.TryGetValue" +
+                    "(name, out var audioClip) ? audioClip : ");
+            
+            #line 117 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write(".Empty;\r\n        }\r\n\r\n        public string GetLocalization(string language)\r\n   " +
+                    "     {\r\n            return _localizations.TryGetValue(language, out var data) ? " +
+                    "data : null;\r\n        }\r\n\r\n        private readonly IJsonSerializer _serializer;" +
+                    "\r\n\r\n");
             
             #line 127 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
@@ -435,14 +451,38 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(@"
-        private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-	}
-}
-
-");
+            this.Write("\r\n        private readonly Dictionary<string, ");
+            
+            #line 136 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write("> _images = new Dictionary<string, ");
+            
+            #line 136 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
+                    " ");
+            
+            #line 137 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write("> _audioClips = new Dictionary<string, ");
+            
+            #line 137 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
+                    " string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalI" +
+                    "gnoreCase);\r\n\t}\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         

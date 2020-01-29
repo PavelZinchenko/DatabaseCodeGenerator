@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="Faction" type="object" typeid="Faction" >
-    <member name="Type" type="string" />
+    <member name="Name" type="string" />
     <member name="Color" type="color" />
     <member name="HomeStarDistance" type="int" minvalue="0" maxvalue="1000" />
     <member name="WanderingShipsDistance" type="int" minvalue="0" maxvalue="1000" />

@@ -8,7 +8,7 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
@@ -22,7 +22,8 @@ namespace GameDatabase.Serializable
 		public float Range;
 		public float Size;
 		public float Cooldown;
-		public Vector2 Offset;
+		public float Lifetime;
+		public UnityEngine.Vector2 Offset;
 		public ActivationType ActivationType;
 		public string Color;
 		public string Sound;

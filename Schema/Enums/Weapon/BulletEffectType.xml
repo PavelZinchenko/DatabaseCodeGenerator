@@ -3,4 +3,5 @@
     <item name="None" />
     <item name="PlaySfx" />
     <item name="SpawnBullet" />
+    <item name="Detonate" />
 </data>

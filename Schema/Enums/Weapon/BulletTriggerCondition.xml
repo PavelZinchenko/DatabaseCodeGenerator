@@ -7,4 +7,5 @@
     <item name="Disarmed" />
     <item name="Expired" />
     <item name="Detonated" />
+    <item name="OutOfAmmo" />
 </data>

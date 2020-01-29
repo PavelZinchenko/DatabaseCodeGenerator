@@ -13,9 +13,9 @@ namespace GameDatabase.Enums
 		Manual = 0,
 		Beacon = 1,
 		LocalEncounter = 2,
-		FactionMission = 2,
-		GameStart = 2,
-		NewStarExplored = 2,
-		ArrivedAtStar = 2,
+		FactionMission = 3,
+		GameStart = 4,
+		NewStarExplored = 5,
+		ArrivedAtStar = 6,
 	}
 }

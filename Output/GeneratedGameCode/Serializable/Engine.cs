@@ -8,14 +8,14 @@
 
 using System;
 using GameDatabase.Enums;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase.Serializable
 {
 	[Serializable]
 	public struct EngineSerializable
 	{
-		public Vector2 Position;
+		public UnityEngine.Vector2 Position;
 		public float Size;
 	}
 }

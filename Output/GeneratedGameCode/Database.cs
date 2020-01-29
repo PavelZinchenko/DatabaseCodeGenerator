@@ -7,307 +7,325 @@
 //-------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using GameDatabase.Classes;
+using GameDatabase.DataModel;
 using GameDatabase.Storage;
-using GameDatabase.Types;
+using GameDatabase.Model;
 
 namespace GameDatabase
 {
 	public partial interface IDatabase
 	{
-		GalaxySettingsData GalaxySettings { get; }
-		ShipSettingsData ShipSettings { get; }
+		GalaxySettings GalaxySettings { get; }
+		ShipSettings ShipSettings { get; }
 
-		IEnumerable<AmmunitionObsoleteData> AmmunitionObsoleteList { get; }
-		IEnumerable<ComponentData> ComponentList { get; }
-		IEnumerable<ComponentModData> ComponentModList { get; }
-		IEnumerable<ComponentStatsData> ComponentStatsList { get; }
-		IEnumerable<DeviceData> DeviceList { get; }
-		IEnumerable<DroneBayData> DroneBayList { get; }
-		IEnumerable<FactionData> FactionList { get; }
-		IEnumerable<SatelliteData> SatelliteList { get; }
-		IEnumerable<SatelliteBuildData> SatelliteBuildList { get; }
-		IEnumerable<ShipData> ShipList { get; }
-		IEnumerable<ShipBuildData> ShipBuildList { get; }
-		IEnumerable<TechnologyData> TechnologyList { get; }
-		IEnumerable<CharacterData> CharacterList { get; }
-		IEnumerable<FleetData> FleetList { get; }
-		IEnumerable<LootData> LootList { get; }
-		IEnumerable<QuestData> QuestList { get; }
-		IEnumerable<QuestItemData> QuestItemList { get; }
-		IEnumerable<AmmunitionData> AmmunitionList { get; }
-		IEnumerable<BulletPrefabData> BulletPrefabList { get; }
-		IEnumerable<VisualEffectData> VisualEffectList { get; }
-		IEnumerable<WeaponData> WeaponList { get; }
+		IEnumerable<AmmunitionObsolete> AmmunitionObsoleteList { get; }
+		IEnumerable<Component> ComponentList { get; }
+		IEnumerable<ComponentMod> ComponentModList { get; }
+		IEnumerable<ComponentStats> ComponentStatsList { get; }
+		IEnumerable<Device> DeviceList { get; }
+		IEnumerable<DroneBay> DroneBayList { get; }
+		IEnumerable<Faction> FactionList { get; }
+		IEnumerable<Satellite> SatelliteList { get; }
+		IEnumerable<SatelliteBuild> SatelliteBuildList { get; }
+		IEnumerable<Ship> ShipList { get; }
+		IEnumerable<ShipBuild> ShipBuildList { get; }
+		IEnumerable<Skill> SkillList { get; }
+		IEnumerable<Technology> TechnologyList { get; }
+		IEnumerable<Character> CharacterList { get; }
+		IEnumerable<Fleet> FleetList { get; }
+		IEnumerable<LootModel> LootList { get; }
+		IEnumerable<QuestModel> QuestList { get; }
+		IEnumerable<QuestItem> QuestItemList { get; }
+		IEnumerable<Ammunition> AmmunitionList { get; }
+		IEnumerable<BulletPrefab> BulletPrefabList { get; }
+		IEnumerable<VisualEffect> VisualEffectList { get; }
+		IEnumerable<Weapon> WeaponList { get; }
 
-		AmmunitionObsoleteData GetAmmunitionObsolete(ItemId<AmmunitionObsoleteData> id);
-		ComponentData GetComponent(ItemId<ComponentData> id);
-		ComponentModData GetComponentMod(ItemId<ComponentModData> id);
-		ComponentStatsData GetComponentStats(ItemId<ComponentStatsData> id);
-		DeviceData GetDevice(ItemId<DeviceData> id);
-		DroneBayData GetDroneBay(ItemId<DroneBayData> id);
-		FactionData GetFaction(ItemId<FactionData> id);
-		SatelliteData GetSatellite(ItemId<SatelliteData> id);
-		SatelliteBuildData GetSatelliteBuild(ItemId<SatelliteBuildData> id);
-		ShipData GetShip(ItemId<ShipData> id);
-		ShipBuildData GetShipBuild(ItemId<ShipBuildData> id);
-		TechnologyData GetTechnology(ItemId<TechnologyData> id);
-		CharacterData GetCharacter(ItemId<CharacterData> id);
-		FleetData GetFleet(ItemId<FleetData> id);
-		LootData GetLoot(ItemId<LootData> id);
-		QuestData GetQuest(ItemId<QuestData> id);
-		QuestItemData GetQuestItem(ItemId<QuestItemData> id);
-		AmmunitionData GetAmmunition(ItemId<AmmunitionData> id);
-		BulletPrefabData GetBulletPrefab(ItemId<BulletPrefabData> id);
-		VisualEffectData GetVisualEffect(ItemId<VisualEffectData> id);
-		WeaponData GetWeapon(ItemId<WeaponData> id);
+		AmmunitionObsolete GetAmmunitionObsolete(ItemId<AmmunitionObsolete> id);
+		Component GetComponent(ItemId<Component> id);
+		ComponentMod GetComponentMod(ItemId<ComponentMod> id);
+		ComponentStats GetComponentStats(ItemId<ComponentStats> id);
+		Device GetDevice(ItemId<Device> id);
+		DroneBay GetDroneBay(ItemId<DroneBay> id);
+		Faction GetFaction(ItemId<Faction> id);
+		Satellite GetSatellite(ItemId<Satellite> id);
+		SatelliteBuild GetSatelliteBuild(ItemId<SatelliteBuild> id);
+		Ship GetShip(ItemId<Ship> id);
+		ShipBuild GetShipBuild(ItemId<ShipBuild> id);
+		Skill GetSkill(ItemId<Skill> id);
+		Technology GetTechnology(ItemId<Technology> id);
+		Character GetCharacter(ItemId<Character> id);
+		Fleet GetFleet(ItemId<Fleet> id);
+		LootModel GetLoot(ItemId<LootModel> id);
+		QuestModel GetQuest(ItemId<QuestModel> id);
+		QuestItem GetQuestItem(ItemId<QuestItem> id);
+		Ammunition GetAmmunition(ItemId<Ammunition> id);
+		BulletPrefab GetBulletPrefab(ItemId<BulletPrefab> id);
+		VisualEffect GetVisualEffect(ItemId<VisualEffect> id);
+		Weapon GetWeapon(ItemId<Weapon> id);
 
-        Image GetImage(string name);
-        AudioClip GetAudioClip(string name);
+        ImageData GetImage(string name);
+        AudioClipData GetAudioClip(string name);
         string GetLocalization(string language);
 	}
 
     public partial class Database : IDatabase
     {
         partial void OnDataLoaded();
+        partial void OnDataInitialized();
 
         protected void Load(IDataStorage storage, IJsonSerializer serializer)
         {
             Clear();
-            _storage = storage;
-            _content = new DatabaseContent(_storage, serializer);
+            Storage = storage;
+            Content = new DatabaseContent(Storage, serializer);
 
-            foreach (var item in _content.AmmunitionObsoleteList)
-                GetAmmunitionObsolete(new ItemId<AmmunitionObsoleteData>(item.Id));
-            foreach (var item in _content.ComponentList)
-                GetComponent(new ItemId<ComponentData>(item.Id));
-            foreach (var item in _content.ComponentModList)
-                GetComponentMod(new ItemId<ComponentModData>(item.Id));
-            foreach (var item in _content.ComponentStatsList)
-                GetComponentStats(new ItemId<ComponentStatsData>(item.Id));
-            foreach (var item in _content.DeviceList)
-                GetDevice(new ItemId<DeviceData>(item.Id));
-            foreach (var item in _content.DroneBayList)
-                GetDroneBay(new ItemId<DroneBayData>(item.Id));
-            foreach (var item in _content.FactionList)
-                GetFaction(new ItemId<FactionData>(item.Id));
-            foreach (var item in _content.SatelliteList)
-                GetSatellite(new ItemId<SatelliteData>(item.Id));
-            foreach (var item in _content.SatelliteBuildList)
-                GetSatelliteBuild(new ItemId<SatelliteBuildData>(item.Id));
-            foreach (var item in _content.ShipList)
-                GetShip(new ItemId<ShipData>(item.Id));
-            foreach (var item in _content.ShipBuildList)
-                GetShipBuild(new ItemId<ShipBuildData>(item.Id));
-            foreach (var item in _content.TechnologyList)
-                GetTechnology(new ItemId<TechnologyData>(item.Id));
-            foreach (var item in _content.CharacterList)
-                GetCharacter(new ItemId<CharacterData>(item.Id));
-            foreach (var item in _content.FleetList)
-                GetFleet(new ItemId<FleetData>(item.Id));
-            foreach (var item in _content.LootList)
-                GetLoot(new ItemId<LootData>(item.Id));
-            foreach (var item in _content.QuestList)
-                GetQuest(new ItemId<QuestData>(item.Id));
-            foreach (var item in _content.QuestItemList)
-                GetQuestItem(new ItemId<QuestItemData>(item.Id));
-            foreach (var item in _content.AmmunitionList)
-                GetAmmunition(new ItemId<AmmunitionData>(item.Id));
-            foreach (var item in _content.BulletPrefabList)
-                GetBulletPrefab(new ItemId<BulletPrefabData>(item.Id));
-            foreach (var item in _content.VisualEffectList)
-                GetVisualEffect(new ItemId<VisualEffectData>(item.Id));
-            foreach (var item in _content.WeaponList)
-                GetWeapon(new ItemId<WeaponData>(item.Id));
+			OnDataLoaded();
 
-			GalaxySettings = GalaxySettingsData.Create(_content.GalaxySettings, this);
-			ShipSettings = ShipSettingsData.Create(_content.ShipSettings, this);
+            foreach (var item in Content.AmmunitionObsoleteList)
+                GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(item.Id));
+            foreach (var item in Content.ComponentList)
+                GetComponent(new ItemId<Component>(item.Id));
+            foreach (var item in Content.ComponentModList)
+                GetComponentMod(new ItemId<ComponentMod>(item.Id));
+            foreach (var item in Content.ComponentStatsList)
+                GetComponentStats(new ItemId<ComponentStats>(item.Id));
+            foreach (var item in Content.DeviceList)
+                GetDevice(new ItemId<Device>(item.Id));
+            foreach (var item in Content.DroneBayList)
+                GetDroneBay(new ItemId<DroneBay>(item.Id));
+            foreach (var item in Content.FactionList)
+                GetFaction(new ItemId<Faction>(item.Id));
+            foreach (var item in Content.SatelliteList)
+                GetSatellite(new ItemId<Satellite>(item.Id));
+            foreach (var item in Content.SatelliteBuildList)
+                GetSatelliteBuild(new ItemId<SatelliteBuild>(item.Id));
+            foreach (var item in Content.ShipList)
+                GetShip(new ItemId<Ship>(item.Id));
+            foreach (var item in Content.ShipBuildList)
+                GetShipBuild(new ItemId<ShipBuild>(item.Id));
+            foreach (var item in Content.SkillList)
+                GetSkill(new ItemId<Skill>(item.Id));
+            foreach (var item in Content.TechnologyList)
+                GetTechnology(new ItemId<Technology>(item.Id));
+            foreach (var item in Content.CharacterList)
+                GetCharacter(new ItemId<Character>(item.Id));
+            foreach (var item in Content.FleetList)
+                GetFleet(new ItemId<Fleet>(item.Id));
+            foreach (var item in Content.LootList)
+                GetLoot(new ItemId<LootModel>(item.Id));
+            foreach (var item in Content.QuestList)
+                GetQuest(new ItemId<QuestModel>(item.Id));
+            foreach (var item in Content.QuestItemList)
+                GetQuestItem(new ItemId<QuestItem>(item.Id));
+            foreach (var item in Content.AmmunitionList)
+                GetAmmunition(new ItemId<Ammunition>(item.Id));
+            foreach (var item in Content.BulletPrefabList)
+                GetBulletPrefab(new ItemId<BulletPrefab>(item.Id));
+            foreach (var item in Content.VisualEffectList)
+                GetVisualEffect(new ItemId<VisualEffect>(item.Id));
+            foreach (var item in Content.WeaponList)
+                GetWeapon(new ItemId<Weapon>(item.Id));
 
-            OnDataLoaded();
+			GalaxySettings = GalaxySettings.Create(Content.GalaxySettings, this);
+			ShipSettings = ShipSettings.Create(Content.ShipSettings, this);
+
+            OnDataInitialized();
         }
 
-		public GalaxySettingsData GalaxySettings { get; private set; }
-		public ShipSettingsData ShipSettings { get; private set; }
+		public GalaxySettings GalaxySettings { get; private set; }
+		public ShipSettings ShipSettings { get; private set; }
 
-		public IEnumerable<AmmunitionObsoleteData> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
-		public IEnumerable<ComponentData> ComponentList => _componentMap.Values;
-		public IEnumerable<ComponentModData> ComponentModList => _componentModMap.Values;
-		public IEnumerable<ComponentStatsData> ComponentStatsList => _componentStatsMap.Values;
-		public IEnumerable<DeviceData> DeviceList => _deviceMap.Values;
-		public IEnumerable<DroneBayData> DroneBayList => _droneBayMap.Values;
-		public IEnumerable<FactionData> FactionList => _factionMap.Values;
-		public IEnumerable<SatelliteData> SatelliteList => _satelliteMap.Values;
-		public IEnumerable<SatelliteBuildData> SatelliteBuildList => _satelliteBuildMap.Values;
-		public IEnumerable<ShipData> ShipList => _shipMap.Values;
-		public IEnumerable<ShipBuildData> ShipBuildList => _shipBuildMap.Values;
-		public IEnumerable<TechnologyData> TechnologyList => _technologyMap.Values;
-		public IEnumerable<CharacterData> CharacterList => _characterMap.Values;
-		public IEnumerable<FleetData> FleetList => _fleetMap.Values;
-		public IEnumerable<LootData> LootList => _lootMap.Values;
-		public IEnumerable<QuestData> QuestList => _questMap.Values;
-		public IEnumerable<QuestItemData> QuestItemList => _questItemMap.Values;
-		public IEnumerable<AmmunitionData> AmmunitionList => _ammunitionMap.Values;
-		public IEnumerable<BulletPrefabData> BulletPrefabList => _bulletPrefabMap.Values;
-		public IEnumerable<VisualEffectData> VisualEffectList => _visualEffectMap.Values;
-		public IEnumerable<WeaponData> WeaponList => _weaponMap.Values;
+		public IEnumerable<AmmunitionObsolete> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
+		public IEnumerable<Component> ComponentList => _componentMap.Values;
+		public IEnumerable<ComponentMod> ComponentModList => _componentModMap.Values;
+		public IEnumerable<ComponentStats> ComponentStatsList => _componentStatsMap.Values;
+		public IEnumerable<Device> DeviceList => _deviceMap.Values;
+		public IEnumerable<DroneBay> DroneBayList => _droneBayMap.Values;
+		public IEnumerable<Faction> FactionList => _factionMap.Values;
+		public IEnumerable<Satellite> SatelliteList => _satelliteMap.Values;
+		public IEnumerable<SatelliteBuild> SatelliteBuildList => _satelliteBuildMap.Values;
+		public IEnumerable<Ship> ShipList => _shipMap.Values;
+		public IEnumerable<ShipBuild> ShipBuildList => _shipBuildMap.Values;
+		public IEnumerable<Skill> SkillList => _skillMap.Values;
+		public IEnumerable<Technology> TechnologyList => _technologyMap.Values;
+		public IEnumerable<Character> CharacterList => _characterMap.Values;
+		public IEnumerable<Fleet> FleetList => _fleetMap.Values;
+		public IEnumerable<LootModel> LootList => _lootMap.Values;
+		public IEnumerable<QuestModel> QuestList => _questMap.Values;
+		public IEnumerable<QuestItem> QuestItemList => _questItemMap.Values;
+		public IEnumerable<Ammunition> AmmunitionList => _ammunitionMap.Values;
+		public IEnumerable<BulletPrefab> BulletPrefabList => _bulletPrefabMap.Values;
+		public IEnumerable<VisualEffect> VisualEffectList => _visualEffectMap.Values;
+		public IEnumerable<Weapon> WeaponList => _weaponMap.Values;
 
-		public AmmunitionObsoleteData GetAmmunitionObsolete(ItemId<AmmunitionObsoleteData> id) 
+		public AmmunitionObsolete GetAmmunitionObsolete(ItemId<AmmunitionObsolete> id) 
 		{
             if (_ammunitionObsoleteMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetAmmunitionObsolete(id.Value);
-            return serializable == null ? null : AmmunitionObsoleteData.Create(serializable, this);
+            var serializable = Content?.GetAmmunitionObsolete(id.Value);
+            return serializable == null ? AmmunitionObsolete.DefaultValue : AmmunitionObsolete.Create(serializable, this);
 		}
-		public ComponentData GetComponent(ItemId<ComponentData> id) 
+		public Component GetComponent(ItemId<Component> id) 
 		{
             if (_componentMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetComponent(id.Value);
-            return serializable == null ? null : ComponentData.Create(serializable, this);
+            var serializable = Content?.GetComponent(id.Value);
+            return serializable == null ? Component.DefaultValue : Component.Create(serializable, this);
 		}
-		public ComponentModData GetComponentMod(ItemId<ComponentModData> id) 
+		public ComponentMod GetComponentMod(ItemId<ComponentMod> id) 
 		{
             if (_componentModMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetComponentMod(id.Value);
-            return serializable == null ? null : ComponentModData.Create(serializable, this);
+            var serializable = Content?.GetComponentMod(id.Value);
+            return serializable == null ? ComponentMod.DefaultValue : ComponentMod.Create(serializable, this);
 		}
-		public ComponentStatsData GetComponentStats(ItemId<ComponentStatsData> id) 
+		public ComponentStats GetComponentStats(ItemId<ComponentStats> id) 
 		{
             if (_componentStatsMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetComponentStats(id.Value);
-            return serializable == null ? null : ComponentStatsData.Create(serializable, this);
+            var serializable = Content?.GetComponentStats(id.Value);
+            return serializable == null ? ComponentStats.DefaultValue : ComponentStats.Create(serializable, this);
 		}
-		public DeviceData GetDevice(ItemId<DeviceData> id) 
+		public Device GetDevice(ItemId<Device> id) 
 		{
             if (_deviceMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetDevice(id.Value);
-            return serializable == null ? null : DeviceData.Create(serializable, this);
+            var serializable = Content?.GetDevice(id.Value);
+            return serializable == null ? Device.DefaultValue : Device.Create(serializable, this);
 		}
-		public DroneBayData GetDroneBay(ItemId<DroneBayData> id) 
+		public DroneBay GetDroneBay(ItemId<DroneBay> id) 
 		{
             if (_droneBayMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetDroneBay(id.Value);
-            return serializable == null ? null : DroneBayData.Create(serializable, this);
+            var serializable = Content?.GetDroneBay(id.Value);
+            return serializable == null ? DroneBay.DefaultValue : DroneBay.Create(serializable, this);
 		}
-		public FactionData GetFaction(ItemId<FactionData> id) 
+		public Faction GetFaction(ItemId<Faction> id) 
 		{
             if (_factionMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetFaction(id.Value);
-            return serializable == null ? null : FactionData.Create(serializable, this);
+            var serializable = Content?.GetFaction(id.Value);
+            return serializable == null ? Faction.DefaultValue : Faction.Create(serializable, this);
 		}
-		public SatelliteData GetSatellite(ItemId<SatelliteData> id) 
+		public Satellite GetSatellite(ItemId<Satellite> id) 
 		{
             if (_satelliteMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetSatellite(id.Value);
-            return serializable == null ? null : SatelliteData.Create(serializable, this);
+            var serializable = Content?.GetSatellite(id.Value);
+            return serializable == null ? Satellite.DefaultValue : Satellite.Create(serializable, this);
 		}
-		public SatelliteBuildData GetSatelliteBuild(ItemId<SatelliteBuildData> id) 
+		public SatelliteBuild GetSatelliteBuild(ItemId<SatelliteBuild> id) 
 		{
             if (_satelliteBuildMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetSatelliteBuild(id.Value);
-            return serializable == null ? null : SatelliteBuildData.Create(serializable, this);
+            var serializable = Content?.GetSatelliteBuild(id.Value);
+            return serializable == null ? SatelliteBuild.DefaultValue : SatelliteBuild.Create(serializable, this);
 		}
-		public ShipData GetShip(ItemId<ShipData> id) 
+		public Ship GetShip(ItemId<Ship> id) 
 		{
             if (_shipMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetShip(id.Value);
-            return serializable == null ? null : ShipData.Create(serializable, this);
+            var serializable = Content?.GetShip(id.Value);
+            return serializable == null ? Ship.DefaultValue : Ship.Create(serializable, this);
 		}
-		public ShipBuildData GetShipBuild(ItemId<ShipBuildData> id) 
+		public ShipBuild GetShipBuild(ItemId<ShipBuild> id) 
 		{
             if (_shipBuildMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetShipBuild(id.Value);
-            return serializable == null ? null : ShipBuildData.Create(serializable, this);
+            var serializable = Content?.GetShipBuild(id.Value);
+            return serializable == null ? ShipBuild.DefaultValue : ShipBuild.Create(serializable, this);
 		}
-		public TechnologyData GetTechnology(ItemId<TechnologyData> id) 
+		public Skill GetSkill(ItemId<Skill> id) 
+		{
+            if (_skillMap.TryGetValue(id.Value, out var item)) return item;
+            var serializable = Content?.GetSkill(id.Value);
+            return serializable == null ? Skill.DefaultValue : Skill.Create(serializable, this);
+		}
+		public Technology GetTechnology(ItemId<Technology> id) 
 		{
             if (_technologyMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetTechnology(id.Value);
-            return serializable == null ? null : TechnologyData.Create(serializable, this);
+            var serializable = Content?.GetTechnology(id.Value);
+            return serializable == null ? Technology.DefaultValue : Technology.Create(serializable, this);
 		}
-		public CharacterData GetCharacter(ItemId<CharacterData> id) 
+		public Character GetCharacter(ItemId<Character> id) 
 		{
             if (_characterMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetCharacter(id.Value);
-            return serializable == null ? null : CharacterData.Create(serializable, this);
+            var serializable = Content?.GetCharacter(id.Value);
+            return serializable == null ? Character.DefaultValue : Character.Create(serializable, this);
 		}
-		public FleetData GetFleet(ItemId<FleetData> id) 
+		public Fleet GetFleet(ItemId<Fleet> id) 
 		{
             if (_fleetMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetFleet(id.Value);
-            return serializable == null ? null : FleetData.Create(serializable, this);
+            var serializable = Content?.GetFleet(id.Value);
+            return serializable == null ? Fleet.DefaultValue : Fleet.Create(serializable, this);
 		}
-		public LootData GetLoot(ItemId<LootData> id) 
+		public LootModel GetLoot(ItemId<LootModel> id) 
 		{
             if (_lootMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetLoot(id.Value);
-            return serializable == null ? null : LootData.Create(serializable, this);
+            var serializable = Content?.GetLoot(id.Value);
+            return serializable == null ? LootModel.DefaultValue : LootModel.Create(serializable, this);
 		}
-		public QuestData GetQuest(ItemId<QuestData> id) 
+		public QuestModel GetQuest(ItemId<QuestModel> id) 
 		{
             if (_questMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetQuest(id.Value);
-            return serializable == null ? null : QuestData.Create(serializable, this);
+            var serializable = Content?.GetQuest(id.Value);
+            return serializable == null ? QuestModel.DefaultValue : QuestModel.Create(serializable, this);
 		}
-		public QuestItemData GetQuestItem(ItemId<QuestItemData> id) 
+		public QuestItem GetQuestItem(ItemId<QuestItem> id) 
 		{
             if (_questItemMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetQuestItem(id.Value);
-            return serializable == null ? null : QuestItemData.Create(serializable, this);
+            var serializable = Content?.GetQuestItem(id.Value);
+            return serializable == null ? QuestItem.DefaultValue : QuestItem.Create(serializable, this);
 		}
-		public AmmunitionData GetAmmunition(ItemId<AmmunitionData> id) 
+		public Ammunition GetAmmunition(ItemId<Ammunition> id) 
 		{
             if (_ammunitionMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetAmmunition(id.Value);
-            return serializable == null ? null : AmmunitionData.Create(serializable, this);
+            var serializable = Content?.GetAmmunition(id.Value);
+            return serializable == null ? Ammunition.DefaultValue : Ammunition.Create(serializable, this);
 		}
-		public BulletPrefabData GetBulletPrefab(ItemId<BulletPrefabData> id) 
+		public BulletPrefab GetBulletPrefab(ItemId<BulletPrefab> id) 
 		{
             if (_bulletPrefabMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetBulletPrefab(id.Value);
-            return serializable == null ? null : BulletPrefabData.Create(serializable, this);
+            var serializable = Content?.GetBulletPrefab(id.Value);
+            return serializable == null ? BulletPrefab.DefaultValue : BulletPrefab.Create(serializable, this);
 		}
-		public VisualEffectData GetVisualEffect(ItemId<VisualEffectData> id) 
+		public VisualEffect GetVisualEffect(ItemId<VisualEffect> id) 
 		{
             if (_visualEffectMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetVisualEffect(id.Value);
-            return serializable == null ? null : VisualEffectData.Create(serializable, this);
+            var serializable = Content?.GetVisualEffect(id.Value);
+            return serializable == null ? VisualEffect.DefaultValue : VisualEffect.Create(serializable, this);
 		}
-		public WeaponData GetWeapon(ItemId<WeaponData> id) 
+		public Weapon GetWeapon(ItemId<Weapon> id) 
 		{
             if (_weaponMap.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.GetWeapon(id.Value);
-            return serializable == null ? null : WeaponData.Create(serializable, this);
+            var serializable = Content?.GetWeapon(id.Value);
+            return serializable == null ? Weapon.DefaultValue : Weapon.Create(serializable, this);
 		}
 
-		public void AddAmmunitionObsolete(int id, AmmunitionObsoleteData item) { _ammunitionObsoleteMap.Add(id, item); }
-		public void AddComponent(int id, ComponentData item) { _componentMap.Add(id, item); }
-		public void AddComponentMod(int id, ComponentModData item) { _componentModMap.Add(id, item); }
-		public void AddComponentStats(int id, ComponentStatsData item) { _componentStatsMap.Add(id, item); }
-		public void AddDevice(int id, DeviceData item) { _deviceMap.Add(id, item); }
-		public void AddDroneBay(int id, DroneBayData item) { _droneBayMap.Add(id, item); }
-		public void AddFaction(int id, FactionData item) { _factionMap.Add(id, item); }
-		public void AddSatellite(int id, SatelliteData item) { _satelliteMap.Add(id, item); }
-		public void AddSatelliteBuild(int id, SatelliteBuildData item) { _satelliteBuildMap.Add(id, item); }
-		public void AddShip(int id, ShipData item) { _shipMap.Add(id, item); }
-		public void AddShipBuild(int id, ShipBuildData item) { _shipBuildMap.Add(id, item); }
-		public void AddTechnology(int id, TechnologyData item) { _technologyMap.Add(id, item); }
-		public void AddCharacter(int id, CharacterData item) { _characterMap.Add(id, item); }
-		public void AddFleet(int id, FleetData item) { _fleetMap.Add(id, item); }
-		public void AddLoot(int id, LootData item) { _lootMap.Add(id, item); }
-		public void AddQuest(int id, QuestData item) { _questMap.Add(id, item); }
-		public void AddQuestItem(int id, QuestItemData item) { _questItemMap.Add(id, item); }
-		public void AddAmmunition(int id, AmmunitionData item) { _ammunitionMap.Add(id, item); }
-		public void AddBulletPrefab(int id, BulletPrefabData item) { _bulletPrefabMap.Add(id, item); }
-		public void AddVisualEffect(int id, VisualEffectData item) { _visualEffectMap.Add(id, item); }
-		public void AddWeapon(int id, WeaponData item) { _weaponMap.Add(id, item); }
+		public void AddAmmunitionObsolete(int id, AmmunitionObsolete item) { _ammunitionObsoleteMap.Add(id, item); }
+		public void AddComponent(int id, Component item) { _componentMap.Add(id, item); }
+		public void AddComponentMod(int id, ComponentMod item) { _componentModMap.Add(id, item); }
+		public void AddComponentStats(int id, ComponentStats item) { _componentStatsMap.Add(id, item); }
+		public void AddDevice(int id, Device item) { _deviceMap.Add(id, item); }
+		public void AddDroneBay(int id, DroneBay item) { _droneBayMap.Add(id, item); }
+		public void AddFaction(int id, Faction item) { _factionMap.Add(id, item); }
+		public void AddSatellite(int id, Satellite item) { _satelliteMap.Add(id, item); }
+		public void AddSatelliteBuild(int id, SatelliteBuild item) { _satelliteBuildMap.Add(id, item); }
+		public void AddShip(int id, Ship item) { _shipMap.Add(id, item); }
+		public void AddShipBuild(int id, ShipBuild item) { _shipBuildMap.Add(id, item); }
+		public void AddSkill(int id, Skill item) { _skillMap.Add(id, item); }
+		public void AddTechnology(int id, Technology item) { _technologyMap.Add(id, item); }
+		public void AddCharacter(int id, Character item) { _characterMap.Add(id, item); }
+		public void AddFleet(int id, Fleet item) { _fleetMap.Add(id, item); }
+		public void AddLoot(int id, LootModel item) { _lootMap.Add(id, item); }
+		public void AddQuest(int id, QuestModel item) { _questMap.Add(id, item); }
+		public void AddQuestItem(int id, QuestItem item) { _questItemMap.Add(id, item); }
+		public void AddAmmunition(int id, Ammunition item) { _ammunitionMap.Add(id, item); }
+		public void AddBulletPrefab(int id, BulletPrefab item) { _bulletPrefabMap.Add(id, item); }
+		public void AddVisualEffect(int id, VisualEffect item) { _visualEffectMap.Add(id, item); }
+		public void AddWeapon(int id, Weapon item) { _weaponMap.Add(id, item); }
 
-        public Image GetImage(string name) { return _content?.GetImage(name) ?? Image.Empty; }
-        public AudioClip GetAudioClip(string name) { return _content?.GetAudioClip(name) ?? AudioClip.Empty; }
-        public string GetLocalization(string language) { return _content?.GetLocalization(language); }
+        public ImageData GetImage(string name) { return Content?.GetImage(name) ?? ImageData.Empty; }
+        public AudioClipData GetAudioClip(string name) { return Content?.GetAudioClip(name) ?? AudioClipData.Empty; }
+        public string GetLocalization(string language) { return Content?.GetLocalization(language); }
+
+		protected DatabaseContent Content { get; private set; }
+        protected IDataStorage Storage { get; private set; }
 
         private void Clear()
         {
-            _content = null;
-            _storage = null;
+            Content = null;
+            Storage = null;
 
 			_ammunitionObsoleteMap.Clear();
 			_componentMap.Clear();
@@ -320,6 +338,7 @@ namespace GameDatabase
 			_satelliteBuildMap.Clear();
 			_shipMap.Clear();
 			_shipBuildMap.Clear();
+			_skillMap.Clear();
 			_technologyMap.Clear();
 			_characterMap.Clear();
 			_fleetMap.Clear();
@@ -335,30 +354,28 @@ namespace GameDatabase
 			ShipSettings = null;
         }
 
-		private readonly Dictionary<int, AmmunitionObsoleteData> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsoleteData>();
-		private readonly Dictionary<int, ComponentData> _componentMap = new Dictionary<int, ComponentData>();
-		private readonly Dictionary<int, ComponentModData> _componentModMap = new Dictionary<int, ComponentModData>();
-		private readonly Dictionary<int, ComponentStatsData> _componentStatsMap = new Dictionary<int, ComponentStatsData>();
-		private readonly Dictionary<int, DeviceData> _deviceMap = new Dictionary<int, DeviceData>();
-		private readonly Dictionary<int, DroneBayData> _droneBayMap = new Dictionary<int, DroneBayData>();
-		private readonly Dictionary<int, FactionData> _factionMap = new Dictionary<int, FactionData>();
-		private readonly Dictionary<int, SatelliteData> _satelliteMap = new Dictionary<int, SatelliteData>();
-		private readonly Dictionary<int, SatelliteBuildData> _satelliteBuildMap = new Dictionary<int, SatelliteBuildData>();
-		private readonly Dictionary<int, ShipData> _shipMap = new Dictionary<int, ShipData>();
-		private readonly Dictionary<int, ShipBuildData> _shipBuildMap = new Dictionary<int, ShipBuildData>();
-		private readonly Dictionary<int, TechnologyData> _technologyMap = new Dictionary<int, TechnologyData>();
-		private readonly Dictionary<int, CharacterData> _characterMap = new Dictionary<int, CharacterData>();
-		private readonly Dictionary<int, FleetData> _fleetMap = new Dictionary<int, FleetData>();
-		private readonly Dictionary<int, LootData> _lootMap = new Dictionary<int, LootData>();
-		private readonly Dictionary<int, QuestData> _questMap = new Dictionary<int, QuestData>();
-		private readonly Dictionary<int, QuestItemData> _questItemMap = new Dictionary<int, QuestItemData>();
-		private readonly Dictionary<int, AmmunitionData> _ammunitionMap = new Dictionary<int, AmmunitionData>();
-		private readonly Dictionary<int, BulletPrefabData> _bulletPrefabMap = new Dictionary<int, BulletPrefabData>();
-		private readonly Dictionary<int, VisualEffectData> _visualEffectMap = new Dictionary<int, VisualEffectData>();
-		private readonly Dictionary<int, WeaponData> _weaponMap = new Dictionary<int, WeaponData>();
-
-        private DatabaseContent _content;
-        private IDataStorage _storage;
+		private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsolete>();
+		private readonly Dictionary<int, Component> _componentMap = new Dictionary<int, Component>();
+		private readonly Dictionary<int, ComponentMod> _componentModMap = new Dictionary<int, ComponentMod>();
+		private readonly Dictionary<int, ComponentStats> _componentStatsMap = new Dictionary<int, ComponentStats>();
+		private readonly Dictionary<int, Device> _deviceMap = new Dictionary<int, Device>();
+		private readonly Dictionary<int, DroneBay> _droneBayMap = new Dictionary<int, DroneBay>();
+		private readonly Dictionary<int, Faction> _factionMap = new Dictionary<int, Faction>();
+		private readonly Dictionary<int, Satellite> _satelliteMap = new Dictionary<int, Satellite>();
+		private readonly Dictionary<int, SatelliteBuild> _satelliteBuildMap = new Dictionary<int, SatelliteBuild>();
+		private readonly Dictionary<int, Ship> _shipMap = new Dictionary<int, Ship>();
+		private readonly Dictionary<int, ShipBuild> _shipBuildMap = new Dictionary<int, ShipBuild>();
+		private readonly Dictionary<int, Skill> _skillMap = new Dictionary<int, Skill>();
+		private readonly Dictionary<int, Technology> _technologyMap = new Dictionary<int, Technology>();
+		private readonly Dictionary<int, Character> _characterMap = new Dictionary<int, Character>();
+		private readonly Dictionary<int, Fleet> _fleetMap = new Dictionary<int, Fleet>();
+		private readonly Dictionary<int, LootModel> _lootMap = new Dictionary<int, LootModel>();
+		private readonly Dictionary<int, QuestModel> _questMap = new Dictionary<int, QuestModel>();
+		private readonly Dictionary<int, QuestItem> _questItemMap = new Dictionary<int, QuestItem>();
+		private readonly Dictionary<int, Ammunition> _ammunitionMap = new Dictionary<int, Ammunition>();
+		private readonly Dictionary<int, BulletPrefab> _bulletPrefabMap = new Dictionary<int, BulletPrefab>();
+		private readonly Dictionary<int, VisualEffect> _visualEffectMap = new Dictionary<int, VisualEffect>();
+		private readonly Dictionary<int, Weapon> _weaponMap = new Dictionary<int, Weapon>();
 	}
 }
 

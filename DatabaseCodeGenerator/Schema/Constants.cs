@@ -16,8 +16,12 @@
         public const string TypeColor = "color";
         public const string TypeLayout = "layout";
         public const string TypeAudioClip = "audioclip";
+        public const string TypePrefab = "prefab";
 
         public const string ItemTypeEnum = "ItemType";
+
+        public const string OptionLegacy = "legacy";
+        public const string OptionObsolete = "obsolete";
 
         public static readonly char[] ValueSeparators = { ',','|',';',' ','\n','\r' };
     }

@@ -14,7 +14,7 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Configurations)
         {
 #>
-		<#= Utils.DataClassName(item.name) + " " + item.name #> { get; }
+		<#= Utils.DataClassName(item) + " " + item.name #> { get; }
 <#
         }
 #>
@@ -23,7 +23,7 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		IEnumerable<<#= Utils.DataClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> { get; }
+		IEnumerable<<#= Utils.DataClassName(item) #>> <#= Utils.ObjectListPropertyName(item.name) #> { get; }
 <#
         }
 #>
@@ -32,32 +32,35 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		<#= Utils.DataClassName(item.name) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item.name) #>> id);
+		<#= Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item) #>> id);
 <#
         }
 #>
 
-        Image GetImage(string name);
-        AudioClip GetAudioClip(string name);
+        <#= Utils.ImageType #> GetImage(string name);
+        <#= Utils.AudioClipType #> GetAudioClip(string name);
         string GetLocalization(string language);
 	}
 
     public partial class <#= Utils.DatabaseClassName #> : I<#= Utils.DatabaseClassName #>
     {
         partial void OnDataLoaded();
+        partial void OnDataInitialized();
 
         protected void Load(IDataStorage storage, IJsonSerializer serializer)
         {
             Clear();
-            _storage = storage;
-            _content = new DatabaseContent(_storage, serializer);
+            Storage = storage;
+            Content = new DatabaseContent(Storage, serializer);
+
+			OnDataLoaded();
 
 <#
 			foreach (var item in Schema.Objects)
 			{
 #>
-            foreach (var item in _content.<#= Utils.ObjectListPropertyName(item.name) #>)
-                <#= Utils.ObjectGetterName(item.name) #>(new ItemId<<#= Utils.DataClassName(item.name)#>>(item.Id));
+            foreach (var item in Content.<#= Utils.ObjectListPropertyName(item.name) #>)
+                <#= Utils.ObjectGetterName(item.name) #>(new ItemId<<#= Utils.DataClassName(item)#>>(item.Id));
 <#
 			}
 #>
@@ -66,19 +69,19 @@ namespace <#= Utils.RootNamespace #>
 			foreach (var item in Schema.Configurations)
 			{
 #>
-			<#= item.name + " = " + Utils.DataClassName(item.name) #>.Create(_content.<#= item.name #>, this);
+			<#= item.name + " = " + Utils.DataClassName(item) #>.Create(Content.<#= item.name #>, this);
 <#
 			}
 #>
 
-            OnDataLoaded();
+            OnDataInitialized();
         }
 
 <#
 		foreach (var item in Schema.Configurations)
         {
 #>
-		public <#= Utils.DataClassName(item.name) + " " + item.name #> { get; private set; }
+		public <#= Utils.DataClassName(item) + " " + item.name #> { get; private set; }
 <#
         }
 #>
@@ -87,7 +90,7 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		public IEnumerable<<#= Utils.DataClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> => <#= DataMember(item.name) #>.Values;
+		public IEnumerable<<#= Utils.DataClassName(item) #>> <#= Utils.ObjectListPropertyName(item.name) #> => <#= DataMember(item.name) #>.Values;
 <#
         }
 #>
@@ -96,11 +99,11 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		public <#= Utils.DataClassName(item.name) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item.name) #>> id) 
+		public <#= Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item) #>> id) 
 		{
             if (<#= DataMember(item.name) #>.TryGetValue(id.Value, out var item)) return item;
-            var serializable = _content?.<#= Utils.ObjectGetterName(item.name) #>(id.Value);
-            return serializable == null ? null : <#= Utils.DataClassName(item.name) #>.Create(serializable, this);
+            var serializable = Content?.<#= Utils.ObjectGetterName(item.name) #>(id.Value);
+            return serializable == null ? <#= Utils.DataClassName(item) #>.DefaultValue : <#= Utils.DataClassName(item) #>.Create(serializable, this);
 		}
 <#
         }
@@ -110,19 +113,22 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		public void <#= Utils.ObjectSetterName(item.name) #>(int id, <#= Utils.DataClassName(item.name) #> item) { <#= DataMember(item.name) #>.Add(id, item); }
+		public void <#= Utils.ObjectSetterName(item.name) #>(int id, <#= Utils.DataClassName(item) #> item) { <#= DataMember(item.name) #>.Add(id, item); }
 <#
         }
 #>
 
-        public Image GetImage(string name) { return _content?.GetImage(name) ?? Image.Empty; }
-        public AudioClip GetAudioClip(string name) { return _content?.GetAudioClip(name) ?? AudioClip.Empty; }
-        public string GetLocalization(string language) { return _content?.GetLocalization(language); }
+        public <#= Utils.ImageType #> GetImage(string name) { return Content?.GetImage(name) ?? <#= Utils.ImageType #>.Empty; }
+        public <#= Utils.AudioClipType #> GetAudioClip(string name) { return Content?.GetAudioClip(name) ?? <#= Utils.AudioClipType #>.Empty; }
+        public string GetLocalization(string language) { return Content?.GetLocalization(language); }
+
+		protected DatabaseContent Content { get; private set; }
+        protected IDataStorage Storage { get; private set; }
 
         private void Clear()
         {
-            _content = null;
-            _storage = null;
+            Content = null;
+            Storage = null;
 
 <#
 			foreach (var item in Schema.Objects)
@@ -147,13 +153,10 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		private readonly Dictionary<int, <#= Utils.DataClassName(item.name) #>> <#= DataMember(item.name) #> = new Dictionary<int, <#= Utils.DataClassName(item.name) #>>();
+		private readonly Dictionary<int, <#= Utils.DataClassName(item) #>> <#= DataMember(item.name) #> = new Dictionary<int, <#= Utils.DataClassName(item) #>>();
 <#
         }
 #>
-
-        private DatabaseContent _content;
-        private IDataStorage _storage;
 	}
 }
 

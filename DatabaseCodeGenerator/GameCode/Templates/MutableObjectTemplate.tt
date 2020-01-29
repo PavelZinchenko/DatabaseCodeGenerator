@@ -11,16 +11,15 @@ using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
-	public abstract partial class <#= Utils.DataClassName(ObjectData.name) #>
+	public abstract partial class <#= Utils.DataClassName(ObjectData) #>
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
 
-		public static <#= Utils.DataClassName(ObjectData.name) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
 <#
-            SortMembers(ObjectData, out var baseMembers, out var extraMembers);
-            var switchEnumType = baseMembers.First(item => item.name.Equals(ObjectData.switchEnum, StringComparison.Ordinal)).typeid;
-			var factoryName = "I" + Utils.DataClassName(ObjectData.name) + "Factory<T>";
+            SortMembers(ObjectData, out var baseMembers, out var extraMembers, out var switchEnumType);
+			var factoryName = "I" + Utils.DataClassName(ObjectData) + "Factory<T>";
 #>
 			switch (serializable.<#= ObjectData.switchEnum #>)
 		    {
@@ -40,13 +39,13 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		public abstract T Create<T>(<#= factoryName #> factory);
 
-		protected <#= Utils.DataClassName(ObjectData.name) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		protected <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
 <#
 			if (ObjectType == ObjectType.Class)
             {
 #>
-			Id = new ItemId<<#= Utils.DataClassName(ObjectData.name) #>>(serializable.Id);
+			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id);
 			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
 
 <#
@@ -56,7 +55,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PushIndent("\t\t\t");
 
 			foreach (var item in baseMembers)
-				WriteDeserializationCode(item);
+				WriteDeserializationCode(item, Schema);
 
 			PopIndent();
 #>
@@ -68,7 +67,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 		if (ObjectType == ObjectType.Class)
         {
 #>
-		public readonly ItemId<<#= Utils.DataClassName(ObjectData.name) #>> Id;
+		public readonly ItemId<<#= Utils.DataClassName(ObjectData) #>> Id;
 
 <#
 		}
@@ -81,6 +80,8 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		PopIndent();
 #>
+
+		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
 	}
 
 	public interface <#= factoryName #>
@@ -99,7 +100,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	foreach (var content in extraMembers)
     {
 #>
-    public partial class <#= ExtraClassName(content.Key) + " : " + Utils.DataClassName(ObjectData.name) #>
+    public partial class <#= ExtraClassName(content.Key) + " : " + Utils.DataClassName(ObjectData) #>
     {
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
 
@@ -110,7 +111,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PushIndent("\t\t\t");
 
 			foreach (var item in content.Value)
-				WriteDeserializationCode(item);
+				WriteDeserializationCode(item, Schema);
 
 			PopIndent();
 #>
@@ -139,29 +140,32 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 }
 
 <#+
-    private static void SortMembers(XmlClassItem data, out List<XmlClassMember> baseMembers, out Dictionary<string, List<XmlClassMember>> extraMembers)
+    private void SortMembers(XmlClassItem data, out List<XmlClassMember> baseMembers, out Dictionary<string, List<XmlClassMember>> extraMembers, out string switchEnumType)
     {
-        extraMembers = new Dictionary<string, List<XmlClassMember>>();
         baseMembers = new List<XmlClassMember>();
+		switchEnumType = string.Empty;
+
+		foreach (var item in data.members)
+        {
+            if (!string.IsNullOrEmpty(item.caseValue)) continue;
+
+            baseMembers.Add(item);
+			if (item.name.Equals(ObjectData.switchEnum, StringComparison.Ordinal))
+				switchEnumType = item.typeid;
+        }
+
+		var switchEnum = Schema.GetEnum(switchEnumType);
+		extraMembers = switchEnum.items.ToDictionary(item => item.name, item => new List<XmlClassMember>());
 
         foreach (var item in data.members)
         {
-            if (string.IsNullOrEmpty(item.caseValue))
-            {
-                baseMembers.Add(item);
-                continue;
-            }
+            if (string.IsNullOrEmpty(item.caseValue)) continue;
 
             var caseValues = item.caseValue.Split(Constants.ValueSeparators, StringSplitOptions.RemoveEmptyEntries);
             foreach (var value in caseValues)
-            {
-                if (!extraMembers.TryGetValue(value, out var list))
-                    extraMembers.Add(value, list = new List<XmlClassMember>());
-
-                list.Add(item);
-            }
+				extraMembers[value].Add(item);
         }
     }
 
-	private string ExtraClassName(string type) { return Utils.DataClassName(ObjectData.name) + "_" + type; }
+	private string ExtraClassName(string type) { return Utils.DataClassName(ObjectData) + "_" + type; }
 #>

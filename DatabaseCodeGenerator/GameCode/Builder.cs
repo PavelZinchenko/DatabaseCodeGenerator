@@ -75,7 +75,7 @@ namespace DatabaseCodeGenerator.GameCode
         {
             string data;
 
-            if (item.options.ContainsKey("legacy"))
+            if (item.options.ContainsKey(Constants.OptionLegacy))
                 data = new LegacyObjectTemplate(item, _schema, type).TransformText();
             else if (!string.IsNullOrEmpty(item.switchEnum))
                 data = new MutableObjectTemplate(item, _schema, type).TransformText();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data name="Quest" type="object" typeid="Quest">
+<data name="Quest" type="object" typeid="Quest" alias="QuestModel">
     <member name="Name" type="string" />
     <member name="QuestType" type="enum" typeid="QuestType" />
     <member name="StartCondition" type="enum" typeid="StartCondition" />

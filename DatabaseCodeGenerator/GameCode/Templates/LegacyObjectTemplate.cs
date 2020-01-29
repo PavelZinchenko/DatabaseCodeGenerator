@@ -133,14 +133,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("\r\n{\r\n\tpublic partial class ");
             
             #line 12 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n\t\tpublic static ");
             
             #line 14 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
@@ -168,14 +168,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" database)\r\n\t\t{\r\n\t\t\treturn new ");
             
             #line 16 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write("(serializable, database);\r\n\t\t}\r\n\r\n\t\tprivate ");
             
             #line 19 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
@@ -206,7 +206,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("\t\t\tId = new ItemId<");
             
             #line 25 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
@@ -246,7 +246,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("\t\tpublic readonly ItemId<");
             
             #line 37 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData.name)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
@@ -266,56 +266,63 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("Stats Stats;\r\n\t}\r\n\r\n\tpublic partial struct ");
+            this.Write("Stats Stats;\r\n\r\n\t\tpublic static ");
             
-            #line 44 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 43 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
+            
+            #line default
+            #line hidden
+            this.Write(" DefaultValue { get; private set; }\r\n\t}\r\n\r\n\tpublic partial struct ");
+            
+            #line 46 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.name));
             
             #line default
             #line hidden
             this.Write("Stats \r\n\t{\r\n\t\tpartial void OnDataDeserialized(");
             
-            #line 46 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write(" serializable, ");
             
-            #line 46 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write(" database);\r\n\r\n\t\tpublic ");
             
-            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 50 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.name));
             
             #line default
             #line hidden
             this.Write("Stats(");
             
-            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 50 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write(" serializable, ");
             
-            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 50 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write(" database)\r\n\t\t{\r\n");
             
-            #line 50 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 52 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
 
 			PushIndent("\t\t\t");
 
 			foreach (var item in ObjectData.members)
-				WriteDeserializationCode(item);
+				WriteLegacyDeserializationCode(item, Schema);
 
 			PopIndent();
 
@@ -324,12 +331,12 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n\t\t\tOnDataDeserialized(serializable, database);\r\n\t\t}\r\n\r\n");
             
-            #line 62 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            #line 64 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
 
 		PushIndent("\t\t");
 
 		foreach (var item in ObjectData.members) 
-			WriteDataClassMember(item, Schema, false);
+			WriteLegacyStructMember(item, Schema);
 
 		PopIndent();
 
@@ -372,13 +379,17 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 			{
 				WriteLine("public string " + member.name + ";");
 			}
+			else if (member.type == Constants.TypePrefab)
+			{
+				WriteLine("public string " + member.name + ";");
+			}
 			else if (member.type == Constants.TypeLayout)
 			{
 				WriteLine("public string " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine("public Vector2 " + member.name + ";");
+				WriteLine("public UnityEngine.Vector2 " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeEnum)
 			{
@@ -421,81 +432,94 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 			}
 		}
 
-		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema, bool isReadonly = true)
+		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
+			var obsolete = member.options.Contains(Constants.OptionObsolete);
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			var prefix = isReadonly ? "public readonly " : "public ";
+			if (obsolete) memberName = PrivateMemberName(memberName);
+			var prefix = obsolete ? "private readonly " : "public ";
+			var suffix = obsolete ? ";" : " { get; private set; }";
 
 			if (member.type == Constants.TypeInt)
 			{
-				WriteLine(prefix + "int " + memberName + ";");
+				WriteLine(prefix + "int " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeFloat)
 			{
-				WriteLine(prefix + "float " + memberName + ";");
+				WriteLine(prefix + "float " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeBool)
 			{
-				WriteLine(prefix + "bool " + memberName + ";");
+				WriteLine(prefix + "bool " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeString)
 			{
-				WriteLine(prefix + "string " + memberName + ";");
+				WriteLine(prefix + "string " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeColor)
 			{
-				WriteLine(prefix + "Color " + memberName + ";");
+				WriteLine(prefix + "ColorData " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeImage)
 			{
-				WriteLine(prefix + "SpriteId " + memberName + ";");
+				WriteLine(prefix + "SpriteId " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeAudioClip)
 			{
-				WriteLine(prefix + "AudioClipId " + memberName + ";");
+				WriteLine(prefix + "AudioClipId " + memberName + suffix);
+			}
+			else if (member.type == Constants.TypePrefab)
+			{
+				WriteLine(prefix + "PrefabId " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeLayout)
 			{
-				WriteLine(prefix + "Layout " + memberName + ";");
+				WriteLine(prefix + "Layout " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine(prefix + "Vector2 " + memberName + ";");
+				WriteLine(prefix + "UnityEngine.Vector2 " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeEnum)
 			{
 				if (!schema.HasEnum(member.typeid))
 					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine(prefix + member.typeid + " " + memberName + ";");
+				WriteLine(prefix + member.typeid + " " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeObject)
 			{
 				if (!schema.HasObject(member.typeid))
 					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
 
-				WriteLine(prefix + Utils.DataClassName(member.typeid) + " " + memberName + ";");
+				var dataClass = schema.GetObject(member.typeid);
+				WriteLine(prefix + Utils.DataClassName(dataClass) + " " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeObjectList)
 			{
 				if (!schema.HasObject(member.typeid))
 					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
 
-				WriteLine(prefix + "System.Collections.ObjectModel.ReadOnlyCollection<" + Utils.DataClassName(member.typeid) + "> " + memberName + ";");
+				var dataClass = schema.GetObject(member.typeid);
+				
+				WriteLine(prefix + "ImmutableCollection<" + Utils.DataClassName(dataClass) + "> " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeStruct)
 			{
 				if (!schema.HasStruct(member.typeid))
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
-				WriteLine(prefix + Utils.DataClassName(member.typeid) + " " + memberName + ";");
+				var dataClass = schema.GetStruct(member.typeid);
+				WriteLine(prefix + Utils.DataClassName(dataClass) + " " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeStructList)
 			{
 				if (!schema.HasStruct(member.typeid))
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
-				WriteLine(prefix + "System.Collections.ObjectModel.ReadOnlyCollection<" + Utils.DataClassName(member.typeid) + "> " + memberName + ";");
+				var dataClass = schema.GetStruct(member.typeid);
+
+				WriteLine(prefix + "ImmutableCollection<" + Utils.DataClassName(dataClass) + "> " + memberName + suffix);
 			}
 			else
 			{
@@ -503,24 +527,122 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 			}
 		}
 
-        private void WriteDeserializationCode(XmlClassMember member)
+		// TODO: delete this method
+		private void WriteLegacyStructMember(XmlClassMember member, DatabaseSchema schema)
+		{
+			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+
+			if (member.type == Constants.TypeInt)
+			{
+				WriteLine("public int " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeFloat)
+			{
+				WriteLine("public float " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeBool)
+			{
+				WriteLine("public bool " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeString)
+			{
+				WriteLine("public string " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeColor)
+			{
+				WriteLine("public ColorData " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeImage)
+			{
+				WriteLine("public SpriteId " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeAudioClip)
+			{
+				WriteLine("public AudioClipId " + memberName + ";");
+			}
+			else if (member.type == Constants.TypePrefab)
+			{
+				WriteLine("public PrefabId " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeLayout)
+			{
+				WriteLine("public Layout " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeVector)
+			{
+				WriteLine("public UnityEngine.Vector2 " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeEnum)
+			{
+				if (!schema.HasEnum(member.typeid))
+					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
+
+				WriteLine("public " + member.typeid + " " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeObject)
+			{
+				if (!schema.HasObject(member.typeid))
+					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
+
+				var dataClass = schema.GetObject(member.typeid);
+				WriteLine("public " + Utils.DataClassName(dataClass) + " " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeObjectList)
+			{
+				if (!schema.HasObject(member.typeid))
+					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
+
+				var dataClass = schema.GetObject(member.typeid);
+				WriteLine("public " + Utils.DataClassName(dataClass) + "[] " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeStruct)
+			{
+				if (!schema.HasStruct(member.typeid))
+					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
+
+				var dataClass = schema.GetStruct(member.typeid);
+				WriteLine("public " + Utils.DataClassName(dataClass) + " " + memberName + ";");
+			}
+			else if (member.type == Constants.TypeStructList)
+			{
+				if (!schema.HasStruct(member.typeid))
+					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
+
+				var dataClass = schema.GetStruct(member.typeid);
+				WriteLine("public " + Utils.DataClassName(dataClass) + "[] " + memberName + ";");
+			}
+			else
+			{
+				throw new InvalidSchemaException("Invalid class member type - " + member.type);
+			}
+		}
+
+        private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
         {
-            var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+			if (member.options.Contains(Constants.OptionObsolete)) memberName = PrivateMemberName(memberName);
+
             if (member.type == Constants.TypeObject)
             {
-                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(member.typeid) + ">(serializable." + member.name + "));");
+				var dataClass = schema.GetObject(member.typeid);
+                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
             }
             else if (member.type == Constants.TypeObjectList)
             {
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(member.typeid) + ">(item))).ToList().AsReadOnly();");
+				var dataClass = schema.GetObject(member.typeid);
+                WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
+					"?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
             }
             else if (member.type == Constants.TypeStruct)
             {
-                WriteLine(memberName + " = " + Utils.DataClassName(member.typeid) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+				var dataClass = schema.GetStruct(member.typeid);
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
             }
             else if (member.type == Constants.TypeStructList)
             {
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(member.typeid) + "." + Utils.FactoryMethodName + "(item, database)).ToList().AsReadOnly();");
+				var dataClass = schema.GetStruct(member.typeid);
+                WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
+					"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)));");
             }
             else if (member.type == Constants.TypeInt)
             {
@@ -534,7 +656,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             }
             else if (member.type == Constants.TypeColor)
             {
-                WriteLine(memberName + " = new Color(serializable." + member.name + ");");
+                WriteLine(memberName + " = new ColorData(serializable." + member.name + ");");
             }
             else if (member.type == Constants.TypeLayout)
             {
@@ -546,13 +668,83 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             }
             else if (member.type == Constants.TypeImage)
             {
-                WriteLine(memberName + " = new SpriteId(serializable." + member.name + ");");
+                WriteLine(memberName + " = new SpriteId(serializable." + member.name + ", SpriteId.Type." + member.typeid + ");");
+            }
+            else if (member.type == Constants.TypePrefab)
+            {
+                WriteLine(memberName + " = new PrefabId(serializable." + member.name + ", PrefabId.Type." + member.typeid + ");");
             }
             else
             {
                 WriteLine(memberName + " = serializable." + member.name + ";");
             }
         }
+
+		// TODO: delete this method
+		private void WriteLegacyDeserializationCode(XmlClassMember member, DatabaseSchema schema)
+        {
+            var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+
+            if (member.type == Constants.TypeObject)
+            {
+				var dataClass = schema.GetObject(member.typeid);
+                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+            }
+            else if (member.type == Constants.TypeObjectList)
+            {
+				var dataClass = schema.GetObject(member.typeid);
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))).ToArray();");
+            }
+            else if (member.type == Constants.TypeStruct)
+            {
+				var dataClass = schema.GetStruct(member.typeid);
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+            }
+            else if (member.type == Constants.TypeStructList)
+            {
+				var dataClass = schema.GetStruct(member.typeid);
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)).ToArray();");
+            }
+            else if (member.type == Constants.TypeInt)
+            {
+                member.MinMaxInt(out var minvalue, out var maxvalue);
+                WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
+            }
+            else if (member.type == Constants.TypeFloat)
+            {
+                member.MinMaxFloat(out var minvalue, out var maxvalue);
+                WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + "f, " + maxvalue + "f);");
+            }
+            else if (member.type == Constants.TypeColor)
+            {
+                WriteLine(memberName + " = new ColorData(serializable." + member.name + ");");
+            }
+            else if (member.type == Constants.TypeLayout)
+            {
+                WriteLine(memberName + " = new Layout(serializable." + member.name + ");");
+            }
+            else if (member.type == Constants.TypeAudioClip)
+            {
+                WriteLine(memberName + " = new AudioClipId(serializable." + member.name + ");");
+            }
+            else if (member.type == Constants.TypeImage)
+            {
+                WriteLine(memberName + " = new SpriteId(serializable." + member.name + ", SpriteId.Type." + member.typeid + ");");
+            }
+            else if (member.type == Constants.TypePrefab)
+            {
+                WriteLine(memberName + " = new PrefabId(serializable." + member.name + ", PrefabId.Type." + member.typeid + ");");
+            }
+            else
+            {
+                WriteLine(memberName + " = serializable." + member.name + ";");
+            }
+        }
+
+		private static string PrivateMemberName(string name) 
+		{ 		
+			return "_" + char.ToLower(name[0]) + name.Substring(1); 
+		}
 
         
         #line default

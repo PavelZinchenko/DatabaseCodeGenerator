@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="InstalledComponent" type="struct">
-    <member name="ComponentId" type="object" typeid="Component" />
+    <member name="ComponentId" type="object" typeid="Component" alias="Component" />
     <member name="Modification" type="enum" typeid="ComponentModType" />
     <member name="Quality" type="enum" typeid="ModificationQuality" />
     <member name="Locked" type="bool" />

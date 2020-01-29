@@ -10,6 +10,6 @@
     <member name="Capacity" type="int" minvalue="1" maxvalue="100" />
     <member name="ActivationType" type="enum" typeid="ActivationType" />
     <member name="LaunchSound" type="audioclip" />
-    <member name="LaunchEffectPrefab" type="string" />
-    <member name="ControlButtonIcon" type="string" />
+    <member name="LaunchEffectPrefab" type="prefab" typeid="Effect" />
+    <member name="ControlButtonIcon" type="image" typeid="ActionButton" />
 </data>
