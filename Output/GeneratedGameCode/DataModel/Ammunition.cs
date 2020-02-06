@@ -15,24 +15,24 @@ namespace GameDatabase.DataModel
 {
 	public partial class Ammunition
 	{
-		partial void OnDataDeserialized(AmmunitionSerializable serializable, Database database);
+		partial void OnDataDeserialized(AmmunitionSerializable serializable, Database.Loader loader);
 
-		public static Ammunition Create(AmmunitionSerializable serializable, Database database)
+		public static Ammunition Create(AmmunitionSerializable serializable, Database.Loader loader)
 		{
-			return new Ammunition(serializable, database);
+			return new Ammunition(serializable, loader);
 		}
 
-		private Ammunition(AmmunitionSerializable serializable, Database database)
+		private Ammunition(AmmunitionSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Ammunition>(serializable.Id);
-			database.AddAmmunition(serializable.Id, this);
+			loader.AddAmmunition(serializable.Id, this);
 
-			Body = BulletBody.Create(serializable.Body, database);
-			Triggers = new ImmutableCollection<BulletTrigger>(serializable.Triggers?.Select(item => BulletTrigger.Create(item, database)));
+			Body = BulletBody.Create(serializable.Body, loader);
+			Triggers = new ImmutableCollection<BulletTrigger>(serializable.Triggers?.Select(item => BulletTrigger.Create(item, loader)));
 			ImpactType = serializable.ImpactType;
-			Effects = new ImmutableCollection<ImpactEffect>(serializable.Effects?.Select(item => ImpactEffect.Create(item, database)));
+			Effects = new ImmutableCollection<ImpactEffect>(serializable.Effects?.Select(item => ImpactEffect.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Ammunition> Id;

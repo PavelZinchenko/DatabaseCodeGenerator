@@ -15,14 +15,14 @@ namespace GameDatabase.DataModel
 {
 	public partial class Barrel
 	{
-		partial void OnDataDeserialized(BarrelSerializable serializable, Database database);
+		partial void OnDataDeserialized(BarrelSerializable serializable, Database.Loader loader);
 
-		public static Barrel Create(BarrelSerializable serializable, Database database)
+		public static Barrel Create(BarrelSerializable serializable, Database.Loader loader)
 		{
-			return new Barrel(serializable, database);
+			return new Barrel(serializable, loader);
 		}
 
-		private Barrel(BarrelSerializable serializable, Database database)
+		private Barrel(BarrelSerializable serializable, Database.Loader loader)
 		{
 			Position = serializable.Position;
 			Rotation = UnityEngine.Mathf.Clamp(serializable.Rotation, -360f, 360f);
@@ -34,7 +34,7 @@ namespace GameDatabase.DataModel
 			Image = new SpriteId(serializable.Image, SpriteId.Type.Satellite);
 			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 10f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public UnityEngine.Vector2 Position { get; private set; }

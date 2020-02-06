@@ -276,24 +276,24 @@
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+                WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
             }
             else if (member.type == Constants.TypeObjectList)
             {
 				var dataClass = schema.GetObject(member.typeid);
                 WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
-					"?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
+					"?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
             }
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", loader);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
                 WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
-					"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)));");
+					"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, loader)));");
             }
             else if (member.type == Constants.TypeInt)
             {
@@ -339,22 +339,22 @@
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+                WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
             }
             else if (member.type == Constants.TypeObjectList)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))).ToArray();");
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))).ToArray();");
             }
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", loader);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)).ToArray();");
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, loader)).ToArray();");
             }
             else if (member.type == Constants.TypeInt)
             {

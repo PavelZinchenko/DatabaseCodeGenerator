@@ -19,8 +19,11 @@ namespace GameDatabase.Storage
         public DatabaseContent(IDataStorage storage, IJsonSerializer jsonSerializer)
         {
             _serializer = jsonSerializer;
-            storage.LoadContent(this);
+            Storage = storage;
+            Storage.LoadContent(this);
         }
+
+		public IDataStorage Storage { get; }
 
         public void LoadJson(string name, string content)
         {
@@ -247,20 +250,9 @@ namespace GameDatabase.Storage
 		public VisualEffectSerializable GetVisualEffect(int id) { return _visualEffectMap.TryGetValue(id, out var item) ? item : null; }
 		public WeaponSerializable GetWeapon(int id) { return _weaponMap.TryGetValue(id, out var item) ? item : null; }
 
-        public ImageData GetImage(string name)
-        {
-            return _images.TryGetValue(name, out var image) ? image : ImageData.Empty;
-        }
-
-        public AudioClipData GetAudioClip(string name)
-        {
-            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClipData.Empty;
-        }
-
-        public string GetLocalization(string language)
-        {
-            return _localizations.TryGetValue(language, out var data) ? data : null;
-        }
+        public IEnumerable<KeyValuePair<string, ImageData>> Images => _images;
+        public IEnumerable<KeyValuePair<string, AudioClipData>> AudioClips => _audioClips;
+        public IEnumerable<KeyValuePair<string, string>> Localizations => _localizations;
 
         private readonly IJsonSerializer _serializer;
 

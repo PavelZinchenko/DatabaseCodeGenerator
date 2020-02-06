@@ -15,19 +15,19 @@ namespace GameDatabase.DataModel
 {
 	public partial class RequiredFactions
 	{
-		partial void OnDataDeserialized(FactionFilterSerializable serializable, Database database);
+		partial void OnDataDeserialized(FactionFilterSerializable serializable, Database.Loader loader);
 
-		public static RequiredFactions Create(FactionFilterSerializable serializable, Database database)
+		public static RequiredFactions Create(FactionFilterSerializable serializable, Database.Loader loader)
 		{
-			return new RequiredFactions(serializable, database);
+			return new RequiredFactions(serializable, loader);
 		}
 
-		private RequiredFactions(FactionFilterSerializable serializable, Database database)
+		private RequiredFactions(FactionFilterSerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
-			List = new ImmutableCollection<Faction>(serializable.List?.Select(item => database.GetFaction(new ItemId<Faction>(item))));
+			List = new ImmutableCollection<Faction>(serializable.List?.Select(item => loader.GetFaction(new ItemId<Faction>(item))));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public FactionFilterType Type { get; private set; }

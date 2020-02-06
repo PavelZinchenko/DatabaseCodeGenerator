@@ -15,20 +15,20 @@ namespace GameDatabase.DataModel
 {
 	public partial class BulletTrigger
 	{
-		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database database);
+		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database.Loader loader);
 
-		public static BulletTrigger Create(BulletTriggerSerializable serializable, Database database)
+		public static BulletTrigger Create(BulletTriggerSerializable serializable, Database.Loader loader)
 		{
-			return new BulletTrigger(serializable, database);
+			return new BulletTrigger(serializable, loader);
 		}
 
-		private BulletTrigger(BulletTriggerSerializable serializable, Database database)
+		private BulletTrigger(BulletTriggerSerializable serializable, Database.Loader loader)
 		{
 			Condition = serializable.Condition;
 			EffectType = serializable.EffectType;
-			VisualEffect = database.GetVisualEffect(new ItemId<VisualEffect>(serializable.VisualEffect));
+			VisualEffect = loader.GetVisualEffect(new ItemId<VisualEffect>(serializable.VisualEffect));
 			AudioClip = new AudioClipId(serializable.AudioClip);
-			Ammunition = database.GetAmmunition(new ItemId<Ammunition>(serializable.Ammunition));
+			Ammunition = loader.GetAmmunition(new ItemId<Ammunition>(serializable.Ammunition));
 			Color = new ColorData(serializable.Color);
 			ColorMode = serializable.ColorMode;
 			Quantity = UnityEngine.Mathf.Clamp(serializable.Quantity, 0, 1000);
@@ -39,7 +39,7 @@ namespace GameDatabase.DataModel
 			PowerMultiplier = UnityEngine.Mathf.Clamp(serializable.PowerMultiplier, 0f, 1000f);
 			MaxNestingLevel = UnityEngine.Mathf.Clamp(serializable.MaxNestingLevel, 0, 100);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public BulletTriggerCondition Condition { get; private set; }

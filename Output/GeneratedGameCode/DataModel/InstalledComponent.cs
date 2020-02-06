@@ -15,16 +15,16 @@ namespace GameDatabase.DataModel
 {
 	public partial class InstalledComponent
 	{
-		partial void OnDataDeserialized(InstalledComponentSerializable serializable, Database database);
+		partial void OnDataDeserialized(InstalledComponentSerializable serializable, Database.Loader loader);
 
-		public static InstalledComponent Create(InstalledComponentSerializable serializable, Database database)
+		public static InstalledComponent Create(InstalledComponentSerializable serializable, Database.Loader loader)
 		{
-			return new InstalledComponent(serializable, database);
+			return new InstalledComponent(serializable, loader);
 		}
 
-		private InstalledComponent(InstalledComponentSerializable serializable, Database database)
+		private InstalledComponent(InstalledComponentSerializable serializable, Database.Loader loader)
 		{
-			Component = database.GetComponent(new ItemId<Component>(serializable.ComponentId));
+			Component = loader.GetComponent(new ItemId<Component>(serializable.ComponentId));
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
 			Locked = serializable.Locked;
@@ -34,7 +34,7 @@ namespace GameDatabase.DataModel
 			Behaviour = UnityEngine.Mathf.Clamp(serializable.Behaviour, 0, 10);
 			KeyBinding = UnityEngine.Mathf.Clamp(serializable.KeyBinding, -10, 10);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public Component Component { get; private set; }

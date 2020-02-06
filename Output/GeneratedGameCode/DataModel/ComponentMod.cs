@@ -15,21 +15,21 @@ namespace GameDatabase.DataModel
 {
 	public partial class ComponentMod
 	{
-		partial void OnDataDeserialized(ComponentModSerializable serializable, Database database);
+		partial void OnDataDeserialized(ComponentModSerializable serializable, Database.Loader loader);
 
-		public static ComponentMod Create(ComponentModSerializable serializable, Database database)
+		public static ComponentMod Create(ComponentModSerializable serializable, Database.Loader loader)
 		{
-			return new ComponentMod(serializable, database);
+			return new ComponentMod(serializable, loader);
 		}
 
-		private ComponentMod(ComponentModSerializable serializable, Database database)
+		private ComponentMod(ComponentModSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<ComponentMod>(serializable.Id);
-			database.AddComponentMod(serializable.Id, this);
+			loader.AddComponentMod(serializable.Id, this);
 
 			Type = serializable.Type;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<ComponentMod> Id;

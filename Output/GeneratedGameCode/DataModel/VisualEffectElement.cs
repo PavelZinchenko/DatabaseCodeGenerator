@@ -15,14 +15,14 @@ namespace GameDatabase.DataModel
 {
 	public partial class VisualEffectElement
 	{
-		partial void OnDataDeserialized(VisualEffectElementSerializable serializable, Database database);
+		partial void OnDataDeserialized(VisualEffectElementSerializable serializable, Database.Loader loader);
 
-		public static VisualEffectElement Create(VisualEffectElementSerializable serializable, Database database)
+		public static VisualEffectElement Create(VisualEffectElementSerializable serializable, Database.Loader loader)
 		{
-			return new VisualEffectElement(serializable, database);
+			return new VisualEffectElement(serializable, loader);
 		}
 
-		private VisualEffectElement(VisualEffectElementSerializable serializable, Database database)
+		private VisualEffectElement(VisualEffectElementSerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
 			Image = new SpriteId(serializable.Image, SpriteId.Type.Effect);
@@ -32,7 +32,7 @@ namespace GameDatabase.DataModel
 			StartTime = UnityEngine.Mathf.Clamp(serializable.StartTime, 0f, 100f);
 			Lifetime = UnityEngine.Mathf.Clamp(serializable.Lifetime, 0f, 100f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public VisualEffectType Type { get; private set; }

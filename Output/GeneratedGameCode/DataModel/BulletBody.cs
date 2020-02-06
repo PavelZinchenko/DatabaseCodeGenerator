@@ -15,14 +15,14 @@ namespace GameDatabase.DataModel
 {
 	public partial class BulletBody
 	{
-		partial void OnDataDeserialized(BulletBodySerializable serializable, Database database);
+		partial void OnDataDeserialized(BulletBodySerializable serializable, Database.Loader loader);
 
-		public static BulletBody Create(BulletBodySerializable serializable, Database database)
+		public static BulletBody Create(BulletBodySerializable serializable, Database.Loader loader)
 		{
-			return new BulletBody(serializable, database);
+			return new BulletBody(serializable, loader);
 		}
 
-		private BulletBody(BulletBodySerializable serializable, Database database)
+		private BulletBody(BulletBodySerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
 			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 1000f);
@@ -32,12 +32,12 @@ namespace GameDatabase.DataModel
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, 0f, 1000f);
 			HitPoints = UnityEngine.Mathf.Clamp(serializable.HitPoints, 0, 1000);
 			Color = new ColorData(serializable.Color);
-			BulletPrefab = database.GetBulletPrefab(new ItemId<BulletPrefab>(serializable.BulletPrefab));
+			BulletPrefab = loader.GetBulletPrefab(new ItemId<BulletPrefab>(serializable.BulletPrefab));
 			EnergyCost = UnityEngine.Mathf.Clamp(serializable.EnergyCost, 0f, 1000f);
 			CanBeDisarmed = serializable.CanBeDisarmed;
 			FriendlyFire = serializable.FriendlyFire;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public BulletType Type { get; private set; }

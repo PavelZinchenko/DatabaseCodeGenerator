@@ -11,21 +11,21 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
 	public partial class <#= Utils.DataClassName(ObjectData) #>
 	{
-		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
-		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
-			return new <#= Utils.DataClassName(ObjectData) #>(serializable, database);
+			return new <#= Utils.DataClassName(ObjectData) #>(serializable, loader);
 		}
 
-		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
 <#
 			if (ObjectType == ObjectType.Class)
             {
 #>
 			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id);
-			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
+			loader.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
 
 <#
 			}
@@ -39,7 +39,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PopIndent();
 #>
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 <#

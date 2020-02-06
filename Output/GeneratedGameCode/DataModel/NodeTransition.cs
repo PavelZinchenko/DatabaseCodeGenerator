@@ -15,20 +15,20 @@ namespace GameDatabase.DataModel
 {
 	public partial class NodeTransition
 	{
-		partial void OnDataDeserialized(NodeTransitionSerializable serializable, Database database);
+		partial void OnDataDeserialized(NodeTransitionSerializable serializable, Database.Loader loader);
 
-		public static NodeTransition Create(NodeTransitionSerializable serializable, Database database)
+		public static NodeTransition Create(NodeTransitionSerializable serializable, Database.Loader loader)
 		{
-			return new NodeTransition(serializable, database);
+			return new NodeTransition(serializable, loader);
 		}
 
-		private NodeTransition(NodeTransitionSerializable serializable, Database database)
+		private NodeTransition(NodeTransitionSerializable serializable, Database.Loader loader)
 		{
 			TargetNode = UnityEngine.Mathf.Clamp(serializable.TargetNode, 1, 1000);
-			Requirement = Requirement.Create(serializable.Requirement, database);
+			Requirement = Requirement.Create(serializable.Requirement, loader);
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, 0f, 1000f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public int TargetNode { get; private set; }

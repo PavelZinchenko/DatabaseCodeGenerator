@@ -15,19 +15,19 @@ namespace GameDatabase.DataModel
 {
 	public partial class GalaxySettings
 	{
-		partial void OnDataDeserialized(GalaxySettingsSerializable serializable, Database database);
+		partial void OnDataDeserialized(GalaxySettingsSerializable serializable, Database.Loader loader);
 
-		public static GalaxySettings Create(GalaxySettingsSerializable serializable, Database database)
+		public static GalaxySettings Create(GalaxySettingsSerializable serializable, Database.Loader loader)
 		{
-			return new GalaxySettings(serializable, database);
+			return new GalaxySettings(serializable, loader);
 		}
 
-		private GalaxySettings(GalaxySettingsSerializable serializable, Database database)
+		private GalaxySettings(GalaxySettingsSerializable serializable, Database.Loader loader)
 		{
-			AbandonedStarbaseFaction = database.GetFaction(new ItemId<Faction>(serializable.AbandonedStarbaseFaction));
-			StartingShipBuilds = new ImmutableCollection<ShipBuild>(serializable.StartingShipBuilds?.Select(item => database.GetShipBuild(new ItemId<ShipBuild>(item))));
+			AbandonedStarbaseFaction = loader.GetFaction(new ItemId<Faction>(serializable.AbandonedStarbaseFaction));
+			StartingShipBuilds = new ImmutableCollection<ShipBuild>(serializable.StartingShipBuilds?.Select(item => loader.GetShipBuild(new ItemId<ShipBuild>(item))));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public Faction AbandonedStarbaseFaction { get; private set; }

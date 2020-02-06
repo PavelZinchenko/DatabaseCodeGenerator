@@ -15,16 +15,16 @@ namespace GameDatabase.DataModel
 {
 	public partial class AmmunitionObsolete
 	{
-		public static AmmunitionObsolete Create(AmmunitionObsoleteSerializable serializable, Database database)
+		public static AmmunitionObsolete Create(AmmunitionObsoleteSerializable serializable, Database.Loader loader)
 		{
-			return new AmmunitionObsolete(serializable, database);
+			return new AmmunitionObsolete(serializable, loader);
 		}
 
-		private AmmunitionObsolete(AmmunitionObsoleteSerializable serializable, Database database)
+		private AmmunitionObsolete(AmmunitionObsoleteSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<AmmunitionObsolete>(serializable.Id);
-			database.AddAmmunitionObsolete(serializable.Id, this);
-			Stats = new AmmunitionObsoleteStats(serializable, database);
+			loader.AddAmmunitionObsolete(serializable.Id, this);
+			Stats = new AmmunitionObsoleteStats(serializable, loader);
 		}
 
 		public readonly ItemId<AmmunitionObsolete> Id;
@@ -35,9 +35,9 @@ namespace GameDatabase.DataModel
 
 	public partial struct AmmunitionObsoleteStats 
 	{
-		partial void OnDataDeserialized(AmmunitionObsoleteSerializable serializable, Database database);
+		partial void OnDataDeserialized(AmmunitionObsoleteSerializable serializable, Database.Loader loader);
 
-		public AmmunitionObsoleteStats(AmmunitionObsoleteSerializable serializable, Database database)
+		public AmmunitionObsoleteStats(AmmunitionObsoleteSerializable serializable, Database.Loader loader)
 		{
 			AmmunitionClass = serializable.AmmunitionClass;
 			DamageType = serializable.DamageType;
@@ -53,14 +53,14 @@ namespace GameDatabase.DataModel
 			HitPoints = UnityEngine.Mathf.Clamp(serializable.HitPoints, 0, 1000);
 			IgnoresShipVelocity = serializable.IgnoresShipVelocity;
 			EnergyCost = UnityEngine.Mathf.Clamp(serializable.EnergyCost, 0f, 1000f);
-			CoupledAmmunition = database.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.CoupledAmmunitionId));
+			CoupledAmmunition = loader.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.CoupledAmmunitionId));
 			Color = new ColorData(serializable.Color);
 			FireSound = new AudioClipId(serializable.FireSound);
 			HitSound = new AudioClipId(serializable.HitSound);
 			HitEffectPrefab = new PrefabId(serializable.HitEffectPrefab, PrefabId.Type.Effect);
 			BulletPrefab = new PrefabId(serializable.BulletPrefab, PrefabId.Type.Bullet);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public AmmunitionClassObsolete AmmunitionClass;

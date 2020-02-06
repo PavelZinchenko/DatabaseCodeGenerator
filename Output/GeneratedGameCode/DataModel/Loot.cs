@@ -15,21 +15,21 @@ namespace GameDatabase.DataModel
 {
 	public partial class LootModel
 	{
-		partial void OnDataDeserialized(LootSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootSerializable serializable, Database.Loader loader);
 
-		public static LootModel Create(LootSerializable serializable, Database database)
+		public static LootModel Create(LootSerializable serializable, Database.Loader loader)
 		{
-			return new LootModel(serializable, database);
+			return new LootModel(serializable, loader);
 		}
 
-		private LootModel(LootSerializable serializable, Database database)
+		private LootModel(LootSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<LootModel>(serializable.Id);
-			database.AddLoot(serializable.Id, this);
+			loader.AddLoot(serializable.Id, this);
 
-			Loot = LootContent.Create(serializable.Loot, database);
+			Loot = LootContent.Create(serializable.Loot, loader);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<LootModel> Id;

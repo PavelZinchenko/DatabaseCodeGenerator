@@ -15,21 +15,21 @@ namespace GameDatabase.DataModel
 {
 	public partial class VisualEffect
 	{
-		partial void OnDataDeserialized(VisualEffectSerializable serializable, Database database);
+		partial void OnDataDeserialized(VisualEffectSerializable serializable, Database.Loader loader);
 
-		public static VisualEffect Create(VisualEffectSerializable serializable, Database database)
+		public static VisualEffect Create(VisualEffectSerializable serializable, Database.Loader loader)
 		{
-			return new VisualEffect(serializable, database);
+			return new VisualEffect(serializable, loader);
 		}
 
-		private VisualEffect(VisualEffectSerializable serializable, Database database)
+		private VisualEffect(VisualEffectSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<VisualEffect>(serializable.Id);
-			database.AddVisualEffect(serializable.Id, this);
+			loader.AddVisualEffect(serializable.Id, this);
 
-			Elements = new ImmutableCollection<VisualEffectElement>(serializable.Elements?.Select(item => VisualEffectElement.Create(item, database)));
+			Elements = new ImmutableCollection<VisualEffectElement>(serializable.Elements?.Select(item => VisualEffectElement.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<VisualEffect> Id;

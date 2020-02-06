@@ -15,16 +15,16 @@ namespace GameDatabase.DataModel
 {
 	public partial class Weapon
 	{
-		public static Weapon Create(WeaponSerializable serializable, Database database)
+		public static Weapon Create(WeaponSerializable serializable, Database.Loader loader)
 		{
-			return new Weapon(serializable, database);
+			return new Weapon(serializable, loader);
 		}
 
-		private Weapon(WeaponSerializable serializable, Database database)
+		private Weapon(WeaponSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Weapon>(serializable.Id);
-			database.AddWeapon(serializable.Id, this);
-			Stats = new WeaponStats(serializable, database);
+			loader.AddWeapon(serializable.Id, this);
+			Stats = new WeaponStats(serializable, loader);
 		}
 
 		public readonly ItemId<Weapon> Id;
@@ -35,9 +35,9 @@ namespace GameDatabase.DataModel
 
 	public partial struct WeaponStats 
 	{
-		partial void OnDataDeserialized(WeaponSerializable serializable, Database database);
+		partial void OnDataDeserialized(WeaponSerializable serializable, Database.Loader loader);
 
-		public WeaponStats(WeaponSerializable serializable, Database database)
+		public WeaponStats(WeaponSerializable serializable, Database.Loader loader)
 		{
 			WeaponClass = serializable.WeaponClass;
 			FireRate = UnityEngine.Mathf.Clamp(serializable.FireRate, 0f, 100f);
@@ -49,7 +49,7 @@ namespace GameDatabase.DataModel
 			ShotEffectPrefab = new PrefabId(serializable.ShotEffectPrefab, PrefabId.Type.Effect);
 			ControlButtonIcon = new SpriteId(serializable.ControlButtonIcon, SpriteId.Type.ActionButton);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public WeaponClass WeaponClass;

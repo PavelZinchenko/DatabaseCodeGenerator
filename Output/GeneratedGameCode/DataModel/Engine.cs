@@ -15,19 +15,19 @@ namespace GameDatabase.DataModel
 {
 	public partial class Engine
 	{
-		partial void OnDataDeserialized(EngineSerializable serializable, Database database);
+		partial void OnDataDeserialized(EngineSerializable serializable, Database.Loader loader);
 
-		public static Engine Create(EngineSerializable serializable, Database database)
+		public static Engine Create(EngineSerializable serializable, Database.Loader loader)
 		{
-			return new Engine(serializable, database);
+			return new Engine(serializable, loader);
 		}
 
-		private Engine(EngineSerializable serializable, Database database)
+		private Engine(EngineSerializable serializable, Database.Loader loader)
 		{
 			Position = serializable.Position;
 			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 1f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public UnityEngine.Vector2 Position { get; private set; }

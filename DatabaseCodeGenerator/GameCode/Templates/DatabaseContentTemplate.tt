@@ -15,8 +15,11 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
         public DatabaseContent(IDataStorage storage, IJsonSerializer jsonSerializer)
         {
             _serializer = jsonSerializer;
-            storage.LoadContent(this);
+            Storage = storage;
+            Storage.LoadContent(this);
         }
+
+		public IDataStorage Storage { get; }
 
         public void LoadJson(string name, string content)
         {
@@ -107,20 +110,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
         }
 #>
 
-        public <#= Utils.ImageType #> GetImage(string name)
-        {
-            return _images.TryGetValue(name, out var image) ? image : <#= Utils.ImageType #>.Empty;
-        }
-
-        public <#= Utils.AudioClipType #> GetAudioClip(string name)
-        {
-            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : <#= Utils.AudioClipType #>.Empty;
-        }
-
-        public string GetLocalization(string language)
-        {
-            return _localizations.TryGetValue(language, out var data) ? data : null;
-        }
+        public IEnumerable<KeyValuePair<string, <#= Utils.ImageType #>>> Images => _images;
+        public IEnumerable<KeyValuePair<string, <#= Utils.AudioClipType #>>> AudioClips => _audioClips;
+        public IEnumerable<KeyValuePair<string, string>> Localizations => _localizations;
 
         private readonly IJsonSerializer _serializer;
 

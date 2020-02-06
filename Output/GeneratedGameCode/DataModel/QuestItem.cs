@@ -15,17 +15,17 @@ namespace GameDatabase.DataModel
 {
 	public partial class QuestItem
 	{
-		partial void OnDataDeserialized(QuestItemSerializable serializable, Database database);
+		partial void OnDataDeserialized(QuestItemSerializable serializable, Database.Loader loader);
 
-		public static QuestItem Create(QuestItemSerializable serializable, Database database)
+		public static QuestItem Create(QuestItemSerializable serializable, Database.Loader loader)
 		{
-			return new QuestItem(serializable, database);
+			return new QuestItem(serializable, loader);
 		}
 
-		private QuestItem(QuestItemSerializable serializable, Database database)
+		private QuestItem(QuestItemSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<QuestItem>(serializable.Id);
-			database.AddQuestItem(serializable.Id, this);
+			loader.AddQuestItem(serializable.Id, this);
 
 			Name = serializable.Name;
 			Description = serializable.Description;
@@ -33,7 +33,7 @@ namespace GameDatabase.DataModel
 			Color = new ColorData(serializable.Color);
 			Price = UnityEngine.Mathf.Clamp(serializable.Price, 0, 100000000);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<QuestItem> Id;

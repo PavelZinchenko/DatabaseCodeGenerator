@@ -15,16 +15,16 @@ namespace GameDatabase.DataModel
 {
 	public partial class DroneBay
 	{
-		public static DroneBay Create(DroneBaySerializable serializable, Database database)
+		public static DroneBay Create(DroneBaySerializable serializable, Database.Loader loader)
 		{
-			return new DroneBay(serializable, database);
+			return new DroneBay(serializable, loader);
 		}
 
-		private DroneBay(DroneBaySerializable serializable, Database database)
+		private DroneBay(DroneBaySerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<DroneBay>(serializable.Id);
-			database.AddDroneBay(serializable.Id, this);
-			Stats = new DroneBayStats(serializable, database);
+			loader.AddDroneBay(serializable.Id, this);
+			Stats = new DroneBayStats(serializable, loader);
 		}
 
 		public readonly ItemId<DroneBay> Id;
@@ -35,9 +35,9 @@ namespace GameDatabase.DataModel
 
 	public partial struct DroneBayStats 
 	{
-		partial void OnDataDeserialized(DroneBaySerializable serializable, Database database);
+		partial void OnDataDeserialized(DroneBaySerializable serializable, Database.Loader loader);
 
-		public DroneBayStats(DroneBaySerializable serializable, Database database)
+		public DroneBayStats(DroneBaySerializable serializable, Database.Loader loader)
 		{
 			EnergyConsumption = UnityEngine.Mathf.Clamp(serializable.EnergyConsumption, 0f, 1000f);
 			PassiveEnergyConsumption = UnityEngine.Mathf.Clamp(serializable.PassiveEnergyConsumption, 0f, 1000f);
@@ -52,7 +52,7 @@ namespace GameDatabase.DataModel
 			LaunchEffectPrefab = new PrefabId(serializable.LaunchEffectPrefab, PrefabId.Type.Effect);
 			ControlButtonIcon = new SpriteId(serializable.ControlButtonIcon, SpriteId.Type.ActionButton);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public float EnergyConsumption;

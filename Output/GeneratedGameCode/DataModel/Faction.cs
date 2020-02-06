@@ -15,17 +15,17 @@ namespace GameDatabase.DataModel
 {
 	public partial class Faction
 	{
-		partial void OnDataDeserialized(FactionSerializable serializable, Database database);
+		partial void OnDataDeserialized(FactionSerializable serializable, Database.Loader loader);
 
-		public static Faction Create(FactionSerializable serializable, Database database)
+		public static Faction Create(FactionSerializable serializable, Database.Loader loader)
 		{
-			return new Faction(serializable, database);
+			return new Faction(serializable, loader);
 		}
 
-		private Faction(FactionSerializable serializable, Database database)
+		private Faction(FactionSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Faction>(serializable.Id);
-			database.AddFaction(serializable.Id, this);
+			loader.AddFaction(serializable.Id, this);
 
 			Name = serializable.Name;
 			Color = new ColorData(serializable.Color);
@@ -33,7 +33,7 @@ namespace GameDatabase.DataModel
 			WanderingShipsDistance = UnityEngine.Mathf.Clamp(serializable.WanderingShipsDistance, 0, 1000);
 			Hidden = serializable.Hidden;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Faction> Id;

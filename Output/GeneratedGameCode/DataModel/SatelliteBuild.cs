@@ -15,24 +15,24 @@ namespace GameDatabase.DataModel
 {
 	public partial class SatelliteBuild
 	{
-		partial void OnDataDeserialized(SatelliteBuildSerializable serializable, Database database);
+		partial void OnDataDeserialized(SatelliteBuildSerializable serializable, Database.Loader loader);
 
-		public static SatelliteBuild Create(SatelliteBuildSerializable serializable, Database database)
+		public static SatelliteBuild Create(SatelliteBuildSerializable serializable, Database.Loader loader)
 		{
-			return new SatelliteBuild(serializable, database);
+			return new SatelliteBuild(serializable, loader);
 		}
 
-		private SatelliteBuild(SatelliteBuildSerializable serializable, Database database)
+		private SatelliteBuild(SatelliteBuildSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<SatelliteBuild>(serializable.Id);
-			database.AddSatelliteBuild(serializable.Id, this);
+			loader.AddSatelliteBuild(serializable.Id, this);
 
-			Satellite = database.GetSatellite(new ItemId<Satellite>(serializable.SatelliteId));
+			Satellite = loader.GetSatellite(new ItemId<Satellite>(serializable.SatelliteId));
 			NotAvailableInGame = serializable.NotAvailableInGame;
 			DifficultyClass = serializable.DifficultyClass;
-			Components = new ImmutableCollection<InstalledComponent>(serializable.Components?.Select(item => InstalledComponent.Create(item, database)));
+			Components = new ImmutableCollection<InstalledComponent>(serializable.Components?.Select(item => InstalledComponent.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<SatelliteBuild> Id;

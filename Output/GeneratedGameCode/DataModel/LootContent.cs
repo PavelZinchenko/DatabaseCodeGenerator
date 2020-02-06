@@ -15,40 +15,40 @@ namespace GameDatabase.DataModel
 {
 	public abstract partial class LootContent
 	{
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-		public static LootContent Create(LootContentSerializable serializable, Database database)
+		public static LootContent Create(LootContentSerializable serializable, Database.Loader loader)
 		{
 			switch (serializable.Type)
 		    {
 				case LootItemType.None:
-					return new LootContent_None(serializable, database);
+					return new LootContent_None(serializable, loader);
 				case LootItemType.SomeMoney:
-					return new LootContent_SomeMoney(serializable, database);
+					return new LootContent_SomeMoney(serializable, loader);
 				case LootItemType.Fuel:
-					return new LootContent_Fuel(serializable, database);
+					return new LootContent_Fuel(serializable, loader);
 				case LootItemType.Money:
-					return new LootContent_Money(serializable, database);
+					return new LootContent_Money(serializable, loader);
 				case LootItemType.Stars:
-					return new LootContent_Stars(serializable, database);
+					return new LootContent_Stars(serializable, loader);
 				case LootItemType.StarMap:
-					return new LootContent_StarMap(serializable, database);
+					return new LootContent_StarMap(serializable, loader);
 				case LootItemType.RandomComponents:
-					return new LootContent_RandomComponents(serializable, database);
+					return new LootContent_RandomComponents(serializable, loader);
 				case LootItemType.RandomItems:
-					return new LootContent_RandomItems(serializable, database);
+					return new LootContent_RandomItems(serializable, loader);
 				case LootItemType.AllItems:
-					return new LootContent_AllItems(serializable, database);
+					return new LootContent_AllItems(serializable, loader);
 				case LootItemType.ItemsWithChance:
-					return new LootContent_ItemsWithChance(serializable, database);
+					return new LootContent_ItemsWithChance(serializable, loader);
 				case LootItemType.QuestItem:
-					return new LootContent_QuestItem(serializable, database);
+					return new LootContent_QuestItem(serializable, loader);
 				case LootItemType.Ship:
-					return new LootContent_Ship(serializable, database);
+					return new LootContent_Ship(serializable, loader);
 				case LootItemType.EmptyShip:
-					return new LootContent_EmptyShip(serializable, database);
+					return new LootContent_EmptyShip(serializable, loader);
 				case LootItemType.Component:
-					return new LootContent_Component(serializable, database);
+					return new LootContent_Component(serializable, loader);
 				default:
                     throw new DatabaseException("LootContent: Invalid content type - " + serializable.Type);
 			}
@@ -56,11 +56,11 @@ namespace GameDatabase.DataModel
 
 		public abstract T Create<T>(ILootContentFactory<T> factory);
 
-		protected LootContent(LootContentSerializable serializable, Database database)
+		protected LootContent(LootContentSerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public LootItemType Type { get; private set; }
@@ -88,13 +88,13 @@ namespace GameDatabase.DataModel
 
     public partial class LootContent_None : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_None(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_None(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -105,14 +105,14 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_SomeMoney : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_SomeMoney(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_SomeMoney(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			ValueRatio = UnityEngine.Mathf.Clamp(serializable.ValueRatio, 0.001f, 1000f);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -124,15 +124,15 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_Fuel : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_Fuel(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_Fuel(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -145,15 +145,15 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_Money : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_Money(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_Money(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -166,15 +166,15 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_Stars : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_Stars(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_Stars(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -187,13 +187,13 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_StarMap : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_StarMap(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_StarMap(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -204,17 +204,17 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_RandomComponents : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_RandomComponents(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_RandomComponents(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 			ValueRatio = UnityEngine.Mathf.Clamp(serializable.ValueRatio, 0.001f, 1000f);
-			Factions = RequiredFactions.Create(serializable.Factions, database);
+			Factions = RequiredFactions.Create(serializable.Factions, loader);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -229,16 +229,16 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_RandomItems : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_RandomItems(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_RandomItems(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
-			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, database)));
+			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, loader)));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -252,14 +252,14 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_AllItems : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_AllItems(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_AllItems(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, database)));
+			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, loader)));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -271,14 +271,14 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_ItemsWithChance : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_ItemsWithChance(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_ItemsWithChance(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, database)));
+			Items = new ImmutableCollection<LootItem>(serializable.Items?.Select(item => LootItem.Create(item, loader)));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -290,16 +290,16 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_QuestItem : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_QuestItem(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_QuestItem(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			QuestItem = database.GetQuestItem(new ItemId<QuestItem>(serializable.ItemId));
+			QuestItem = loader.GetQuestItem(new ItemId<QuestItem>(serializable.ItemId));
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -313,14 +313,14 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_Ship : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_Ship(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_Ship(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			ShipBuild = database.GetShipBuild(new ItemId<ShipBuild>(serializable.ItemId));
+			ShipBuild = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.ItemId));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -332,14 +332,14 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_EmptyShip : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_EmptyShip(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_EmptyShip(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Ship = database.GetShip(new ItemId<Ship>(serializable.ItemId));
+			Ship = loader.GetShip(new ItemId<Ship>(serializable.ItemId));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)
@@ -351,16 +351,16 @@ namespace GameDatabase.DataModel
     }
     public partial class LootContent_Component : LootContent
     {
-		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database.Loader loader);
 
-  		public LootContent_Component(LootContentSerializable serializable, Database database)
-            : base(serializable, database)
+  		public LootContent_Component(LootContentSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Component = database.GetComponent(new ItemId<Component>(serializable.ItemId));
+			Component = loader.GetComponent(new ItemId<Component>(serializable.ItemId));
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ILootContentFactory<T> factory)

@@ -15,20 +15,20 @@ namespace GameDatabase.DataModel
 {
 	public partial class NodeAction
 	{
-		partial void OnDataDeserialized(NodeActionSerializable serializable, Database database);
+		partial void OnDataDeserialized(NodeActionSerializable serializable, Database.Loader loader);
 
-		public static NodeAction Create(NodeActionSerializable serializable, Database database)
+		public static NodeAction Create(NodeActionSerializable serializable, Database.Loader loader)
 		{
-			return new NodeAction(serializable, database);
+			return new NodeAction(serializable, loader);
 		}
 
-		private NodeAction(NodeActionSerializable serializable, Database database)
+		private NodeAction(NodeActionSerializable serializable, Database.Loader loader)
 		{
 			TargetNode = UnityEngine.Mathf.Clamp(serializable.TargetNode, 1, 1000);
-			Requirement = Requirement.Create(serializable.Requirement, database);
+			Requirement = Requirement.Create(serializable.Requirement, loader);
 			ButtonText = serializable.ButtonText;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public int TargetNode { get; private set; }

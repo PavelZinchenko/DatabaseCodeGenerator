@@ -15,25 +15,25 @@ namespace GameDatabase.DataModel
 {
 	public partial class ShipBuild
 	{
-		partial void OnDataDeserialized(ShipBuildSerializable serializable, Database database);
+		partial void OnDataDeserialized(ShipBuildSerializable serializable, Database.Loader loader);
 
-		public static ShipBuild Create(ShipBuildSerializable serializable, Database database)
+		public static ShipBuild Create(ShipBuildSerializable serializable, Database.Loader loader)
 		{
-			return new ShipBuild(serializable, database);
+			return new ShipBuild(serializable, loader);
 		}
 
-		private ShipBuild(ShipBuildSerializable serializable, Database database)
+		private ShipBuild(ShipBuildSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<ShipBuild>(serializable.Id);
-			database.AddShipBuild(serializable.Id, this);
+			loader.AddShipBuild(serializable.Id, this);
 
-			Ship = database.GetShip(new ItemId<Ship>(serializable.ShipId));
+			Ship = loader.GetShip(new ItemId<Ship>(serializable.ShipId));
 			NotAvailableInGame = serializable.NotAvailableInGame;
 			DifficultyClass = serializable.DifficultyClass;
-			BuildFaction = database.GetFaction(new ItemId<Faction>(serializable.BuildFaction));
-			Components = new ImmutableCollection<InstalledComponent>(serializable.Components?.Select(item => InstalledComponent.Create(item, database)));
+			BuildFaction = loader.GetFaction(new ItemId<Faction>(serializable.BuildFaction));
+			Components = new ImmutableCollection<InstalledComponent>(serializable.Components?.Select(item => InstalledComponent.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<ShipBuild> Id;

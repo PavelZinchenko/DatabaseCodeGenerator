@@ -15,21 +15,21 @@ namespace GameDatabase.DataModel
 {
 	public partial class ImpactEffect
 	{
-		partial void OnDataDeserialized(ImpactEffectSerializable serializable, Database database);
+		partial void OnDataDeserialized(ImpactEffectSerializable serializable, Database.Loader loader);
 
-		public static ImpactEffect Create(ImpactEffectSerializable serializable, Database database)
+		public static ImpactEffect Create(ImpactEffectSerializable serializable, Database.Loader loader)
 		{
-			return new ImpactEffect(serializable, database);
+			return new ImpactEffect(serializable, loader);
 		}
 
-		private ImpactEffect(ImpactEffectSerializable serializable, Database database)
+		private ImpactEffect(ImpactEffectSerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
 			DamageType = serializable.DamageType;
 			Power = UnityEngine.Mathf.Clamp(serializable.Power, 0f, 1000f);
 			Factor = UnityEngine.Mathf.Clamp(serializable.Factor, 0f, 1f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public ImpactEffectType Type { get; private set; }

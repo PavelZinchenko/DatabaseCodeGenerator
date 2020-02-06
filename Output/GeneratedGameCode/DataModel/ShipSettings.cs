@@ -15,14 +15,14 @@ namespace GameDatabase.DataModel
 {
 	public partial class ShipSettings
 	{
-		partial void OnDataDeserialized(ShipSettingsSerializable serializable, Database database);
+		partial void OnDataDeserialized(ShipSettingsSerializable serializable, Database.Loader loader);
 
-		public static ShipSettings Create(ShipSettingsSerializable serializable, Database database)
+		public static ShipSettings Create(ShipSettingsSerializable serializable, Database.Loader loader)
 		{
-			return new ShipSettings(serializable, database);
+			return new ShipSettings(serializable, loader);
 		}
 
-		private ShipSettings(ShipSettingsSerializable serializable, Database database)
+		private ShipSettings(ShipSettingsSerializable serializable, Database.Loader loader)
 		{
 			DefaultWeightPerCell = UnityEngine.Mathf.Clamp(serializable.DefaultWeightPerCell, 1f, 1000f);
 			MinimumWeightPerCell = UnityEngine.Mathf.Clamp(serializable.MinimumWeightPerCell, 1f, 1000f);
@@ -38,7 +38,7 @@ namespace GameDatabase.DataModel
 			MaxVelocity = UnityEngine.Mathf.Clamp(serializable.MaxVelocity, 5f, 30f);
 			MaxTurnRate = UnityEngine.Mathf.Clamp(serializable.MaxTurnRate, 5f, 30f);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public float DefaultWeightPerCell { get; private set; }

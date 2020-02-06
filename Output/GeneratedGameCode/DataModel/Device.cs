@@ -15,16 +15,16 @@ namespace GameDatabase.DataModel
 {
 	public partial class Device
 	{
-		public static Device Create(DeviceSerializable serializable, Database database)
+		public static Device Create(DeviceSerializable serializable, Database.Loader loader)
 		{
-			return new Device(serializable, database);
+			return new Device(serializable, loader);
 		}
 
-		private Device(DeviceSerializable serializable, Database database)
+		private Device(DeviceSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Device>(serializable.Id);
-			database.AddDevice(serializable.Id, this);
-			Stats = new DeviceStats(serializable, database);
+			loader.AddDevice(serializable.Id, this);
+			Stats = new DeviceStats(serializable, loader);
 		}
 
 		public readonly ItemId<Device> Id;
@@ -35,9 +35,9 @@ namespace GameDatabase.DataModel
 
 	public partial struct DeviceStats 
 	{
-		partial void OnDataDeserialized(DeviceSerializable serializable, Database database);
+		partial void OnDataDeserialized(DeviceSerializable serializable, Database.Loader loader);
 
-		public DeviceStats(DeviceSerializable serializable, Database database)
+		public DeviceStats(DeviceSerializable serializable, Database.Loader loader)
 		{
 			DeviceClass = serializable.DeviceClass;
 			EnergyConsumption = UnityEngine.Mathf.Clamp(serializable.EnergyConsumption, 0f, 1000f);
@@ -55,7 +55,7 @@ namespace GameDatabase.DataModel
 			ObjectPrefab = new PrefabId(serializable.ObjectPrefab, PrefabId.Type.Object);
 			ControlButtonIcon = new SpriteId(serializable.ControlButtonIcon, SpriteId.Type.ActionButton);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public DeviceClass DeviceClass;

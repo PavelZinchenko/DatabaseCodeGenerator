@@ -15,39 +15,39 @@ namespace GameDatabase.DataModel
 {
 	public partial class Component
 	{
-		partial void OnDataDeserialized(ComponentSerializable serializable, Database database);
+		partial void OnDataDeserialized(ComponentSerializable serializable, Database.Loader loader);
 
-		public static Component Create(ComponentSerializable serializable, Database database)
+		public static Component Create(ComponentSerializable serializable, Database.Loader loader)
 		{
-			return new Component(serializable, database);
+			return new Component(serializable, loader);
 		}
 
-		private Component(ComponentSerializable serializable, Database database)
+		private Component(ComponentSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Component>(serializable.Id);
-			database.AddComponent(serializable.Id, this);
+			loader.AddComponent(serializable.Id, this);
 
 			Name = serializable.Name;
 			Description = serializable.Description;
 			DisplayCategory = serializable.DisplayCategory;
 			Availability = serializable.Availability;
-			Stats = database.GetComponentStats(new ItemId<ComponentStats>(serializable.ComponentStatsId));
-			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
+			Stats = loader.GetComponentStats(new ItemId<ComponentStats>(serializable.ComponentStatsId));
+			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 500);
 			Icon = new SpriteId(serializable.Icon, SpriteId.Type.Component);
 			Color = new ColorData(serializable.Color);
 			Layout = new Layout(serializable.Layout);
 			_cellType = serializable.CellType;
-			Device = database.GetDevice(new ItemId<Device>(serializable.DeviceId));
-			Weapon = database.GetWeapon(new ItemId<Weapon>(serializable.WeaponId));
-			Ammunition = database.GetAmmunition(new ItemId<Ammunition>(serializable.AmmunitionId));
-			AmmunitionObsolete = database.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.AmmunitionId));
+			Device = loader.GetDevice(new ItemId<Device>(serializable.DeviceId));
+			Weapon = loader.GetWeapon(new ItemId<Weapon>(serializable.WeaponId));
+			Ammunition = loader.GetAmmunition(new ItemId<Ammunition>(serializable.AmmunitionId));
+			AmmunitionObsolete = loader.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.AmmunitionId));
 			WeaponSlotType = serializable.WeaponSlotType;
-			DroneBay = database.GetDroneBay(new ItemId<DroneBay>(serializable.DroneBayId));
-			Drone = database.GetShipBuild(new ItemId<ShipBuild>(serializable.DroneId));
-			PossibleModifications = new ImmutableCollection<ComponentMod>(serializable.PossibleModifications?.Select(item => database.GetComponentMod(new ItemId<ComponentMod>(item))));
+			DroneBay = loader.GetDroneBay(new ItemId<DroneBay>(serializable.DroneBayId));
+			Drone = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.DroneId));
+			PossibleModifications = new ImmutableCollection<ComponentMod>(serializable.PossibleModifications?.Select(item => loader.GetComponentMod(new ItemId<ComponentMod>(item))));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Component> Id;

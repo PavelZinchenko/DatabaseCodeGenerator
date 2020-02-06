@@ -11,23 +11,23 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
 	public partial class <#= Utils.DataClassName(ObjectData) #>
 	{
-		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
-			return new <#= Utils.DataClassName(ObjectData) #>(serializable, database);
+			return new <#= Utils.DataClassName(ObjectData) #>(serializable, loader);
 		}
 
-		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
 <#
 			if (ObjectType == ObjectType.Class)
             {
 #>
 			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id);
-			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
+			loader.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
 <#
 			}
 #>
-			Stats = new <#= ObjectData.name #>Stats(serializable, database);
+			Stats = new <#= ObjectData.name #>Stats(serializable, loader);
 		}
 
 <#
@@ -45,9 +45,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 	public partial struct <#= ObjectData.name #>Stats 
 	{
-		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
-		public <#= ObjectData.name #>Stats(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public <#= ObjectData.name #>Stats(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
 <#
 			PushIndent("\t\t\t");
@@ -58,7 +58,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PopIndent();
 #>
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 <#

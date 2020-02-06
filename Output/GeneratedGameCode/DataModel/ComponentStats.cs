@@ -15,17 +15,17 @@ namespace GameDatabase.DataModel
 {
 	public partial class ComponentStats
 	{
-		partial void OnDataDeserialized(ComponentStatsSerializable serializable, Database database);
+		partial void OnDataDeserialized(ComponentStatsSerializable serializable, Database.Loader loader);
 
-		public static ComponentStats Create(ComponentStatsSerializable serializable, Database database)
+		public static ComponentStats Create(ComponentStatsSerializable serializable, Database.Loader loader)
 		{
-			return new ComponentStats(serializable, database);
+			return new ComponentStats(serializable, loader);
 		}
 
-		private ComponentStats(ComponentStatsSerializable serializable, Database database)
+		private ComponentStats(ComponentStatsSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<ComponentStats>(serializable.Id);
-			database.AddComponentStats(serializable.Id, this);
+			loader.AddComponentStats(serializable.Id, this);
 
 			Type = serializable.Type;
 			ArmorPoints = UnityEngine.Mathf.Clamp(serializable.ArmorPoints, -1000f, 1000f);
@@ -58,7 +58,7 @@ namespace GameDatabase.DataModel
 			WeaponEnergyCostModifier = UnityEngine.Mathf.Clamp(serializable.WeaponEnergyCostModifier, -1f, 1f);
 			AlterWeaponPlatform = serializable.AlterWeaponPlatform;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<ComponentStats> Id;

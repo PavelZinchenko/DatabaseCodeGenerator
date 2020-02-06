@@ -15,27 +15,27 @@ namespace GameDatabase.DataModel
 {
 	public partial class Character
 	{
-		partial void OnDataDeserialized(CharacterSerializable serializable, Database database);
+		partial void OnDataDeserialized(CharacterSerializable serializable, Database.Loader loader);
 
-		public static Character Create(CharacterSerializable serializable, Database database)
+		public static Character Create(CharacterSerializable serializable, Database.Loader loader)
 		{
-			return new Character(serializable, database);
+			return new Character(serializable, loader);
 		}
 
-		private Character(CharacterSerializable serializable, Database database)
+		private Character(CharacterSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Character>(serializable.Id);
-			database.AddCharacter(serializable.Id, this);
+			loader.AddCharacter(serializable.Id, this);
 
 			Name = serializable.Name;
 			AvatarIcon = new SpriteId(serializable.AvatarIcon, SpriteId.Type.AvatarIcon);
-			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
-			Inventory = database.GetLoot(new ItemId<LootModel>(serializable.Inventory));
-			Fleet = database.GetFleet(new ItemId<Fleet>(serializable.Fleet));
+			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
+			Inventory = loader.GetLoot(new ItemId<LootModel>(serializable.Inventory));
+			Fleet = loader.GetFleet(new ItemId<Fleet>(serializable.Fleet));
 			Relations = UnityEngine.Mathf.Clamp(serializable.Relations, 0, 100);
 			IsUnique = serializable.IsUnique;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Character> Id;

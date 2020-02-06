@@ -13,9 +13,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
 	public abstract partial class <#= Utils.DataClassName(ObjectData) #>
 	{
-		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
-		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
 <#
             SortMembers(ObjectData, out var baseMembers, out var extraMembers, out var switchEnumType);
@@ -28,7 +28,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
             {
 #>
 				case <#= switchEnumType + "." + item.Key #>:
-					return new <#= ExtraClassName(item.Key) #>(serializable, database);
+					return new <#= ExtraClassName(item.Key) #>(serializable, loader);
 <#
 			}
 #>
@@ -39,14 +39,14 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		public abstract T Create<T>(<#= factoryName #> factory);
 
-		protected <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		protected <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
 <#
 			if (ObjectType == ObjectType.Class)
             {
 #>
 			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id);
-			database.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
+			loader.<#= Utils.ObjectSetterName(ObjectData.name) #>(serializable.Id, this);
 
 <#
 			}
@@ -60,7 +60,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PopIndent();
 #>
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 <#
@@ -102,10 +102,10 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 #>
     public partial class <#= ExtraClassName(content.Key) + " : " + Utils.DataClassName(ObjectData) #>
     {
-		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
-  		public <#= ExtraClassName(content.Key) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
-            : base(serializable, database)
+  		public <#= ExtraClassName(content.Key) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
+            : base(serializable, loader)
         {
 <#
 			PushIndent("\t\t\t");
@@ -116,7 +116,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PopIndent();
 #>
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(<#= factoryName #> factory)

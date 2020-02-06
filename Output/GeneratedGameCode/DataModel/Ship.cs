@@ -15,21 +15,21 @@ namespace GameDatabase.DataModel
 {
 	public partial class Ship
 	{
-		partial void OnDataDeserialized(ShipSerializable serializable, Database database);
+		partial void OnDataDeserialized(ShipSerializable serializable, Database.Loader loader);
 
-		public static Ship Create(ShipSerializable serializable, Database database)
+		public static Ship Create(ShipSerializable serializable, Database.Loader loader)
 		{
-			return new Ship(serializable, database);
+			return new Ship(serializable, loader);
 		}
 
-		private Ship(ShipSerializable serializable, Database database)
+		private Ship(ShipSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Ship>(serializable.Id);
-			database.AddShip(serializable.Id, this);
+			loader.AddShip(serializable.Id, this);
 
 			ShipCategory = serializable.ShipCategory;
 			Name = serializable.Name;
-			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
+			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 			SizeClass = serializable.SizeClass;
 			IconImage = new SpriteId(serializable.IconImage, SpriteId.Type.ShipIcon);
 			IconScale = UnityEngine.Mathf.Clamp(serializable.IconScale, 0.1f, 100f);
@@ -38,17 +38,17 @@ namespace GameDatabase.DataModel
 			_enginePosition = serializable.EnginePosition;
 			EngineColor = new ColorData(serializable.EngineColor);
 			_engineSize = UnityEngine.Mathf.Clamp(serializable.EngineSize, 0f, 1f);
-			Engines = new ImmutableCollection<Engine>(serializable.Engines?.Select(item => Engine.Create(item, database)));
+			Engines = new ImmutableCollection<Engine>(serializable.Engines?.Select(item => Engine.Create(item, loader)));
 			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, 0f, 100f);
 			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, 0f, 100f);
 			HeatResistance = UnityEngine.Mathf.Clamp(serializable.HeatResistance, 0f, 100f);
 			Regeneration = serializable.Regeneration;
 			BaseWeightModifier = UnityEngine.Mathf.Clamp(serializable.BaseWeightModifier, -0.9f, 100f);
-			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => database.GetDevice(new ItemId<Device>(item))));
+			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => loader.GetDevice(new ItemId<Device>(item))));
 			Layout = new Layout(serializable.Layout);
-			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, database)));
+			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Ship> Id;

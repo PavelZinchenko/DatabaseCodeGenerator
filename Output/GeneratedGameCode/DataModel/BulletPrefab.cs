@@ -15,17 +15,17 @@ namespace GameDatabase.DataModel
 {
 	public partial class BulletPrefab
 	{
-		partial void OnDataDeserialized(BulletPrefabSerializable serializable, Database database);
+		partial void OnDataDeserialized(BulletPrefabSerializable serializable, Database.Loader loader);
 
-		public static BulletPrefab Create(BulletPrefabSerializable serializable, Database database)
+		public static BulletPrefab Create(BulletPrefabSerializable serializable, Database.Loader loader)
 		{
-			return new BulletPrefab(serializable, database);
+			return new BulletPrefab(serializable, loader);
 		}
 
-		private BulletPrefab(BulletPrefabSerializable serializable, Database database)
+		private BulletPrefab(BulletPrefabSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<BulletPrefab>(serializable.Id);
-			database.AddBulletPrefab(serializable.Id, this);
+			loader.AddBulletPrefab(serializable.Id, this);
 
 			Shape = serializable.Shape;
 			Image = new SpriteId(serializable.Image, SpriteId.Type.Ammunition);
@@ -36,7 +36,7 @@ namespace GameDatabase.DataModel
 			SecondColor = new ColorData(serializable.SecondColor);
 			SecondColorMode = serializable.SecondColorMode;
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<BulletPrefab> Id;

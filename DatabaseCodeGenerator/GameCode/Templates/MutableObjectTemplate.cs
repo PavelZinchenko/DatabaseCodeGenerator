@@ -154,7 +154,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database);\r\n\r\n\t\tpublic static ");
+            this.Write(".Loader loader);\r\n\r\n\t\tpublic static ");
             
             #line 18 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
@@ -182,7 +182,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database)\r\n\t\t{\r\n");
+            this.Write(".Loader loader)\r\n\t\t{\r\n");
             
             #line 20 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 
@@ -223,7 +223,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("(serializable, database);\r\n");
+            this.Write("(serializable, loader);\r\n");
             
             #line 32 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 
@@ -274,7 +274,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database)\r\n\t\t{\r\n");
+            this.Write(".Loader loader)\r\n\t\t{\r\n");
             
             #line 44 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 
@@ -291,7 +291,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(">(serializable.Id);\r\n\t\t\tdatabase.");
+            this.Write(">(serializable.Id);\r\n\t\t\tloader.");
             
             #line 49 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectSetterName(ObjectData.name)));
@@ -320,7 +320,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\tOnDataDeserialized(serializable, database);\r\n\t\t}\r\n\r\n");
+            this.Write("\r\n\t\t\tOnDataDeserialized(serializable, loader);\r\n\t\t}\r\n\r\n");
             
             #line 66 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 
@@ -430,7 +430,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database);\r\n\r\n  \t\tpublic ");
+            this.Write(".Loader loader);\r\n\r\n  \t\tpublic ");
             
             #line 107 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ExtraClassName(content.Key)));
@@ -451,7 +451,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database)\r\n            : base(serializable, database)\r\n        {\r\n");
+            this.Write(".Loader loader)\r\n            : base(serializable, loader)\r\n        {\r\n");
             
             #line 110 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 
@@ -465,8 +465,8 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n            OnDataDeserialized(serializable, database);\r\n        }\r\n\r\n        p" +
-                    "ublic override T Create<T>(");
+            this.Write("\r\n            OnDataDeserialized(serializable, loader);\r\n        }\r\n\r\n        pub" +
+                    "lic override T Create<T>(");
             
             #line 122 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(factoryName));
@@ -813,24 +813,24 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+                WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
             }
             else if (member.type == Constants.TypeObjectList)
             {
 				var dataClass = schema.GetObject(member.typeid);
                 WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
-					"?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
+					"?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
             }
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", loader);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
                 WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
-					"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)));");
+					"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, loader)));");
             }
             else if (member.type == Constants.TypeInt)
             {
@@ -876,22 +876,22 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+                WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
             }
             else if (member.type == Constants.TypeObjectList)
             {
 				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => database." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))).ToArray();");
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))).ToArray();");
             }
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", database);");
+                WriteLine(memberName + " = " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName +  "(serializable." + member.name + ", loader);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, database)).ToArray();");
+                WriteLine(memberName + " = " + "serializable." + member.name + "?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, loader)).ToArray();");
             }
             else if (member.type == Constants.TypeInt)
             {

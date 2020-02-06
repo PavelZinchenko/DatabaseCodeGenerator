@@ -15,19 +15,19 @@ namespace GameDatabase.DataModel
 {
 	public partial class LootItem
 	{
-		partial void OnDataDeserialized(LootItemSerializable serializable, Database database);
+		partial void OnDataDeserialized(LootItemSerializable serializable, Database.Loader loader);
 
-		public static LootItem Create(LootItemSerializable serializable, Database database)
+		public static LootItem Create(LootItemSerializable serializable, Database.Loader loader)
 		{
-			return new LootItem(serializable, database);
+			return new LootItem(serializable, loader);
 		}
 
-		private LootItem(LootItemSerializable serializable, Database database)
+		private LootItem(LootItemSerializable serializable, Database.Loader loader)
 		{
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, -3.402823E+38f, 3.402823E+38f);
-			Loot = LootContent.Create(serializable.Loot, database);
+			Loot = LootContent.Create(serializable.Loot, loader);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public float Weight { get; private set; }

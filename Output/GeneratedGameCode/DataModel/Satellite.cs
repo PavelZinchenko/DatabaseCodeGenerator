@@ -15,26 +15,26 @@ namespace GameDatabase.DataModel
 {
 	public partial class Satellite
 	{
-		partial void OnDataDeserialized(SatelliteSerializable serializable, Database database);
+		partial void OnDataDeserialized(SatelliteSerializable serializable, Database.Loader loader);
 
-		public static Satellite Create(SatelliteSerializable serializable, Database database)
+		public static Satellite Create(SatelliteSerializable serializable, Database.Loader loader)
 		{
-			return new Satellite(serializable, database);
+			return new Satellite(serializable, loader);
 		}
 
-		private Satellite(SatelliteSerializable serializable, Database database)
+		private Satellite(SatelliteSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Satellite>(serializable.Id);
-			database.AddSatellite(serializable.Id, this);
+			loader.AddSatellite(serializable.Id, this);
 
 			Name = serializable.Name;
 			ModelImage = new SpriteId(serializable.ModelImage, SpriteId.Type.Satellite);
 			ModelScale = UnityEngine.Mathf.Clamp(serializable.ModelScale, 0.1f, 100f);
 			SizeClass = serializable.SizeClass;
 			Layout = new Layout(serializable.Layout);
-			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, database)));
+			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Satellite> Id;

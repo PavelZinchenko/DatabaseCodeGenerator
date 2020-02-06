@@ -15,27 +15,27 @@ namespace GameDatabase.DataModel
 {
 	public partial class QuestModel
 	{
-		partial void OnDataDeserialized(QuestSerializable serializable, Database database);
+		partial void OnDataDeserialized(QuestSerializable serializable, Database.Loader loader);
 
-		public static QuestModel Create(QuestSerializable serializable, Database database)
+		public static QuestModel Create(QuestSerializable serializable, Database.Loader loader)
 		{
-			return new QuestModel(serializable, database);
+			return new QuestModel(serializable, loader);
 		}
 
-		private QuestModel(QuestSerializable serializable, Database database)
+		private QuestModel(QuestSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<QuestModel>(serializable.Id);
-			database.AddQuest(serializable.Id, this);
+			loader.AddQuest(serializable.Id, this);
 
 			Name = serializable.Name;
 			QuestType = serializable.QuestType;
 			StartCondition = serializable.StartCondition;
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, 0f, 1000f);
-			Requirement = Requirement.Create(serializable.Requirement, database);
+			Requirement = Requirement.Create(serializable.Requirement, loader);
 			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 1000);
-			Nodes = new ImmutableCollection<Node>(serializable.Nodes?.Select(item => Node.Create(item, database)));
+			Nodes = new ImmutableCollection<Node>(serializable.Nodes?.Select(item => Node.Create(item, loader)));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<QuestModel> Id;

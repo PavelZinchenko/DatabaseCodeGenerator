@@ -15,18 +15,18 @@ namespace GameDatabase.DataModel
 {
 	public abstract partial class Technology
 	{
-		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataDeserialized(TechnologySerializable serializable, Database.Loader loader);
 
-		public static Technology Create(TechnologySerializable serializable, Database database)
+		public static Technology Create(TechnologySerializable serializable, Database.Loader loader)
 		{
 			switch (serializable.Type)
 		    {
 				case TechType.Component:
-					return new Technology_Component(serializable, database);
+					return new Technology_Component(serializable, loader);
 				case TechType.Ship:
-					return new Technology_Ship(serializable, database);
+					return new Technology_Ship(serializable, loader);
 				case TechType.Satellite:
-					return new Technology_Satellite(serializable, database);
+					return new Technology_Satellite(serializable, loader);
 				default:
                     throw new DatabaseException("Technology: Invalid content type - " + serializable.Type);
 			}
@@ -34,18 +34,18 @@ namespace GameDatabase.DataModel
 
 		public abstract T Create<T>(ITechnologyFactory<T> factory);
 
-		protected Technology(TechnologySerializable serializable, Database database)
+		protected Technology(TechnologySerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Technology>(serializable.Id);
-			database.AddTechnology(serializable.Id, this);
+			loader.AddTechnology(serializable.Id, this);
 
 			Type = serializable.Type;
 			Price = UnityEngine.Mathf.Clamp(serializable.Price, 0, 1000);
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
-			Dependencies = new ImmutableCollection<Technology>(serializable.Dependencies?.Select(item => database.GetTechnology(new ItemId<Technology>(item))));
+			Dependencies = new ImmutableCollection<Technology>(serializable.Dependencies?.Select(item => loader.GetTechnology(new ItemId<Technology>(item))));
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Technology> Id;
@@ -68,15 +68,15 @@ namespace GameDatabase.DataModel
 
     public partial class Technology_Component : Technology
     {
-		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataDeserialized(TechnologySerializable serializable, Database.Loader loader);
 
-  		public Technology_Component(TechnologySerializable serializable, Database database)
-            : base(serializable, database)
+  		public Technology_Component(TechnologySerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Component = database.GetComponent(new ItemId<Component>(serializable.ItemId));
-			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
+			Component = loader.GetComponent(new ItemId<Component>(serializable.ItemId));
+			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ITechnologyFactory<T> factory)
@@ -89,14 +89,14 @@ namespace GameDatabase.DataModel
     }
     public partial class Technology_Ship : Technology
     {
-		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataDeserialized(TechnologySerializable serializable, Database.Loader loader);
 
-  		public Technology_Ship(TechnologySerializable serializable, Database database)
-            : base(serializable, database)
+  		public Technology_Ship(TechnologySerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Ship = database.GetShip(new ItemId<Ship>(serializable.ItemId));
+			Ship = loader.GetShip(new ItemId<Ship>(serializable.ItemId));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ITechnologyFactory<T> factory)
@@ -108,15 +108,15 @@ namespace GameDatabase.DataModel
     }
     public partial class Technology_Satellite : Technology
     {
-		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataDeserialized(TechnologySerializable serializable, Database.Loader loader);
 
-  		public Technology_Satellite(TechnologySerializable serializable, Database database)
-            : base(serializable, database)
+  		public Technology_Satellite(TechnologySerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
         {
-			Satellite = database.GetSatellite(new ItemId<Satellite>(serializable.ItemId));
-			Faction = database.GetFaction(new ItemId<Faction>(serializable.Faction));
+			Satellite = loader.GetSatellite(new ItemId<Satellite>(serializable.ItemId));
+			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 
-            OnDataDeserialized(serializable, database);
+            OnDataDeserialized(serializable, loader);
         }
 
         public override T Create<T>(ITechnologyFactory<T> factory)

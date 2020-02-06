@@ -15,17 +15,17 @@ namespace GameDatabase.DataModel
 {
 	public partial class Skill
 	{
-		partial void OnDataDeserialized(SkillSerializable serializable, Database database);
+		partial void OnDataDeserialized(SkillSerializable serializable, Database.Loader loader);
 
-		public static Skill Create(SkillSerializable serializable, Database database)
+		public static Skill Create(SkillSerializable serializable, Database.Loader loader)
 		{
-			return new Skill(serializable, database);
+			return new Skill(serializable, loader);
 		}
 
-		private Skill(SkillSerializable serializable, Database database)
+		private Skill(SkillSerializable serializable, Database.Loader loader)
 		{
 			Id = new ItemId<Skill>(serializable.Id);
-			database.AddSkill(serializable.Id, this);
+			loader.AddSkill(serializable.Id, this);
 
 			Name = serializable.Name;
 			Icon = new SpriteId(serializable.Icon, SpriteId.Type.SkillIcon);
@@ -36,7 +36,7 @@ namespace GameDatabase.DataModel
 			PricePerLevel = UnityEngine.Mathf.Clamp(serializable.PricePerLevel, 0f, 100f);
 			MaxLevel = UnityEngine.Mathf.Clamp(serializable.MaxLevel, 1, 1000);
 
-			OnDataDeserialized(serializable, database);
+			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Skill> Id;
