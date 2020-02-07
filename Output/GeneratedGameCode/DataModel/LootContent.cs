@@ -296,6 +296,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			QuestItem = loader.GetQuestItem(new ItemId<QuestItem>(serializable.ItemId));
+			if (QuestItem == QuestItem.DefaultValue)
+			    UnityEngine.Debug.LogError(this.GetType().Name + "QuestItem cannot be null - " + serializable.ItemId);
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 
@@ -319,6 +321,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			ShipBuild = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.ItemId));
+			if (ShipBuild == ShipBuild.DefaultValue)
+			    UnityEngine.Debug.LogError(this.GetType().Name + "ShipBuild cannot be null - " + serializable.ItemId);
 
             OnDataDeserialized(serializable, loader);
         }
@@ -338,6 +342,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			Ship = loader.GetShip(new ItemId<Ship>(serializable.ItemId));
+			if (Ship == Ship.DefaultValue)
+			    UnityEngine.Debug.LogError(this.GetType().Name + "Ship cannot be null - " + serializable.ItemId);
 
             OnDataDeserialized(serializable, loader);
         }
@@ -357,6 +363,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			Component = loader.GetComponent(new ItemId<Component>(serializable.ItemId));
+			if (Component == Component.DefaultValue)
+			    UnityEngine.Debug.LogError(this.GetType().Name + "Component cannot be null - " + serializable.ItemId);
 			MinAmount = UnityEngine.Mathf.Clamp(serializable.MinAmount, 0, 100000000);
 			MaxAmount = UnityEngine.Mathf.Clamp(serializable.MaxAmount, 0, 100000000);
 

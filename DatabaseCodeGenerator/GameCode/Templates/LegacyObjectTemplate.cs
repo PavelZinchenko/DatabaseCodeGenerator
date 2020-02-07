@@ -621,11 +621,17 @@ namespace DatabaseCodeGenerator.GameCode.Templates
         {
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
 			if (member.options.Contains(Constants.OptionObsolete)) memberName = PrivateMemberName(memberName);
+			var notnull = member.options.Contains(Constants.OptionNotNull);
 
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
                 WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+				if (notnull)
+				{
+					WriteLine("if (" + memberName + " == " + Utils.DataClassName(dataClass) + ".DefaultValue)");
+					WriteLine("    UnityEngine.Debug.LogError(this.GetType().Name + \"" + memberName + " cannot be null - \" + serializable." + member.name + ");");
+                }
             }
             else if (member.type == Constants.TypeObjectList)
             {
@@ -684,11 +690,17 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 		private void WriteLegacyDeserializationCode(XmlClassMember member, DatabaseSchema schema)
         {
             var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+			var notnull = member.options.Contains(Constants.OptionNotNull);
 
             if (member.type == Constants.TypeObject)
             {
 				var dataClass = schema.GetObject(member.typeid);
                 WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+				if (notnull)
+				{
+					WriteLine("if (" + memberName + " == " + Utils.DataClassName(dataClass) + ".DefaultValue)");
+					WriteLine("    UnityEngine.Debug.LogError(this.GetType().Name + \"" + memberName + " cannot be null - \" + serializable." + member.name + ");");
+                }
             }
             else if (member.type == Constants.TypeObjectList)
             {

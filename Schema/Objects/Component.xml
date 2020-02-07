@@ -4,7 +4,7 @@
     <member name="Description" type="string" />
     <member name="DisplayCategory" type="enum" typeid="ComponentCategory" />
     <member name="Availability" type="enum" typeid="Availability" />
-    <member name="ComponentStatsId" type="object" typeid="ComponentStats" alias="Stats" />
+    <member name="ComponentStatsId" type="object" typeid="ComponentStats" alias="Stats" options="notnull" />
     <member name="Faction" type="object" typeid="Faction" />
     <member name="Level" type="int" minvalue="0" maxvalue="500" />
     <member name="Icon" type="image" typeid="Component" />

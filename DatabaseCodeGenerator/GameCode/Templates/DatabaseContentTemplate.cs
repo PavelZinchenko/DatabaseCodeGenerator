@@ -173,23 +173,38 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(")\r\n            {\r\n                var data = _serializer.FromJson<");
+            this.Write(")\r\n            {\r\n\t\t\t    if (");
             
             #line 36 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
+            
+            #line default
+            #line hidden
+            this.Write(".ContainsKey(item.Id)) throw new DatabaseException(\"Duplicate ");
+            
+            #line 36 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
+            
+            #line default
+            #line hidden
+            this.Write(" ID - \" + item.Id + \" (\" + name + \")\");\r\n                var data = _serializer.F" +
+                    "romJson<");
+            
+            #line 37 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write(">(content);\r\n                data.FileName = name;\r\n                ");
             
-            #line 38 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 39 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Add(data.Id, data);\r\n            }\r\n");
             
-            #line 40 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 41 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 				first = false;
             }
@@ -202,49 +217,49 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("            ");
             
-            #line 47 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(first ? "if" : "else if"));
             
             #line default
             #line hidden
             this.Write(" (type == ");
             
-            #line 47 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 48 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Constants.ItemTypeEnum + "." + item.name));
             
             #line default
             #line hidden
             this.Write(")\r\n            {\r\n                var data = _serializer.FromJson<");
             
-            #line 49 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 50 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write(">(content);\r\n                data.FileName = name;\r\n\r\n\t\t\t\tif (");
             
-            #line 52 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 53 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n                    throw new DatabaseException(\"Duplicate ");
             
-            #line 53 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 54 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" file found - \" + name);\r\n                ");
             
-            #line 54 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 55 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = data;\r\n            }\r\n");
             
-            #line 56 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 57 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 				first = false;
             }
@@ -257,7 +272,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("            else\r\n            {\r\n                throw new DatabaseException(\"Unk" +
                     "nown file type - \" + type + \"(\" + name + \")\");\r\n            }\r\n");
             
-            #line 66 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 67 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 			}
 
@@ -269,7 +284,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "oadImage(string name, byte[] data)\r\n        {\r\n            _images.Add(name, new" +
                     " ");
             
-            #line 78 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 79 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -277,14 +292,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("(data));\r\n        }\r\n\r\n        public void LoadAudioClip(string name, byte[] data" +
                     ")\r\n        {\r\n            _audioClips.Add(name, new ");
             
-            #line 83 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 84 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
             #line hidden
             this.Write("(data));\r\n        }\r\n\r\n");
             
-            #line 86 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 87 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
         {
@@ -294,14 +309,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 90 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 91 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name) + " " + item.name));
             
             #line default
             #line hidden
             this.Write(" { get; private set; }\r\n");
             
-            #line 91 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 92 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
         }
 
@@ -310,7 +325,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 95 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 96 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -320,28 +335,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic IEnumerable<");
             
-            #line 99 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 100 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 99 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 100 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 99 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 100 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Values;\r\n");
             
-            #line 100 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 101 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
         }
 
@@ -350,7 +365,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 104 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 105 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -360,21 +375,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 108 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 109 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(int id) { return ");
             
-            #line 108 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 109 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".TryGetValue(id, out var item) ? item : null; }\r\n");
             
-            #line 109 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 110 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
         }
 
@@ -383,14 +398,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n        public IEnumerable<KeyValuePair<string, ");
             
-            #line 113 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 114 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
             this.Write(">> Images => _images;\r\n        public IEnumerable<KeyValuePair<string, ");
             
-            #line 114 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 115 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -399,7 +414,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "ring>> Localizations => _localizations;\r\n\r\n        private readonly IJsonSeriali" +
                     "zer _serializer;\r\n\r\n");
             
-            #line 119 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 120 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -409,28 +424,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tprivate readonly Dictionary<int, ");
             
-            #line 123 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 124 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 123 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 124 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" = new Dictionary<int, ");
             
-            #line 123 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 124 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write(">();\r\n");
             
-            #line 124 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 125 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
 
         }
 
@@ -439,14 +454,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n        private readonly Dictionary<string, ");
             
-            #line 128 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 129 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
             this.Write("> _images = new Dictionary<string, ");
             
-            #line 128 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 129 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -454,14 +469,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
                     " ");
             
-            #line 129 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 130 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
             #line hidden
             this.Write("> _audioClips = new Dictionary<string, ");
             
-            #line 129 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+            #line 130 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -472,7 +487,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 134 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
+        #line 135 "G:\EventHorizon\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseContentTemplate.tt"
  
 	private static string DataMember(string name) 
 	{ 		

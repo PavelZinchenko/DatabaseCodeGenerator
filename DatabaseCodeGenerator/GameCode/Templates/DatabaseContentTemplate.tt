@@ -33,6 +33,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 #>
             <#= first ? "if" : "else if" #> (type == <#= Constants.ItemTypeEnum + "." + item.name #>)
             {
+			    if (<#= DataMember(item.name) #>.ContainsKey(item.Id)) throw new DatabaseException("Duplicate <#= item.name #> ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
                 data.FileName = name;
                 <#= DataMember(item.name) #>.Add(data.Id, data);

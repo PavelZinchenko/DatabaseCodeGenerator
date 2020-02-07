@@ -22,6 +22,7 @@
 
         public const string OptionLegacy = "legacy";
         public const string OptionObsolete = "obsolete";
+        public const string OptionNotNull = "notnull";
 
         public static readonly char[] ValueSeparators = { ',','|',';',' ','\n','\r' };
     }

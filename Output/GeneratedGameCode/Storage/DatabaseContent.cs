@@ -32,132 +32,154 @@ namespace GameDatabase.Storage
 
             if (type == ItemType.AmmunitionObsolete)
             {
+			    if (_ammunitionObsoleteMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate AmmunitionObsolete ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<AmmunitionObsoleteSerializable>(content);
                 data.FileName = name;
                 _ammunitionObsoleteMap.Add(data.Id, data);
             }
             else if (type == ItemType.Component)
             {
+			    if (_componentMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Component ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<ComponentSerializable>(content);
                 data.FileName = name;
                 _componentMap.Add(data.Id, data);
             }
             else if (type == ItemType.ComponentMod)
             {
+			    if (_componentModMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate ComponentMod ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<ComponentModSerializable>(content);
                 data.FileName = name;
                 _componentModMap.Add(data.Id, data);
             }
             else if (type == ItemType.ComponentStats)
             {
+			    if (_componentStatsMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate ComponentStats ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<ComponentStatsSerializable>(content);
                 data.FileName = name;
                 _componentStatsMap.Add(data.Id, data);
             }
             else if (type == ItemType.Device)
             {
+			    if (_deviceMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Device ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<DeviceSerializable>(content);
                 data.FileName = name;
                 _deviceMap.Add(data.Id, data);
             }
             else if (type == ItemType.DroneBay)
             {
+			    if (_droneBayMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate DroneBay ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<DroneBaySerializable>(content);
                 data.FileName = name;
                 _droneBayMap.Add(data.Id, data);
             }
             else if (type == ItemType.Faction)
             {
+			    if (_factionMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Faction ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<FactionSerializable>(content);
                 data.FileName = name;
                 _factionMap.Add(data.Id, data);
             }
             else if (type == ItemType.Satellite)
             {
+			    if (_satelliteMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Satellite ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<SatelliteSerializable>(content);
                 data.FileName = name;
                 _satelliteMap.Add(data.Id, data);
             }
             else if (type == ItemType.SatelliteBuild)
             {
+			    if (_satelliteBuildMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate SatelliteBuild ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<SatelliteBuildSerializable>(content);
                 data.FileName = name;
                 _satelliteBuildMap.Add(data.Id, data);
             }
             else if (type == ItemType.Ship)
             {
+			    if (_shipMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Ship ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<ShipSerializable>(content);
                 data.FileName = name;
                 _shipMap.Add(data.Id, data);
             }
             else if (type == ItemType.ShipBuild)
             {
+			    if (_shipBuildMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate ShipBuild ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<ShipBuildSerializable>(content);
                 data.FileName = name;
                 _shipBuildMap.Add(data.Id, data);
             }
             else if (type == ItemType.Skill)
             {
+			    if (_skillMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Skill ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<SkillSerializable>(content);
                 data.FileName = name;
                 _skillMap.Add(data.Id, data);
             }
             else if (type == ItemType.Technology)
             {
+			    if (_technologyMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Technology ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<TechnologySerializable>(content);
                 data.FileName = name;
                 _technologyMap.Add(data.Id, data);
             }
             else if (type == ItemType.Character)
             {
+			    if (_characterMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Character ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<CharacterSerializable>(content);
                 data.FileName = name;
                 _characterMap.Add(data.Id, data);
             }
             else if (type == ItemType.Fleet)
             {
+			    if (_fleetMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Fleet ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<FleetSerializable>(content);
                 data.FileName = name;
                 _fleetMap.Add(data.Id, data);
             }
             else if (type == ItemType.Loot)
             {
+			    if (_lootMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Loot ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<LootSerializable>(content);
                 data.FileName = name;
                 _lootMap.Add(data.Id, data);
             }
             else if (type == ItemType.Quest)
             {
+			    if (_questMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Quest ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<QuestSerializable>(content);
                 data.FileName = name;
                 _questMap.Add(data.Id, data);
             }
             else if (type == ItemType.QuestItem)
             {
+			    if (_questItemMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate QuestItem ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<QuestItemSerializable>(content);
                 data.FileName = name;
                 _questItemMap.Add(data.Id, data);
             }
             else if (type == ItemType.Ammunition)
             {
+			    if (_ammunitionMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Ammunition ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<AmmunitionSerializable>(content);
                 data.FileName = name;
                 _ammunitionMap.Add(data.Id, data);
             }
             else if (type == ItemType.BulletPrefab)
             {
+			    if (_bulletPrefabMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate BulletPrefab ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<BulletPrefabSerializable>(content);
                 data.FileName = name;
                 _bulletPrefabMap.Add(data.Id, data);
             }
             else if (type == ItemType.VisualEffect)
             {
+			    if (_visualEffectMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate VisualEffect ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<VisualEffectSerializable>(content);
                 data.FileName = name;
                 _visualEffectMap.Add(data.Id, data);
             }
             else if (type == ItemType.Weapon)
             {
+			    if (_weaponMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Weapon ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<WeaponSerializable>(content);
                 data.FileName = name;
                 _weaponMap.Add(data.Id, data);

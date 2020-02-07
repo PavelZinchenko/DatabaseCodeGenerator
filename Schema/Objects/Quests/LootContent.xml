@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="LootContent" type="struct" switch="Type" >
     <member name="Type" type="enum" typeid="LootItemType" />
-    <member name="ItemId" type="object" typeid="QuestItem" case="QuestItem" alias="QuestItem" />
-    <member name="ItemId" type="object" typeid="Ship" case="EmptyShip" alias="Ship" />
-    <member name="ItemId" type="object" typeid="ShipBuild" case="Ship" alias="ShipBuild" />
-    <member name="ItemId" type="object" typeid="Component" case="Component" alias="Component" />
+    <member name="ItemId" type="object" typeid="QuestItem" case="QuestItem" alias="QuestItem" options="notnull" />
+    <member name="ItemId" type="object" typeid="Ship" case="EmptyShip" alias="Ship" options="notnull" />
+    <member name="ItemId" type="object" typeid="ShipBuild" case="Ship" alias="ShipBuild" options="notnull" />
+    <member name="ItemId" type="object" typeid="Component" case="Component" alias="Component" options="notnull" />
     <member name="MinAmount" type="int" case="Money,Fuel,Stars,RandomComponents,
     RandomItems,QuestItem,Component" minvalue="0" maxvalue="100000000" />
     <member name="MaxAmount" type="int" case="Money,Fuel,Stars,RandomComponents,
