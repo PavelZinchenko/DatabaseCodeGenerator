@@ -49,6 +49,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditorCode\Builder.cs" />
+    <Compile Include="EditorCode\Templates\DatabaseContentTemplate.cs">
+      <DependentUpon>DatabaseContentTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\DatabaseExceptionTemplate.cs">
+      <DependentUpon>DatabaseExceptionTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\DatabaseTemplate.cs">
+      <DependentUpon>DatabaseTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\MutableObjectTemplate.cs">
+      <DependentUpon>MutableObjectTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\ObjectTemplate.cs">
+      <DependentUpon>ObjectTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\SerializableItemTemplate.cs">
+      <DependentUpon>SerializableItemTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\SerializableTemplate.cs">
+      <DependentUpon>SerializableTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\StorageInterfacesTemplate.cs">
+      <DependentUpon>StorageInterfacesTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EditorCode\Templates\TemplateClasses.cs" />
+    <Compile Include="EditorCode\Utils.cs" />
     <Compile Include="GameCode\Builder.cs" />
     <Compile Include="GameCode\Templates\DatabaseTemplate.cs">
       <DependentUpon>DatabaseTemplate.tt</DependentUpon>
@@ -116,14 +164,50 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EditorCode\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameCode\Templates\Serialization.tt" />
+    <None Include="EditorCode\Templates\GeneratedCodeWarning.tt" />
+    <Content Include="EditorCode\Templates\DatabaseContentTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseContentTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\DatabaseExceptionTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseExceptionTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\DatabaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\EnumTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\MutableObjectTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MutableObjectTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\ObjectTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ObjectTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\SerializableItemTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializableItemTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="EditorCode\Templates\SerializableTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializableTemplate.cs</LastGenOutput>
+    </Content>
+    <None Include="EditorCode\Templates\Serialization.tt" />
+    <Content Include="EditorCode\Templates\StorageInterfacesTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>StorageInterfacesTemplate.cs</LastGenOutput>
+    </Content>
     <Content Include="GameCode\Templates\DatabaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DatabaseTemplate.cs</LastGenOutput>

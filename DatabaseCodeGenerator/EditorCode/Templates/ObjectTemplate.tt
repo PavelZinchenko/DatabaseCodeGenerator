@@ -1,0 +1,99 @@
+﻿<#@ template language="C#" #>
+<#@ include file="Serialization.tt" #>
+<#@ include file="GeneratedCodeWarning.tt" #>
+
+using System.Linq;
+using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.SerializableNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+
+namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
+{
+	public partial class <#= Utils.DataClassName(ObjectData) #>
+	{
+		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+
+<#
+		if (ObjectType == ObjectType.Struct)
+        {
+#>
+		public <#= Utils.DataClassName(ObjectData) #>() {}
+<#
+        }
+#>
+
+		public <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		{
+<#
+			if (ObjectType == ObjectType.Class)
+            {
+#>
+			Id = new ItemId<<#= Utils.DataClassName(ObjectData) #>>(serializable.Id, serializable.FileName);
+<#
+			}
+
+			PushIndent("\t\t\t");
+
+			foreach (var item in ObjectData.members)
+				WriteDeserializationCode(item, Schema);
+
+			PopIndent();
+#>
+
+			OnDataDeserialized(serializable, database);
+		}
+
+<#
+		if (ObjectType == ObjectType.Struct)
+        {
+#>
+		public <#= Utils.SerializableClassName(ObjectData.name) + " " + Utils.StructSerializationMethodName #>()
+		{
+			var serializable = new <#= Utils.SerializableClassName(ObjectData.name) #>();
+<#
+		}
+		else
+        {
+#>
+		public void <#= Utils.SerializationMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable)
+		{
+<#
+			}
+
+			PushIndent("\t\t\t");
+
+			foreach (var item in ObjectData.members)
+				WriteSerializationCode(item, Schema);
+
+			PopIndent();
+
+			if (ObjectType == ObjectType.Struct)
+            {
+#>
+			return serializable;
+<#
+			}
+#>
+		}
+
+<#
+		if (ObjectType == ObjectType.Class)
+        {
+#>
+		public readonly ItemId<<#= Utils.DataClassName(ObjectData) #>> Id;
+
+<#
+		}
+#>
+<#
+		PushIndent("\t\t");
+
+		foreach (var item in ObjectData.members) 
+			WriteDataClassMember(item, Schema);
+
+		PopIndent();
+#>
+
+		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
+	}
+}

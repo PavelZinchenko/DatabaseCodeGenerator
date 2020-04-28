@@ -18,6 +18,8 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
             Storage = storage;
             Storage.LoadContent(this);
         }
+  
+        public const int SchemaVersion = <#= Schema.Version #>;
 
 		public IDataStorage Storage { get; }
 

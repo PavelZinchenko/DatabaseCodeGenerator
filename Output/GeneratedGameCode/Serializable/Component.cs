@@ -29,9 +29,10 @@ namespace GameDatabase.Serializable
 		public int DeviceId;
 		public int WeaponId;
 		public int AmmunitionId;
-		public WeaponSlotType WeaponSlotType;
+		public string WeaponSlotType;
 		public int DroneBayId;
 		public int DroneId;
+		public ComponentRestrictionsSerializable Restrictions;
 		public int[] PossibleModifications;
 	}
 }

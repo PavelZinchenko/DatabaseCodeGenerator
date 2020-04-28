@@ -11,6 +11,7 @@
         public const string TypeStruct = "struct";
         public const string TypeObjectList = "object_list";
         public const string TypeStructList = "struct_list";
+        public const string TypeEnumFlags = "enum_flags";
         public const string TypeImage = "image";
         public const string TypeVector = "vector";
         public const string TypeColor = "color";

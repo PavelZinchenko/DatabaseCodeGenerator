@@ -16,6 +16,7 @@ namespace GameDatabase
 {
 	public partial interface IDatabase
 	{
+		DatabaseSettings DatabaseSettings { get; }
 		GalaxySettings GalaxySettings { get; }
 		ShipSettings ShipSettings { get; }
 
@@ -75,6 +76,7 @@ namespace GameDatabase
         partial void OnDataLoaded();
         partial void OnDataInitialized();
 
+		public DatabaseSettings DatabaseSettings { get; private set; }
 		public GalaxySettings GalaxySettings { get; private set; }
 		public ShipSettings ShipSettings { get; private set; }
 
@@ -153,6 +155,7 @@ namespace GameDatabase
 			_visualEffectMap.Clear();
 			_weaponMap.Clear();
 
+			DatabaseSettings = null;
 			GalaxySettings = null;
 			ShipSettings = null;
 
@@ -260,10 +263,13 @@ namespace GameDatabase
                         if (!_database._localizations.ContainsKey(item.Key))
                             _database._localizations.Add(item.Key, item.Value);
 
+					if (_database.DatabaseSettings == null && content.DatabaseSettings != null) _database.DatabaseSettings = DatabaseSettings.Create(content.DatabaseSettings, this);
 					if (_database.GalaxySettings == null && content.GalaxySettings != null) _database.GalaxySettings = GalaxySettings.Create(content.GalaxySettings, this);
 					if (_database.ShipSettings == null && content.ShipSettings != null) _database.ShipSettings = ShipSettings.Create(content.ShipSettings, this);
 				}
 
+				if (_database.DatabaseSettings == null) _database.DatabaseSettings = DatabaseSettings.Create(
+					new Serializable.DatabaseSettingsSerializable { ItemType = Enums.ItemType.DatabaseSettings }, this);
 				if (_database.GalaxySettings == null) _database.GalaxySettings = GalaxySettings.Create(
 					new Serializable.GalaxySettingsSerializable { ItemType = Enums.ItemType.GalaxySettings }, this);
 				if (_database.ShipSettings == null) _database.ShipSettings = ShipSettings.Create(

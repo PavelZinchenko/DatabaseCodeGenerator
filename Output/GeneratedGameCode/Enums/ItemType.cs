@@ -35,5 +35,6 @@ namespace GameDatabase.Enums
 		BulletPrefab = 27,
 		ShipSettings = 100,
 		GalaxySettings = 101,
+		DatabaseSettings = 102,
 	}
 }

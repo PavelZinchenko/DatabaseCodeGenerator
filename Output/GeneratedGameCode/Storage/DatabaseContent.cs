@@ -22,6 +22,8 @@ namespace GameDatabase.Storage
             Storage = storage;
             Storage.LoadContent(this);
         }
+  
+        public const int SchemaVersion = 1;
 
 		public IDataStorage Storage { get; }
 
@@ -184,6 +186,15 @@ namespace GameDatabase.Storage
                 data.FileName = name;
                 _weaponMap.Add(data.Id, data);
             }
+            else if (type == ItemType.DatabaseSettings)
+            {
+                var data = _serializer.FromJson<DatabaseSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (DatabaseSettings != null)
+                    throw new DatabaseException("Duplicate DatabaseSettings file found - " + name);
+                DatabaseSettings = data;
+            }
             else if (type == ItemType.GalaxySettings)
             {
                 var data = _serializer.FromJson<GalaxySettingsSerializable>(content);
@@ -223,6 +234,7 @@ namespace GameDatabase.Storage
             _audioClips.Add(name, new AudioClipData(data));
         }
 
+		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 

@@ -26,5 +26,6 @@ namespace GameDatabase.Enums
 		Fortification,
 		ToxicWaste,
 		WormTail,
+		ClonningCenter,
 	}
 }

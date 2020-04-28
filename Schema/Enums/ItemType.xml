@@ -25,4 +25,5 @@
     <item name="BulletPrefab">27</item>
     <item name="ShipSettings">100</item>
     <item name="GalaxySettings">101</item>
+    <item name="DatabaseSettings">102</item>
 </data>

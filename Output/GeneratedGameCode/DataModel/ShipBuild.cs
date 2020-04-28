@@ -29,7 +29,7 @@ namespace GameDatabase.DataModel
 
 			Ship = loader.GetShip(new ItemId<Ship>(serializable.ShipId));
 			if (Ship == Ship.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + "Ship cannot be null - " + serializable.ShipId);
+			    UnityEngine.Debug.LogError(this.GetType().Name + ".Ship cannot be null - " + serializable.ShipId);
 			NotAvailableInGame = serializable.NotAvailableInGame;
 			DifficultyClass = serializable.DifficultyClass;
 			BuildFaction = loader.GetFaction(new ItemId<Faction>(serializable.BuildFaction));

@@ -1,0 +1,1 @@
+DatabaseCodeGenerator\bin\Release\DatabaseCodeGenerator.exe Schema Output

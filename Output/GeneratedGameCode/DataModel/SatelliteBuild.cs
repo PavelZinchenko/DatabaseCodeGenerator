@@ -29,7 +29,7 @@ namespace GameDatabase.DataModel
 
 			Satellite = loader.GetSatellite(new ItemId<Satellite>(serializable.SatelliteId));
 			if (Satellite == Satellite.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + "Satellite cannot be null - " + serializable.SatelliteId);
+			    UnityEngine.Debug.LogError(this.GetType().Name + ".Satellite cannot be null - " + serializable.SatelliteId);
 			NotAvailableInGame = serializable.NotAvailableInGame;
 			DifficultyClass = serializable.DifficultyClass;
 			Components = new ImmutableCollection<InstalledComponent>(serializable.Components?.Select(item => InstalledComponent.Create(item, loader)));

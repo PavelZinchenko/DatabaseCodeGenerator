@@ -33,7 +33,7 @@ namespace GameDatabase.DataModel
 			Availability = serializable.Availability;
 			Stats = loader.GetComponentStats(new ItemId<ComponentStats>(serializable.ComponentStatsId));
 			if (Stats == ComponentStats.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + "Stats cannot be null - " + serializable.ComponentStatsId);
+			    UnityEngine.Debug.LogError(this.GetType().Name + ".Stats cannot be null - " + serializable.ComponentStatsId);
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 500);
 			Icon = new SpriteId(serializable.Icon, SpriteId.Type.Component);
@@ -44,9 +44,10 @@ namespace GameDatabase.DataModel
 			Weapon = loader.GetWeapon(new ItemId<Weapon>(serializable.WeaponId));
 			Ammunition = loader.GetAmmunition(new ItemId<Ammunition>(serializable.AmmunitionId));
 			AmmunitionObsolete = loader.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.AmmunitionId));
-			WeaponSlotType = serializable.WeaponSlotType;
+			_weaponSlotType = serializable.WeaponSlotType;
 			DroneBay = loader.GetDroneBay(new ItemId<DroneBay>(serializable.DroneBayId));
 			Drone = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.DroneId));
+			Restrictions = ComponentRestrictions.Create(serializable.Restrictions, loader);
 			PossibleModifications = new ImmutableCollection<ComponentMod>(serializable.PossibleModifications?.Select(item => loader.GetComponentMod(new ItemId<ComponentMod>(item))));
 
 			OnDataDeserialized(serializable, loader);
@@ -69,9 +70,10 @@ namespace GameDatabase.DataModel
 		public Weapon Weapon { get; private set; }
 		public Ammunition Ammunition { get; private set; }
 		public AmmunitionObsolete AmmunitionObsolete { get; private set; }
-		public WeaponSlotType WeaponSlotType { get; private set; }
+		private readonly string _weaponSlotType;
 		public DroneBay DroneBay { get; private set; }
 		public ShipBuild Drone { get; private set; }
+		public ComponentRestrictions Restrictions { get; private set; }
 		public ImmutableCollection<ComponentMod> PossibleModifications { get; private set; }
 
 		public static Component DefaultValue { get; private set; }

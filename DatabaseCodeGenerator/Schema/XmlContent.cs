@@ -49,6 +49,8 @@ namespace DatabaseCodeGenerator.Schema
         public string caseValue = string.Empty;
         [XmlAttribute]
         public string options = string.Empty;
+        [XmlAttribute]
+        public string version = string.Empty;
     }
 
     [XmlRoot("data")]

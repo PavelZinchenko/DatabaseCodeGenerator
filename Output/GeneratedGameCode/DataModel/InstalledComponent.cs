@@ -26,7 +26,7 @@ namespace GameDatabase.DataModel
 		{
 			Component = loader.GetComponent(new ItemId<Component>(serializable.ComponentId));
 			if (Component == Component.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + "Component cannot be null - " + serializable.ComponentId);
+			    UnityEngine.Debug.LogError(this.GetType().Name + ".Component cannot be null - " + serializable.ComponentId);
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
 			Locked = serializable.Locked;
