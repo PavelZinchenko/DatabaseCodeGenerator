@@ -12,6 +12,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	public partial class <#= Utils.DataClassName(ObjectData) #>
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataSerialized(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable);
 
 <#
 		if (ObjectType == ObjectType.Struct)
@@ -66,7 +67,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 				WriteSerializationCode(item, Schema);
 
 			PopIndent();
-
+#>
+			OnDataSerialized(ref serializable);
+<#
 			if (ObjectType == ObjectType.Struct)
             {
 #>

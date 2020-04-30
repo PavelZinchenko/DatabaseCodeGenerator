@@ -26,6 +26,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	public partial class <#= Utils.DataClassName(ObjectData) #> : IDataAdapter
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataSerialized(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable);
 
 		private static <#= Utils.ContentInterfaceName(ObjectData) #> CreateContent(<#= switchEnumType #> type)
 		{
@@ -110,7 +111,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 				WriteSerializationCode(item, Schema);
 
 			PopIndent();
-
+#>
+			OnDataSerialized(ref serializable);
+<#
 			if (ObjectType == ObjectType.Struct)
             {
 #>
@@ -118,7 +121,6 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
 			}
 #>
-
 		}
 
 		public event System.Action LayoutChangedEvent;
@@ -189,6 +191,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	public partial class <#= ExtraClassName(content.Key) + " : " + Utils.ContentInterfaceName(ObjectData) #>
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
+		partial void OnDataSerialized(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable);
 
 		public void Load(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
@@ -214,6 +217,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 			PopIndent();
 #>
+			OnDataSerialized(ref serializable);
 		}
 
 <#

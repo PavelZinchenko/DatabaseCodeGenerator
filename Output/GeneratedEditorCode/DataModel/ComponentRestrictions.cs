@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ComponentRestrictions
 	{
 		partial void OnDataDeserialized(ComponentRestrictionsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ComponentRestrictionsSerializable serializable);
 
 		public ComponentRestrictions() {}
 
@@ -39,6 +40,7 @@ namespace EditorDatabase.DataModel
 			serializable.NotForOrganicShips = NotForOrganicShips;
 			serializable.NotForMechanicShips = NotForMechanicShips;
 			serializable.UniqueComponentTag = UniqueComponentTag;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

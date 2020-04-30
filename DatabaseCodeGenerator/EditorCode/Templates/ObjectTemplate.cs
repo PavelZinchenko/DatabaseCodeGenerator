@@ -151,9 +151,16 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database);\r\n\r\n");
+            this.Write(" database);\r\n\t\tpartial void OnDataSerialized(ref ");
             
-            #line 16 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 15 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
+            
+            #line default
+            #line hidden
+            this.Write(" serializable);\r\n\r\n");
+            
+            #line 17 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		if (ObjectType == ObjectType.Struct)
         {
@@ -163,14 +170,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 20 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 21 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write("() {}\r\n");
             
-            #line 21 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 22 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
         }
 
@@ -179,28 +186,28 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n\t\tpublic ");
             
-            #line 25 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 26 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 25 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 26 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write(" serializable, ");
             
-            #line 25 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 26 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write(" database)\r\n\t\t{\r\n");
             
-            #line 27 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 28 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 			if (ObjectType == ObjectType.Class)
             {
@@ -210,14 +217,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t\tId = new ItemId<");
             
-            #line 31 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 32 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write(">(serializable.Id, serializable.FileName);\r\n");
             
-            #line 32 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 33 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 			}
 
@@ -233,7 +240,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n\t\t\tOnDataDeserialized(serializable, database);\r\n\t\t}\r\n\r\n");
             
-            #line 46 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 47 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		if (ObjectType == ObjectType.Struct)
         {
@@ -243,21 +250,21 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 50 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 51 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name) + " " + Utils.StructSerializationMethodName));
             
             #line default
             #line hidden
             this.Write("()\r\n\t\t{\r\n\t\t\tvar serializable = new ");
             
-            #line 52 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 53 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write("();\r\n");
             
-            #line 53 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 54 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		}
 		else
@@ -268,21 +275,21 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic void ");
             
-            #line 58 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 59 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializationMethodName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 58 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 59 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write(" serializable)\r\n\t\t{\r\n");
             
-            #line 60 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 61 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 			}
 
@@ -293,6 +300,13 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 			PopIndent();
 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tOnDataSerialized(ref serializable);\r\n");
+            
+            #line 72 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+
 			if (ObjectType == ObjectType.Struct)
             {
 
@@ -301,7 +315,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t\treturn serializable;\r\n");
             
-            #line 74 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 77 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 			}
 
@@ -310,7 +324,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t}\r\n\r\n");
             
-            #line 79 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 82 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		if (ObjectType == ObjectType.Class)
         {
@@ -320,14 +334,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic readonly ItemId<");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 86 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
             #line hidden
             this.Write("> Id;\r\n\r\n");
             
-            #line 85 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 88 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		}
 
@@ -335,7 +349,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line default
             #line hidden
             
-            #line 88 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 91 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
 
 		PushIndent("\t\t");
 
@@ -349,7 +363,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n\t\tpublic static ");
             
-            #line 97 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
+            #line 100 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
             
             #line default
