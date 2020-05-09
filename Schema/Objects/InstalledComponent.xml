@@ -4,9 +4,9 @@
     <member name="Modification" type="enum" typeid="ComponentModType" />
     <member name="Quality" type="enum" typeid="ModificationQuality" />
     <member name="Locked" type="bool" />
-    <member name="X" type="int" minvalue="-128" maxvalue="127" />
-    <member name="Y" type="int" minvalue="-128" maxvalue="127" />
-    <member name="BarrelId" type="int" minvalue="0" maxvalue="32" />
+    <member name="X" type="int"/>
+    <member name="Y" type="int"/>
+    <member name="BarrelId" type="int" minvalue="0" maxvalue="999999" />
     <member name="Behaviour" type="int" minvalue="0" maxvalue="10" />
     <member name="KeyBinding" type="int" minvalue="-10" maxvalue="10" />
 </data>
