@@ -2,43 +2,43 @@
 <data name="ComponentStats" type="object" typeid="ComponentStats" >
     <member name="Type" type="enum" typeid="ComponentStatsType" />
     
-    <member name="ArmorPoints" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="ArmorRepairRate" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="ArmorRepairCooldownModifier" type="float" minvalue="-1" maxvalue="1" />
+    <member name="ArmorPoints" type="float"/>
+    <member name="ArmorRepairRate" type="float"/>
+    <member name="ArmorRepairCooldownModifier" type="float"/>
 
-    <member name="EnergyPoints" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="EnergyRechargeRate" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="EnergyRechargeCooldownModifier" type="float" minvalue="-5" maxvalue="5" />
+    <member name="EnergyPoints" type="float"/>
+    <member name="EnergyRechargeRate" type="float"/>
+    <member name="EnergyRechargeCooldownModifier" type="float"/>
     
-    <member name="ShieldPoints" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="ShieldRechargeRate" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="ShieldRechargeCooldownModifier" type="float" minvalue="-5" maxvalue="5" />
+    <member name="ShieldPoints" type="float"/>
+    <member name="ShieldRechargeRate" type="float"/>
+    <member name="ShieldRechargeCooldownModifier" type="float"/>
 
-    <member name="Weight" type="float" minvalue="-1000000" maxvalue="1000000" />
+    <member name="Weight" type="float"/>
 
-    <member name="RammingDamage" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="EnergyAbsorption" type="float" minvalue="-1000000" maxvalue="1000000" />
+    <member name="RammingDamage" type="float"/>
+    <member name="EnergyAbsorption" type="float"/>
 
-    <member name="KineticResistance" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="EnergyResistance" type="float" minvalue="-1000000" maxvalue="1000000" />
-    <member name="ThermalResistance" type="float" minvalue="-1000000" maxvalue="1000000" />
+    <member name="KineticResistance" type="float"/>
+    <member name="EnergyResistance" type="float"/>
+    <member name="ThermalResistance" type="float"/>
 
-    <member name="EnginePower" type="float" minvalue="0" maxvalue="2000" />
-    <member name="TurnRate" type="float" minvalue="0" maxvalue="2000" />
+    <member name="EnginePower" type="float"/>
+    <member name="TurnRate" type="float"/>
 
     <member name="Autopilot" type="bool" />
 
-    <member name="DroneRangeModifier" type="float" minvalue="-50" maxvalue="50" />
-    <member name="DroneDamageModifier" type="float" minvalue="-50" maxvalue="50" />
-    <member name="DroneDefenseModifier" type="float" minvalue="-50" maxvalue="50" />
-    <member name="DroneSpeedModifier" type="float" minvalue="-50" maxvalue="50" />
-    <member name="DronesBuiltPerSecond" type="float" minvalue="0" maxvalue="100" />
-    <member name="DroneBuildTimeModifier" type="float" minvalue="0" maxvalue="100" />
+    <member name="DroneRangeModifier" type="float"/>
+    <member name="DroneDamageModifier" type="float"/>
+    <member name="DroneDefenseModifier" type="float"/>
+    <member name="DroneSpeedModifier" type="float"/>
+    <member name="DronesBuiltPerSecond" type="float"/>
+    <member name="DroneBuildTimeModifier" type="float"/>
 
-    <member name="WeaponFireRateModifier" type="float" minvalue="-100" maxvalue="100" />
-    <member name="WeaponDamageModifier" type="float" minvalue="-100" maxvalue="100" />
-    <member name="WeaponRangeModifier" type="float" minvalue="-100" maxvalue="100" />
-    <member name="WeaponEnergyCostModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="WeaponFireRateModifier" type="float"/>
+    <member name="WeaponDamageModifier" type="float"/>
+    <member name="WeaponRangeModifier" type="float"/>
+    <member name="WeaponEnergyCostModifier" type="float"/>
 
     <member name="AlterWeaponPlatform" type="enum" typeid="PlatformType" />
 </data>

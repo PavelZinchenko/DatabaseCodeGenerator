@@ -5,7 +5,7 @@
     <member name="ItemId" alias="Satellite" type="object" typeid="Satellite" case="Satellite" options="notnull" />
     <member name="ItemId" alias="Ship" type="object" typeid="Ship" case="Ship" options="notnull" />
     <member name="Faction" type="object" typeid="Faction" case="Component,Satellite" />
-    <member name="Price" type="int" minvalue="0" maxvalue="10000" />
+    <member name="Price" type="int"/>
     <member name="Hidden" type="bool" />
     <member name="Special" type="bool" />
     <member name="Dependencies" type="object_list" typeid="Technology" />

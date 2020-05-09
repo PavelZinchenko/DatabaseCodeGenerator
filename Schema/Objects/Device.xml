@@ -3,11 +3,11 @@
     <member name="DeviceClass" type="enum" typeid="DeviceClass" />
     <member name="EnergyConsumption" type="float" minvalue="0" maxvalue="1000000" />
     <member name="PassiveEnergyConsumption" type="float" minvalue="0" maxvalue="1000000" />
-    <member name="Power" type="float" minvalue="0" maxvalue="1000" />
+    <member name="Power" type="float" minvalue="0" maxvalue="1000000" />
     <member name="Range" type="float" minvalue="0" maxvalue="1000" />
     <member name="Size" type="float" minvalue="0" maxvalue="1000" />
     <member name="Cooldown" type="float" minvalue="0" maxvalue="1000" />
-    <member name="Lifetime" type="float" minvalue="0" maxvalue="1000" />
+    <member name="Lifetime" type="float" minvalue="0" maxvalue="1000000" />
     <member name="Offset" type="vector" />
     <member name="ActivationType" type="enum" typeid="ActivationType" />
     <member name="Color" type="color" />

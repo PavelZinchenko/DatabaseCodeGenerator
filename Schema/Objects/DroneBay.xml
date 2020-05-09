@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="DroneBay" type="object" typeid="DroneBay" options="legacy" >
-    <member name="EnergyConsumption" type="float" minvalue="0" maxvalue="1000000" />
-    <member name="PassiveEnergyConsumption" type="float" minvalue="0" maxvalue="1000000" />
+    <member name="EnergyConsumption" type="float" />
+    <member name="PassiveEnergyConsumption" type="float" />
     <member name="Range" type="float" minvalue="1" maxvalue="1000" />
     <member name="DamageMultiplier" type="float" minvalue="0.01" maxvalue="1000" />
     <member name="DefenseMultiplier" type="float" minvalue="0.01" maxvalue="1000" />

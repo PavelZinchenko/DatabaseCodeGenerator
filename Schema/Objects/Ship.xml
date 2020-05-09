@@ -13,9 +13,9 @@
     <member name="EngineSize" type="float" minvalue="0" maxvalue="1" options="obsolete" />
     <member name="Engines" type="struct_list" typeid="Engine" />
     
-    <member name="EnergyResistance" type="float" minvalue="-100" maxvalue="100" />
-    <member name="KineticResistance" type="float" minvalue="-100" maxvalue="100" />
-    <member name="HeatResistance" type="float" minvalue="-100" maxvalue="100" />
+    <member name="EnergyResistance" type="float"/>
+    <member name="KineticResistance" type="float"/>
+    <member name="HeatResistance" type="float"/>
     <member name="Regeneration" type="bool" />
     <member name="BaseWeightModifier" type="float" minvalue="-0.9" maxvalue="1000" />
     <member name="BuiltinDevices" type="object_list" typeid="Device" />
