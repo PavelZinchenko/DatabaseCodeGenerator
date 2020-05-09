@@ -25,7 +25,7 @@ namespace GameDatabase.DataModel
 		private RequiredFactions(FactionFilterSerializable serializable, Database.Loader loader)
 		{
 			Type = serializable.Type;
-			List = new ImmutableCollection<Faction>(serializable.List?.Select(item => loader.GetFaction(new ItemId<Faction>(item))));
+			List = new ImmutableCollection<Faction>(serializable.List?.Select(item => loader.GetFaction(new ItemId<Faction>(item), true)));
 
 			OnDataDeserialized(serializable, loader);
 		}

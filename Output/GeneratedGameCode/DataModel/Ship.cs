@@ -44,7 +44,7 @@ namespace GameDatabase.DataModel
 			HeatResistance = UnityEngine.Mathf.Clamp(serializable.HeatResistance, 0f, 100f);
 			Regeneration = serializable.Regeneration;
 			BaseWeightModifier = UnityEngine.Mathf.Clamp(serializable.BaseWeightModifier, -0.9f, 100f);
-			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => loader.GetDevice(new ItemId<Device>(item))));
+			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => loader.GetDevice(new ItemId<Device>(item), true)));
 			Layout = new Layout(serializable.Layout);
 			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, loader)));
 

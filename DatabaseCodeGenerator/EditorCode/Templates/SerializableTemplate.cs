@@ -376,7 +376,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				if (!schema.HasEnum(member.typeid))
 					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine(prefix + member.typeid + "[] " + memberName + suffix);
+				WriteLine(prefix + "ValueWrapper<" + member.typeid + ">[] " + memberName + suffix);
 			}
 			else
 			{
@@ -455,7 +455,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
                 WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
                 WriteLine("    serializable." + member.name + " = null;");
                 WriteLine("else");
-                WriteLine("    serializable." + member.name + " = (" + member.typeid + "[])" + memberName + ".Clone();");
+                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item.Value).ToArray();");
 			}
             else if (member.type == Constants.TypeInt)
             {
@@ -514,7 +514,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             }
 			else if (member.type == Constants.TypeEnumFlags)
 			{
-                WriteLine(memberName + " = (" + member.typeid + "[])serializable." + member.name + "?.Clone();");
+                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new ValueWrapper<" + member.typeid + "> { Value = item }).ToArray();");
 			}
             else if (member.type == Constants.TypeInt)
             {

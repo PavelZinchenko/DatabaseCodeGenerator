@@ -27,5 +27,6 @@ namespace GameDatabase.Enums
 		ToxicWaste,
 		WormTail,
 		ClonningCenter,
+		TimeMachine,
 	}
 }

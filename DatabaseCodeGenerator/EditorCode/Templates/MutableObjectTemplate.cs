@@ -164,7 +164,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database);\r\n\t\tvoid Save(");
+            this.Write(" database);\r\n\t\tvoid Save(ref ");
             
             #line 23 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
@@ -426,7 +426,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t_content.Save(serializable);\r\n");
+            this.Write("\t\t\t_content.Save(ref serializable);\r\n");
             
             #line 106 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
 
@@ -497,20 +497,17 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write(@"
-				foreach (var item in _content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
-					yield return new Property(_content, item, DataChangedEvent);
-			}
-		}
-
-		private void OnTypeChanged()
-		{
-			_content = CreateContent(Type);
-			DataChangedEvent?.Invoke();
-			LayoutChangedEvent?.Invoke();
-		}
-
-");
+            this.Write("\r\n\t\t\t\tforeach (var item in _content.GetType().GetFields().Where(f => f.IsPublic &" +
+                    "& !f.IsStatic))\r\n\t\t\t\t\tyield return new Property(_content, item, DataChangedEvent" +
+                    ");\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tprivate void OnTypeChanged()\r\n\t\t{\r\n\t\t\t_content = CreateConten" +
+                    "t(");
+            
+            #line 153 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.switchEnum));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\t\t\tDataChangedEvent?.Invoke();\r\n\t\t\tLayoutChangedEvent?.Invoke();\r\n\t\t}\r\n\r\n");
             
             #line 158 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
 
@@ -585,7 +582,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write(" database) {}\r\n\t\tpublic void Save(");
+            this.Write(" database) {}\r\n\t\tpublic void Save(ref ");
             
             #line 183 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
@@ -659,7 +656,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\tOnDataDeserialized(serializable, database);\r\n\t\t}\r\n\r\n\t\tpublic void Save(");
+            this.Write("\r\n\t\t\tOnDataDeserialized(serializable, database);\r\n\t\t}\r\n\r\n\t\tpublic void Save(ref ");
             
             #line 210 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
@@ -937,7 +934,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				if (!schema.HasEnum(member.typeid))
 					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine(prefix + member.typeid + "[] " + memberName + suffix);
+				WriteLine(prefix + "ValueWrapper<" + member.typeid + ">[] " + memberName + suffix);
 			}
 			else
 			{
@@ -1016,7 +1013,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
                 WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
                 WriteLine("    serializable." + member.name + " = null;");
                 WriteLine("else");
-                WriteLine("    serializable." + member.name + " = (" + member.typeid + "[])" + memberName + ".Clone();");
+                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item.Value).ToArray();");
 			}
             else if (member.type == Constants.TypeInt)
             {
@@ -1075,7 +1072,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             }
 			else if (member.type == Constants.TypeEnumFlags)
 			{
-                WriteLine(memberName + " = (" + member.typeid + "[])serializable." + member.name + "?.Clone();");
+                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new ValueWrapper<" + member.typeid + "> { Value = item }).ToArray();");
 			}
             else if (member.type == Constants.TypeInt)
             {

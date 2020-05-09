@@ -20,7 +20,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	public interface <#= Utils.ContentInterfaceName(ObjectData) #>
 	{
 		void Load(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database);
-		void Save(<#= Utils.SerializableClassName(ObjectData.name) #> serializable);
+		void Save(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable);
 	}
 
 	public partial class <#= Utils.DataClassName(ObjectData) #> : IDataAdapter
@@ -102,7 +102,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
             }
 #>
-			_content.Save(serializable);
+			_content.Save(ref serializable);
 <#
 
 			PushIndent("\t\t\t");
@@ -150,7 +150,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		private void OnTypeChanged()
 		{
-			_content = CreateContent(Type);
+			_content = CreateContent(<#= ObjectData.switchEnum #>);
 			DataChangedEvent?.Invoke();
 			LayoutChangedEvent?.Invoke();
 		}
@@ -180,7 +180,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 	public class <#= EmptyClassName() + " : " + Utils.ContentInterfaceName(ObjectData) #>
 	{
 		public void Load(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database) {}
-		public void Save(<#= Utils.SerializableClassName(ObjectData.name) #> serializable) {}
+		public void Save(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable) {}
 	}
 
 <#
@@ -207,7 +207,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(<#= Utils.SerializableClassName(ObjectData.name) #> serializable)
+		public void Save(ref <#= Utils.SerializableClassName(ObjectData.name) #> serializable)
 		{
 <#
 			PushIndent("\t\t\t");

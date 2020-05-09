@@ -46,9 +46,6 @@ namespace <#= Utils.RootNamespace #>
 
     public partial class <#= Utils.DatabaseClassName #> : I<#= Utils.DatabaseClassName #>
     {
-        partial void OnDataLoaded();
-        partial void OnDataInitialized();
-
 <#
 		foreach (var item in Schema.Configurations)
         {
@@ -180,7 +177,7 @@ namespace <#= Utils.RootNamespace #>
 			foreach (var item in Schema.Objects)
 	        {
 #>
-			public <#= Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item) #>> id)
+			public <#= Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item) #>> id, bool notNull = false)
 			{
 				if (_database.<#= DataMember(item.name) #>.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -189,7 +186,9 @@ namespace <#= Utils.RootNamespace #>
                     if (serializable != null) return <#= Utils.DataClassName(item) #>.Create(serializable, this);
                 }
 
-                return <#= Utils.DataClassName(item) #>.DefaultValue;
+				var value = <#= Utils.DataClassName(item) #>.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
 <#
 	        }

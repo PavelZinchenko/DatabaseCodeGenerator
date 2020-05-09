@@ -195,6 +195,15 @@ namespace GameDatabase.Storage
                     throw new DatabaseException("Duplicate DatabaseSettings file found - " + name);
                 DatabaseSettings = data;
             }
+            else if (type == ItemType.ExplorationSettings)
+            {
+                var data = _serializer.FromJson<ExplorationSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (ExplorationSettings != null)
+                    throw new DatabaseException("Duplicate ExplorationSettings file found - " + name);
+                ExplorationSettings = data;
+            }
             else if (type == ItemType.GalaxySettings)
             {
                 var data = _serializer.FromJson<GalaxySettingsSerializable>(content);
@@ -235,6 +244,7 @@ namespace GameDatabase.Storage
         }
 
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
+		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 

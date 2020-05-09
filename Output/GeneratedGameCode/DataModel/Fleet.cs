@@ -33,7 +33,7 @@ namespace GameDatabase.DataModel
 			CombatTimeLimit = UnityEngine.Mathf.Clamp(serializable.CombatTimeLimit, 0, 999);
 			LootCondition = serializable.LootCondition;
 			ExpCondition = serializable.ExpCondition;
-			SpecificShips = new ImmutableCollection<ShipBuild>(serializable.SpecificShips?.Select(item => loader.GetShipBuild(new ItemId<ShipBuild>(item))));
+			SpecificShips = new ImmutableCollection<ShipBuild>(serializable.SpecificShips?.Select(item => loader.GetShipBuild(new ItemId<ShipBuild>(item), true)));
 
 			OnDataDeserialized(serializable, loader);
 		}

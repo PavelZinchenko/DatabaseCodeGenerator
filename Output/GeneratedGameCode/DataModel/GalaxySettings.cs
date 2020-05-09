@@ -25,7 +25,7 @@ namespace GameDatabase.DataModel
 		private GalaxySettings(GalaxySettingsSerializable serializable, Database.Loader loader)
 		{
 			AbandonedStarbaseFaction = loader.GetFaction(new ItemId<Faction>(serializable.AbandonedStarbaseFaction));
-			StartingShipBuilds = new ImmutableCollection<ShipBuild>(serializable.StartingShipBuilds?.Select(item => loader.GetShipBuild(new ItemId<ShipBuild>(item))));
+			StartingShipBuilds = new ImmutableCollection<ShipBuild>(serializable.StartingShipBuilds?.Select(item => loader.GetShipBuild(new ItemId<ShipBuild>(item), true)));
 
 			OnDataDeserialized(serializable, loader);
 		}

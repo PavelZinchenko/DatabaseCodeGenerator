@@ -7,22 +7,17 @@
 //-------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using EditorDatabase.Enums;
-using EditorDatabase.Model;
+using GameDatabase.Enums;
+using GameDatabase.Model;
 
-namespace EditorDatabase.Serializable
+namespace GameDatabase.Serializable
 {
 	[Serializable]
-	public class FactionSerializable : SerializableItem
+	public class ExplorationSettingsSerializable : SerializableItem
 	{
-		[DefaultValue("")]
-		public string Name;
-		[DefaultValue("")]
-		public string Color;
-		public int HomeStarDistance;
-		public int WanderingShipsDistance;
-		public bool Hidden;
-		public bool Hostile;
+		public int OutpostShip;
+		public int TurretShip;
+		public int InfectedPlanetFaction;
+		public int HiveShipBuild;
 	}
 }

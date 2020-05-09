@@ -43,7 +43,7 @@ namespace GameDatabase.DataModel
 			Price = UnityEngine.Mathf.Clamp(serializable.Price, 0, 1000);
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
-			Dependencies = new ImmutableCollection<Technology>(serializable.Dependencies?.Select(item => loader.GetTechnology(new ItemId<Technology>(item))));
+			Dependencies = new ImmutableCollection<Technology>(serializable.Dependencies?.Select(item => loader.GetTechnology(new ItemId<Technology>(item), true)));
 
 			OnDataDeserialized(serializable, loader);
 		}

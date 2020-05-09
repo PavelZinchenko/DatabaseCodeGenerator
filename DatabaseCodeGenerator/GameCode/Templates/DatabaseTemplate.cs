@@ -251,10 +251,9 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n        partial void OnDataLoaded();\r\n        partial void OnDataInitial" +
-                    "ized();\r\n\r\n");
+            this.Write("\r\n    {\r\n");
             
-            #line 52 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 49 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
         {
@@ -264,14 +263,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 56 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 53 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + item.name));
             
             #line default
             #line hidden
             this.Write(" { get; private set; }\r\n");
             
-            #line 57 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 54 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -280,7 +279,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 61 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 58 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -290,28 +289,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic IEnumerable<");
             
-            #line 65 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 65 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 65 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Values;\r\n");
             
-            #line 66 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 63 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -320,7 +319,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 70 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 67 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -330,35 +329,35 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 74 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(ItemId<");
             
-            #line 74 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> id) { return (");
             
-            #line 74 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".TryGetValue(id.Value, out var item)) ? item : ");
             
-            #line 74 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".DefaultValue; }\r\n");
             
-            #line 75 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 72 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -367,7 +366,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n        public ");
             
-            #line 79 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 76 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -375,14 +374,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" GetImage(string name) { return _images.TryGetValue(name, out var image) ? image " +
                     ": ");
             
-            #line 79 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 76 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
             this.Write(".Empty; }\r\n        public ");
             
-            #line 80 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 77 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -390,7 +389,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" GetAudioClip(string name) { return _audioClips.TryGetValue(name, out var audioCl" +
                     "ip) ? audioClip : ");
             
-            #line 80 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 77 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -399,7 +398,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "izations.TryGetValue(language, out var data) ? data : null; }\r\n\r\n        private" +
                     " void Clear()\r\n        {\r\n");
             
-            #line 85 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 82 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 			{
@@ -409,14 +408,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 89 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 86 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Clear();\r\n");
             
-            #line 90 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 87 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -425,7 +424,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 94 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 91 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Configurations)
 			{
@@ -435,14 +434,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 98 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 95 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 99 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 96 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -452,7 +451,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("\r\n\t\t\t_images.Clear();\r\n\t\t\t_audioClips.Clear();\r\n\t\t\t_localizations.Clear();\r\n     " +
                     "   }\r\n\r\n");
             
-            #line 108 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 105 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -462,28 +461,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tprivate readonly Dictionary<int, ");
             
-            #line 112 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 109 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 112 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 109 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" = new Dictionary<int, ");
             
-            #line 112 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 109 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(">();\r\n");
             
-            #line 113 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 110 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -492,14 +491,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\r\n        private readonly Dictionary<string, ");
             
-            #line 117 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 114 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
             this.Write("> _images = new Dictionary<string, ");
             
-            #line 117 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 114 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -507,14 +506,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
                     " ");
             
-            #line 118 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 115 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
             #line hidden
             this.Write("> _audioClips = new Dictionary<string, ");
             
-            #line 118 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 115 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -523,7 +522,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     " string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalI" +
                     "gnoreCase);\r\n\r\n\t\tpublic class Loader\r\n        {\r\n            public Loader(");
             
-            #line 123 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 120 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
@@ -543,7 +542,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
 ");
             
-            #line 136 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 133 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 					foreach (var item in Schema.Objects)
 					{
@@ -553,28 +552,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\t\tforeach (var item in content.");
             
-            #line 140 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 137 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\t\t");
             
-            #line 141 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 138 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(new ItemId<");
             
-            #line 141 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 138 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(">(item.Id));\r\n");
             
-            #line 142 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 139 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 					}
 
@@ -596,7 +595,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
 ");
             
-            #line 158 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 155 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 					foreach (var item in Schema.Configurations)
 					{
@@ -606,42 +605,42 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\t\tif (_database.");
             
-            #line 162 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" == null && content.");
             
-            #line 162 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" != null) _database.");
             
-            #line 162 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 162 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".Create(content.");
             
-            #line 162 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(", this);\r\n");
             
-            #line 163 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 160 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 					}
 
@@ -650,7 +649,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\t}\r\n\r\n");
             
-            #line 168 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 165 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				foreach (var item in Schema.Configurations)
 				{
@@ -660,42 +659,42 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\tif (_database.");
             
-            #line 172 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 169 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" == null) _database.");
             
-            #line 172 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 169 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 172 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 169 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".Create(\r\n\t\t\t\t\tnew ");
             
-            #line 173 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 170 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace + "." + Utils.SerializableClassName(item.name)));
             
             #line default
             #line hidden
             this.Write(" { ItemType = ");
             
-            #line 173 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 170 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace + "." + Constants.ItemTypeEnum + "." + item.name));
             
             #line default
             #line hidden
             this.Write(" }, this);\r\n");
             
-            #line 174 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 171 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				}
 
@@ -704,7 +703,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t}\r\n\r\n");
             
-            #line 179 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 176 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 	        {
@@ -714,21 +713,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\tpublic ");
             
-            #line 183 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 180 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(ItemId<");
             
-            #line 183 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 180 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
-            this.Write("> id)\r\n\t\t\t{\r\n\t\t\t\tif (_database.");
+            this.Write("> id, bool notNull = false)\r\n\t\t\t{\r\n\t\t\t\tif (_database.");
             
-            #line 185 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 182 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
@@ -737,28 +736,29 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "nt - 1; i >= 0; --i)\r\n                {\r\n                    var serializable = " +
                     "Contents[i].");
             
-            #line 188 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 185 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(id.Value);\r\n                    if (serializable != null) return ");
             
+            #line 186 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
+            
+            #line default
+            #line hidden
+            this.Write(".Create(serializable, this);\r\n                }\r\n\r\n\t\t\t\tvar value = ");
+            
             #line 189 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
-            this.Write(".Create(serializable, this);\r\n                }\r\n\r\n                return ");
+            this.Write(".DefaultValue;\r\n\t\t\t\tif (notNull && value == null) throw new DatabaseException(\"Da" +
+                    "ta not found \" + id);\r\n                return value;\r\n\t\t\t}\r\n");
             
-            #line 192 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
-            
-            #line default
-            #line hidden
-            this.Write(".DefaultValue;\r\n\t\t\t}\r\n");
-            
-            #line 194 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 193 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 	        }
 
@@ -767,7 +767,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n\r\n");
             
-            #line 199 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 198 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 	        {
@@ -777,28 +777,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\tpublic void ");
             
-            #line 203 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 202 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectSetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(int id, ");
             
-            #line 203 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 202 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(" item) { _database.");
             
-            #line 203 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 202 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Add(id, item); }\r\n");
             
-            #line 204 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 203 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 	        }
 
@@ -807,7 +807,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n\t\t\tprivate readonly ");
             
-            #line 208 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 207 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
@@ -816,7 +816,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 213 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+        #line 212 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
  
 	private static string DataMember(string name) 
 	{ 		

@@ -544,7 +544,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             {
 				var dataClass = schema.GetObject(member.typeid);
                 WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
-					"?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item))));");
+					"?.Select(item => loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(item), true)));");
             }
             else if (member.type == Constants.TypeStruct)
             {

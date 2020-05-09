@@ -5,4 +5,5 @@
     <member name="HomeStarDistance" type="int" minvalue="0" maxvalue="1000" />
     <member name="WanderingShipsDistance" type="int" minvalue="0" maxvalue="1000" />
     <member name="Hidden" type="bool" />
+    <member name="Hostile" type="bool" />
 </data>

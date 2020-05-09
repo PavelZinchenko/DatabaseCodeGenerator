@@ -46,7 +46,7 @@ namespace GameDatabase.DataModel
 			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 1000f);
 			InitialPosition = serializable.InitialPosition;
 			AreaOfEffect = UnityEngine.Mathf.Clamp(serializable.AreaOfEffect, 0f, 1000f);
-			Damage = UnityEngine.Mathf.Clamp(serializable.Damage, 0f, 1000f);
+			Damage = UnityEngine.Mathf.Clamp(serializable.Damage, 0f, 1E+09f);
 			Range = UnityEngine.Mathf.Clamp(serializable.Range, 0f, 1000f);
 			Velocity = UnityEngine.Mathf.Clamp(serializable.Velocity, 0f, 1000f);
 			LifeTime = UnityEngine.Mathf.Clamp(serializable.LifeTime, 0f, 1000f);

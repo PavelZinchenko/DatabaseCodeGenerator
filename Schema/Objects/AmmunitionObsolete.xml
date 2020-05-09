@@ -7,7 +7,7 @@
     <member name="Size" type="float" minvalue="0" maxvalue="1000" />
     <member name="InitialPosition" type="vector" />
     <member name="AreaOfEffect" type="float" minvalue="0" maxvalue="1000" />
-    <member name="Damage" type="float" minvalue="0" maxvalue="1000" />
+    <member name="Damage" type="float" minvalue="0" maxvalue="999999999" />
     <member name="Range" type="float" minvalue="0" maxvalue="1000" />
     <member name="Velocity" type="float" minvalue="0" maxvalue="1000" />
     <member name="LifeTime" type="float" minvalue="0" maxvalue="1000" />

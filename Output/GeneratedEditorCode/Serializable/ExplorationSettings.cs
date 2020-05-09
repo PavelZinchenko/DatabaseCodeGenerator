@@ -14,15 +14,11 @@ using EditorDatabase.Model;
 namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class FactionSerializable : SerializableItem
+	public class ExplorationSettingsSerializable : SerializableItem
 	{
-		[DefaultValue("")]
-		public string Name;
-		[DefaultValue("")]
-		public string Color;
-		public int HomeStarDistance;
-		public int WanderingShipsDistance;
-		public bool Hidden;
-		public bool Hostile;
+		public int OutpostShip;
+		public int TurretShip;
+		public int InfectedPlanetFaction;
+		public int HiveShipBuild;
 	}
 }

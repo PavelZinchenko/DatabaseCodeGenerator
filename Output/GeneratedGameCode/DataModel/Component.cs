@@ -48,7 +48,7 @@ namespace GameDatabase.DataModel
 			DroneBay = loader.GetDroneBay(new ItemId<DroneBay>(serializable.DroneBayId));
 			Drone = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.DroneId));
 			Restrictions = ComponentRestrictions.Create(serializable.Restrictions, loader);
-			PossibleModifications = new ImmutableCollection<ComponentMod>(serializable.PossibleModifications?.Select(item => loader.GetComponentMod(new ItemId<ComponentMod>(item))));
+			PossibleModifications = new ImmutableCollection<ComponentMod>(serializable.PossibleModifications?.Select(item => loader.GetComponentMod(new ItemId<ComponentMod>(item), true)));
 
 			OnDataDeserialized(serializable, loader);
 		}

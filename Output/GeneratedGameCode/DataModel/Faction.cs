@@ -32,6 +32,7 @@ namespace GameDatabase.DataModel
 			HomeStarDistance = UnityEngine.Mathf.Clamp(serializable.HomeStarDistance, 0, 1000);
 			WanderingShipsDistance = UnityEngine.Mathf.Clamp(serializable.WanderingShipsDistance, 0, 1000);
 			Hidden = serializable.Hidden;
+			Hostile = serializable.Hostile;
 
 			OnDataDeserialized(serializable, loader);
 		}
@@ -43,6 +44,7 @@ namespace GameDatabase.DataModel
 		public int HomeStarDistance { get; private set; }
 		public int WanderingShipsDistance { get; private set; }
 		public bool Hidden { get; private set; }
+		public bool Hostile { get; private set; }
 
 		public static Faction DefaultValue { get; private set; }
 	}

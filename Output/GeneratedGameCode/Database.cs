@@ -17,6 +17,7 @@ namespace GameDatabase
 	public partial interface IDatabase
 	{
 		DatabaseSettings DatabaseSettings { get; }
+		ExplorationSettings ExplorationSettings { get; }
 		GalaxySettings GalaxySettings { get; }
 		ShipSettings ShipSettings { get; }
 
@@ -73,10 +74,8 @@ namespace GameDatabase
 
     public partial class Database : IDatabase
     {
-        partial void OnDataLoaded();
-        partial void OnDataInitialized();
-
 		public DatabaseSettings DatabaseSettings { get; private set; }
+		public ExplorationSettings ExplorationSettings { get; private set; }
 		public GalaxySettings GalaxySettings { get; private set; }
 		public ShipSettings ShipSettings { get; private set; }
 
@@ -156,6 +155,7 @@ namespace GameDatabase
 			_weaponMap.Clear();
 
 			DatabaseSettings = null;
+			ExplorationSettings = null;
 			GalaxySettings = null;
 			ShipSettings = null;
 
@@ -264,19 +264,22 @@ namespace GameDatabase
                             _database._localizations.Add(item.Key, item.Value);
 
 					if (_database.DatabaseSettings == null && content.DatabaseSettings != null) _database.DatabaseSettings = DatabaseSettings.Create(content.DatabaseSettings, this);
+					if (_database.ExplorationSettings == null && content.ExplorationSettings != null) _database.ExplorationSettings = ExplorationSettings.Create(content.ExplorationSettings, this);
 					if (_database.GalaxySettings == null && content.GalaxySettings != null) _database.GalaxySettings = GalaxySettings.Create(content.GalaxySettings, this);
 					if (_database.ShipSettings == null && content.ShipSettings != null) _database.ShipSettings = ShipSettings.Create(content.ShipSettings, this);
 				}
 
 				if (_database.DatabaseSettings == null) _database.DatabaseSettings = DatabaseSettings.Create(
 					new Serializable.DatabaseSettingsSerializable { ItemType = Enums.ItemType.DatabaseSettings }, this);
+				if (_database.ExplorationSettings == null) _database.ExplorationSettings = ExplorationSettings.Create(
+					new Serializable.ExplorationSettingsSerializable { ItemType = Enums.ItemType.ExplorationSettings }, this);
 				if (_database.GalaxySettings == null) _database.GalaxySettings = GalaxySettings.Create(
 					new Serializable.GalaxySettingsSerializable { ItemType = Enums.ItemType.GalaxySettings }, this);
 				if (_database.ShipSettings == null) _database.ShipSettings = ShipSettings.Create(
 					new Serializable.ShipSettingsSerializable { ItemType = Enums.ItemType.ShipSettings }, this);
 			}
 
-			public AmmunitionObsolete GetAmmunitionObsolete(ItemId<AmmunitionObsolete> id)
+			public AmmunitionObsolete GetAmmunitionObsolete(ItemId<AmmunitionObsolete> id, bool notNull = false)
 			{
 				if (_database._ammunitionObsoleteMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -285,9 +288,11 @@ namespace GameDatabase
                     if (serializable != null) return AmmunitionObsolete.Create(serializable, this);
                 }
 
-                return AmmunitionObsolete.DefaultValue;
+				var value = AmmunitionObsolete.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Component GetComponent(ItemId<Component> id)
+			public Component GetComponent(ItemId<Component> id, bool notNull = false)
 			{
 				if (_database._componentMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -296,9 +301,11 @@ namespace GameDatabase
                     if (serializable != null) return Component.Create(serializable, this);
                 }
 
-                return Component.DefaultValue;
+				var value = Component.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public ComponentMod GetComponentMod(ItemId<ComponentMod> id)
+			public ComponentMod GetComponentMod(ItemId<ComponentMod> id, bool notNull = false)
 			{
 				if (_database._componentModMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -307,9 +314,11 @@ namespace GameDatabase
                     if (serializable != null) return ComponentMod.Create(serializable, this);
                 }
 
-                return ComponentMod.DefaultValue;
+				var value = ComponentMod.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public ComponentStats GetComponentStats(ItemId<ComponentStats> id)
+			public ComponentStats GetComponentStats(ItemId<ComponentStats> id, bool notNull = false)
 			{
 				if (_database._componentStatsMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -318,9 +327,11 @@ namespace GameDatabase
                     if (serializable != null) return ComponentStats.Create(serializable, this);
                 }
 
-                return ComponentStats.DefaultValue;
+				var value = ComponentStats.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Device GetDevice(ItemId<Device> id)
+			public Device GetDevice(ItemId<Device> id, bool notNull = false)
 			{
 				if (_database._deviceMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -329,9 +340,11 @@ namespace GameDatabase
                     if (serializable != null) return Device.Create(serializable, this);
                 }
 
-                return Device.DefaultValue;
+				var value = Device.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public DroneBay GetDroneBay(ItemId<DroneBay> id)
+			public DroneBay GetDroneBay(ItemId<DroneBay> id, bool notNull = false)
 			{
 				if (_database._droneBayMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -340,9 +353,11 @@ namespace GameDatabase
                     if (serializable != null) return DroneBay.Create(serializable, this);
                 }
 
-                return DroneBay.DefaultValue;
+				var value = DroneBay.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Faction GetFaction(ItemId<Faction> id)
+			public Faction GetFaction(ItemId<Faction> id, bool notNull = false)
 			{
 				if (_database._factionMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -351,9 +366,11 @@ namespace GameDatabase
                     if (serializable != null) return Faction.Create(serializable, this);
                 }
 
-                return Faction.DefaultValue;
+				var value = Faction.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Satellite GetSatellite(ItemId<Satellite> id)
+			public Satellite GetSatellite(ItemId<Satellite> id, bool notNull = false)
 			{
 				if (_database._satelliteMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -362,9 +379,11 @@ namespace GameDatabase
                     if (serializable != null) return Satellite.Create(serializable, this);
                 }
 
-                return Satellite.DefaultValue;
+				var value = Satellite.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public SatelliteBuild GetSatelliteBuild(ItemId<SatelliteBuild> id)
+			public SatelliteBuild GetSatelliteBuild(ItemId<SatelliteBuild> id, bool notNull = false)
 			{
 				if (_database._satelliteBuildMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -373,9 +392,11 @@ namespace GameDatabase
                     if (serializable != null) return SatelliteBuild.Create(serializable, this);
                 }
 
-                return SatelliteBuild.DefaultValue;
+				var value = SatelliteBuild.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Ship GetShip(ItemId<Ship> id)
+			public Ship GetShip(ItemId<Ship> id, bool notNull = false)
 			{
 				if (_database._shipMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -384,9 +405,11 @@ namespace GameDatabase
                     if (serializable != null) return Ship.Create(serializable, this);
                 }
 
-                return Ship.DefaultValue;
+				var value = Ship.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public ShipBuild GetShipBuild(ItemId<ShipBuild> id)
+			public ShipBuild GetShipBuild(ItemId<ShipBuild> id, bool notNull = false)
 			{
 				if (_database._shipBuildMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -395,9 +418,11 @@ namespace GameDatabase
                     if (serializable != null) return ShipBuild.Create(serializable, this);
                 }
 
-                return ShipBuild.DefaultValue;
+				var value = ShipBuild.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Skill GetSkill(ItemId<Skill> id)
+			public Skill GetSkill(ItemId<Skill> id, bool notNull = false)
 			{
 				if (_database._skillMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -406,9 +431,11 @@ namespace GameDatabase
                     if (serializable != null) return Skill.Create(serializable, this);
                 }
 
-                return Skill.DefaultValue;
+				var value = Skill.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Technology GetTechnology(ItemId<Technology> id)
+			public Technology GetTechnology(ItemId<Technology> id, bool notNull = false)
 			{
 				if (_database._technologyMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -417,9 +444,11 @@ namespace GameDatabase
                     if (serializable != null) return Technology.Create(serializable, this);
                 }
 
-                return Technology.DefaultValue;
+				var value = Technology.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Character GetCharacter(ItemId<Character> id)
+			public Character GetCharacter(ItemId<Character> id, bool notNull = false)
 			{
 				if (_database._characterMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -428,9 +457,11 @@ namespace GameDatabase
                     if (serializable != null) return Character.Create(serializable, this);
                 }
 
-                return Character.DefaultValue;
+				var value = Character.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Fleet GetFleet(ItemId<Fleet> id)
+			public Fleet GetFleet(ItemId<Fleet> id, bool notNull = false)
 			{
 				if (_database._fleetMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -439,9 +470,11 @@ namespace GameDatabase
                     if (serializable != null) return Fleet.Create(serializable, this);
                 }
 
-                return Fleet.DefaultValue;
+				var value = Fleet.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public LootModel GetLoot(ItemId<LootModel> id)
+			public LootModel GetLoot(ItemId<LootModel> id, bool notNull = false)
 			{
 				if (_database._lootMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -450,9 +483,11 @@ namespace GameDatabase
                     if (serializable != null) return LootModel.Create(serializable, this);
                 }
 
-                return LootModel.DefaultValue;
+				var value = LootModel.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public QuestModel GetQuest(ItemId<QuestModel> id)
+			public QuestModel GetQuest(ItemId<QuestModel> id, bool notNull = false)
 			{
 				if (_database._questMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -461,9 +496,11 @@ namespace GameDatabase
                     if (serializable != null) return QuestModel.Create(serializable, this);
                 }
 
-                return QuestModel.DefaultValue;
+				var value = QuestModel.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public QuestItem GetQuestItem(ItemId<QuestItem> id)
+			public QuestItem GetQuestItem(ItemId<QuestItem> id, bool notNull = false)
 			{
 				if (_database._questItemMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -472,9 +509,11 @@ namespace GameDatabase
                     if (serializable != null) return QuestItem.Create(serializable, this);
                 }
 
-                return QuestItem.DefaultValue;
+				var value = QuestItem.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Ammunition GetAmmunition(ItemId<Ammunition> id)
+			public Ammunition GetAmmunition(ItemId<Ammunition> id, bool notNull = false)
 			{
 				if (_database._ammunitionMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -483,9 +522,11 @@ namespace GameDatabase
                     if (serializable != null) return Ammunition.Create(serializable, this);
                 }
 
-                return Ammunition.DefaultValue;
+				var value = Ammunition.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public BulletPrefab GetBulletPrefab(ItemId<BulletPrefab> id)
+			public BulletPrefab GetBulletPrefab(ItemId<BulletPrefab> id, bool notNull = false)
 			{
 				if (_database._bulletPrefabMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -494,9 +535,11 @@ namespace GameDatabase
                     if (serializable != null) return BulletPrefab.Create(serializable, this);
                 }
 
-                return BulletPrefab.DefaultValue;
+				var value = BulletPrefab.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public VisualEffect GetVisualEffect(ItemId<VisualEffect> id)
+			public VisualEffect GetVisualEffect(ItemId<VisualEffect> id, bool notNull = false)
 			{
 				if (_database._visualEffectMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -505,9 +548,11 @@ namespace GameDatabase
                     if (serializable != null) return VisualEffect.Create(serializable, this);
                 }
 
-                return VisualEffect.DefaultValue;
+				var value = VisualEffect.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
-			public Weapon GetWeapon(ItemId<Weapon> id)
+			public Weapon GetWeapon(ItemId<Weapon> id, bool notNull = false)
 			{
 				if (_database._weaponMap.TryGetValue(id.Value, out var item)) return item;
 				for (var i = Contents.Count - 1; i >= 0; --i)
@@ -516,7 +561,9 @@ namespace GameDatabase
                     if (serializable != null) return Weapon.Create(serializable, this);
                 }
 
-                return Weapon.DefaultValue;
+				var value = Weapon.DefaultValue;
+				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
+                return value;
 			}
 
 
