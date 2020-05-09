@@ -4,10 +4,10 @@
     <member name="ItemId" type="object" case="HaveItemById" typeid="Loot" alias="Loot" />
     <member name="ItemId" type="object" case="HaveQuestItem" typeid="QuestItem" alias="QuestItem" />
     <member name="ItemId" type="object" case="QuestCompleted,QuestActive" typeid="Quest" alias="Quest" />
-    <member name="MinValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="1000" />
-    <member name="MaxValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="1000" />
-    <member name="MinValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-100" maxvalue="100" />
-    <member name="MaxValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-100" maxvalue="100" />
+    <member name="MinValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="10000" />
+    <member name="MaxValue" type="int" case="PlayerPosition,RandomStarSystem" minvalue="0" maxvalue="10000" />
+    <member name="MinValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-1000000" maxvalue="100" />
+    <member name="MaxValue" type="int" case="CharacterRelations,FactionRelations" minvalue="-1000000" maxvalue="1000000" />
     <member name="MinValue" type="int" case="HaveQuestItem" minvalue="1" maxvalue="1000000" alias="Amount" />
     <member name="Character" type="object" typeid="Character" case="CharacterRelations" />
     <member name="Faction" type="object" typeid="Faction" case="Faction" />
