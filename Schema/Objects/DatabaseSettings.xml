@@ -4,4 +4,5 @@
     <member name="ModName" type="string" />
     <member name="ModId" type="string" />
     <member name="ModVersion" type="int" />
+    <member name="UnloadOriginalDatabase" type="bool" />
 </data>

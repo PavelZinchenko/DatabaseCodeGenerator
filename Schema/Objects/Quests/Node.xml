@@ -15,7 +15,7 @@
     <member name="Character" type="object" typeid="Character" case="ShowDialog,ChangeCharacterRelations,SetCharacterRelations" />
     <member name="Faction" type="object" typeid="Faction" case="OpenShipyard" />
     <member name="Value" type="int" case="ChangeCharacterRelations,ChangeFactionRelations,SetCharacterRelations,SetFactionRelations" minvalue="-100" maxvalue="100" />
-    <member name="Value" type="int" case="OpenShipyard" minvalue="0" maxvalue="1000" alias="Level" />
+    <member name="Value" type="int" case="OpenShipyard" minvalue="0" maxvalue="10000" alias="Level" />
     <member name="Actions" type="struct_list" typeid="NodeAction" case="ShowDialog" />
     <member name="Transitions" type="struct_list" typeid="NodeTransition" case="Switch,Random,Condition" />
 </data>

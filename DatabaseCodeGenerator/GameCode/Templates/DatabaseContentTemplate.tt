@@ -12,16 +12,19 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 {
     public class DatabaseContent : IContentLoader
     {
-        public DatabaseContent(IDataStorage storage, IJsonSerializer jsonSerializer)
+        public DatabaseContent(IJsonSerializer jsonSerializer, IDataStorage storage)
         {
             _serializer = jsonSerializer;
-            Storage = storage;
-            Storage.LoadContent(this);
+            storage?.LoadContent(this);
+            _allowDuplicates = true;
         }
-  
-        public const int SchemaVersion = <#= Schema.Version #>;
 
-		public IDataStorage Storage { get; }
+        public void LoadParent(IDataStorage storage)
+        {
+            storage?.LoadContent(this);
+        }
+
+        public const int SchemaVersion = <#= Schema.Version #>;
 
         public void LoadJson(string name, string content)
         {
@@ -35,10 +38,16 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 #>
             <#= first ? "if" : "else if" #> (type == <#= Constants.ItemTypeEnum + "." + item.name #>)
             {
-			    if (<#= DataMember(item.name) #>.ContainsKey(item.Id)) throw new DatabaseException("Duplicate <#= item.name #> ID - " + item.Id + " (" + name + ")");
-                var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
-                data.FileName = name;
-                <#= DataMember(item.name) #>.Add(data.Id, data);
+			    if (!<#= DataMember(item.name) #>.ContainsKey(item.Id))
+                {
+                    var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
+                    data.FileName = name;
+                    <#= DataMember(item.name) #>.Add(data.Id, data);
+                    return;
+                }
+
+                if (!_allowDuplicates)
+                    throw new DatabaseException("Duplicate <#= item.name #> ID - " + item.Id + " (" + name + ")");
             }
 <#
 				first = false;
@@ -49,12 +58,16 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 #>
             <#= first ? "if" : "else if" #> (type == <#= Constants.ItemTypeEnum + "." + item.name #>)
             {
-                var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
-                data.FileName = name;
+                if (<#= item.name #> == null)
+                {
+                    var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
+                    data.FileName = name;
+                    <#= item.name #> = data;
+                    return;
+                }
 
-				if (<#= item.name #> != null)
+				if (!_allowDuplicates)
                     throw new DatabaseException("Duplicate <#= item.name #> file found - " + name);
-                <#= item.name #> = data;
             }
 <#
 				first = false;
@@ -117,6 +130,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
         public IEnumerable<KeyValuePair<string, <#= Utils.AudioClipType #>>> AudioClips => _audioClips;
         public IEnumerable<KeyValuePair<string, string>> Localizations => _localizations;
 
+        private bool _allowDuplicates = false;
         private readonly IJsonSerializer _serializer;
 
 <#

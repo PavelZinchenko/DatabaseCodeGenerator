@@ -6,9 +6,9 @@
     <member name="ItemId" type="object" typeid="ShipBuild" case="Ship" alias="ShipBuild" options="notnull" />
     <member name="ItemId" type="object" typeid="Component" case="Component" alias="Component" options="notnull" />
     <member name="MinAmount" type="int" case="Money,Fuel,Stars,RandomComponents,
-    RandomItems,QuestItem,Component" minvalue="0" maxvalue="100000000" />
+    RandomItems,QuestItem,Component" minvalue="0" maxvalue="999999999" />
     <member name="MaxAmount" type="int" case="Money,Fuel,Stars,RandomComponents,
-    RandomItems,QuestItem,Component" minvalue="0" maxvalue="100000000" />
+    RandomItems,QuestItem,Component" minvalue="0" maxvalue="999999999" />
     <member name="ValueRatio" type="float" case="SomeMoney,RandomComponents" minvalue="0.001" maxvalue="1000" />
     <member name="Factions" type="struct" typeid="FactionFilter" case="RandomComponents" />
     <member name="Items" type="struct_list" typeid="LootItem" case="RandomItems,AllItems,ItemsWithChance" />

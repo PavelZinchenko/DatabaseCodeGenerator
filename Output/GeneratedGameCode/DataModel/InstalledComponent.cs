@@ -25,14 +25,14 @@ namespace GameDatabase.DataModel
 		private InstalledComponent(InstalledComponentSerializable serializable, Database.Loader loader)
 		{
 			Component = loader.GetComponent(new ItemId<Component>(serializable.ComponentId));
-			if (Component == Component.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + ".Component cannot be null - " + serializable.ComponentId);
+			if (Component == null)
+			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null - " + serializable.ComponentId);
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
 			Locked = serializable.Locked;
-			X = UnityEngine.Mathf.Clamp(serializable.X, -128, 127);
-			Y = UnityEngine.Mathf.Clamp(serializable.Y, -128, 127);
-			BarrelId = UnityEngine.Mathf.Clamp(serializable.BarrelId, 0, 32);
+			X = UnityEngine.Mathf.Clamp(serializable.X, -32768, 32767);
+			Y = UnityEngine.Mathf.Clamp(serializable.Y, -32768, 32767);
+			BarrelId = UnityEngine.Mathf.Clamp(serializable.BarrelId, 0, 255);
 			Behaviour = UnityEngine.Mathf.Clamp(serializable.Behaviour, 0, 10);
 			KeyBinding = UnityEngine.Mathf.Clamp(serializable.KeyBinding, -10, 10);
 

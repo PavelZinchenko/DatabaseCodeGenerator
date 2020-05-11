@@ -109,7 +109,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write(" ItemType;\r\n        public int Id;\r\n    }\r\n}\r\n");
+            this.Write(" ItemType;\r\n        public int Id;\r\n        public bool Disabled;\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -10,10 +10,10 @@
     <member name="Damage" type="float" minvalue="0" maxvalue="999999999" />
     <member name="Range" type="float" minvalue="0" maxvalue="1000" />
     <member name="Velocity" type="float" minvalue="0" maxvalue="1000" />
-    <member name="LifeTime" type="float" minvalue="0" maxvalue="1000" />
-    <member name="HitPoints" type="int" minvalue="0" maxvalue="1000" />
+    <member name="LifeTime" type="float" minvalue="0" maxvalue="999999999" />
+    <member name="HitPoints" type="int" minvalue="0" maxvalue="999999999" />
     <member name="IgnoresShipVelocity" type="bool" />
-    <member name="EnergyCost" type="float" minvalue="0" maxvalue="1000" />
+    <member name="EnergyCost" type="float" minvalue="0" maxvalue="999999999" />
     <member name="CoupledAmmunitionId" type="object" typeid="AmmunitionObsolete" alias="CoupledAmmunition" />
     <member name="Color" type="color" />
     <member name="FireSound" type="audioclip" />

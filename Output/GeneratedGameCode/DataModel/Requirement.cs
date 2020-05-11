@@ -173,8 +173,8 @@ namespace GameDatabase.DataModel
   		public Requirement_PlayerPosition(RequirementSerializable serializable, Database.Loader loader)
             : base(serializable, loader)
         {
-			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 1000);
-			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 1000);
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 10000);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 10000);
 
             OnDataDeserialized(serializable, loader);
         }
@@ -194,8 +194,8 @@ namespace GameDatabase.DataModel
   		public Requirement_RandomStarSystem(RequirementSerializable serializable, Database.Loader loader)
             : base(serializable, loader)
         {
-			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 1000);
-			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 1000);
+			MinValue = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 10000);
+			MaxValue = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 10000);
 
             OnDataDeserialized(serializable, loader);
         }

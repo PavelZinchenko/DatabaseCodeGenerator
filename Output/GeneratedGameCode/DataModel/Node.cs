@@ -187,7 +187,7 @@ namespace GameDatabase.DataModel
         {
 			Transition = UnityEngine.Mathf.Clamp(serializable.DefaultTransition, 1, 1000);
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
-			Level = UnityEngine.Mathf.Clamp(serializable.Value, 0, 1000);
+			Level = UnityEngine.Mathf.Clamp(serializable.Value, 0, 10000);
 
             OnDataDeserialized(serializable, loader);
         }

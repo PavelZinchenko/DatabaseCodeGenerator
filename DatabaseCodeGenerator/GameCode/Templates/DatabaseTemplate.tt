@@ -117,57 +117,50 @@ namespace <#= Utils.RootNamespace #>
 
 		public class Loader
         {
-            public Loader(<#= Utils.DatabaseClassName #> database)
+		    public static void Load(<#= Utils.DatabaseClassName #> database, DatabaseContent content)
             {
-                _database = database;
+				var loader = new Loader(database, content);
+				loader.Load();
             }
 
-			public ImmutableCollection<DatabaseContent> Contents;
+            private Loader(<#= Utils.DatabaseClassName #> database, DatabaseContent content)
+            {
+                _database = database;
+                _content = content;
+            }
 
 			public void Load()
             {
-                for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var content = Contents[i];
-
 <#
-					foreach (var item in Schema.Objects)
-					{
+				foreach (var item in Schema.Objects)
+				{
 #>
-					foreach (var item in content.<#= Utils.ObjectListPropertyName(item.name) #>)
-						<#= Utils.ObjectGetterName(item.name) #>(new ItemId<<#= Utils.DataClassName(item)#>>(item.Id));
+				foreach (var item in _content.<#= Utils.ObjectListPropertyName(item.name) #>)
+					if (!item.Disabled && !_database.<#= DataMember(item.name) #>.ContainsKey(item.Id))
+						<#= Utils.DataClassName(item) #>.Create(item, this);
 <#
-					}
-#>
-
-                    foreach (var item in content.Images)
-                        if (!_database._images.ContainsKey(item.Key))
-                            _database._images.Add(item.Key, item.Value);
-
-                    foreach (var item in content.AudioClips)
-                        if (!_database._audioClips.ContainsKey(item.Key))
-                            _database._audioClips.Add(item.Key, item.Value);
-
-                    foreach (var item in content.Localizations)
-                        if (!_database._localizations.ContainsKey(item.Key))
-                            _database._localizations.Add(item.Key, item.Value);
-
-<#
-					foreach (var item in Schema.Configurations)
-					{
-#>
-					if (_database.<#= item.name #> == null && content.<#= item.name #> != null) _database.<#= item.name #> = <#= Utils.DataClassName(item) #>.Create(content.<#= item.name #>, this);
-<#
-					}
-#>
 				}
+#>
+
+                foreach (var item in _content.Images)
+                    if (!_database._images.ContainsKey(item.Key))
+                        _database._images.Add(item.Key, item.Value);
+
+                foreach (var item in _content.AudioClips)
+                    if (!_database._audioClips.ContainsKey(item.Key))
+                        _database._audioClips.Add(item.Key, item.Value);
+
+                foreach (var item in _content.Localizations)
+                    if (!_database._localizations.ContainsKey(item.Key))
+                        _database._localizations.Add(item.Key, item.Value);
 
 <#
 				foreach (var item in Schema.Configurations)
 				{
 #>
-				if (_database.<#= item.name #> == null) _database.<#= item.name #> = <#= Utils.DataClassName(item) #>.Create(
-					new <#= Utils.SerializableNamespace + "." + Utils.SerializableClassName(item.name) #> { ItemType = <#= Utils.EnumsNamespace + "." + Constants.ItemTypeEnum + "." + item.name #> }, this);
+				if (_database.<#= item.name #> == null)
+					_database.<#= item.name #> = <#= Utils.DataClassName(item) #>.<#= Utils.FactoryMethodName #>(_content.<#= item.name #> ?? new <#= Utils.SerializableNamespace + "." +
+						Utils.SerializableClassName(item.name) #> { ItemType = <#= Utils.EnumsNamespace + "." + Constants.ItemTypeEnum + "." + item.name #> }, this);
 <#
 				}
 #>
@@ -180,11 +173,8 @@ namespace <#= Utils.RootNamespace #>
 			public <#= Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name) #>(ItemId<<#= Utils.DataClassName(item) #>> id, bool notNull = false)
 			{
 				if (_database.<#= DataMember(item.name) #>.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].<#= Utils.ObjectGetterName(item.name) #>(id.Value);
-                    if (serializable != null) return <#= Utils.DataClassName(item) #>.Create(serializable, this);
-                }
+                var serializable = _content.<#= Utils.ObjectGetterName(item.name) #>(id.Value);
+                if (serializable != null && !serializable.Disabled) return <#= Utils.DataClassName(item) #>.Create(serializable, this);
 
 				var value = <#= Utils.DataClassName(item) #>.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -204,6 +194,7 @@ namespace <#= Utils.RootNamespace #>
 	        }
 #>
 
+            private readonly DatabaseContent _content;
 			private readonly <#= Utils.DatabaseClassName #> _database;
 		}
 	}

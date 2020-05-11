@@ -49,10 +49,10 @@ namespace GameDatabase.DataModel
 			Damage = UnityEngine.Mathf.Clamp(serializable.Damage, 0f, 1E+09f);
 			Range = UnityEngine.Mathf.Clamp(serializable.Range, 0f, 1000f);
 			Velocity = UnityEngine.Mathf.Clamp(serializable.Velocity, 0f, 1000f);
-			LifeTime = UnityEngine.Mathf.Clamp(serializable.LifeTime, 0f, 1000f);
-			HitPoints = UnityEngine.Mathf.Clamp(serializable.HitPoints, 0, 1000);
+			LifeTime = UnityEngine.Mathf.Clamp(serializable.LifeTime, 0f, 1E+09f);
+			HitPoints = UnityEngine.Mathf.Clamp(serializable.HitPoints, 0, 999999999);
 			IgnoresShipVelocity = serializable.IgnoresShipVelocity;
-			EnergyCost = UnityEngine.Mathf.Clamp(serializable.EnergyCost, 0f, 1000f);
+			EnergyCost = UnityEngine.Mathf.Clamp(serializable.EnergyCost, 0f, 1E+09f);
 			CoupledAmmunition = loader.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.CoupledAmmunitionId));
 			Color = new ColorData(serializable.Color);
 			FireSound = new AudioClipId(serializable.FireSound);

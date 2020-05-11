@@ -415,8 +415,8 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                 WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
 				if (notnull)
 				{
-					WriteLine("if (" + memberName + " == " + Utils.DataClassName(dataClass) + ".DefaultValue)");
-					WriteLine("    UnityEngine.Debug.LogError(this.GetType().Name + \"." + memberName + " cannot be null - \" + serializable." + member.name + ");");
+					WriteLine("if (" + memberName + " == null)");
+					WriteLine("    throw new DatabaseException(this.GetType().Name + \"." + memberName + " cannot be null - \" + serializable." + member.name + ");");
                 }
             }
             else if (member.type == Constants.TypeObjectList)

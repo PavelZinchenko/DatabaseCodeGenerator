@@ -17,5 +17,6 @@ namespace GameDatabase.Serializable
 	    public string FileName { get; set; }
         public ItemType ItemType;
         public int Id;
+        public bool Disabled;
     }
 }

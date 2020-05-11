@@ -32,10 +32,10 @@ namespace GameDatabase.DataModel
 			DisplayCategory = serializable.DisplayCategory;
 			Availability = serializable.Availability;
 			Stats = loader.GetComponentStats(new ItemId<ComponentStats>(serializable.ComponentStatsId));
-			if (Stats == ComponentStats.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + ".Stats cannot be null - " + serializable.ComponentStatsId);
+			if (Stats == null)
+			    throw new DatabaseException(this.GetType().Name + ".Stats cannot be null - " + serializable.ComponentStatsId);
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
-			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 500);
+			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 1000);
 			Icon = new SpriteId(serializable.Icon, SpriteId.Type.Component);
 			Color = new ColorData(serializable.Color);
 			Layout = new Layout(serializable.Layout);

@@ -28,7 +28,7 @@ namespace GameDatabase.DataModel
 			loader.AddFleet(serializable.Id, this);
 
 			Factions = RequiredFactions.Create(serializable.Factions, loader);
-			LevelBonus = UnityEngine.Mathf.Clamp(serializable.LevelBonus, -100, 100);
+			LevelBonus = UnityEngine.Mathf.Clamp(serializable.LevelBonus, -10000, 10000);
 			NoRandomShips = serializable.NoRandomShips;
 			CombatTimeLimit = UnityEngine.Mathf.Clamp(serializable.CombatTimeLimit, 0, 999);
 			LootCondition = serializable.LootCondition;

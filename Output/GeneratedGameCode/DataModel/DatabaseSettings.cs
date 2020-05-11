@@ -28,6 +28,7 @@ namespace GameDatabase.DataModel
 			ModName = serializable.ModName;
 			ModId = serializable.ModId;
 			ModVersion = UnityEngine.Mathf.Clamp(serializable.ModVersion, -2147483648, 2147483647);
+			UnloadOriginalDatabase = serializable.UnloadOriginalDatabase;
 
 			OnDataDeserialized(serializable, loader);
 		}
@@ -36,6 +37,7 @@ namespace GameDatabase.DataModel
 		public string ModName { get; private set; }
 		public string ModId { get; private set; }
 		public int ModVersion { get; private set; }
+		public bool UnloadOriginalDatabase { get; private set; }
 
 		public static DatabaseSettings DefaultValue { get; private set; }
 	}

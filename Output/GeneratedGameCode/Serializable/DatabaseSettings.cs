@@ -19,5 +19,6 @@ namespace GameDatabase.Serializable
 		public string ModName;
 		public string ModId;
 		public int ModVersion;
+		public bool UnloadOriginalDatabase;
 	}
 }

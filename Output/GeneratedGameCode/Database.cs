@@ -193,100 +193,114 @@ namespace GameDatabase
 
 		public class Loader
         {
-            public Loader(Database database)
+		    public static void Load(Database database, DatabaseContent content)
             {
-                _database = database;
+				var loader = new Loader(database, content);
+				loader.Load();
             }
 
-			public ImmutableCollection<DatabaseContent> Contents;
+            private Loader(Database database, DatabaseContent content)
+            {
+                _database = database;
+                _content = content;
+            }
 
 			public void Load()
             {
-                for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var content = Contents[i];
+				foreach (var item in _content.AmmunitionObsoleteList)
+					if (!item.Disabled && !_database._ammunitionObsoleteMap.ContainsKey(item.Id))
+						AmmunitionObsolete.Create(item, this);
+				foreach (var item in _content.ComponentList)
+					if (!item.Disabled && !_database._componentMap.ContainsKey(item.Id))
+						Component.Create(item, this);
+				foreach (var item in _content.ComponentModList)
+					if (!item.Disabled && !_database._componentModMap.ContainsKey(item.Id))
+						ComponentMod.Create(item, this);
+				foreach (var item in _content.ComponentStatsList)
+					if (!item.Disabled && !_database._componentStatsMap.ContainsKey(item.Id))
+						ComponentStats.Create(item, this);
+				foreach (var item in _content.DeviceList)
+					if (!item.Disabled && !_database._deviceMap.ContainsKey(item.Id))
+						Device.Create(item, this);
+				foreach (var item in _content.DroneBayList)
+					if (!item.Disabled && !_database._droneBayMap.ContainsKey(item.Id))
+						DroneBay.Create(item, this);
+				foreach (var item in _content.FactionList)
+					if (!item.Disabled && !_database._factionMap.ContainsKey(item.Id))
+						Faction.Create(item, this);
+				foreach (var item in _content.SatelliteList)
+					if (!item.Disabled && !_database._satelliteMap.ContainsKey(item.Id))
+						Satellite.Create(item, this);
+				foreach (var item in _content.SatelliteBuildList)
+					if (!item.Disabled && !_database._satelliteBuildMap.ContainsKey(item.Id))
+						SatelliteBuild.Create(item, this);
+				foreach (var item in _content.ShipList)
+					if (!item.Disabled && !_database._shipMap.ContainsKey(item.Id))
+						Ship.Create(item, this);
+				foreach (var item in _content.ShipBuildList)
+					if (!item.Disabled && !_database._shipBuildMap.ContainsKey(item.Id))
+						ShipBuild.Create(item, this);
+				foreach (var item in _content.SkillList)
+					if (!item.Disabled && !_database._skillMap.ContainsKey(item.Id))
+						Skill.Create(item, this);
+				foreach (var item in _content.TechnologyList)
+					if (!item.Disabled && !_database._technologyMap.ContainsKey(item.Id))
+						Technology.Create(item, this);
+				foreach (var item in _content.CharacterList)
+					if (!item.Disabled && !_database._characterMap.ContainsKey(item.Id))
+						Character.Create(item, this);
+				foreach (var item in _content.FleetList)
+					if (!item.Disabled && !_database._fleetMap.ContainsKey(item.Id))
+						Fleet.Create(item, this);
+				foreach (var item in _content.LootList)
+					if (!item.Disabled && !_database._lootMap.ContainsKey(item.Id))
+						LootModel.Create(item, this);
+				foreach (var item in _content.QuestList)
+					if (!item.Disabled && !_database._questMap.ContainsKey(item.Id))
+						QuestModel.Create(item, this);
+				foreach (var item in _content.QuestItemList)
+					if (!item.Disabled && !_database._questItemMap.ContainsKey(item.Id))
+						QuestItem.Create(item, this);
+				foreach (var item in _content.AmmunitionList)
+					if (!item.Disabled && !_database._ammunitionMap.ContainsKey(item.Id))
+						Ammunition.Create(item, this);
+				foreach (var item in _content.BulletPrefabList)
+					if (!item.Disabled && !_database._bulletPrefabMap.ContainsKey(item.Id))
+						BulletPrefab.Create(item, this);
+				foreach (var item in _content.VisualEffectList)
+					if (!item.Disabled && !_database._visualEffectMap.ContainsKey(item.Id))
+						VisualEffect.Create(item, this);
+				foreach (var item in _content.WeaponList)
+					if (!item.Disabled && !_database._weaponMap.ContainsKey(item.Id))
+						Weapon.Create(item, this);
 
-					foreach (var item in content.AmmunitionObsoleteList)
-						GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(item.Id));
-					foreach (var item in content.ComponentList)
-						GetComponent(new ItemId<Component>(item.Id));
-					foreach (var item in content.ComponentModList)
-						GetComponentMod(new ItemId<ComponentMod>(item.Id));
-					foreach (var item in content.ComponentStatsList)
-						GetComponentStats(new ItemId<ComponentStats>(item.Id));
-					foreach (var item in content.DeviceList)
-						GetDevice(new ItemId<Device>(item.Id));
-					foreach (var item in content.DroneBayList)
-						GetDroneBay(new ItemId<DroneBay>(item.Id));
-					foreach (var item in content.FactionList)
-						GetFaction(new ItemId<Faction>(item.Id));
-					foreach (var item in content.SatelliteList)
-						GetSatellite(new ItemId<Satellite>(item.Id));
-					foreach (var item in content.SatelliteBuildList)
-						GetSatelliteBuild(new ItemId<SatelliteBuild>(item.Id));
-					foreach (var item in content.ShipList)
-						GetShip(new ItemId<Ship>(item.Id));
-					foreach (var item in content.ShipBuildList)
-						GetShipBuild(new ItemId<ShipBuild>(item.Id));
-					foreach (var item in content.SkillList)
-						GetSkill(new ItemId<Skill>(item.Id));
-					foreach (var item in content.TechnologyList)
-						GetTechnology(new ItemId<Technology>(item.Id));
-					foreach (var item in content.CharacterList)
-						GetCharacter(new ItemId<Character>(item.Id));
-					foreach (var item in content.FleetList)
-						GetFleet(new ItemId<Fleet>(item.Id));
-					foreach (var item in content.LootList)
-						GetLoot(new ItemId<LootModel>(item.Id));
-					foreach (var item in content.QuestList)
-						GetQuest(new ItemId<QuestModel>(item.Id));
-					foreach (var item in content.QuestItemList)
-						GetQuestItem(new ItemId<QuestItem>(item.Id));
-					foreach (var item in content.AmmunitionList)
-						GetAmmunition(new ItemId<Ammunition>(item.Id));
-					foreach (var item in content.BulletPrefabList)
-						GetBulletPrefab(new ItemId<BulletPrefab>(item.Id));
-					foreach (var item in content.VisualEffectList)
-						GetVisualEffect(new ItemId<VisualEffect>(item.Id));
-					foreach (var item in content.WeaponList)
-						GetWeapon(new ItemId<Weapon>(item.Id));
+                foreach (var item in _content.Images)
+                    if (!_database._images.ContainsKey(item.Key))
+                        _database._images.Add(item.Key, item.Value);
 
-                    foreach (var item in content.Images)
-                        if (!_database._images.ContainsKey(item.Key))
-                            _database._images.Add(item.Key, item.Value);
+                foreach (var item in _content.AudioClips)
+                    if (!_database._audioClips.ContainsKey(item.Key))
+                        _database._audioClips.Add(item.Key, item.Value);
 
-                    foreach (var item in content.AudioClips)
-                        if (!_database._audioClips.ContainsKey(item.Key))
-                            _database._audioClips.Add(item.Key, item.Value);
+                foreach (var item in _content.Localizations)
+                    if (!_database._localizations.ContainsKey(item.Key))
+                        _database._localizations.Add(item.Key, item.Value);
 
-                    foreach (var item in content.Localizations)
-                        if (!_database._localizations.ContainsKey(item.Key))
-                            _database._localizations.Add(item.Key, item.Value);
-
-					if (_database.DatabaseSettings == null && content.DatabaseSettings != null) _database.DatabaseSettings = DatabaseSettings.Create(content.DatabaseSettings, this);
-					if (_database.ExplorationSettings == null && content.ExplorationSettings != null) _database.ExplorationSettings = ExplorationSettings.Create(content.ExplorationSettings, this);
-					if (_database.GalaxySettings == null && content.GalaxySettings != null) _database.GalaxySettings = GalaxySettings.Create(content.GalaxySettings, this);
-					if (_database.ShipSettings == null && content.ShipSettings != null) _database.ShipSettings = ShipSettings.Create(content.ShipSettings, this);
-				}
-
-				if (_database.DatabaseSettings == null) _database.DatabaseSettings = DatabaseSettings.Create(
-					new Serializable.DatabaseSettingsSerializable { ItemType = Enums.ItemType.DatabaseSettings }, this);
-				if (_database.ExplorationSettings == null) _database.ExplorationSettings = ExplorationSettings.Create(
-					new Serializable.ExplorationSettingsSerializable { ItemType = Enums.ItemType.ExplorationSettings }, this);
-				if (_database.GalaxySettings == null) _database.GalaxySettings = GalaxySettings.Create(
-					new Serializable.GalaxySettingsSerializable { ItemType = Enums.ItemType.GalaxySettings }, this);
-				if (_database.ShipSettings == null) _database.ShipSettings = ShipSettings.Create(
-					new Serializable.ShipSettingsSerializable { ItemType = Enums.ItemType.ShipSettings }, this);
+				if (_database.DatabaseSettings == null)
+					_database.DatabaseSettings = DatabaseSettings.Create(_content.DatabaseSettings ?? new Serializable.DatabaseSettingsSerializable { ItemType = Enums.ItemType.DatabaseSettings }, this);
+				if (_database.ExplorationSettings == null)
+					_database.ExplorationSettings = ExplorationSettings.Create(_content.ExplorationSettings ?? new Serializable.ExplorationSettingsSerializable { ItemType = Enums.ItemType.ExplorationSettings }, this);
+				if (_database.GalaxySettings == null)
+					_database.GalaxySettings = GalaxySettings.Create(_content.GalaxySettings ?? new Serializable.GalaxySettingsSerializable { ItemType = Enums.ItemType.GalaxySettings }, this);
+				if (_database.ShipSettings == null)
+					_database.ShipSettings = ShipSettings.Create(_content.ShipSettings ?? new Serializable.ShipSettingsSerializable { ItemType = Enums.ItemType.ShipSettings }, this);
 			}
 
 			public AmmunitionObsolete GetAmmunitionObsolete(ItemId<AmmunitionObsolete> id, bool notNull = false)
 			{
 				if (_database._ammunitionObsoleteMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetAmmunitionObsolete(id.Value);
-                    if (serializable != null) return AmmunitionObsolete.Create(serializable, this);
-                }
+                var serializable = _content.GetAmmunitionObsolete(id.Value);
+                if (serializable != null && !serializable.Disabled) return AmmunitionObsolete.Create(serializable, this);
 
 				var value = AmmunitionObsolete.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -295,11 +309,8 @@ namespace GameDatabase
 			public Component GetComponent(ItemId<Component> id, bool notNull = false)
 			{
 				if (_database._componentMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetComponent(id.Value);
-                    if (serializable != null) return Component.Create(serializable, this);
-                }
+                var serializable = _content.GetComponent(id.Value);
+                if (serializable != null && !serializable.Disabled) return Component.Create(serializable, this);
 
 				var value = Component.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -308,11 +319,8 @@ namespace GameDatabase
 			public ComponentMod GetComponentMod(ItemId<ComponentMod> id, bool notNull = false)
 			{
 				if (_database._componentModMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetComponentMod(id.Value);
-                    if (serializable != null) return ComponentMod.Create(serializable, this);
-                }
+                var serializable = _content.GetComponentMod(id.Value);
+                if (serializable != null && !serializable.Disabled) return ComponentMod.Create(serializable, this);
 
 				var value = ComponentMod.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -321,11 +329,8 @@ namespace GameDatabase
 			public ComponentStats GetComponentStats(ItemId<ComponentStats> id, bool notNull = false)
 			{
 				if (_database._componentStatsMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetComponentStats(id.Value);
-                    if (serializable != null) return ComponentStats.Create(serializable, this);
-                }
+                var serializable = _content.GetComponentStats(id.Value);
+                if (serializable != null && !serializable.Disabled) return ComponentStats.Create(serializable, this);
 
 				var value = ComponentStats.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -334,11 +339,8 @@ namespace GameDatabase
 			public Device GetDevice(ItemId<Device> id, bool notNull = false)
 			{
 				if (_database._deviceMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetDevice(id.Value);
-                    if (serializable != null) return Device.Create(serializable, this);
-                }
+                var serializable = _content.GetDevice(id.Value);
+                if (serializable != null && !serializable.Disabled) return Device.Create(serializable, this);
 
 				var value = Device.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -347,11 +349,8 @@ namespace GameDatabase
 			public DroneBay GetDroneBay(ItemId<DroneBay> id, bool notNull = false)
 			{
 				if (_database._droneBayMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetDroneBay(id.Value);
-                    if (serializable != null) return DroneBay.Create(serializable, this);
-                }
+                var serializable = _content.GetDroneBay(id.Value);
+                if (serializable != null && !serializable.Disabled) return DroneBay.Create(serializable, this);
 
 				var value = DroneBay.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -360,11 +359,8 @@ namespace GameDatabase
 			public Faction GetFaction(ItemId<Faction> id, bool notNull = false)
 			{
 				if (_database._factionMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetFaction(id.Value);
-                    if (serializable != null) return Faction.Create(serializable, this);
-                }
+                var serializable = _content.GetFaction(id.Value);
+                if (serializable != null && !serializable.Disabled) return Faction.Create(serializable, this);
 
 				var value = Faction.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -373,11 +369,8 @@ namespace GameDatabase
 			public Satellite GetSatellite(ItemId<Satellite> id, bool notNull = false)
 			{
 				if (_database._satelliteMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetSatellite(id.Value);
-                    if (serializable != null) return Satellite.Create(serializable, this);
-                }
+                var serializable = _content.GetSatellite(id.Value);
+                if (serializable != null && !serializable.Disabled) return Satellite.Create(serializable, this);
 
 				var value = Satellite.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -386,11 +379,8 @@ namespace GameDatabase
 			public SatelliteBuild GetSatelliteBuild(ItemId<SatelliteBuild> id, bool notNull = false)
 			{
 				if (_database._satelliteBuildMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetSatelliteBuild(id.Value);
-                    if (serializable != null) return SatelliteBuild.Create(serializable, this);
-                }
+                var serializable = _content.GetSatelliteBuild(id.Value);
+                if (serializable != null && !serializable.Disabled) return SatelliteBuild.Create(serializable, this);
 
 				var value = SatelliteBuild.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -399,11 +389,8 @@ namespace GameDatabase
 			public Ship GetShip(ItemId<Ship> id, bool notNull = false)
 			{
 				if (_database._shipMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetShip(id.Value);
-                    if (serializable != null) return Ship.Create(serializable, this);
-                }
+                var serializable = _content.GetShip(id.Value);
+                if (serializable != null && !serializable.Disabled) return Ship.Create(serializable, this);
 
 				var value = Ship.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -412,11 +399,8 @@ namespace GameDatabase
 			public ShipBuild GetShipBuild(ItemId<ShipBuild> id, bool notNull = false)
 			{
 				if (_database._shipBuildMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetShipBuild(id.Value);
-                    if (serializable != null) return ShipBuild.Create(serializable, this);
-                }
+                var serializable = _content.GetShipBuild(id.Value);
+                if (serializable != null && !serializable.Disabled) return ShipBuild.Create(serializable, this);
 
 				var value = ShipBuild.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -425,11 +409,8 @@ namespace GameDatabase
 			public Skill GetSkill(ItemId<Skill> id, bool notNull = false)
 			{
 				if (_database._skillMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetSkill(id.Value);
-                    if (serializable != null) return Skill.Create(serializable, this);
-                }
+                var serializable = _content.GetSkill(id.Value);
+                if (serializable != null && !serializable.Disabled) return Skill.Create(serializable, this);
 
 				var value = Skill.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -438,11 +419,8 @@ namespace GameDatabase
 			public Technology GetTechnology(ItemId<Technology> id, bool notNull = false)
 			{
 				if (_database._technologyMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetTechnology(id.Value);
-                    if (serializable != null) return Technology.Create(serializable, this);
-                }
+                var serializable = _content.GetTechnology(id.Value);
+                if (serializable != null && !serializable.Disabled) return Technology.Create(serializable, this);
 
 				var value = Technology.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -451,11 +429,8 @@ namespace GameDatabase
 			public Character GetCharacter(ItemId<Character> id, bool notNull = false)
 			{
 				if (_database._characterMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetCharacter(id.Value);
-                    if (serializable != null) return Character.Create(serializable, this);
-                }
+                var serializable = _content.GetCharacter(id.Value);
+                if (serializable != null && !serializable.Disabled) return Character.Create(serializable, this);
 
 				var value = Character.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -464,11 +439,8 @@ namespace GameDatabase
 			public Fleet GetFleet(ItemId<Fleet> id, bool notNull = false)
 			{
 				if (_database._fleetMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetFleet(id.Value);
-                    if (serializable != null) return Fleet.Create(serializable, this);
-                }
+                var serializable = _content.GetFleet(id.Value);
+                if (serializable != null && !serializable.Disabled) return Fleet.Create(serializable, this);
 
 				var value = Fleet.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -477,11 +449,8 @@ namespace GameDatabase
 			public LootModel GetLoot(ItemId<LootModel> id, bool notNull = false)
 			{
 				if (_database._lootMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetLoot(id.Value);
-                    if (serializable != null) return LootModel.Create(serializable, this);
-                }
+                var serializable = _content.GetLoot(id.Value);
+                if (serializable != null && !serializable.Disabled) return LootModel.Create(serializable, this);
 
 				var value = LootModel.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -490,11 +459,8 @@ namespace GameDatabase
 			public QuestModel GetQuest(ItemId<QuestModel> id, bool notNull = false)
 			{
 				if (_database._questMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetQuest(id.Value);
-                    if (serializable != null) return QuestModel.Create(serializable, this);
-                }
+                var serializable = _content.GetQuest(id.Value);
+                if (serializable != null && !serializable.Disabled) return QuestModel.Create(serializable, this);
 
 				var value = QuestModel.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -503,11 +469,8 @@ namespace GameDatabase
 			public QuestItem GetQuestItem(ItemId<QuestItem> id, bool notNull = false)
 			{
 				if (_database._questItemMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetQuestItem(id.Value);
-                    if (serializable != null) return QuestItem.Create(serializable, this);
-                }
+                var serializable = _content.GetQuestItem(id.Value);
+                if (serializable != null && !serializable.Disabled) return QuestItem.Create(serializable, this);
 
 				var value = QuestItem.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -516,11 +479,8 @@ namespace GameDatabase
 			public Ammunition GetAmmunition(ItemId<Ammunition> id, bool notNull = false)
 			{
 				if (_database._ammunitionMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetAmmunition(id.Value);
-                    if (serializable != null) return Ammunition.Create(serializable, this);
-                }
+                var serializable = _content.GetAmmunition(id.Value);
+                if (serializable != null && !serializable.Disabled) return Ammunition.Create(serializable, this);
 
 				var value = Ammunition.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -529,11 +489,8 @@ namespace GameDatabase
 			public BulletPrefab GetBulletPrefab(ItemId<BulletPrefab> id, bool notNull = false)
 			{
 				if (_database._bulletPrefabMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetBulletPrefab(id.Value);
-                    if (serializable != null) return BulletPrefab.Create(serializable, this);
-                }
+                var serializable = _content.GetBulletPrefab(id.Value);
+                if (serializable != null && !serializable.Disabled) return BulletPrefab.Create(serializable, this);
 
 				var value = BulletPrefab.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -542,11 +499,8 @@ namespace GameDatabase
 			public VisualEffect GetVisualEffect(ItemId<VisualEffect> id, bool notNull = false)
 			{
 				if (_database._visualEffectMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetVisualEffect(id.Value);
-                    if (serializable != null) return VisualEffect.Create(serializable, this);
-                }
+                var serializable = _content.GetVisualEffect(id.Value);
+                if (serializable != null && !serializable.Disabled) return VisualEffect.Create(serializable, this);
 
 				var value = VisualEffect.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -555,11 +509,8 @@ namespace GameDatabase
 			public Weapon GetWeapon(ItemId<Weapon> id, bool notNull = false)
 			{
 				if (_database._weaponMap.TryGetValue(id.Value, out var item)) return item;
-				for (var i = Contents.Count - 1; i >= 0; --i)
-                {
-                    var serializable = Contents[i].GetWeapon(id.Value);
-                    if (serializable != null) return Weapon.Create(serializable, this);
-                }
+                var serializable = _content.GetWeapon(id.Value);
+                if (serializable != null && !serializable.Disabled) return Weapon.Create(serializable, this);
 
 				var value = Weapon.DefaultValue;
 				if (notNull && value == null) throw new DatabaseException("Data not found " + id);
@@ -590,6 +541,7 @@ namespace GameDatabase
 			public void AddVisualEffect(int id, VisualEffect item) { _database._visualEffectMap.Add(id, item); }
 			public void AddWeapon(int id, Weapon item) { _database._weaponMap.Add(id, item); }
 
+            private readonly DatabaseContent _content;
 			private readonly Database _database;
 		}
 	}

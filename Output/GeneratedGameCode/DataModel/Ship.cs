@@ -39,11 +39,11 @@ namespace GameDatabase.DataModel
 			EngineColor = new ColorData(serializable.EngineColor);
 			_engineSize = UnityEngine.Mathf.Clamp(serializable.EngineSize, 0f, 1f);
 			Engines = new ImmutableCollection<Engine>(serializable.Engines?.Select(item => Engine.Create(item, loader)));
-			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, 0f, 100f);
-			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, 0f, 100f);
-			HeatResistance = UnityEngine.Mathf.Clamp(serializable.HeatResistance, 0f, 100f);
+			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, -100f, 100f);
+			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, -100f, 100f);
+			HeatResistance = UnityEngine.Mathf.Clamp(serializable.HeatResistance, -100f, 100f);
 			Regeneration = serializable.Regeneration;
-			BaseWeightModifier = UnityEngine.Mathf.Clamp(serializable.BaseWeightModifier, -0.9f, 100f);
+			BaseWeightModifier = UnityEngine.Mathf.Clamp(serializable.BaseWeightModifier, -0.9f, 1000f);
 			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => loader.GetDevice(new ItemId<Device>(item), true)));
 			Layout = new Layout(serializable.Layout);
 			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, loader)));

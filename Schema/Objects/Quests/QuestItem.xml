@@ -4,5 +4,5 @@
     <member name="Description" type="string" />
     <member name="Icon" type="image" typeid="ArtifactIcon" />
     <member name="Color" type="color" />
-    <member name="Price" type="int" minvalue="0" maxvalue="100000000" />
+    <member name="Price" type="int" minvalue="0" maxvalue="999999999" />
 </data>

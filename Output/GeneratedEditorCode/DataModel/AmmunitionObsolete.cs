@@ -32,10 +32,10 @@ namespace EditorDatabase.DataModel
 			Damage = new NumericValue<float>(serializable.Damage, 0f, 1E+09f);
 			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
 			Velocity = new NumericValue<float>(serializable.Velocity, 0f, 1000f);
-			LifeTime = new NumericValue<float>(serializable.LifeTime, 0f, 1000f);
-			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 1000);
+			LifeTime = new NumericValue<float>(serializable.LifeTime, 0f, 1E+09f);
+			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 999999999);
 			IgnoresShipVelocity = serializable.IgnoresShipVelocity;
-			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1000f);
+			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
 			CoupledAmmunition = database.GetAmmunitionObsoleteId(serializable.CoupledAmmunitionId);
 			Color = Helpers.ColorFromString(serializable.Color);
 			FireSound = serializable.FireSound;
@@ -83,10 +83,10 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> Damage = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Velocity = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> LifeTime = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<int> HitPoints = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<float> LifeTime = new NumericValue<float>(0, 0f, 1E+09f);
+		public NumericValue<int> HitPoints = new NumericValue<int>(0, 0, 999999999);
 		public bool IgnoresShipVelocity;
-		public NumericValue<float> EnergyCost = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> EnergyCost = new NumericValue<float>(0, 0f, 1E+09f);
 		public ItemId<AmmunitionObsolete> CoupledAmmunition = ItemId<AmmunitionObsolete>.Empty;
 		public System.Drawing.Color Color;
 		public string FireSound;

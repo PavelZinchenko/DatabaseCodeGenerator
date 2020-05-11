@@ -40,7 +40,7 @@ namespace GameDatabase.DataModel
 			loader.AddTechnology(serializable.Id, this);
 
 			Type = serializable.Type;
-			Price = UnityEngine.Mathf.Clamp(serializable.Price, 0, 1000);
+			Price = UnityEngine.Mathf.Clamp(serializable.Price, 0, 10000);
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
 			Dependencies = new ImmutableCollection<Technology>(serializable.Dependencies?.Select(item => loader.GetTechnology(new ItemId<Technology>(item), true)));
@@ -74,8 +74,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			Component = loader.GetComponent(new ItemId<Component>(serializable.ItemId));
-			if (Component == Component.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + ".Component cannot be null - " + serializable.ItemId);
+			if (Component == null)
+			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null - " + serializable.ItemId);
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 
             OnDataDeserialized(serializable, loader);
@@ -97,8 +97,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			Ship = loader.GetShip(new ItemId<Ship>(serializable.ItemId));
-			if (Ship == Ship.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + ".Ship cannot be null - " + serializable.ItemId);
+			if (Ship == null)
+			    throw new DatabaseException(this.GetType().Name + ".Ship cannot be null - " + serializable.ItemId);
 
             OnDataDeserialized(serializable, loader);
         }
@@ -118,8 +118,8 @@ namespace GameDatabase.DataModel
             : base(serializable, loader)
         {
 			Satellite = loader.GetSatellite(new ItemId<Satellite>(serializable.ItemId));
-			if (Satellite == Satellite.DefaultValue)
-			    UnityEngine.Debug.LogError(this.GetType().Name + ".Satellite cannot be null - " + serializable.ItemId);
+			if (Satellite == null)
+			    throw new DatabaseException(this.GetType().Name + ".Satellite cannot be null - " + serializable.ItemId);
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
 
             OnDataDeserialized(serializable, loader);

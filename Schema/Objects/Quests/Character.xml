@@ -5,6 +5,6 @@
     <member name="Faction" type="object" typeid="Faction" />
     <member name="Inventory" type="object" typeid="Loot" />
     <member name="Fleet" type="object" typeid="Fleet" />
-    <member name="Relations" type="int" minvalue="0" maxvalue="100" />
+    <member name="Relations" type="int" minvalue="-100" maxvalue="100" />
     <member name="IsUnique" type="bool" />
 </data>

@@ -32,7 +32,7 @@ namespace GameDatabase.DataModel
 			RotationSpeed = UnityEngine.Mathf.Clamp(serializable.RotationSpeed, 0f, 1000f);
 			WeaponClass = serializable.WeaponClass;
 			Image = new SpriteId(serializable.Image, SpriteId.Type.Satellite);
-			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 10f);
+			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 100f);
 
 			OnDataDeserialized(serializable, loader);
 		}
