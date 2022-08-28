@@ -31,6 +31,7 @@ namespace GameDatabase.DataModel
 			QuestType = serializable.QuestType;
 			StartCondition = serializable.StartCondition;
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, 0f, 1000f);
+			Origin = QuestOrigin.Create(serializable.Origin, loader);
 			Requirement = Requirement.Create(serializable.Requirement, loader);
 			Level = UnityEngine.Mathf.Clamp(serializable.Level, 0, 1000);
 			Nodes = new ImmutableCollection<Node>(serializable.Nodes?.Select(item => Node.Create(item, loader)));
@@ -44,6 +45,7 @@ namespace GameDatabase.DataModel
 		public QuestType QuestType { get; private set; }
 		public StartCondition StartCondition { get; private set; }
 		public float Weight { get; private set; }
+		public QuestOrigin Origin { get; private set; }
 		public Requirement Requirement { get; private set; }
 		public int Level { get; private set; }
 		public ImmutableCollection<Node> Nodes { get; private set; }

@@ -7,21 +7,20 @@
 //-------------------------------------------------------------------------------
 
 using System;
-using GameDatabase.Enums;
-using GameDatabase.Model;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
 
-namespace GameDatabase.Serializable
+namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class QuestSerializable : SerializableItem
+	public struct QuestOriginSerializable
 	{
-		public string Name;
-		public QuestType QuestType;
-		public StartCondition StartCondition;
-		public float Weight;
-		public QuestOriginSerializable Origin;
-		public RequirementSerializable Requirement;
-		public int Level;
-		public NodeSerializable[] Nodes;
+		public QuestOriginType Type;
+		public FactionFilterSerializable Factions;
+		public int MinDistance;
+		public int MaxDistance;
+		public int MinRelations;
+		public int MaxRelations;
 	}
 }

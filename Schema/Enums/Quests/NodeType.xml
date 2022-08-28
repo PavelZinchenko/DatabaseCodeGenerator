@@ -31,4 +31,8 @@
     <item name="SetFactionRelations">51</item>
     <item name="ChangeCharacterRelations">55</item>
     <item name="ChangeFactionRelations">56</item>
+
+    <item name="CaptureStarBase">60</item>
+    <item name="LiberateStarBase">61</item>
+    <item name="ChangeFaction">62</item>
 </data>

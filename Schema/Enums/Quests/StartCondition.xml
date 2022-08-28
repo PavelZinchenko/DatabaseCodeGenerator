@@ -7,4 +7,5 @@
     <item name="GameStart">4</item>
     <item name="NewStarExplored">5</item>
     <item name="ArrivedAtStar">6</item>
+    <item name="Daily">7</item>
 </data>

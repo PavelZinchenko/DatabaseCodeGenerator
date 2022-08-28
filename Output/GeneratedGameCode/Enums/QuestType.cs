@@ -14,5 +14,6 @@ namespace GameDatabase.Enums
 		Singleton = 1,
 		Storyline = 2,
 		Temporary = 3,
+		Urgent = 4,
 	}
 }

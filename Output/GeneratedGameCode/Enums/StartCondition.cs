@@ -17,5 +17,6 @@ namespace GameDatabase.Enums
 		GameStart = 4,
 		NewStarExplored = 5,
 		ArrivedAtStar = 6,
+		Daily = 7,
 	}
 }

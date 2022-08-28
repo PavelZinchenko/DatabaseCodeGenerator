@@ -21,10 +21,13 @@ namespace EditorDatabase.Enums
 		QuestActive = 10,
 		CharacterRelations = 15,
 		FactionRelations = 16,
+		StarbaseCaptured = 17,
 		Faction = 20,
 		HaveQuestItem = 25,
 		HaveItem = 26,
 		HaveItemById = 27,
-		ComeBack = 30,
+		ComeToOrigin = 30,
+		TimeSinceQuestStart = 40,
+		TimeSinceLastCompletion = 41,
 	}
 }

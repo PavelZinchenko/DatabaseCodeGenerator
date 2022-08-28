@@ -14,6 +14,7 @@
     
     <item name="CharacterRelations">15</item>
     <item name="FactionRelations">16</item>
+    <item name="StarbaseCaptured">17</item>
     
     <item name="Faction">20</item>
     
@@ -21,5 +22,8 @@
     <item name="HaveItem">26</item>
     <item name="HaveItemById">27</item>
     
-    <item name="ComeBack">30</item>
+    <item name="ComeToOrigin">30</item>
+
+    <item name="TimeSinceQuestStart">40</item>
+    <item name="TimeSinceLastCompletion">41</item>
 </data>

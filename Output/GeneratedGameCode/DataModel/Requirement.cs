@@ -43,6 +43,8 @@ namespace GameDatabase.DataModel
 					return new Requirement_CharacterRelations(serializable, loader);
 				case RequirementType.FactionRelations:
 					return new Requirement_FactionRelations(serializable, loader);
+				case RequirementType.StarbaseCaptured:
+					return new Requirement_StarbaseCaptured(serializable, loader);
 				case RequirementType.Faction:
 					return new Requirement_Faction(serializable, loader);
 				case RequirementType.HaveQuestItem:
@@ -51,8 +53,12 @@ namespace GameDatabase.DataModel
 					return new Requirement_HaveItem(serializable, loader);
 				case RequirementType.HaveItemById:
 					return new Requirement_HaveItemById(serializable, loader);
-				case RequirementType.ComeBack:
-					return new Requirement_ComeBack(serializable, loader);
+				case RequirementType.ComeToOrigin:
+					return new Requirement_ComeToOrigin(serializable, loader);
+				case RequirementType.TimeSinceQuestStart:
+					return new Requirement_TimeSinceQuestStart(serializable, loader);
+				case RequirementType.TimeSinceLastCompletion:
+					return new Requirement_TimeSinceLastCompletion(serializable, loader);
 				default:
                     throw new DatabaseException("Requirement: Invalid content type - " + serializable.Type);
 			}
@@ -85,11 +91,14 @@ namespace GameDatabase.DataModel
 	    T Create(Requirement_QuestActive content);
 	    T Create(Requirement_CharacterRelations content);
 	    T Create(Requirement_FactionRelations content);
+	    T Create(Requirement_StarbaseCaptured content);
 	    T Create(Requirement_Faction content);
 	    T Create(Requirement_HaveQuestItem content);
 	    T Create(Requirement_HaveItem content);
 	    T Create(Requirement_HaveItemById content);
-	    T Create(Requirement_ComeBack content);
+	    T Create(Requirement_ComeToOrigin content);
+	    T Create(Requirement_TimeSinceQuestStart content);
+	    T Create(Requirement_TimeSinceLastCompletion content);
     }
 
     public partial class Requirement_Empty : Requirement
@@ -307,6 +316,23 @@ namespace GameDatabase.DataModel
 		public int MinValue { get; private set; }
 		public int MaxValue { get; private set; }
     }
+    public partial class Requirement_StarbaseCaptured : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database.Loader loader);
+
+  		public Requirement_StarbaseCaptured(RequirementSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
+        {
+
+            OnDataDeserialized(serializable, loader);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+    }
     public partial class Requirement_Faction : Requirement
     {
 		partial void OnDataDeserialized(RequirementSerializable serializable, Database.Loader loader);
@@ -385,11 +411,11 @@ namespace GameDatabase.DataModel
 
 		public LootModel Loot { get; private set; }
     }
-    public partial class Requirement_ComeBack : Requirement
+    public partial class Requirement_ComeToOrigin : Requirement
     {
 		partial void OnDataDeserialized(RequirementSerializable serializable, Database.Loader loader);
 
-  		public Requirement_ComeBack(RequirementSerializable serializable, Database.Loader loader)
+  		public Requirement_ComeToOrigin(RequirementSerializable serializable, Database.Loader loader)
             : base(serializable, loader)
         {
 
@@ -401,6 +427,48 @@ namespace GameDatabase.DataModel
             return factory.Create(this);
         }
 
+    }
+    public partial class Requirement_TimeSinceQuestStart : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database.Loader loader);
+
+  		public Requirement_TimeSinceQuestStart(RequirementSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
+        {
+			Minutes = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 999999);
+			Hours = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 999999);
+
+            OnDataDeserialized(serializable, loader);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int Minutes { get; private set; }
+		public int Hours { get; private set; }
+    }
+    public partial class Requirement_TimeSinceLastCompletion : Requirement
+    {
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database.Loader loader);
+
+  		public Requirement_TimeSinceLastCompletion(RequirementSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
+        {
+			Minutes = UnityEngine.Mathf.Clamp(serializable.MinValue, 0, 999999);
+			Hours = UnityEngine.Mathf.Clamp(serializable.MaxValue, 0, 999999);
+
+            OnDataDeserialized(serializable, loader);
+        }
+
+        public override T Create<T>(IRequirementFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public int Minutes { get; private set; }
+		public int Hours { get; private set; }
     }
 
 }

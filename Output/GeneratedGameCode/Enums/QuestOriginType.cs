@@ -6,22 +6,14 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-using System;
-using GameDatabase.Enums;
-using GameDatabase.Model;
-
-namespace GameDatabase.Serializable
+namespace GameDatabase.Enums
 {
-	[Serializable]
-	public class QuestSerializable : SerializableItem
+	public enum QuestOriginType
 	{
-		public string Name;
-		public QuestType QuestType;
-		public StartCondition StartCondition;
-		public float Weight;
-		public QuestOriginSerializable Origin;
-		public RequirementSerializable Requirement;
-		public int Level;
-		public NodeSerializable[] Nodes;
+		CurrentStar,
+		CurrentFactionBase,
+		RandomFactionBase,
+		HomeStar,
+		RandomStar,
 	}
 }

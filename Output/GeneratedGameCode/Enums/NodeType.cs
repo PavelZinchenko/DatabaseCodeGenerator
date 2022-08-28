@@ -33,5 +33,8 @@ namespace GameDatabase.Enums
 		SetFactionRelations = 51,
 		ChangeCharacterRelations = 55,
 		ChangeFactionRelations = 56,
+		CaptureStarBase = 60,
+		LiberateStarBase = 61,
+		ChangeFaction = 62,
 	}
 }
