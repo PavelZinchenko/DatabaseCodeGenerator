@@ -6,7 +6,7 @@
     <member name="Availability" type="enum" typeid="Availability" />
     <member name="ComponentStatsId" type="object" typeid="ComponentStats" alias="Stats" options="notnull" />
     <member name="Faction" type="object" typeid="Faction" />
-    <member name="Level" type="int" minvalue="0" maxvalue="1000" />
+    <member name="Level" type="int" minvalue="0" />
     <member name="Icon" type="image" typeid="Component" />
     <member name="Color" type="color" />
     <member name="Layout" type="layout" />

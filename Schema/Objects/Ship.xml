@@ -17,7 +17,11 @@
     <member name="KineticResistance" type="float" minvalue="-100" maxvalue="100" />
     <member name="HeatResistance" type="float" minvalue="-100" maxvalue="100" />
     <member name="Regeneration" type="bool" />
-    <member name="BaseWeightModifier" type="float" minvalue="-0.9" maxvalue="1000" />
+
+    <member name="WeightModifier" type="float" minvalue="-0.99" maxvalue="10" />
+    <member name="VelocityModifier" type="float" minvalue="-0.99" maxvalue="10" />
+    <member name="TurnRateModifier" type="float" minvalue="-0.99" maxvalue="10" />
+
     <member name="BuiltinDevices" type="object_list" typeid="Device" />
     
     <member name="Layout" type="layout" />

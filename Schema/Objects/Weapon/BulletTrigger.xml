@@ -2,14 +2,14 @@
 <data name="BulletTrigger" type="struct" switch="EffectType" >
     <member name="Condition" type="enum" typeid="BulletTriggerCondition" />
     <member name="EffectType" type="enum" typeid="BulletEffectType" />
-    <member name="VisualEffect" type="object" typeid="VisualEffect" case="PlaySfx" />
-    <member name="AudioClip" type="audioclip" case="PlaySfx,SpawnBullet" />
+    <member name="VisualEffect" type="object" typeid="VisualEffect" case="PlaySfx,SpawnStaticSfx" />
+    <member name="AudioClip" type="audioclip" case="PlaySfx,SpawnStaticSfx,SpawnBullet" />
     <member name="Ammunition" type="object" typeid="Ammunition" case="SpawnBullet" />
-    <member name="Color" type="color" case="PlaySfx,SpawnBullet" />
-    <member name="ColorMode" type="enum" typeid="ColorMode" case="PlaySfx,SpawnBullet" />
+    <member name="Color" type="color" case="PlaySfx,SpawnStaticSfx,SpawnBullet" />
+    <member name="ColorMode" type="enum" typeid="ColorMode" case="PlaySfx,SpawnStaticSfx,SpawnBullet" />
     <member name="Quantity" type="int" minvalue="0" maxvalue="1000" case="SpawnBullet" />
-    <member name="Size" type="float" minvalue="0" maxvalue="100" case="PlaySfx,SpawnBullet" />
-    <member name="Lifetime" type="float" minvalue="0" maxvalue="1000" case="PlaySfx" />
+    <member name="Size" type="float" minvalue="0" maxvalue="100" case="PlaySfx,SpawnStaticSfx,SpawnBullet" />
+    <member name="Lifetime" type="float" minvalue="0" maxvalue="1000" case="PlaySfx,SpawnStaticSfx" />
     <member name="Cooldown" type="float" minvalue="0" maxvalue="1000" case="SpawnBullet" />
     <member name="RandomFactor" type="float" minvalue="0" maxvalue="1" case="SpawnBullet" />
     <member name="PowerMultiplier" type="float" minvalue="0" maxvalue="1000" case="SpawnBullet" />

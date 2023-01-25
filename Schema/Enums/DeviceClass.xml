@@ -19,4 +19,6 @@
     <item name="ClonningCenter" />
     <item name="TimeMachine" />
     <item name="Jammer" />
+    <item name="DroneCamouflage" />
+    <item name="MissileCamouflage" />
 </data>
