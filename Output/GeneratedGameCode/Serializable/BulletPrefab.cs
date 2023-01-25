@@ -19,6 +19,7 @@ namespace GameDatabase.Serializable
 		public string Image;
 		public float Size;
 		public float Margins;
+		public float Deformation;
 		public string MainColor;
 		public ColorMode MainColorMode;
 		public string SecondColor;

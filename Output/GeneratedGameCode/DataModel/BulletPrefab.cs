@@ -31,6 +31,7 @@ namespace GameDatabase.DataModel
 			Image = new SpriteId(serializable.Image, SpriteId.Type.Ammunition);
 			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0.01f, 100f);
 			Margins = UnityEngine.Mathf.Clamp(serializable.Margins, 0f, 1f);
+			Deformation = UnityEngine.Mathf.Clamp(serializable.Deformation, -100f, 100f);
 			MainColor = new ColorData(serializable.MainColor);
 			MainColorMode = serializable.MainColorMode;
 			SecondColor = new ColorData(serializable.SecondColor);
@@ -45,6 +46,7 @@ namespace GameDatabase.DataModel
 		public SpriteId Image { get; private set; }
 		public float Size { get; private set; }
 		public float Margins { get; private set; }
+		public float Deformation { get; private set; }
 		public ColorData MainColor { get; private set; }
 		public ColorMode MainColorMode { get; private set; }
 		public ColorData SecondColor { get; private set; }

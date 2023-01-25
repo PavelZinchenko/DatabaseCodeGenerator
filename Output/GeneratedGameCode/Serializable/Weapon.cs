@@ -23,6 +23,8 @@ namespace GameDatabase.Serializable
 		public string ShotSound;
 		public string ChargeSound;
 		public string ShotEffectPrefab;
+		public int VisualEffect;
+		public float EffectSize;
 		public string ControlButtonIcon;
 	}
 }

@@ -17,5 +17,6 @@ namespace GameDatabase.Enums
 		EnergyBeam,
 		Spark,
 		Mine,
+		Wave,
 	}
 }

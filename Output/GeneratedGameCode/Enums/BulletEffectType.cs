@@ -14,5 +14,6 @@ namespace GameDatabase.Enums
 		PlaySfx,
 		SpawnBullet,
 		Detonate,
+		SpawnStaticSfx,
 	}
 }

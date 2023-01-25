@@ -29,6 +29,8 @@ namespace GameDatabase.DataModel
 					return new BulletTrigger_SpawnBullet(serializable, loader);
 				case BulletEffectType.Detonate:
 					return new BulletTrigger_Detonate(serializable, loader);
+				case BulletEffectType.SpawnStaticSfx:
+					return new BulletTrigger_SpawnStaticSfx(serializable, loader);
 				default:
                     throw new DatabaseException("BulletTrigger: Invalid content type - " + serializable.EffectType);
 			}
@@ -56,6 +58,7 @@ namespace GameDatabase.DataModel
 	    T Create(BulletTrigger_PlaySfx content);
 	    T Create(BulletTrigger_SpawnBullet content);
 	    T Create(BulletTrigger_Detonate content);
+	    T Create(BulletTrigger_SpawnStaticSfx content);
     }
 
     public partial class BulletTrigger_None : BulletTrigger
@@ -157,6 +160,35 @@ namespace GameDatabase.DataModel
             return factory.Create(this);
         }
 
+    }
+    public partial class BulletTrigger_SpawnStaticSfx : BulletTrigger
+    {
+		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database.Loader loader);
+
+  		public BulletTrigger_SpawnStaticSfx(BulletTriggerSerializable serializable, Database.Loader loader)
+            : base(serializable, loader)
+        {
+			VisualEffect = loader.GetVisualEffect(new ItemId<VisualEffect>(serializable.VisualEffect));
+			AudioClip = new AudioClipId(serializable.AudioClip);
+			Color = new ColorData(serializable.Color);
+			ColorMode = serializable.ColorMode;
+			Size = UnityEngine.Mathf.Clamp(serializable.Size, 0f, 100f);
+			Lifetime = UnityEngine.Mathf.Clamp(serializable.Lifetime, 0f, 1000f);
+
+            OnDataDeserialized(serializable, loader);
+        }
+
+        public override T Create<T>(IBulletTriggerFactory<T> factory)
+        {
+            return factory.Create(this);
+        }
+
+		public VisualEffect VisualEffect { get; private set; }
+		public AudioClipId AudioClip { get; private set; }
+		public ColorData Color { get; private set; }
+		public ColorMode ColorMode { get; private set; }
+		public float Size { get; private set; }
+		public float Lifetime { get; private set; }
     }
 
 }
