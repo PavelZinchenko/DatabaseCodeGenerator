@@ -29,5 +29,7 @@ namespace GameDatabase.Enums
 		ClonningCenter,
 		TimeMachine,
 		Jammer,
+		DroneCamouflage,
+		MissileCamouflage,
 	}
 }

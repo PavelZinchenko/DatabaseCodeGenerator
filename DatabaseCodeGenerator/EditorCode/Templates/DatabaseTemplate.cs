@@ -252,51 +252,50 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write("            return Enumerable.Empty<IItemId>();\r\n        }\r\n\r\n        public obje" +
-                    "ct GetItem(ItemType type, int id)\r\n        {\r\n            switch (type)\r\n       " +
-                    "     {\r\n");
+            this.Write("            return Enumerable.Empty<IItemId>();\r\n        }\r\n\r\n        public IEnu" +
+                    "merable<object> GetAllItems()\r\n        {\r\n");
             
-            #line 60 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 58 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
-				foreach (var item in Schema.Objects)
-				{
+			foreach (var item in Schema.Objects)
+			{
 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\tcase ItemType.");
+            this.Write("            foreach (var item in _content.");
             
-            #line 64 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.typeid));
+            #line 62 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
-            this.Write(": return ");
+            this.Write(")\r\n                yield return ");
             
-            #line 64 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 63 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
-            this.Write("(id);\r\n");
+            this.Write("(item.Id);\r\n");
             
-            #line 65 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 64 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
-		        }
-				foreach (var item in Schema.Configurations)
-			    {
+	        }
+			foreach (var item in Schema.Configurations)
+			{
 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\tcase ItemType.");
+            this.Write("            if (_content.");
             
-            #line 70 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.typeid));
+            #line 69 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
-            this.Write(": return ");
+            this.Write(" != null)\r\n\t\t\t\tyield return ");
             
             #line 70 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
@@ -307,6 +306,98 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line 71 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
+			}
+
+            
+            #line default
+            #line hidden
+            this.Write("        }\r\n\r\n        public IItemId GetItemId(Type type, int id)\r\n        {\r\n");
+            
+            #line 78 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+
+			foreach (var item in Schema.Objects)
+			{
+
+            
+            #line default
+            #line hidden
+            this.Write("            if (type == typeof(");
+            
+            #line 82 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
+            
+            #line default
+            #line hidden
+            this.Write(")) return ");
+            
+            #line 82 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectIdGetterName(item.name)));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\r\n");
+            
+            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+
+		    }
+
+            
+            #line default
+            #line hidden
+            this.Write("            return ItemId<Type>.Empty;\r\n        }\r\n\r\n        public object GetIte" +
+                    "m(ItemType type, int id)\r\n        {\r\n            switch (type)\r\n            {\r\n");
+            
+            #line 93 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+
+				foreach (var item in Schema.Objects)
+				{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tcase ItemType.");
+            
+            #line 97 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.typeid));
+            
+            #line default
+            #line hidden
+            this.Write(": return ");
+            
+            #line 97 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
+            
+            #line default
+            #line hidden
+            this.Write("(id);\r\n");
+            
+            #line 98 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+
+		        }
+				foreach (var item in Schema.Configurations)
+			    {
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tcase ItemType.");
+            
+            #line 103 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.typeid));
+            
+            #line default
+            #line hidden
+            this.Write(": return ");
+            
+            #line 103 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n");
+            
+            #line 104 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+
 			    }
 
             
@@ -314,7 +405,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("                default: return null;\r\n            }\r\n        }\r\n\r\n\r\n");
             
-            #line 79 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 112 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
         {
@@ -324,49 +415,49 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SettingsDataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" ?? (");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SettingsDataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" = new ");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("(_content.");
             
-            #line 83 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(", this));\r\n");
             
-            #line 84 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 117 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -375,7 +466,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 88 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 121 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -385,35 +476,35 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tpublic ItemId<");
             
-            #line 92 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 125 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + "> " + Utils.ObjectIdGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(int id) { return new ItemId<");
             
-            #line 92 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 125 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(">(_content.");
             
-            #line 92 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 125 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(id)); }\r\n        public ");
             
-            #line 93 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 126 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(int id)\r\n        {\r\n            if (!");
             
-            #line 95 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 128 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
@@ -421,28 +512,28 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             this.Write(".TryGetValue(id, out var item))\r\n            {\r\n                var serializable " +
                     "= _content.");
             
-            #line 97 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 130 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(id);\r\n                item = new ");
             
-            #line 98 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 131 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("(serializable, this);\r\n                ");
             
-            #line 99 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 132 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Add(id, item);\r\n            }\r\n            return item;\r\n        }\r\n\r\n");
             
-            #line 104 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 137 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -451,7 +542,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n        public ");
             
-            #line 108 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 141 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -459,7 +550,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             this.Write(" GetImage(string name) { return _content.GetImage(name); }\r\n\r\n        private voi" +
                     "d Clear()\r\n        {\r\n");
             
-            #line 112 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 145 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 			{
@@ -469,14 +560,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 116 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 149 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Clear();\r\n");
             
-            #line 117 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 150 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -485,7 +576,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 121 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 154 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Configurations)
 			{
@@ -495,14 +586,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 125 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 158 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SettingsDataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 126 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 159 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -511,7 +602,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("        }\r\n\r\n");
             
-            #line 131 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 164 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -521,28 +612,28 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tprivate readonly Dictionary<int, ");
             
-            #line 135 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 168 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 135 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 168 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(" = new Dictionary<int, ");
             
-            #line 135 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 168 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(">();\r\n");
             
-            #line 136 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 169 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -551,7 +642,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 140 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 173 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
 		{
@@ -561,14 +652,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\tprivate ");
             
-            #line 144 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 177 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name + " " + SettingsDataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 145 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+            #line 178 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
 
 		}
 
@@ -580,7 +671,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 154 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
+        #line 187 "D:\Projects\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"
  
 	private static string DataMember(string name) 
 	{ 		

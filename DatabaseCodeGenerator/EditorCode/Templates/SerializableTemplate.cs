@@ -492,7 +492,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				if (notnull)
 				{
 					WriteLine("if (" + memberName + ".IsNull)");
-					WriteLine("    throw new DatabaseException(this.GetType().Name + \"." + memberName + " cannot be null\");");
+					WriteLine("    throw new DatabaseException(this.GetType().Name + \": " + memberName + " cannot be null\");");
                 }
             }
             else if (member.type == Constants.TypeObjectList)

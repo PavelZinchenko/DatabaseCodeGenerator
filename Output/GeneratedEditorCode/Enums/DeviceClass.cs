@@ -29,5 +29,7 @@ namespace EditorDatabase.Enums
 		ClonningCenter,
 		TimeMachine,
 		Jammer,
+		DroneCamouflage,
+		MissileCamouflage,
 	}
 }
