@@ -21,6 +21,7 @@ namespace GameDatabase.Serializable
 		public float DamageMultiplier;
 		public float DefenseMultiplier;
 		public float SpeedMultiplier;
+		public int BuildExtraCycles;
 		public bool ImprovedAi;
 		public int Capacity;
 		public ActivationType ActivationType;

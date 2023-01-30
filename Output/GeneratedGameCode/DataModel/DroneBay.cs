@@ -45,6 +45,7 @@ namespace GameDatabase.DataModel
 			DamageMultiplier = UnityEngine.Mathf.Clamp(serializable.DamageMultiplier, 0.01f, 1000f);
 			DefenseMultiplier = UnityEngine.Mathf.Clamp(serializable.DefenseMultiplier, 0.01f, 1000f);
 			SpeedMultiplier = UnityEngine.Mathf.Clamp(serializable.SpeedMultiplier, 0.01f, 1000f);
+			BuildExtraCycles = UnityEngine.Mathf.Clamp(serializable.BuildExtraCycles, 0, 100);
 			ImprovedAi = serializable.ImprovedAi;
 			Capacity = UnityEngine.Mathf.Clamp(serializable.Capacity, 1, 1000);
 			ActivationType = serializable.ActivationType;
@@ -61,6 +62,7 @@ namespace GameDatabase.DataModel
 		public float DamageMultiplier;
 		public float DefenseMultiplier;
 		public float SpeedMultiplier;
+		public int BuildExtraCycles;
 		public bool ImprovedAi;
 		public int Capacity;
 		public ActivationType ActivationType;

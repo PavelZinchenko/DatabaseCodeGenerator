@@ -6,6 +6,7 @@
     <member name="DamageMultiplier" type="float" minvalue="0.01" maxvalue="1000" />
     <member name="DefenseMultiplier" type="float" minvalue="0.01" maxvalue="1000" />
     <member name="SpeedMultiplier" type="float" minvalue="0.01" maxvalue="1000" />
+    <member name="BuildExtraCycles" type="int" minvalue="0" maxvalue="100" />
     <member name="ImprovedAi" type="bool" />
     <member name="Capacity" type="int" minvalue="1" maxvalue="1000" />
     <member name="ActivationType" type="enum" typeid="ActivationType" />
