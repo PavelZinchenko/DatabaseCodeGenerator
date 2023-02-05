@@ -6,16 +6,12 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace GameDatabase.Enums
+namespace EditorDatabase.Enums
 {
-	public enum SizeClass
+	public enum WayToGetShip
 	{
-		Drone = -1,
-		Frigate = 0,
-		Destroyer = 1,
-		Cruiser = 2,
-		Battleship = 3,
-		Titan = 4,
-		Starbase = 5,
+		Default = 0,
+		Purchase = 1,
+		Special = 2,
 	}
 }

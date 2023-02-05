@@ -6,16 +6,16 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace GameDatabase.Enums
+using System;
+using GameDatabase.Enums;
+using GameDatabase.Model;
+
+namespace GameDatabase.Serializable
 {
-	public enum SizeClass
+	[Serializable]
+	public class FrontierSettingsSerializable : SerializableItem
 	{
-		Drone = -1,
-		Frigate = 0,
-		Destroyer = 1,
-		Cruiser = 2,
-		Battleship = 3,
-		Titan = 4,
-		Starbase = 5,
+		public ShipToValueSerializable[] CustomShipLevels;
+		public int[] ExplorationShips;
 	}
 }

@@ -6,16 +6,17 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace GameDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum SizeClass
+	[Serializable]
+	public struct ShipToValueSerializable
 	{
-		Drone = -1,
-		Frigate = 0,
-		Destroyer = 1,
-		Cruiser = 2,
-		Battleship = 3,
-		Titan = 4,
-		Starbase = 5,
+		public int Ship;
+		public int Value;
 	}
 }

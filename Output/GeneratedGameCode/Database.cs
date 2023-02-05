@@ -18,6 +18,7 @@ namespace GameDatabase
 	{
 		DatabaseSettings DatabaseSettings { get; }
 		ExplorationSettings ExplorationSettings { get; }
+		FrontierSettings FrontierSettings { get; }
 		GalaxySettings GalaxySettings { get; }
 		ShipSettings ShipSettings { get; }
 
@@ -76,6 +77,7 @@ namespace GameDatabase
     {
 		public DatabaseSettings DatabaseSettings { get; private set; }
 		public ExplorationSettings ExplorationSettings { get; private set; }
+		public FrontierSettings FrontierSettings { get; private set; }
 		public GalaxySettings GalaxySettings { get; private set; }
 		public ShipSettings ShipSettings { get; private set; }
 
@@ -156,6 +158,7 @@ namespace GameDatabase
 
 			DatabaseSettings = null;
 			ExplorationSettings = null;
+			FrontierSettings = null;
 			GalaxySettings = null;
 			ShipSettings = null;
 
@@ -290,6 +293,8 @@ namespace GameDatabase
 					_database.DatabaseSettings = DatabaseSettings.Create(_content.DatabaseSettings ?? new Serializable.DatabaseSettingsSerializable { ItemType = Enums.ItemType.DatabaseSettings }, this);
 				if (_database.ExplorationSettings == null)
 					_database.ExplorationSettings = ExplorationSettings.Create(_content.ExplorationSettings ?? new Serializable.ExplorationSettingsSerializable { ItemType = Enums.ItemType.ExplorationSettings }, this);
+				if (_database.FrontierSettings == null)
+					_database.FrontierSettings = FrontierSettings.Create(_content.FrontierSettings ?? new Serializable.FrontierSettingsSerializable { ItemType = Enums.ItemType.FrontierSettings }, this);
 				if (_database.GalaxySettings == null)
 					_database.GalaxySettings = GalaxySettings.Create(_content.GalaxySettings ?? new Serializable.GalaxySettingsSerializable { ItemType = Enums.ItemType.GalaxySettings }, this);
 				if (_database.ShipSettings == null)

@@ -6,16 +6,26 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace GameDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum SizeClass
+	[Serializable]
+	public struct ShipFeaturesSerializable
 	{
-		Drone = -1,
-		Frigate = 0,
-		Destroyer = 1,
-		Cruiser = 2,
-		Battleship = 3,
-		Titan = 4,
-		Starbase = 5,
+		public float EnergyResistance;
+		public float KineticResistance;
+		public float HeatResistance;
+		public float WeightBonus;
+		public float VelocityBonus;
+		public float TurnRateBonus;
+		public float ArmorBonus;
+		public float ShieldBonus;
+		public float EnergyBonus;
+		public bool Regeneration;
+		public int[] BuiltinDevices;
 	}
 }

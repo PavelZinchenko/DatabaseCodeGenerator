@@ -6,16 +6,25 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+using System;
+using GameDatabase.Enums;
+using GameDatabase.Model;
+
+namespace GameDatabase.Serializable
 {
-	public enum ShipCategory
+	[Serializable]
+	public struct ShipFeaturesSerializable
 	{
-		Common,
-		Rare,
-		Flagship,
-		Special,
-		Starbase,
-		Hidden,
-		Drone,
+		public float EnergyResistance;
+		public float KineticResistance;
+		public float HeatResistance;
+		public float WeightBonus;
+		public float VelocityBonus;
+		public float TurnRateBonus;
+		public float ArmorBonus;
+		public float ShieldBonus;
+		public float EnergyBonus;
+		public bool Regeneration;
+		public int[] BuiltinDevices;
 	}
 }

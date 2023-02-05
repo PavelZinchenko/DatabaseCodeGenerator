@@ -27,56 +27,40 @@ namespace GameDatabase.DataModel
 			Id = new ItemId<Ship>(serializable.Id);
 			loader.AddShip(serializable.Id, this);
 
-			ShipCategory = serializable.ShipCategory;
+			ShipType = serializable.ShipType;
+			WayToGetShip = serializable.WayToGetShip;
+			SizeClass = serializable.SizeClass;
 			Name = serializable.Name;
 			Faction = loader.GetFaction(new ItemId<Faction>(serializable.Faction));
-			SizeClass = serializable.SizeClass;
 			IconImage = new SpriteId(serializable.IconImage, SpriteId.Type.ShipIcon);
 			IconScale = UnityEngine.Mathf.Clamp(serializable.IconScale, 0.1f, 100f);
 			ModelImage = new SpriteId(serializable.ModelImage, SpriteId.Type.Ship);
 			ModelScale = UnityEngine.Mathf.Clamp(serializable.ModelScale, 0.1f, 100f);
-			_enginePosition = serializable.EnginePosition;
 			EngineColor = new ColorData(serializable.EngineColor);
-			_engineSize = UnityEngine.Mathf.Clamp(serializable.EngineSize, 0f, 1f);
 			Engines = new ImmutableCollection<Engine>(serializable.Engines?.Select(item => Engine.Create(item, loader)));
-			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, -100f, 100f);
-			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, -100f, 100f);
-			HeatResistance = UnityEngine.Mathf.Clamp(serializable.HeatResistance, -100f, 100f);
-			Regeneration = serializable.Regeneration;
-			WeightModifier = UnityEngine.Mathf.Clamp(serializable.WeightModifier, -0.99f, 10f);
-			VelocityModifier = UnityEngine.Mathf.Clamp(serializable.VelocityModifier, -0.99f, 10f);
-			TurnRateModifier = UnityEngine.Mathf.Clamp(serializable.TurnRateModifier, -0.99f, 10f);
-			BuiltinDevices = new ImmutableCollection<Device>(serializable.BuiltinDevices?.Select(item => loader.GetDevice(new ItemId<Device>(item), true)));
 			Layout = new Layout(serializable.Layout);
 			Barrels = new ImmutableCollection<Barrel>(serializable.Barrels?.Select(item => Barrel.Create(item, loader)));
+			Features = ShipFeatures.Create(serializable.Features, loader);
 
 			OnDataDeserialized(serializable, loader);
 		}
 
 		public readonly ItemId<Ship> Id;
 
-		public ShipCategory ShipCategory { get; private set; }
+		public ShipType ShipType { get; private set; }
+		public WayToGetShip WayToGetShip { get; private set; }
+		public SizeClass SizeClass { get; private set; }
 		public string Name { get; private set; }
 		public Faction Faction { get; private set; }
-		public SizeClass SizeClass { get; private set; }
 		public SpriteId IconImage { get; private set; }
 		public float IconScale { get; private set; }
 		public SpriteId ModelImage { get; private set; }
 		public float ModelScale { get; private set; }
-		private readonly UnityEngine.Vector2 _enginePosition;
 		public ColorData EngineColor { get; private set; }
-		private readonly float _engineSize;
 		public ImmutableCollection<Engine> Engines { get; private set; }
-		public float EnergyResistance { get; private set; }
-		public float KineticResistance { get; private set; }
-		public float HeatResistance { get; private set; }
-		public bool Regeneration { get; private set; }
-		public float WeightModifier { get; private set; }
-		public float VelocityModifier { get; private set; }
-		public float TurnRateModifier { get; private set; }
-		public ImmutableCollection<Device> BuiltinDevices { get; private set; }
 		public Layout Layout { get; private set; }
 		public ImmutableCollection<Barrel> Barrels { get; private set; }
+		public ShipFeatures Features { get; private set; }
 
 		public static Ship DefaultValue { get; private set; }
 	}

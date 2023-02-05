@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data type="enum" name="WayToGetShip">
+    <item name="Default">0</item>
+    <item name="Purchase">1</item>
+    <item name="Special">2</item>
+</data>

@@ -186,6 +186,8 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
 		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
+			//if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			if (member.type == Constants.TypeInt)
 			{
 				WriteLine("public int " + member.name + ";");
@@ -276,11 +278,12 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
 		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
-			var obsolete = member.options.Contains(Constants.OptionObsolete);
+			if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			if (obsolete) memberName = PrivateMemberName(memberName);
-			var prefix = obsolete ? "private readonly " : "public ";
-			var suffix = obsolete ? ";" : " { get; private set; }";
+
+			var prefix = "public ";
+			var suffix = " { get; private set; }";
 
 			WriteDataClassMember(memberName, prefix, suffix, member, schema);
         }
@@ -393,8 +396,9 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
         private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
         {
+			if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			if (member.options.Contains(Constants.OptionObsolete)) memberName = PrivateMemberName(memberName);
 			WriteDeserializationCode(memberName, member, schema);
         }
 

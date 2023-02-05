@@ -27,4 +27,5 @@
     <item name="GalaxySettings">101</item>
     <item name="DatabaseSettings">102</item>
     <item name="ExplorationSettings">103</item>
+    <item name="FrontierSettings">104</item>
 </data>

@@ -6,16 +6,17 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace GameDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum ShipCategory
+	[Serializable]
+	public class FrontierSettingsSerializable : SerializableItem
 	{
-		Common,
-		Rare,
-		Flagship,
-		Special,
-		Starbase,
-		Hidden,
-		Drone,
+		public ShipToValueSerializable[] CustomShipLevels;
+		public int[] ExplorationShips;
 	}
 }

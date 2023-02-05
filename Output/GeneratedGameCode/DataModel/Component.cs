@@ -39,12 +39,10 @@ namespace GameDatabase.DataModel
 			Icon = new SpriteId(serializable.Icon, SpriteId.Type.Component);
 			Color = new ColorData(serializable.Color);
 			Layout = new Layout(serializable.Layout);
-			_cellType = serializable.CellType;
 			Device = loader.GetDevice(new ItemId<Device>(serializable.DeviceId));
 			Weapon = loader.GetWeapon(new ItemId<Weapon>(serializable.WeaponId));
 			Ammunition = loader.GetAmmunition(new ItemId<Ammunition>(serializable.AmmunitionId));
 			AmmunitionObsolete = loader.GetAmmunitionObsolete(new ItemId<AmmunitionObsolete>(serializable.AmmunitionId));
-			_weaponSlotType = serializable.WeaponSlotType;
 			DroneBay = loader.GetDroneBay(new ItemId<DroneBay>(serializable.DroneBayId));
 			Drone = loader.GetShipBuild(new ItemId<ShipBuild>(serializable.DroneId));
 			Restrictions = ComponentRestrictions.Create(serializable.Restrictions, loader);
@@ -65,12 +63,10 @@ namespace GameDatabase.DataModel
 		public SpriteId Icon { get; private set; }
 		public ColorData Color { get; private set; }
 		public Layout Layout { get; private set; }
-		private readonly string _cellType;
 		public Device Device { get; private set; }
 		public Weapon Weapon { get; private set; }
 		public Ammunition Ammunition { get; private set; }
 		public AmmunitionObsolete AmmunitionObsolete { get; private set; }
-		private readonly string _weaponSlotType;
 		public DroneBay DroneBay { get; private set; }
 		public ShipBuild Drone { get; private set; }
 		public ComponentRestrictions Restrictions { get; private set; }

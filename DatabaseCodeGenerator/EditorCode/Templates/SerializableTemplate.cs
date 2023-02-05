@@ -282,11 +282,11 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
-			//var obsolete = member.options.Contains(Constants.OptionObsolete);
+			if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			//if (obsolete) memberName = PrivateMemberName(memberName);
-			var prefix = "public "; //obsolete ? "private readonly " : "public ";
-			var suffix = ";"; //obsolete ? ";" : " { get; private set; }";
+			var prefix = "public ";
+			var suffix = ";";
 
 			if (member.type == Constants.TypeInt)
 			{
@@ -418,8 +418,9 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 		private void WriteSerializationCode(XmlClassMember member, DatabaseSchema schema)
         {
+			if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			//if (member.options.Contains(Constants.OptionObsolete)) memberName = PrivateMemberName(memberName);
 			var notnull = member.options.Contains(Constants.OptionNotNull);
 
             if (member.type == Constants.TypeObject)
@@ -481,8 +482,9 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
         private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
         {
+			if (member.options.Contains(Constants.OptionObsolete)) return;
+
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			//if (member.options.Contains(Constants.OptionObsolete)) memberName = PrivateMemberName(memberName);
 			var notnull = member.options.Contains(Constants.OptionNotNull);
 
             if (member.type == Constants.TypeObject)

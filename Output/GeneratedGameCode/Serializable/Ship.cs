@@ -15,27 +15,28 @@ namespace GameDatabase.Serializable
 	[Serializable]
 	public class ShipSerializable : SerializableItem
 	{
-		public ShipCategory ShipCategory;
+		public ShipType ShipType;
+		public WayToGetShip WayToGetShip;
+		public SizeClass SizeClass;
 		public string Name;
 		public int Faction;
-		public SizeClass SizeClass;
 		public string IconImage;
 		public float IconScale;
 		public string ModelImage;
 		public float ModelScale;
-		public UnityEngine.Vector2 EnginePosition;
 		public string EngineColor;
-		public float EngineSize;
 		public EngineSerializable[] Engines;
+		public string Layout;
+		public BarrelSerializable[] Barrels;
+		public ShipFeaturesSerializable Features;
+		public UnityEngine.Vector2 EnginePosition;
+		public float EngineSize;
+		public int ShipCategory;
 		public float EnergyResistance;
 		public float KineticResistance;
 		public float HeatResistance;
 		public bool Regeneration;
-		public float WeightModifier;
-		public float VelocityModifier;
-		public float TurnRateModifier;
 		public int[] BuiltinDevices;
-		public string Layout;
-		public BarrelSerializable[] Barrels;
+		public float BaseWeightModifier;
 	}
 }
