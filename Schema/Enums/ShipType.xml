@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data type="enum" name="ShipType">
-    <item name="Normal" />
-    <item name="Rare" />
-    <item name="Hidden" />
+    <item name="Common" />
+    <item name="Drone" />
+    <item name="Station" />
     <item name="Special" />
-    <item name="Unique" />
 </data>

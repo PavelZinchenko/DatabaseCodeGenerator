@@ -40,5 +40,7 @@
     <member name="WeaponRangeModifier" type="float" minvalue="-100" maxvalue="100" />
     <member name="WeaponEnergyCostModifier" type="float" minvalue="-100" maxvalue="100" />
 
-    <member name="AlterWeaponPlatform" type="enum" typeid="PlatformType" />
+    <member name="AlterWeaponPlatform" type="int" options="obsolete"/>
+    <member name="AutoAimingArc" type="float" minvalue="0" maxvalue="360"/>
+    <member name="TurretTurnSpeed" type="float" minvalue="-1000" maxvalue="1000" />
 </data>

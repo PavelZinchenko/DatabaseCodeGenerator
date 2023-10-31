@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data name="Ship" type="object" typeid="Ship" >
     <member name="ShipType" type="enum" typeid="ShipType" />
-    <member name="WayToGetShip" type="enum" typeid="WayToGetShip" />
+    <member name="ShipRarity" type="enum" typeid="ShipRarity" />
     <member name="SizeClass" type="enum" typeid="SizeClass" />
     <member name="Name" type="string" />
     <member name="Faction" type="object" typeid="Faction" />

@@ -8,4 +8,7 @@
     <item name="SlowDown" />
     <item name="CaptureDrones" />
     <item name="Repair" />
+    <item name="RestoreLifetime" />
+    <item name="Devour" />
+    <item name="Teleport" />
 </data>
