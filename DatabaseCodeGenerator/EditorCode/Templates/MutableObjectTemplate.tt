@@ -66,7 +66,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PushIndent("\t\t\t");
 
 			foreach (var item in baseMembers)
-				WriteDeserializationCode(item, Schema);
+				WriteDeserializationCode(item, Schema, ObjectType == ObjectType.Class);
 
 			PopIndent();
 #>
@@ -199,7 +199,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			PushIndent("\t\t\t");
 
 			foreach (var item in content.Value)
-				WriteDeserializationCode(item, Schema);
+				WriteDeserializationCode(item, Schema, ObjectType == ObjectType.Class);
 
 			PopIndent();
 #>

@@ -296,7 +296,7 @@
             }
         }
 
-        private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
+        private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema, bool isClass)
         {
 			if (member.options.Contains(Constants.OptionObsolete)) return;
 
@@ -310,7 +310,7 @@
 				if (notnull)
 				{
 					WriteLine("if (" + memberName + ".IsNull)");
-					WriteLine("    throw new DatabaseException(this.GetType().Name + \": " + memberName + " cannot be null\");");
+					WriteLine("    throw new DatabaseException(this.GetType().Name + \"" + (isClass ? " (\" + serializable.Id + \"): " : ": ") + memberName + " cannot be null\");");
                 }
             }
             else if (member.type == Constants.TypeObjectList)
