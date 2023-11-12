@@ -23,9 +23,12 @@
     <item name="Ammunition">25</item>
     <item name="VisualEffect">26</item>
     <item name="BulletPrefab">27</item>
+
     <item name="ShipSettings">100</item>
     <item name="GalaxySettings">101</item>
     <item name="DatabaseSettings">102</item>
     <item name="ExplorationSettings">103</item>
     <item name="FrontierSettings">104</item>
+    <item name="ShipModSettings">105</item>
+    <item name="SpecialEventSettings">106</item>
 </data>

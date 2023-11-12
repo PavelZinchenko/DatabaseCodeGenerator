@@ -19,4 +19,7 @@
     <item name="EmptyShip">31</item>
 
     <item name="Component">35</item>
+
+    <item name="Blueprint">40</item>
+    <item name="ResearchPoints">41</item>
 </data>

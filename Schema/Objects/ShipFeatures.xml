@@ -4,7 +4,8 @@
     <member name="KineticResistance" type="float" minvalue="-100" maxvalue="100" />
     <member name="HeatResistance" type="float" minvalue="-100" maxvalue="100" />
 
-    <member name="WeightBonus" type="float" minvalue="-1" maxvalue="10" />
+    <member name="ShipWeightBonus" type="float" minvalue="-1" maxvalue="10" />
+    <member name="EquipmentWeightBonus" type="float" minvalue="-1" maxvalue="10" />
     <member name="VelocityBonus" type="float" minvalue="-1" maxvalue="10" />
     <member name="TurnRateBonus" type="float" minvalue="-1" maxvalue="10" />
     <member name="ArmorBonus" type="float" minvalue="-1" maxvalue="10" />
