@@ -44,6 +44,8 @@ namespace DatabaseCodeGenerator.Schema
         [XmlAttribute]
         public string maxvalue = string.Empty;
         [XmlAttribute]
+        public string @default = string.Empty;
+        [XmlAttribute]
         public string alias = string.Empty;
         [XmlAttribute("case")]
         public string caseValue = string.Empty;
