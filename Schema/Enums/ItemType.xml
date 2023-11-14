@@ -31,4 +31,5 @@
     <item name="FrontierSettings">104</item>
     <item name="ShipModSettings">105</item>
     <item name="SpecialEventSettings">106</item>
+    <item name="SkillSettings">107</item>
 </data>
