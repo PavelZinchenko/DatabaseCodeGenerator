@@ -89,14 +89,14 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
             _localizations.Add(name, data);
         }
 
-        public void LoadImage(string name, byte[] data)
+        public void LoadImage(string name, <#= Utils.ImageType #> image)
         {
-            _images.Add(name, new <#= Utils.ImageType #>(data));
+            _images.Add(name, image);
         }
 
-        public void LoadAudioClip(string name, byte[] data)
+        public void LoadAudioClip(string name, <#= Utils.AudioClipType #> audioClip)
         {
-            _audioClips.Add(name, new <#= Utils.AudioClipType #>(data));
+            _audioClips.Add(name, audioClip);
         }
 
 <#
@@ -137,14 +137,14 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		private readonly Dictionary<int, <#= Utils.SerializableClassName(item.name) #>> <#= DataMember(item.name) #> = new Dictionary<int, <#= Utils.SerializableClassName(item.name) #>>();
+		private readonly Dictionary<int, <#= Utils.SerializableClassName(item.name) #>> <#= DataMember(item.name) #> = new();
 <#
         }
 #>
 
-        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new Dictionary<string, <#= Utils.ImageType #>>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new Dictionary<string, <#= Utils.AudioClipType #>>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, string> _localizations = new(StringComparer.OrdinalIgnoreCase);
 	}
 }
 

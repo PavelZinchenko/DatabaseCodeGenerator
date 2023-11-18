@@ -73,8 +73,8 @@ namespace <#= Utils.RootNamespace #>
         }
 #>
 
-        public <#= Utils.ImageType #> GetImage(string name) { return _images.TryGetValue(name, out var image) ? image : <#= Utils.ImageType #>.Empty; }
-        public <#= Utils.AudioClipType #> GetAudioClip(string name) { return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : <#= Utils.AudioClipType #>.Empty; }
+        public <#= Utils.ImageType #> GetImage(string name) { return _images.TryGetValue(name, out var image) ? image : <#= Utils.EmptyImage #>; }
+        public <#= Utils.AudioClipType #> GetAudioClip(string name) { return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : <#= Utils.EmptyAudioClip #>; }
         public string GetLocalization(string language) { return _localizations.TryGetValue(language, out var data) ? data : null; }
 
         private void Clear()
@@ -106,14 +106,14 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Objects)
         {
 #>
-		private readonly Dictionary<int, <#= Utils.DataClassName(item) #>> <#= DataMember(item.name) #> = new Dictionary<int, <#= Utils.DataClassName(item) #>>();
+		private readonly Dictionary<int, <#= Utils.DataClassName(item) #>> <#= DataMember(item.name) #> = new();
 <#
         }
 #>
 	
-        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new Dictionary<string, <#= Utils.ImageType #>>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new Dictionary<string, <#= Utils.AudioClipType #>>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, string> _localizations = new(StringComparer.OrdinalIgnoreCase);
 
 		public class Loader
         {
