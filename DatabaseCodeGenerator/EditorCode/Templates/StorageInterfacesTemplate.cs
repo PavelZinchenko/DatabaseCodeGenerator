@@ -15,7 +15,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class StorageInterfacesTemplate : StorageInterfacesTemplateBase
     {
@@ -26,77 +26,77 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
         public virtual string TransformText()
         {
             
-            #line 1 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 2 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 3 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    This code was automatically generated.                                     "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 4 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    Changes to this file may cause incorrect behavior and will be lost if      "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 5 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    the code is regenerated.                                                   "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 6 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 7 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nusing ");
             
-            #line 4 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 4 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 6 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 6 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default

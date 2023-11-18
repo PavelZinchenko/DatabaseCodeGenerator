@@ -15,8 +15,8 @@ namespace DatabaseCodeGenerator.GameCode
 
         public const string ImageType = "IImageData";
         public const string AudioClipType = "IAudioClipData";
-        public const string EmptyImage = "EmptyImageData.Instance";
-        public const string EmptyAudioClip = "EmptyAudioClipData.Instance";
+        public const string EmptyImage = "ImageData.Empty";
+        public const string EmptyAudioClip = "AudioClipData.Empty";
 
         public const string RootNamespace = "GameDatabase";
         public const string TypesNamespace = "Model";

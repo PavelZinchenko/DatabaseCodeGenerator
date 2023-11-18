@@ -16,7 +16,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class DatabaseTemplate : DatabaseTemplateBase
     {
@@ -27,112 +27,112 @@ namespace DatabaseCodeGenerator.GameCode.Templates
         public virtual string TransformText()
         {
             
-            #line 1 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 2 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 3 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    This code was automatically generated.                                     "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 4 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    Changes to this file may cause incorrect behavior and will be lost if      "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 5 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    the code is regenerated.                                                   "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 6 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 7 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing ");
             
-            #line 7 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 7 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ClassesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 8 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 8 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 9 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 9 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 9 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 9 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 11 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic partial interface I");
             
-            #line 13 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 15 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 15 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
         {
@@ -142,14 +142,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t");
             
-            #line 19 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + item.name));
             
             #line default
             #line hidden
             this.Write(" { get; }\r\n");
             
-            #line 20 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 20 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -158,7 +158,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 24 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 24 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -168,21 +168,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tIEnumerable<");
             
-            #line 28 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 28 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 28 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 28 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(" { get; }\r\n");
             
-            #line 29 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 29 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -191,7 +191,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 33 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 33 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -201,21 +201,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t");
             
-            #line 37 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 37 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(ItemId<");
             
-            #line 37 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 37 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> id);\r\n");
             
-            #line 38 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 38 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -224,14 +224,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n        ");
             
-            #line 42 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 42 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
             this.Write(" GetImage(string name);\r\n        ");
             
-            #line 43 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 43 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -239,21 +239,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" GetAudioClip(string name);\r\n        string GetLocalization(string language);\r\n\t}" +
                     "\r\n\r\n    public partial class ");
             
-            #line 47 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 47 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write(" : I");
             
-            #line 47 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 47 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 49 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 49 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Configurations)
         {
@@ -263,14 +263,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 53 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 53 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + item.name));
             
             #line default
             #line hidden
             this.Write(" { get; private set; }\r\n");
             
-            #line 54 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 54 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -279,7 +279,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 58 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 58 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -289,28 +289,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic IEnumerable<");
             
-            #line 62 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 62 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 62 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 62 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Values;\r\n");
             
-            #line 63 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 63 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -319,7 +319,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 67 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 67 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -329,35 +329,35 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 71 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(ItemId<");
             
-            #line 71 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> id) { return (");
             
-            #line 71 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".TryGetValue(id.Value, out var item)) ? item : ");
             
-            #line 71 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 71 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".DefaultValue; }\r\n");
             
-            #line 72 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 72 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -366,7 +366,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n        public ");
             
-            #line 76 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 76 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
@@ -374,14 +374,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" GetImage(string name) { return _images.TryGetValue(name, out var image) ? image " +
                     ": ");
             
-            #line 76 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            #line 76 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EmptyImage));
             
             #line default
             #line hidden
-            this.Write(".Empty; }\r\n        public ");
+            this.Write("; }\r\n        public ");
             
-            #line 77 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 77 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
@@ -389,16 +389,16 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(" GetAudioClip(string name) { return _audioClips.TryGetValue(name, out var audioCl" +
                     "ip) ? audioClip : ");
             
-            #line 77 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            #line 77 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EmptyAudioClip));
             
             #line default
             #line hidden
-            this.Write(".Empty; }\r\n        public string GetLocalization(string language) { return _local" +
-                    "izations.TryGetValue(language, out var data) ? data : null; }\r\n\r\n        private" +
-                    " void Clear()\r\n        {\r\n");
+            this.Write("; }\r\n        public string GetLocalization(string language) { return _localizatio" +
+                    "ns.TryGetValue(language, out var data) ? data : null; }\r\n\r\n        private void " +
+                    "Clear()\r\n        {\r\n");
             
-            #line 82 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 82 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 			{
@@ -408,14 +408,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 86 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 86 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Clear();\r\n");
             
-            #line 87 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 87 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -424,7 +424,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n");
             
-            #line 91 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Configurations)
 			{
@@ -434,14 +434,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 95 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 95 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 96 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 96 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			}
 
@@ -451,7 +451,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("\r\n\t\t\t_images.Clear();\r\n\t\t\t_audioClips.Clear();\r\n\t\t\t_localizations.Clear();\r\n     " +
                     "   }\r\n\r\n");
             
-            #line 105 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 105 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 		foreach (var item in Schema.Objects)
         {
@@ -461,28 +461,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\tprivate readonly Dictionary<int, ");
             
-            #line 109 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 109 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 109 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 109 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
-            this.Write(" = new Dictionary<int, ");
+            this.Write(" = new();\r\n");
             
-            #line 109 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
-            
-            #line default
-            #line hidden
-            this.Write(">();\r\n");
-            
-            #line 110 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 110 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
         }
 
@@ -491,38 +484,24 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\r\n        private readonly Dictionary<string, ");
             
-            #line 114 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 114 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
             
             #line default
             #line hidden
-            this.Write("> _images = new Dictionary<string, ");
+            this.Write("> _images = new(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dict" +
+                    "ionary<string, ");
             
-            #line 114 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
-            
-            #line default
-            #line hidden
-            this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
-                    " ");
-            
-            #line 115 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 115 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
             
             #line default
             #line hidden
-            this.Write("> _audioClips = new Dictionary<string, ");
+            this.Write("> _audioClips = new(StringComparer.OrdinalIgnoreCase);\r\n        private readonly " +
+                    "Dictionary<string, string> _localizations = new(StringComparer.OrdinalIgnoreCase" +
+                    ");\r\n\r\n\t\tpublic class Loader\r\n        {\r\n\t\t    public static void Load(");
             
-            #line 115 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
-            
-            #line default
-            #line hidden
-            this.Write(">(StringComparer.OrdinalIgnoreCase);\r\n        private readonly Dictionary<string," +
-                    " string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalI" +
-                    "gnoreCase);\r\n\r\n\t\tpublic class Loader\r\n        {\r\n\t\t    public static void Load(");
-            
-            #line 120 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 120 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
@@ -531,7 +510,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "atabase, content);\r\n\t\t\t\tloader.Load();\r\n            }\r\n\r\n            private Loa" +
                     "der(");
             
-            #line 126 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 126 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
@@ -540,7 +519,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
                     "atabase;\r\n                _content = content;\r\n            }\r\n\r\n\t\t\tpublic void L" +
                     "oad()\r\n            {\r\n");
             
-            #line 134 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 134 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				foreach (var item in Schema.Objects)
 				{
@@ -550,28 +529,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\tforeach (var item in _content.");
             
-            #line 138 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 138 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectListPropertyName(item.name)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\tif (!item.Disabled && !_database.");
             
-            #line 139 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 139 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".ContainsKey(item.Id))\r\n\t\t\t\t\t\t");
             
-            #line 140 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 140 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".Create(item, this);\r\n");
             
-            #line 141 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 141 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				}
 
@@ -593,7 +572,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 
 ");
             
-            #line 157 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 157 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				foreach (var item in Schema.Configurations)
 				{
@@ -603,42 +582,42 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t\tif (_database.");
             
-            #line 161 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 161 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\t\t\t_database.");
             
-            #line 162 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 162 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 162 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.FactoryMethodName));
             
             #line default
             #line hidden
             this.Write("(_content.");
             
-            #line 162 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
             
             #line default
             #line hidden
             this.Write(" ?? new ");
             
-            #line 162 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace + "." +
 						Utils.SerializableClassName(item.name)));
             
@@ -646,14 +625,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write(" { ItemType = ");
             
-            #line 163 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 163 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace + "." + Constants.ItemTypeEnum + "." + item.name));
             
             #line default
             #line hidden
             this.Write(" }, this);\r\n");
             
-            #line 164 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 164 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 				}
 
@@ -662,7 +641,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\t}\r\n\r\n");
             
-            #line 169 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 169 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 	        {
@@ -672,21 +651,21 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\tpublic ");
             
-            #line 173 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 173 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item) + " " + Utils.ObjectGetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(ItemId<");
             
-            #line 173 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 173 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write("> id, bool notNull = false)\r\n\t\t\t{\r\n\t\t\t\tif (_database.");
             
-            #line 175 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 175 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
@@ -694,7 +673,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(".TryGetValue(id.Value, out var item)) return item;\r\n                var serializa" +
                     "ble = _content.");
             
-            #line 176 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 176 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectGetterName(item.name)));
             
             #line default
@@ -702,14 +681,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write("(id.Value);\r\n                if (serializable != null && !serializable.Disabled) " +
                     "return ");
             
-            #line 177 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 177 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(".Create(serializable, this);\r\n\r\n\t\t\t\tvar value = ");
             
-            #line 179 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 179 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
@@ -717,7 +696,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             this.Write(".DefaultValue;\r\n\t\t\t\tif (notNull && value == null) throw new DatabaseException(\"Da" +
                     "ta not found \" + id);\r\n                return value;\r\n\t\t\t}\r\n");
             
-            #line 183 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 183 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 	        }
 
@@ -726,7 +705,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n\r\n");
             
-            #line 188 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 188 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 			foreach (var item in Schema.Objects)
 	        {
@@ -736,28 +715,28 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\t\t\tpublic void ");
             
-            #line 192 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 192 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ObjectSetterName(item.name)));
             
             #line default
             #line hidden
             this.Write("(int id, ");
             
-            #line 192 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 192 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(item)));
             
             #line default
             #line hidden
             this.Write(" item) { _database.");
             
-            #line 192 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 192 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DataMember(item.name)));
             
             #line default
             #line hidden
             this.Write(".Add(id, item); }\r\n");
             
-            #line 193 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 193 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
 
 	        }
 
@@ -766,7 +745,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             #line hidden
             this.Write("\r\n            private readonly DatabaseContent _content;\r\n\t\t\tprivate readonly ");
             
-            #line 198 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+            #line 198 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseClassName));
             
             #line default
@@ -775,7 +754,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 203 "D:\Projects\EventHorizon\Starship\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
+        #line 203 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\DatabaseTemplate.tt"
  
 	private static string DataMember(string name) 
 	{ 		
