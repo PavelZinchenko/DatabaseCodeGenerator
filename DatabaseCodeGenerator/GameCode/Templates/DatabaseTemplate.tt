@@ -46,6 +46,9 @@ namespace <#= Utils.RootNamespace #>
 
     public partial class <#= Utils.DatabaseClassName #> : I<#= Utils.DatabaseClassName #>
     {
+		public const int VersionMajor = <#= Schema.VersionMajor #>;
+		public const int VersionMinor = <#= Schema.VersionMinor #>;
+
 <#
 		foreach (var item in Schema.Configurations)
         {

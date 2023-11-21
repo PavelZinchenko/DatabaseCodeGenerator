@@ -14,6 +14,9 @@ namespace <#= Utils.RootNamespace #>
 {
     public partial class <#= Utils.DatabaseClassName #>
     {
+		public const int VersionMajor = <#= Schema.VersionMajor #>;
+		public const int VersionMinor = <#= Schema.VersionMinor #>;
+
 		public <#= Utils.DatabaseClassName #>(IDataStorage storage)
 		{
             _serializer = new JsonSerializer();

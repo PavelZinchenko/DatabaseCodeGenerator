@@ -21,7 +21,8 @@ namespace DatabaseCodeGenerator.Schema
             return schema;
         }
 
-        public int Version { get; private set; } = 1;
+        public int VersionMajor => 1;
+        public int VersionMinor => 1;
 
         public IEnumerable<XmlEnumItem> Enums => _enums.Values;
         public IEnumerable<XmlClassItem> Objects => _classes.Values;
@@ -146,8 +147,6 @@ namespace DatabaseCodeGenerator.Schema
                     throw new InvalidSchemaException("Member name cannot be empty - " + data.name);
                 if (string.IsNullOrEmpty(item.type))
                     throw new InvalidSchemaException("Member type cannot be empty - " + data.name + "." + item.name);
-                if (!string.IsNullOrEmpty(item.version) && int.TryParse(item.version, out var version) && version >= Version)
-                    Version = version + 1;
 
                 if (string.IsNullOrEmpty(item.caseValue))
                 {

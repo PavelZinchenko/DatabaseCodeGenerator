@@ -39,8 +39,6 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 #>
         }
 
-        public const int SchemaVersion = <#= Schema.Version #>;
-
         public void LoadJson(string name, string content)
         {
             var item = _serializer.FromJson<SerializableItem>(content);
