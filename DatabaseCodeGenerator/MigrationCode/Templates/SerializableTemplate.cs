@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace DatabaseCodeGenerator.EditorCode.Templates
+namespace DatabaseCodeGenerator.MigrationCode.Templates
 {
     using Schema;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class SerializableTemplate : SerializableTemplateBase
     {
@@ -28,99 +28,113 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
         public virtual string TransformText()
         {
             
-            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    This code was automatically generated.                                     "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    Changes to this file may cause incorrect behavior and will be lost if      "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    the code is regenerated.                                                   "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
-            this.Write("\r\nusing System;\r\nusing System.ComponentModel;\r\nusing ");
+            this.Write("\r\nusing System;\r\nusing ");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ContextNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 9 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 9 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[Serializable]\r\n");
             
-            #line 14 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
 	if (ObjectType == ObjectType.Struct)
     {
@@ -130,14 +144,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\tpublic struct ");
             
-            #line 18 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 17 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
-            this.Write("\r\n");
+            this.Write("\r\n\t{\r\n");
             
-            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
     } else {
 
@@ -146,24 +160,30 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\tpublic class ");
             
-            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
-            this.Write(" : SerializableItem\r\n");
+            this.Write(" : SerializableItem\r\n\t{\r\n\t\tpublic ");
             
-            #line 23 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
-
-    }
-
+            #line 24 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
-            this.Write("\t{\r\n");
+            this.Write("()\r\n\t\t{\r\n\t\t\tItemType = ");
             
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
+            #line 26 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Constants.ItemTypeEnum + "." + ObjectData.typeid));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\t\t}\r\n\r\n");
+            
+            #line 29 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
+    }
 		PushIndent("\t\t");
 
         var members = new HashSet<string>();
@@ -182,7 +202,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\Serialization.tt"
+        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\Serialization.tt"
 
 		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
@@ -218,37 +238,31 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 			}
 			else if (member.type == Constants.TypeString)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + defaultValue + ";");
 			}
 			else if (member.type == Constants.TypeColor)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + defaultValue + ";");
 			}
 			else if (member.type == Constants.TypeImage)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeAudioClip)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + ";");
 			}
 			else if (member.type == Constants.TypePrefab)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeLayout)
 			{
-				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine("public Vector2 " + member.name + ";");
+				WriteLine("public UnityEngine.Vector2 " + member.name + ";");
 			}
 			else if (member.type == Constants.TypeEnum)
 			{
@@ -298,267 +312,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 			}
 		}
 
-		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)
-		{
-			if (member.options.Contains(Constants.OptionObsolete)) return;
-
-			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			var prefix = "public ";
-			var suffix = ";";
-
-			if (member.type == Constants.TypeInt)
-			{
-	            member.MinMaxInt(out var minvalue, out var maxvalue);
-		        WriteLine(prefix + "NumericValue<int> " + memberName + " = new NumericValue<int>(0, " + minvalue + ", " + maxvalue + ");");
-			}
-			else if (member.type == Constants.TypeFloat)
-			{
-	            member.MinMaxFloat(out var minvalue, out var maxvalue);
-		        WriteLine(prefix + "NumericValue<float> " + memberName + " = new NumericValue<float>(0, " + minvalue + "f, " + maxvalue + "f);");
-			}
-			else if (member.type == Constants.TypeBool)
-			{
-				WriteLine(prefix + "bool " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeString)
-			{
-				WriteLine(prefix + "string " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeColor)
-			{
-				WriteLine(prefix + "System.Drawing.Color " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeImage)
-			{
-				WriteLine(prefix + "string " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeAudioClip)
-			{
-				WriteLine(prefix + "string " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypePrefab)
-			{
-				WriteLine(prefix + "string " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeLayout)
-			{
-				WriteLine(prefix + "Layout " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeVector)
-			{
-				WriteLine(prefix + "Vector2 " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeEnum)
-			{
-				if (!schema.HasEnum(member.typeid))
-					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
-
-				WriteLine(prefix + member.typeid + " " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeObject)
-			{
-				if (!schema.HasObject(member.typeid))
-					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
-
-				var dataClass = schema.GetObject(member.typeid);
-				WriteLine(prefix + "ItemId<" + Utils.DataClassName(dataClass) + "> " + memberName + " = ItemId<" + Utils.DataClassName(dataClass) + ">.Empty" + suffix);
-			}
-			else if (member.type == Constants.TypeObjectList)
-			{
-				if (!schema.HasObject(member.typeid))
-					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
-
-				var dataClass = schema.GetObject(member.typeid);
-				
-				WriteLine(prefix + "Wrapper<" + Utils.DataClassName(dataClass) + ">[] " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeStruct)
-			{
-				if (!schema.HasStruct(member.typeid))
-					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
-
-				var dataClass = schema.GetStruct(member.typeid);
-				WriteLine(prefix + Utils.DataClassName(dataClass) + " " + memberName + " = new " + Utils.DataClassName(dataClass) + "()" + suffix);
-			}
-			else if (member.type == Constants.TypeStructList)
-			{
-				if (!schema.HasStruct(member.typeid))
-					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
-
-				var dataClass = schema.GetStruct(member.typeid);
-
-				WriteLine(prefix + Utils.DataClassName(dataClass) + "[] " + memberName + suffix);
-			}
-			else if (member.type == Constants.TypeEnumFlags)
-			{
-				if (!schema.HasEnum(member.typeid))
-					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
-
-				WriteLine(prefix + "ValueWrapper<" + member.typeid + ">[] " + memberName + suffix);
-			}
-			else
-			{
-				throw new InvalidSchemaException("Invalid class member type - " + member.type);
-			}
+		private static string PrivateMemberName(string name) 
+		{ 		
+			return "_" + char.ToLower(name[0]) + name.Substring(1); 
 		}
-
-		private string GetSerializableDefaultValue(XmlClassMember member, DatabaseSchema schema)
-        {
-			switch (member.type)
-			{
-				case Constants.TypeInt:
-				case Constants.TypeEnum:
-				case Constants.TypeObject:
-					return "0";
-				case Constants.TypeFloat:
-					return "0f";
-				case Constants.TypeBool:
-					return "false";
-				case Constants.TypeString:
-				case Constants.TypeColor:
-				case Constants.TypeImage:
-				case Constants.TypeAudioClip:
-				case Constants.TypePrefab:
-				case Constants.TypeLayout:
-					return "string.Empty";
-				case Constants.TypeVector:
-					return "Vector2.Zero";
-				case Constants.TypeObjectList:
-				case Constants.TypeStructList:
-				case Constants.TypeEnumFlags:
-					return "null";
-				case Constants.TypeStruct:
-					return "new " + Utils.SerializableClassName(member.typeid) + "()";
-				default:
-					throw new InvalidSchemaException("Invalid class member type - " + member.type);
-			}
-        }
-
-		private void WriteSerializationCode(XmlClassMember member, DatabaseSchema schema)
-        {
-			if (member.options.Contains(Constants.OptionObsolete)) return;
-
-			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			var notnull = member.options.Contains(Constants.OptionNotNull);
-
-            if (member.type == Constants.TypeObject)
-            {
-				var dataClass = schema.GetObject(member.typeid);
-                WriteLine("serializable." + member.name + " = " + memberName + ".Value;");
-				//TODO: if (notnull)
-            }
-            else if (member.type == Constants.TypeObjectList)
-            {
-				var dataClass = schema.GetObject(member.typeid);
-                WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
-                WriteLine("    serializable." + member.name + " = null;");
-                WriteLine("else");
-                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(wrapper => wrapper.Item.Value).ToArray();");
-            }
-            else if (member.type == Constants.TypeStruct)
-            {
-				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine("serializable." + member.name + " = " + memberName + "." + Utils.StructSerializationMethodName + "();");
-            }
-            else if (member.type == Constants.TypeStructList)
-            {
-				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
-                WriteLine("    serializable." + member.name + " = null;");
-                WriteLine("else");
-                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item." +
-					Utils.StructSerializationMethodName + "()).ToArray();");
-            }
-			else if (member.type == Constants.TypeEnumFlags)
-			{
-                WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
-                WriteLine("    serializable." + member.name + " = null;");
-                WriteLine("else");
-                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item.Value).ToArray();");
-			}
-            else if (member.type == Constants.TypeInt)
-            {
-                WriteLine("serializable." + member.name + " = " + memberName + ".Value;");
-            }
-            else if (member.type == Constants.TypeFloat)
-            {
-                WriteLine("serializable." + member.name + " = " + memberName + ".Value;");
-            }
-            else if (member.type == Constants.TypeColor)
-            {
-                WriteLine("serializable." + member.name + " = Helpers.ColorToString(" + memberName + ");");
-            }
-            else if (member.type == Constants.TypeLayout)
-            {
-                WriteLine("serializable." + member.name + " = " + memberName + ".Data;");
-            }
-            else
-            {
-                WriteLine("serializable." + member.name + " = " + memberName + ";");
-            }
-        }
-
-        private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema, bool isClass)
-        {
-			if (member.options.Contains(Constants.OptionObsolete)) return;
-
-			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
-			var notnull = member.options.Contains(Constants.OptionNotNull);
-
-            if (member.type == Constants.TypeObject)
-            {
-				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = database." + Utils.ObjectIdGetterName(member.typeid) + "(serializable." + member.name + ");");
-				if (notnull)
-				{
-					WriteLine("if (" + memberName + ".IsNull)");
-					WriteLine("    throw new DatabaseException(this.GetType().Name + \"" + (isClass ? " (\" + serializable.Id + \"): " : ": ") + memberName + " cannot be null\");");
-                }
-            }
-            else if (member.type == Constants.TypeObjectList)
-            {
-				var dataClass = schema.GetObject(member.typeid);
-                WriteLine(memberName + " = serializable." + member.name + "?.Select(id => new Wrapper<" + 
-					Utils.DataClassName(dataClass) + "> { Item = database." + Utils.ObjectIdGetterName(member.typeid) + "(id) }).ToArray();");
-            }
-            else if (member.type == Constants.TypeStruct)
-            {
-				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = new " + Utils.DataClassName(dataClass) + "(serializable." + member.name + ", database);");
-            }
-            else if (member.type == Constants.TypeStructList)
-            {
-				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new " + 
-					Utils.DataClassName(dataClass) + "(item, database)).ToArray();");
-            }
-			else if (member.type == Constants.TypeEnumFlags)
-			{
-                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new ValueWrapper<" + member.typeid + "> { Value = item }).ToArray();");
-			}
-            else if (member.type == Constants.TypeInt)
-            {
-                member.MinMaxInt(out var minvalue, out var maxvalue);
-                WriteLine(memberName + " = new NumericValue<int>(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
-            }
-            else if (member.type == Constants.TypeFloat)
-            {
-                member.MinMaxFloat(out var minvalue, out var maxvalue);
-                WriteLine(memberName + " = new NumericValue<float>(serializable." + member.name + ", " + minvalue + "f, " + maxvalue + "f);");
-            }
-            else if (member.type == Constants.TypeColor)
-            {
-                WriteLine(memberName + " = Helpers.ColorFromString(serializable." + member.name + ");");
-            }
-            else if (member.type == Constants.TypeLayout)
-            {
-                WriteLine(memberName + " = new Layout(serializable." + member.name + ");");
-            }
-            else
-            {
-                WriteLine(memberName + " = serializable." + member.name + ";");
-            }
-        }
 
         
         #line default

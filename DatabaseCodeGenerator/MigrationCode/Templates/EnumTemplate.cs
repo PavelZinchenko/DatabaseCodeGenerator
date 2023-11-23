@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace DatabaseCodeGenerator.EditorCode.Templates
+namespace DatabaseCodeGenerator.MigrationCode.Templates
 {
     using System;
     
@@ -15,9 +15,9 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
+    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class SerializableItemTemplate : SerializableItemTemplateBase
+    public partial class EnumTemplate : EnumTemplateBase
     {
 #line hidden
         /// <summary>
@@ -26,90 +26,127 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
         public virtual string TransformText()
         {
             
-            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    This code was automatically generated.                                     "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    Changes to this file may cause incorrect behavior and will be lost if      "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    the code is regenerated.                                                   "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\GeneratedCodeWarning.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
-            this.Write("\r\n\r\nusing System;\r\nusing Newtonsoft.Json;\r\nusing ");
+            this.Write("\r\n\r\nnamespace ");
             
-            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\nnamespace ");
+            this.Write("\r\n{\r\n\tpublic enum ");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace));
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(EnumData.name));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    [Serializable]\r\n    public class SerializableItem\r\n    {\r\n        [JsonI" +
-                    "gnore]\r\n\t    public string FileName { get; set; }\r\n\r\n        public ");
+            this.Write("\r\n\t{\r\n");
             
-            #line 16 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableItemTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Constants.ItemTypeEnum));
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+	
+		foreach (var item in EnumData.items) 
+		{
+			if (string.IsNullOrEmpty(item.value)) 
+			{ 
+
             
             #line default
             #line hidden
-            this.Write(" ItemType;\r\n        public int Id;\r\n        public bool Disabled;\r\n    }\r\n}\r\n");
+            this.Write("\t\t");
+            
+            #line 14 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.name + ","));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 15 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+	
+			} else { 
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 18 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.name + " = " + item.value + ","));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\EnumTemplate.tt"
+ 
+			}
+		}
+
+            
+            #line default
+            #line hidden
+            this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -121,7 +158,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class SerializableItemTemplateBase
+    public class EnumTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace DatabaseCodeGenerator
@@ -13,22 +14,38 @@ namespace DatabaseCodeGenerator
                 return;
             }
 
-            Console.WriteLine(args[0]);
-
             try
             {
-                var schema = Schema.DatabaseSchema.Load(args[0]);
+                var filename = args[0];
+                var versions = new Schema.VersionList(filename);
+                if (!versions.TryGetLatest(out var latestVersion))
+                {
+                    Console.WriteLine("No schema versions found");
+                    return;
+                }
+
+                var path = Path.GetDirectoryName(filename);
+                var latestSchema = Schema.DatabaseSchema.Load(path, latestVersion);
 
                 if (args.Length == 2 || args.Skip(2).Contains("game"))
                 {
-                    var gameCodeBuilder = new GameCode.Builder(schema, new Utils.CodeWriter(System.IO.Path.Combine(args[1], "GeneratedGameCode")));
-                    gameCodeBuilder.Build();
+                    var builder = new GameCode.Builder(latestSchema, new Utils.CodeWriter(Path.Combine(args[1], "GeneratedGameCode")));
+                    builder.Build();
                 }
 
                 if (args.Length == 2 || args.Skip(2).Contains("editor"))
                 {
-                    var editorCodeBuilder = new EditorCode.Builder(schema, new Utils.CodeWriter(System.IO.Path.Combine(args[1], "GeneratedEditorCode")));
-                    editorCodeBuilder.Build();
+                    var builder = new EditorCode.Builder(latestSchema, new Utils.CodeWriter(Path.Combine(args[1], "GeneratedEditorCode")));
+                    builder.Build();
+                }
+
+                if (args.Skip(2).Contains("upgrade"))
+                {
+                    var builder = new MigrationCode.Builder(
+                        new Utils.CodeWriter(Path.Combine(args[1], "GeneratedMigrationCode")), 
+                        versions, path, GameCode.Utils.RootNamespace);
+                    
+                    builder.Build();
                 }
             }
             catch (Exception e)

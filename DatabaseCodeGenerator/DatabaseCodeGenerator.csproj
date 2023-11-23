@@ -67,9 +67,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="EditorCode\Templates\EnumTemplate.cs">
-      <DependentUpon>EnumTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="EditorCode\Templates\MutableObjectTemplate.cs">
       <DependentUpon>MutableObjectTemplate.tt</DependentUpon>
@@ -151,13 +151,47 @@
       <DependentUpon>SerializableItemTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="GameCode\Templates\TemplateClasses.cs" />
+    <Compile Include="MigrationCode\Templates\DatabaseUpgraderTemplate.cs">
+      <DependentUpon>DatabaseUpgraderTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Schema\Constants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\DatabaseSchema.cs" />
     <Compile Include="Schema\Extensions.cs" />
     <Compile Include="Schema\InvalidSchemaException.cs" />
+    <Compile Include="Schema\VersionList.cs" />
     <Compile Include="Schema\XmlContent.cs" />
+    <Compile Include="MigrationCode\Builder.cs" />
+    <Compile Include="MigrationCode\Templates\DatabaseContentTemplate.cs">
+      <DependentUpon>DatabaseContentTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MigrationCode\Templates\DatabaseExceptionTemplate.cs">
+      <DependentUpon>DatabaseExceptionTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MigrationCode\Templates\EnumTemplate.cs">
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MigrationCode\Templates\SerializableItemTemplate.cs">
+      <DependentUpon>SerializableItemTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MigrationCode\Templates\SerializableTemplate.cs">
+      <DependentUpon>SerializableTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MigrationCode\Templates\TemplateClasses.cs" />
+    <Compile Include="MigrationCode\Utils.cs" />
     <Compile Include="Utils\CodeWriter.cs" />
     <Compile Include="Utils\Context.cs" />
   </ItemGroup>
@@ -170,6 +204,32 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MigrationCode\Templates\DatabaseUpgraderTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseUpgraderTemplate.cs</LastGenOutput>
+    </Content>
+    <None Include="MigrationCode\Templates\GeneratedCodeWarning.tt" />
+    <Content Include="MigrationCode\Templates\DatabaseContentTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseContentTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="MigrationCode\Templates\DatabaseExceptionTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DatabaseExceptionTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="MigrationCode\Templates\EnumTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="MigrationCode\Templates\SerializableItemTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializableItemTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="MigrationCode\Templates\SerializableTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializableTemplate.cs</LastGenOutput>
+    </Content>
+    <None Include="MigrationCode\Templates\Serialization.tt" />
     <None Include="GameCode\Templates\Serialization.tt" />
     <None Include="EditorCode\Templates\GeneratedCodeWarning.tt" />
     <Content Include="EditorCode\Templates\DatabaseContentTemplate.tt">

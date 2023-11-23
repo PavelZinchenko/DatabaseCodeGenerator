@@ -3,6 +3,23 @@ using System.Xml.Serialization;
 
 namespace DatabaseCodeGenerator.Schema
 {
+    [XmlRoot("schema")]
+    public class XmlVersionList
+    {
+        [XmlElement("version")]
+        public List<XmlVersionInfo> members = new List<XmlVersionInfo>();
+    }
+
+    public class XmlVersionInfo
+    {
+        [XmlAttribute]
+        public string name = string.Empty;
+        [XmlAttribute]
+        public string major = string.Empty;
+        [XmlAttribute]
+        public string minor = string.Empty;
+    }
+
     [XmlRoot("data")]
     public class XmlTypeInfo
     {

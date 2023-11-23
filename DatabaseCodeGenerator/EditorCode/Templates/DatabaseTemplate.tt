@@ -14,8 +14,8 @@ namespace <#= Utils.RootNamespace #>
 {
     public partial class <#= Utils.DatabaseClassName #>
     {
-		public const int VersionMajor = <#= Schema.VersionMajor #>;
-		public const int VersionMinor = <#= Schema.VersionMinor #>;
+		public const int VersionMajor = <#= Schema.Version.Major #>;
+		public const int VersionMinor = <#= Schema.Version.Minor #>;
 
 		public <#= Utils.DatabaseClassName #>(IDataStorage storage)
 		{

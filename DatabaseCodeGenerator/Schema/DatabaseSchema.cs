@@ -9,20 +9,22 @@ namespace DatabaseCodeGenerator.Schema
 {
     public class DatabaseSchema
     {
-        private DatabaseSchema() { }
-
-        public static DatabaseSchema Load(string xmlPath)
+        private DatabaseSchema(SchemaVersion version) 
         {
-            var schema = new DatabaseSchema();
-            schema.LoadResources(xmlPath);
+            _version = version;
+        }
+
+        public static DatabaseSchema Load(string xmlPath, SchemaVersion version)
+        {
+            var schema = new DatabaseSchema(version);
+            schema.LoadResources(Path.Combine(xmlPath, version.Path));
             schema.ParseItemTypes();
             schema.ValidateObjects();
 
             return schema;
         }
 
-        public int VersionMajor => 1;
-        public int VersionMinor => 1;
+        public SchemaVersion Version => _version;
 
         public IEnumerable<XmlEnumItem> Enums => _enums.Values;
         public IEnumerable<XmlClassItem> Objects => _classes.Values;
@@ -237,6 +239,7 @@ namespace DatabaseCodeGenerator.Schema
             }
         }
 
+        private readonly SchemaVersion _version;
         private readonly Dictionary<string, int> _itemTypes = new Dictionary<string, int>();
         private readonly Dictionary<string, XmlEnumItem> _enums = new Dictionary<string, XmlEnumItem>();
         private readonly Dictionary<string, XmlClassItem> _structs = new Dictionary<string, XmlClassItem>();
