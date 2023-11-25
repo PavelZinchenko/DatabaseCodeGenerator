@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace DatabaseCodeGenerator.MigrationCode.Templates
 {
+    using System.Linq;
     using Schema;
     using System;
     
@@ -76,35 +77,35 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("\r\n\r\nusing ");
             
-            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ContextNamespace));
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Context.Namespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public class ");
+            this.Write("\r\n{\r\n    public partial class ");
             
-            #line 9 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseUpgraderClassName));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public ");
             
-            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 12 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseUpgraderClassName));
             
             #line default
@@ -120,9 +121,20 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             var major = _storage.Version.Major;
             var minor = _storage.Version.Minor;
 
-");
+            if (major == 0)
+            {
+                major = ");
             
-            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(VersionList.Items.First().Major));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n                minor = 0;\r\n            }\r\n            \r\n            if (!IsVa" +
+                    "lidVersion(major, minor))\r\n                throw new DatabaseException($\"invalid" +
+                    " database version: {major}.{minor}\");\r\n\r\n");
+            
+            #line 32 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
         var lastVersion = new SchemaVersion();
 		foreach (var schemaVersion in VersionList.Items)
@@ -133,35 +145,35 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("            ");
             
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 37 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 37 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(".DatabaseContent content");
             
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 37 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n            if (major <= ");
             
-            #line 28 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 38 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 29 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 39 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             if (lastVersion.IsNull)
             {
@@ -171,42 +183,56 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("            {\r\n                content");
             
-            #line 34 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 44 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(" = new ");
             
-            #line 34 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 44 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 34 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 44 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
-            this.Write(".DatabaseContent(_serializer, _storage);\r\n                var upgrader = new ");
+            this.Write(".DatabaseContent(_serializer, _storage);\r\n                content");
             
-            #line 35 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 45 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
+            
+            #line default
+            #line hidden
+            this.Write(".VersionMajor = major;\r\n                content");
+            
+            #line 46 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
+            
+            #line default
+            #line hidden
+            this.Write(".VersionMinor = minor;\r\n                var upgrader = new ");
+            
+            #line 47 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".DatabaseUpgrader(content");
             
-            #line 35 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 47 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(");\r\n                upgrader.UpgradeMinor();\r\n            }\r\n\r\n");
             
-            #line 39 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 51 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             }
             else 
@@ -217,21 +243,21 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("                content");
             
-            #line 44 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 56 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(" = MigrateFrom(content");
             
-            #line 44 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 56 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.Major));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n");
             
-            #line 46 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 58 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             }
             lastVersion = schemaVersion;
@@ -240,24 +266,59 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n            if (major <= 0 || major > ");
+            this.Write("\r\n            content");
             
-            #line 52 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 64 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.Major));
             
             #line default
             #line hidden
-            this.Write(")\r\n                throw new DatabaseException($\"invalid database version: {major" +
-                    "}.{minor}\");\r\n\r\n            content");
+            this.Write(".Export(result);\r\n        }\r\n\r\n        private bool IsValidVersion(int major, int" +
+                    " minor)\r\n        {\r\n");
             
-            #line 55 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.Major));
+            #line 69 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+
+        lastVersion = new SchemaVersion();
+		foreach (var schemaVersion in VersionList.Items)
+        {
+
             
             #line default
             #line hidden
-            this.Write(".Export(result);\r\n        }\r\n\r\n");
+            this.Write("            ");
             
-            #line 58 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 74 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.IsNull ? "if" : "else if"));
+            
+            #line default
+            #line hidden
+            this.Write(" (major == ");
+            
+            #line 74 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n                return minor >= 0 && minor <= ");
+            
+            #line 75 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Minor));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n");
+            
+            #line 76 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+
+            lastVersion = schemaVersion;
+        }
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            return false;\r\n        }\r\n\r\n");
+            
+            #line 84 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
     lastVersion = new SchemaVersion();
 	foreach (var schemaVersion in VersionList.Items)
@@ -270,35 +331,35 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("        private ");
             
-            #line 65 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 65 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(".DatabaseContent MigrateFrom(");
             
-            #line 65 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 65 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(".DatabaseContent contentOld)\r\n        {\r\n            ");
             
-            #line 67 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 93 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
@@ -306,14 +367,14 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write(".Storage.DatabaseContent content;\r\n            if (contentOld == null)\r\n         " +
                     "       content = new ");
             
-            #line 69 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 95 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 69 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 95 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
@@ -321,14 +382,14 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write(".DatabaseContent(_serializer, _storage);\r\n            else\r\n            {\r\n      " +
                     "          content = new ");
             
-            #line 72 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 98 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 72 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 98 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
@@ -336,7 +397,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write(".DatabaseContent(_serializer, null);\r\n                contentOld.Export(content);" +
                     "\r\n                content.VersionMajor = ");
             
-            #line 74 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 100 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
@@ -344,7 +405,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write(";\r\n                content.VersionMinor = 0;\r\n            }\r\n\r\n            var up" +
                     "grader = new ");
             
-            #line 78 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 104 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
@@ -352,7 +413,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write(".DatabaseUpgrader(content);\r\n            upgrader.UpgradeMajor(contentOld);\r\n    " +
                     "        upgrader.UpgradeMinor();\r\n\r\n            return content;\r\n        }\r\n\r\n");
             
-            #line 85 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 111 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
         }
         lastVersion = schemaVersion;
@@ -364,7 +425,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write("        private readonly IDataStorage _storage;\r\n        private readonly IJsonSe" +
                     "rializer _serializer;\r\n    }\r\n\r\n");
             
-            #line 94 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 120 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
 lastVersion = new SchemaVersion();
 foreach (var schemaVersion in VersionList.Items)
@@ -375,28 +436,28 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("    namespace ");
             
-            #line 99 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 125 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public partial class ");
             
-            #line 101 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 127 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseUpgraderClassName));
             
             #line default
             #line hidden
             this.Write("\r\n        {\r\n            public ");
             
-            #line 103 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 129 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DatabaseUpgraderClassName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 103 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 129 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
@@ -405,14 +466,14 @@ foreach (var schemaVersion in VersionList.Items)
                     "             var major = content.VersionMajor;\r\n                var minor = cont" +
                     "ent.VersionMinor;\r\n\r\n                if (major != ");
             
-            #line 109 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 135 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Major));
             
             #line default
             #line hidden
             this.Write(" || minor < 0 || minor > ");
             
-            #line 109 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 135 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(schemaVersion.Minor));
             
             #line default
@@ -420,7 +481,7 @@ foreach (var schemaVersion in VersionList.Items)
             this.Write(")\r\n                    throw new DatabaseException($\"invalid database version: {m" +
                     "ajor}.{minor}\");\r\n            }\r\n\r\n");
             
-            #line 113 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 139 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             if (!lastVersion.IsNull)
             {
@@ -430,7 +491,7 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("            public void UpgradeMajor(");
             
-            #line 117 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 143 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.ToNamespace()));
             
             #line default
@@ -438,14 +499,14 @@ foreach (var schemaVersion in VersionList.Items)
             this.Write(".Storage.DatabaseContent oldContent)\r\n            {\r\n                if (oldConte" +
                     "nt.VersionMajor != ");
             
-            #line 119 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 145 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.Major));
             
             #line default
             #line hidden
             this.Write(" || oldContent.VersionMinor != ");
             
-            #line 119 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 145 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.Minor));
             
             #line default
@@ -454,14 +515,14 @@ foreach (var schemaVersion in VersionList.Items)
                     "ldContent.VersionMajor}.{oldContent.VersionMinor}\");\r\n\r\n                MigrateF" +
                     "rom_");
             
-            #line 122 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 148 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write("(oldContent);\r\n            }\r\n\r\n");
             
-            #line 125 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 151 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             }
 
@@ -470,7 +531,7 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("            public void UpgradeMinor()\r\n            {\r\n");
             
-            #line 130 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 156 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
                 for (var i = 0; i < schemaVersion.Minor; ++i)
                 {
@@ -480,35 +541,35 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("                if (Content.VersionMinor == ");
             
-            #line 134 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 160 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(")\r\n                {\r\n                    Migrate_");
             
-            #line 136 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("_");
             
-            #line 136 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 162 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("();\r\n                    Content.VersionMinor = ");
             
-            #line 137 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 163 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write(";\r\n                }\r\n");
             
-            #line 139 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 165 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
                 }
 
@@ -517,7 +578,7 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("            }\r\n\r\n");
             
-            #line 144 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 170 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             if (!lastVersion.IsNull) 
             {
@@ -527,28 +588,28 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("            partial void MigrateFrom_");
             
-            #line 148 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 174 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 148 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 174 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(lastVersion.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 148 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 174 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(".DatabaseContent contentOld);\r\n");
             
-            #line 149 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 175 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             }
 
@@ -560,21 +621,21 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("            partial void Migrate_");
             
-            #line 155 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 181 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("_");
             
-            #line 155 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 181 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("();\r\n");
             
-            #line 156 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 182 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
             }
 
@@ -583,14 +644,14 @@ foreach (var schemaVersion in VersionList.Items)
             #line hidden
             this.Write("\r\n            protected ");
             
-            #line 160 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 186 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.StorageNamespace));
             
             #line default
             #line hidden
             this.Write(".DatabaseContent Content { get; }\r\n        }\r\n    }\r\n");
             
-            #line 163 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
+            #line 189 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\DatabaseUpgraderTemplate.tt"
 
     lastVersion = schemaVersion;
 }

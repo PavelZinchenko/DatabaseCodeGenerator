@@ -166,7 +166,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line default
             #line hidden
             this.Write("(IDataStorage storage)\r\n\t\t{\r\n            _serializer = new JsonSerializer();\r\n   " +
-                    "         _content = new DatabaseContent(storage, _serializer);\r\n\t\t}\r\n\r\n\t\tpublic " +
+                    "         _content = new DatabaseContent(_serializer, storage);\r\n\t\t}\r\n\r\n\t\tpublic " +
                     "void Save(IDataStorage storage)\r\n\t\t{\r\n");
             
             #line 28 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\DatabaseTemplate.tt"

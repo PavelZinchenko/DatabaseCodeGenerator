@@ -597,7 +597,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine("public UnityEngine.Vector2 " + member.name + ";");
+				WriteLine($"public {Utils.VectorType} {member.name};");
 			}
 			else if (member.type == Constants.TypeEnum)
 			{

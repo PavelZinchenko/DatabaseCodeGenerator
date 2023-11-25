@@ -119,10 +119,21 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
     {
         void LoadJson(string name, string data);
         void LoadLocalization(string name, string data);
-        void LoadImage(ImageData data);
-    }
-}
-");
+        void LoadImage(string name, ");
+            
+            #line 24 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ImageType));
+            
+            #line default
+            #line hidden
+            this.Write(" image);\r\n        void LoadAudioClip(string name, ");
+            
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\StorageInterfacesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.AudioClipType));
+            
+            #line default
+            #line hidden
+            this.Write(" audioClip);\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

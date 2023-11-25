@@ -79,7 +79,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             this.Write("\r\nusing System;\r\nusing ");
             
             #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ContextNamespace));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Context.Namespace));
             
             #line default
             #line hidden
@@ -179,9 +179,9 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             
             #line default
             #line hidden
-            this.Write(";\r\n\t\t}\r\n\r\n");
+            this.Write(";\r\n\t\t\tFileName = $\"{ItemType}.json\";\r\n\t\t}\r\n\r\n");
             
-            #line 29 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 30 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
     }
 		PushIndent("\t\t");
@@ -262,7 +262,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine("public UnityEngine.Vector2 " + member.name + ";");
+				WriteLine($"public {Context.VectorType} {member.name};");
 			}
 			else if (member.type == Constants.TypeEnum)
 			{
