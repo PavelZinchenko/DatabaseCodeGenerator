@@ -15,8 +15,11 @@ namespace DatabaseCodeGenerator.EditorCode
         public const string StructSerializationMethodName = "Serialize";
         public const string DatabaseClassName = "Database";
 
-        public const string ImageType = "ImageData";
-        public const string AudioClipType = "AudioClipData";
+        public const string ImageType = "IImageData";
+        public const string AudioClipType = "IAudioClipData";
+        public const string EmptyImage = "ImageData.Empty";
+        public const string EmptyAudioClip = "AudioClipData.Empty";
+        public const string VectorType = "Vector2";
 
         public const string RootNamespace = "EditorDatabase";
         public const string TypesNamespace = "Model";

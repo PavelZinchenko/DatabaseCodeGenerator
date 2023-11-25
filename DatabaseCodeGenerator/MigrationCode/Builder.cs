@@ -7,12 +7,12 @@ namespace DatabaseCodeGenerator.MigrationCode
 {
     public class Builder
     {
-        public Builder(CodeWriter codeWriter, VersionList versionList, string schemaRootFolder, string contextNamespace)
+        public Builder(CodeWriter codeWriter, VersionList versionList, string schemaRootFolder, Context context)
         {
             _codeWriter = codeWriter;
             _versionList = versionList;
             _schemaRootFolder = schemaRootFolder;
-            _contextNamespace = contextNamespace;
+            _context = context;
         }
 
         public void Build()
@@ -31,7 +31,7 @@ namespace DatabaseCodeGenerator.MigrationCode
         {
             _codeWriter.Write(string.Empty, "DatabaseException", new DatabaseExceptionTemplate().TransformText());
             _codeWriter.Write(string.Empty, Utils.DatabaseUpgraderClassName,
-                new DatabaseUpgraderTemplate(_versionList, _contextNamespace).TransformText());
+                new DatabaseUpgraderTemplate(_versionList, _context).TransformText());
         }
 
         private void GenerateSchemaCode(DatabaseSchema schema)
@@ -40,7 +40,7 @@ namespace DatabaseCodeGenerator.MigrationCode
             _codeWriter.Write(CombineNameSpace(rootNamespace, Utils.SerializableNamespace), "SerializableItem", 
                 new SerializableItemTemplate(schema).TransformText());
             _codeWriter.Write(CombineNameSpace(rootNamespace, Utils.StorageNamespace), "DatabaseContent", 
-                new DatabaseContentTemplate(schema, _contextNamespace).TransformText());
+                new DatabaseContentTemplate(schema, _context).TransformText());
 
             foreach (var item in schema.Enums)
                 GenerateEnum(schema, item, rootNamespace);
@@ -65,7 +65,7 @@ namespace DatabaseCodeGenerator.MigrationCode
 
         private void GenerateSerializableClass(DatabaseSchema schema, XmlClassItem item, ObjectType type, string ns)
         {
-            var template = new SerializableTemplate(item, schema, type, _contextNamespace);
+            var template = new SerializableTemplate(item, schema, type, _context);
             var data = template.TransformText();
 
             _codeWriter.Write(CombineNameSpace(ns, Utils.SerializableNamespace), item.name, data);
@@ -83,6 +83,22 @@ namespace DatabaseCodeGenerator.MigrationCode
         private readonly CodeWriter _codeWriter;
         private readonly VersionList _versionList;
         private readonly string _schemaRootFolder;
-        private readonly string _contextNamespace;
+        private readonly Context _context;
+
+        public struct Context
+        {
+            public static Context EditorCodeContext()
+            {
+                return new Context { Namespace = EditorCode.Utils.RootNamespace, VectorType = EditorCode.Utils.VectorType };
+            }
+
+            public static Context GameCodeContext()
+            {
+                return new Context { Namespace = GameCode.Utils.RootNamespace, VectorType = GameCode.Utils.VectorType };
+            }
+
+            public string Namespace;
+            public string VectorType;
+        }
     }
 }

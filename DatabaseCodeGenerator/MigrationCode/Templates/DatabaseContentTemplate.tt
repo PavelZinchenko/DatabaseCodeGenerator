@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using <#= ContextNamespace #>.<#= Utils.StorageNamespace #>;
-using <#= ContextNamespace #>.<#= Utils.TypesNamespace #>;
+using <#= Context.Namespace #>.<#= Utils.StorageNamespace #>;
+using <#= Context.Namespace #>.<#= Utils.TypesNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Utils.EnumsNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Utils.SerializableNamespace #>;
 
@@ -22,13 +22,13 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
         public int VersionMajor 
         {
             get => <#= Utils.DatabaseSettings #> != null ? <#= Utils.DatabaseSettings #>.DatabaseVersion : <#= Schema.Version.Major #>;
-            set => (<#= Utils.DatabaseSettings #> ??= new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>()).<#= Utils.VersionMajor #> = value;
+            set => (<#= Utils.DatabaseSettings #> ?? (<#= Utils.DatabaseSettings #> = new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>())).<#= Utils.VersionMajor #> = value;
         }
 
         public int VersionMinor
         {
             get => <#= Utils.DatabaseSettings #> != null ? <#= Utils.DatabaseSettings #>.DatabaseVersionMinor : 0;
-            set => (<#= Utils.DatabaseSettings #> ??= new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>()).<#= Utils.VersionMinor #> = value;
+            set => (<#= Utils.DatabaseSettings #> ?? (<#= Utils.DatabaseSettings #> = new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>())).<#= Utils.VersionMinor #> = value;
         }
 
         public void LoadJson(string name, string content)
@@ -43,10 +43,9 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 #>
             <#= first ? "if" : "else if" #> (type == <#= Constants.ItemTypeEnum + "." + item.name #>)
             {
-			    if (<#= DataMember(item.name) #>.ContainsKey(item.Id)) throw new DatabaseException("Duplicate <#= item.name #> ID - " + item.Id + " (" + name + ")");
                 var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
                 data.FileName = name;
-                <#= DataMember(item.name) #>.Add(data.Id, data);
+                <#= Utils.ObjectListPropertyName(item.name) #>.Add(data);
             }
 <#
 				first = false;
@@ -85,7 +84,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 		    foreach (var item in Schema.Objects)
             {
 #>
-            foreach (var item in <#= DataMember(item.name) #>.Values)
+            foreach (var item in <#= Utils.ObjectListPropertyName(item.name) #>)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
 <#
             }
@@ -134,16 +133,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 		foreach (var item in Schema.Objects)
         {
 #>
-		public IEnumerable<<#= Utils.SerializableClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> => <#= DataMember(item.name) #>.Values;
-<#
-        }
-#>
-
-<#
-		foreach (var item in Schema.Objects)
-        {
-#>
-		public <#= Utils.SerializableClassName(item.name) + " " + Utils.ObjectGetterName(item.name) #>(int id) { return <#= DataMember(item.name) #>.TryGetValue(id, out var item) ? item : null; }
+		public List<<#= Utils.SerializableClassName(item.name) #>> <#= Utils.ObjectListPropertyName(item.name) #> { get; } = new List<<#= Utils.SerializableClassName(item.name) #>>();
 <#
         }
 #>
@@ -154,24 +144,8 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 
         private readonly IJsonSerializer _serializer;
 
-<#
-		foreach (var item in Schema.Objects)
-        {
-#>
-		private readonly Dictionary<int, <#= Utils.SerializableClassName(item.name) #>> <#= DataMember(item.name) #> = new();
-<#
-        }
-#>
-
-        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, string> _localizations = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new Dictionary<string, <#= Utils.ImageType #>>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new Dictionary<string, <#= Utils.AudioClipType #>>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 	}
 }
-
-<#+ 
-	private static string DataMember(string name) 
-	{ 		
-		return "_" + char.ToLower(name[0]) + name.Substring(1) + "Map"; 
-	}
-#>

@@ -20,7 +20,7 @@ namespace <#= Utils.RootNamespace #>
 		public <#= Utils.DatabaseClassName #>(IDataStorage storage)
 		{
             _serializer = new JsonSerializer();
-            _content = new DatabaseContent(storage, _serializer);
+            _content = new DatabaseContent(_serializer, storage);
 		}
 
 		public void Save(IDataStorage storage)

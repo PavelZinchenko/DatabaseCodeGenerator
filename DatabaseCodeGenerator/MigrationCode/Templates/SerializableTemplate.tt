@@ -4,7 +4,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 
 using System;
-using <#= ContextNamespace #>.<#= Utils.TypesNamespace #>;
+using <#= Context.Namespace #>.<#= Utils.TypesNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Utils.EnumsNamespace #>;
 
 namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Utils.SerializableNamespace #>
@@ -24,6 +24,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 		public <#= Utils.SerializableClassName(ObjectData.name) #>()
 		{
 			ItemType = <#= Constants.ItemTypeEnum + "." + ObjectData.typeid #>;
+			FileName = $"{ItemType}.json";
 		}
 
 <#

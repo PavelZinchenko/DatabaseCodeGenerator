@@ -33,40 +33,41 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
 
     public partial class SerializableTemplate
     {
-        public SerializableTemplate(XmlClassItem objectData, DatabaseSchema schema, ObjectType type, string contextNamespace) 
+        public SerializableTemplate(XmlClassItem objectData, DatabaseSchema schema, ObjectType type, Builder.Context context)
         {
             ObjectData = objectData; 
-            Schema = schema; ObjectType = type; 
-            ContextNamespace = contextNamespace; 
+            Schema = schema; ObjectType = type;
+            ObjectType = type;
+            Context = context; 
         }
 
         protected XmlClassItem ObjectData { get; }
         protected DatabaseSchema Schema { get; }
         protected ObjectType ObjectType { get; }
-        protected string ContextNamespace { get; }
+        protected Builder.Context Context { get; }
     }
 
     public partial class DatabaseContentTemplate
     {
-        public DatabaseContentTemplate(DatabaseSchema schema, string contextNamespace) 
+        public DatabaseContentTemplate(DatabaseSchema schema, Builder.Context context) 
         {
             Schema = schema; 
-            ContextNamespace = contextNamespace; 
+            Context = context; 
         }
 
         protected DatabaseSchema Schema { get; }
-        protected string ContextNamespace { get; }
+        protected Builder.Context Context { get; }
     }
 
     public partial class DatabaseUpgraderTemplate
     {
-        public DatabaseUpgraderTemplate(VersionList versionList, string contextNamespace)
+        public DatabaseUpgraderTemplate(VersionList versionList, Builder.Context context)
         {
             VersionList = versionList;
-            ContextNamespace = contextNamespace;
+            Context = context;
         }
 
         protected VersionList VersionList { get; }
-        protected string ContextNamespace { get; }
+        protected Builder.Context Context { get; }
     }
 }

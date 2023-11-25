@@ -12,10 +12,10 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 {
     public class DatabaseContent : IContentLoader
     {
-        public DatabaseContent(IDataStorage storage, IJsonSerializer jsonSerializer)
+        public DatabaseContent(IJsonSerializer jsonSerializer, IDataStorage storage)
         {
             _serializer = jsonSerializer;
-            storage.LoadContent(this);
+            storage?.LoadContent(this);
         }
   
         public void Save(IDataStorage storage, IJsonSerializer jsonSerializer)
@@ -92,11 +92,15 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
             _localizations.Add(name, data);
         }
 
-        public void LoadImage(<#= Utils.ImageType #> data)
+        public void LoadImage(string name, <#= Utils.ImageType #> image)
         {
-            _images.Add(data.Name, data);
+            _images.Add(name, image);
         }
         
+        public void LoadAudioClip(string name, <#= Utils.AudioClipType #> audioClip)
+        {
+            _audioClips.Add(name, audioClip);
+        }
 <#
 		foreach (var item in Schema.Configurations)
         {
@@ -126,7 +130,12 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 
         public <#= Utils.ImageType #> GetImage(string name)
         {
-            return _images.TryGetValue(name, out var image) ? image : <#= Utils.ImageType #>.Empty;
+            return _images.TryGetValue(name, out var image) ? image : <#= Utils.EmptyImage #>;
+        }
+
+        public <#= Utils.AudioClipType #> GetAudioClip(string name)
+        {
+            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : <#= Utils.EmptyAudioClip #>;
         }
 
         private IEnumerable<KeyValuePair<string, <#= Utils.ImageType #>>> Images => _images;
@@ -144,6 +153,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.StorageNamespace #>
 #>
 
         private readonly Dictionary<string, <#= Utils.ImageType #>> _images = new Dictionary<string, <#= Utils.ImageType #>>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, <#= Utils.AudioClipType #>> _audioClips = new Dictionary<string, <#= Utils.AudioClipType #>>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 	}
 }

@@ -27,24 +27,33 @@ namespace DatabaseCodeGenerator
                 var path = Path.GetDirectoryName(filename);
                 var latestSchema = Schema.DatabaseSchema.Load(path, latestVersion);
 
-                if (args.Length == 2 || args.Skip(2).Contains("game"))
+                if (args.Skip(2).Contains("game"))
                 {
                     var builder = new GameCode.Builder(latestSchema, new Utils.CodeWriter(Path.Combine(args[1], "GeneratedGameCode")));
                     builder.Build();
                 }
 
-                if (args.Length == 2 || args.Skip(2).Contains("editor"))
+                if (args.Skip(2).Contains("editor"))
                 {
                     var builder = new EditorCode.Builder(latestSchema, new Utils.CodeWriter(Path.Combine(args[1], "GeneratedEditorCode")));
                     builder.Build();
                 }
 
-                if (args.Skip(2).Contains("upgrade"))
+                if (args.Skip(2).Contains("upgrade_game"))
                 {
                     var builder = new MigrationCode.Builder(
                         new Utils.CodeWriter(Path.Combine(args[1], "GeneratedMigrationCode")), 
-                        versions, path, GameCode.Utils.RootNamespace);
+                        versions, path, MigrationCode.Builder.Context.GameCodeContext());
                     
+                    builder.Build();
+                }
+
+                if (args.Skip(2).Contains("upgrade_editor"))
+                {
+                    var builder = new MigrationCode.Builder(
+                        new Utils.CodeWriter(Path.Combine(args[1], "GeneratedMigrationCode")),
+                        versions, path, MigrationCode.Builder.Context.EditorCodeContext());
+
                     builder.Build();
                 }
             }

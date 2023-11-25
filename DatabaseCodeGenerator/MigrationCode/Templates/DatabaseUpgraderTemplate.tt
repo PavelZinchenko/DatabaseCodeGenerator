@@ -1,12 +1,13 @@
 ﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="Schema" #>
 <#@ include file="GeneratedCodeWarning.tt" #>
 
-using <#= ContextNamespace #>.<#= Utils.StorageNamespace #>;
+using <#= Context.Namespace #>.<#= Utils.StorageNamespace #>;
 
 namespace <#= Utils.RootNamespace #>
 {
-    public class <#= Utils.DatabaseUpgraderClassName #>
+    public partial class <#= Utils.DatabaseUpgraderClassName #>
     {
         public <#= Utils.DatabaseUpgraderClassName #>(IJsonSerializer jsonSerializer, IDataStorage storage)
         {
@@ -18,6 +19,15 @@ namespace <#= Utils.RootNamespace #>
         {
             var major = _storage.Version.Major;
             var minor = _storage.Version.Minor;
+
+            if (major == 0)
+            {
+                major = <#= VersionList.Items.First().Major #>;
+                minor = 0;
+            }
+            
+            if (!IsValidVersion(major, minor))
+                throw new DatabaseException($"invalid database version: {major}.{minor}");
 
 <#
         var lastVersion = new SchemaVersion();
@@ -32,6 +42,8 @@ namespace <#= Utils.RootNamespace #>
 #>
             {
                 content<#= schemaVersion.Major #> = new <#= schemaVersion.ToNamespace() #>.<#= Utils.StorageNamespace #>.DatabaseContent(_serializer, _storage);
+                content<#= schemaVersion.Major #>.VersionMajor = major;
+                content<#= schemaVersion.Major #>.VersionMinor = minor;
                 var upgrader = new <#= schemaVersion.ToNamespace() #>.DatabaseUpgrader(content<#= schemaVersion.Major #>);
                 upgrader.UpgradeMinor();
             }
@@ -49,10 +61,24 @@ namespace <#= Utils.RootNamespace #>
         }
 #>
 
-            if (major <= 0 || major > <#= lastVersion.Major #>)
-                throw new DatabaseException($"invalid database version: {major}.{minor}");
-
             content<#= lastVersion.Major #>.Export(result);
+        }
+
+        private bool IsValidVersion(int major, int minor)
+        {
+<#
+        lastVersion = new SchemaVersion();
+		foreach (var schemaVersion in VersionList.Items)
+        {
+#>
+            <#= lastVersion.IsNull ? "if" : "else if" #> (major == <#= schemaVersion.Major #>)
+                return minor >= 0 && minor <= <#= schemaVersion.Minor #>;
+<#
+            lastVersion = schemaVersion;
+        }
+#>
+
+            return false;
         }
 
 <#
