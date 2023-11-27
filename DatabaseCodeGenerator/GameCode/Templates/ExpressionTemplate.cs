@@ -7,19 +7,18 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace DatabaseCodeGenerator.MigrationCode.Templates
+namespace DatabaseCodeGenerator.GameCode.Templates
 {
     using Schema;
-    using System.Collections.Generic;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+    #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class SerializableTemplate : SerializableTemplateBase
+    public partial class ExpressionTemplate : ExpressionTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,179 +27,270 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
         public virtual string TransformText()
         {
             
-            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 3 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    This code was automatically generated.                                     "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 4 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    Changes to this file may cause incorrect behavior and will be lost if      "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//    the code is regenerated.                                                   "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//                                                                               "));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\GeneratedCodeWarning.tt"
+            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\GeneratedCodeWarning.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture("//-------------------------------------------------------------------------------"));
             
             #line default
             #line hidden
-            this.Write("\r\n");
-            this.Write("\r\nusing System;\r\nusing ");
+            this.Write("\r\n\r\nusing ");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Context.Namespace));
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
+            #line 5 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
+            #line 6 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
             
             #line default
             #line hidden
-            this.Write(".");
+            this.Write(";\r\nusing CodeWriter.ExpressionParser;\r\n");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
+            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+	var returnType = GetFuncReturnType(ExpressionData);
+
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\nnamespace ");
+            this.Write("\r\nnamespace ");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 12 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
+            #line 12 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ExpressionsNamespace));
             
             #line default
             #line hidden
-            this.Write(".");
+            this.Write("\r\n{\r\n\tpublic class ");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n{\r\n\t[Serializable]\r\n");
-            
-            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-
-	if (ObjectType == ObjectType.Struct)
-    {
-
-            
-            #line default
-            #line hidden
-            this.Write("\tpublic struct ");
-            
-            #line 17 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
+            #line 14 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ExpressionClassName(ExpressionData)));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 16 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
 
-    } else {
-
-            
-            #line default
-            #line hidden
-            this.Write("\tpublic class ");
-            
-            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
-            
-            #line default
-            #line hidden
-            this.Write(" : SerializableItem\r\n\t{\r\n\t\tpublic ");
-            
-            #line 24 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
-            
-            #line default
-            #line hidden
-            this.Write("()\r\n\t\t{\r\n\t\t\tItemType = ");
-            
-            #line 26 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Constants.ItemTypeEnum + "." + ObjectData.typeid));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\t\t\tFileName = \"");
-            
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.typeid));
-            
-            #line default
-            #line hidden
-            this.Write(".json\";\r\n\t\t}\r\n\r\n");
-            
-            #line 30 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
-
-    }
 		PushIndent("\t\t");
 
-        var members = new HashSet<string>();
-        foreach (var item in ObjectData.members)
-        {
-            if (!members.Add(item.name)) continue;
-			WriteSerializableClassMember(item, Schema);
-        }
+		for(int i = 0; i < ExpressionData.items.Count; ++i)
+			WriteLine($"public string ParamName{i+1} {{ get; set; }} = \"{ExpressionData.items[i].name}\";");
 
 		PopIndent();
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\tpublic ");
+            
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.ExpressionClassName(ExpressionData)));
+            
+            #line default
+            #line hidden
+            this.Write("(string data, ");
+            
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" minvalue, ");
+            
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" maxvalue, IVariableResolver variableResolver)\r\n\t\t{\r\n\t\t\t_expressionText = data;\r\n" +
+                    "\t\t\t_minvalue = minvalue;\r\n\t\t\t_maxvalue = maxvalue;\r\n\t\t\t_variableResolver = varia" +
+                    "bleResolver;\r\n\t\t}\r\n\r\n\t\tpublic ");
+            
+            #line 33 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" Evaluate(");
+            
+            #line 33 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetFuncParamList(ExpressionData)));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n\t\t{\r\n\t\t\tif (_expression == null) Build();\r\n");
+            
+            #line 36 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+			PushIndent("\t\t\t");
+
+			foreach(var item in ExpressionData.items)
+				WriteLine($"{Utils.PrivateMemberName(item.name)} = {item.name};");
+
+			PopIndent();
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\treturn ClampResult(_expression.Invoke().AsInt);\r\n\t\t}\r\n\r\n\t\tprivate void Build()" +
+                    "\r\n\t\t{\r\n\t\t\tvar builder = new ExpressionBuilder(_variableResolver);\r\n");
+            
+            #line 50 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+			PushIndent("\t\t\t");
+			
+			for (int i = 0; i < ExpressionData.items.Count; i++)
+				WriteLine($"builder.AddParameter(ParamName{i+1}, {Utils.GetterName(ExpressionData.items[i].name)});");
+
+			PopIndent();
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t_expression = builder.Build(_expressionText).Invoke;\r\n\t\t}\r\n\r\n\t\tprivate ");
+            
+            #line 61 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" ClampResult(");
+            
+            #line 61 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" value)\r\n        {\r\n\t\t\tif (value < _minvalue) return _minvalue;\r\n\t\t\tif (value > _" +
+                    "maxvalue) return _maxvalue;\r\n\t\t\treturn value;\r\n        }\r\n\r\n");
+            
+            #line 68 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+		PushIndent("\t\t");
+
+		foreach(var item in ExpressionData.items)
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(item.name)}() => {Utils.PrivateMemberName(item.name)};");
+
+		PopIndent();
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\tprivate IVariableResolver _variableResolver;\r\n\t\tprivate Expression<");
+            
+            #line 78 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.VariantType));
+            
+            #line default
+            #line hidden
+            this.Write("> _expression;\r\n\t\tprivate string _expressionText;\r\n\t\tprivate ");
+            
+            #line 80 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" _minvalue;\r\n\t\tprivate ");
+            
+            #line 81 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
+            
+            #line default
+            #line hidden
+            this.Write(" _maxvalue;\r\n\r\n");
+            
+            #line 83 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+		foreach(var item in ExpressionData.items)
+		{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\tprivate ");
+            
+            #line 87 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetFuncParamType(item, Schema)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 87 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.PrivateMemberName(item.name)));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n");
+            
+            #line 88 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ExpressionTemplate.tt"
+
+		}
 
             
             #line default
@@ -209,124 +299,116 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\Serialization.tt"
+        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\FuncParams.tt"
 
-		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
-		{
-			var defaultValue = string.Empty;
-			if (!string.IsNullOrEmpty(member.@default))
-			{
-				switch (member.type)
-				{
-				case Constants.TypeInt:
-				case Constants.TypeBool:
-					defaultValue = " = " + member.@default;
-					break;
-				case Constants.TypeFloat:
-					defaultValue = " = " + member.@default + "f";
-					break;
-				default:
-					defaultValue = " = \"" + member.@default + "\"";
-					break;
-				}
-			}
 
-			if (member.type == Constants.TypeInt)
-			{
-				WriteLine("public int " + member.name + defaultValue + ";");
-			}
-			else if (member.type == Constants.TypeFloat)
-			{
-				WriteLine("public float " + member.name + defaultValue + ";");
-			}
-			else if (member.type == Constants.TypeBool)
-			{
-				WriteLine("public bool " + member.name + defaultValue + ";");
-			}
-			else if (member.type == Constants.TypeString)
-			{
-				WriteLine("public string " + member.name + defaultValue + ";");
-			}
-			else if (member.type == Constants.TypeColor)
-			{
-				WriteLine("public string " + member.name + defaultValue + ";");
-			}
-			else if (member.type == Constants.TypeImage)
-			{
-				WriteLine("public string " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeAudioClip)
-			{
-				WriteLine("public string " + member.name + ";");
-			}
-			else if (member.type == Constants.TypePrefab)
-			{
-				WriteLine("public string " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeLayout)
-			{
-				WriteLine("public string " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeFormula)
-			{
-				WriteLine("public string " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeVector)
-			{
-				WriteLine($"public {Context.VectorType} {member.name};");
-			}
-			else if (member.type == Constants.TypeEnum)
-			{
-				if (!schema.HasEnum(member.typeid))
-					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
+private bool HasExpression(XmlClassItem objectData)
+{
+	foreach(var member in objectData.members)
+		if (member.type == Constants.TypeFormula) 
+			return true;
+	return false;
+}
 
-				WriteLine("public " + member.typeid + " " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeObject)
-			{
-				if (!schema.HasObject(member.typeid))
-					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
+private string GetFuncParamType(XmlExpressionParam member, DatabaseSchema schema)
+{
+	if (member.type == Constants.TypeInt)
+	{
+		return Constants.TypeInt;
+	}
+	else if (member.type == Constants.TypeFloat)
+	{
+		return Constants.TypeFloat;
+	}
+	else if (member.type == Constants.TypeBool)
+	{
+		return Constants.TypeBool;
+	}
+	else if (member.type == Constants.TypeFormula)
+	{
+		if (!schema.HasExpression(member.typeid))
+			throw new InvalidSchemaException("Unknown expression type in class member " + member.name);
 
-				WriteLine("public int " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeObjectList)
-			{
-				if (!schema.HasObject(member.typeid))
-					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
+		var expression = schema.GetExpression(member.typeid);
+		return Utils.ExpressionClassName(expression);
+	}
+	else if (member.type == Constants.TypeEnum)
+	{
+		if (!schema.HasEnum(member.typeid))
+			throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine("public int[] " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeStruct)
-			{
-				if (!schema.HasStruct(member.typeid))
-					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
+		return member.typeid;
+	}
+	else
+	{
+		throw new InvalidSchemaException("Invalid expression param type - " + member.type);
+	}
+}
 
-				WriteLine("public " + Utils.SerializableClassName(member.typeid) + " " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeStructList)
-			{
-				if (!schema.HasStruct(member.typeid))
-					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
+private string GetFuncReturnType(XmlExpressionItem expression)
+{
+	if (expression.result == Constants.TypeFloat)
+		return Constants.TypeFloat;
+	else
+		return Constants.TypeInt;
+}
 
-				WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + ";");
-			}
-			else if (member.type == Constants.TypeEnumFlags)
-			{
-				if (!schema.HasEnum(member.typeid))
-					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
+private void WriteVariableResolverResolve(XmlClassMember member)
+{
+	if (member.options.Contains(Constants.OptionObsolete)) return;
 
-				WriteLine("public " + member.typeid + "[] " + member.name + ";");
-			}
-			else
-			{
-				throw new InvalidSchemaException("Invalid class member type - " + member.type);
-			}
-		}
+    var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+	switch (member.type)
+	{
+		case Constants.TypeInt:
+		case Constants.TypeFloat:
+		case Constants.TypeBool:
+			WriteLine($"if (name == \"{memberName}\") return {Utils.GetterName(memberName)};");
+			break;
+		case Constants.TypeEnum:
+			// TODO
+			break;
+	}
+}
 
-		private static string PrivateMemberName(string name) 
-		{ 		
-			return "_" + char.ToLower(name[0]) + name.Substring(1); 
-		}
+private void WriteVariableResolverGetter(XmlClassMember member)
+{
+	if (member.options.Contains(Constants.OptionObsolete)) return;
+
+    var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+	switch (member.type)
+	{
+		case Constants.TypeInt:
+		case Constants.TypeFloat:
+		case Constants.TypeBool:
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => _context.{memberName};");
+			break;
+		case Constants.TypeEnum:
+			// TODO
+			break;
+	}
+}
+
+private string GetFuncParamList(XmlExpressionItem expression, string paramNames = null)
+{
+	var paramNamesArray = paramNames?.Split(new char[] { ',', ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+
+	bool first = true;
+
+	var sb = new System.Text.StringBuilder();
+
+	for (int i = 0; i < expression.items.Count; ++i)
+	{
+		var item = expression.items[i];
+		if (!first) sb.Append(", ");
+		first = false;
+		var name = paramNamesArray != null && paramNamesArray.Length > i ? paramNamesArray[i] : item.name;
+		sb.Append($"{GetFuncParamType(item, Schema)} {name}");
+	}
+
+	return sb.ToString();
+}
+
 
         
         #line default
@@ -340,7 +422,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public class SerializableTemplateBase
+    public class ExpressionTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
