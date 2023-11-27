@@ -1,5 +1,5 @@
 ﻿<#@ template language="C#" #>
-<#@ include file="Serialization.tt" #>
+<#@ include file="WriteSerializableClassMember.tt" #>
 <#@ include file="GeneratedCodeWarning.tt" #>
 <#@ import namespace="System.Collections.Generic" #>
 

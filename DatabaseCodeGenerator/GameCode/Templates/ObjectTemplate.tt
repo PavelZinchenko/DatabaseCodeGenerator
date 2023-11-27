@@ -1,11 +1,18 @@
 ﻿<#@ template language="C#" #>
-<#@ include file="Serialization.tt" #>
+<#@ include file="FuncParams.tt" #>
+<#@ include file="WriteDeserializationCode.tt" #>
+<#@ include file="WriteDataClassMember.tt" #>
 <#@ include file="GeneratedCodeWarning.tt" #>
 
 using System.Linq;
 using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Utils.SerializableNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+<#
+	var hasExpression = HasExpression(ObjectData);
+	if (hasExpression)
+		WriteLine("using CodeWriter.ExpressionParser;");
+#>
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
@@ -33,6 +40,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
 			PushIndent("\t\t\t");
 
+			if (hasExpression)
+				WriteLine("var variableResolver = new VariableResolver(this);");
+
 			foreach (var item in ObjectData.members)
 				WriteDeserializationCode(item, Schema);
 
@@ -54,12 +64,51 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
 		PushIndent("\t\t");
 
-		foreach (var item in ObjectData.members) 
+		foreach (var item in ObjectData.members)
 			WriteDataClassMember(item, Schema);
 
 		PopIndent();
 #>
 
 		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
+<#
+		if (hasExpression)
+		{
+#>
+
+		private class VariableResolver : IVariableResolver
+        {
+			private <#= Utils.DataClassName(ObjectData) #> _context;
+
+			public VariableResolver(<#= Utils.DataClassName(ObjectData) #> context)
+            {
+				_context = context;
+            }
+
+			public Expression<Variant> Resolve(string name)
+            {
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in ObjectData.members)
+					WriteVariableResolverResolve(item);
+
+				PopIndent();
+#>
+				return null;
+            }
+
+<#
+			PushIndent("\t\t\t");
+
+			foreach(var item in ObjectData.members)
+				WriteVariableResolverGetter(item);
+
+			PopIndent();
+#>
+        }
+<#
+		}
+#>
 	}
 }

@@ -30,15 +30,18 @@ namespace DatabaseCodeGenerator.Schema
         public IEnumerable<XmlClassItem> Objects => _classes.Values;
         public IEnumerable<XmlClassItem> Structs => _structs.Values;
         public IEnumerable<XmlClassItem> Configurations => _configurations.Values;
+        public IEnumerable<XmlExpressionItem> Expressions => _expressions.Values;
 
         public bool HasItemType(string type) => _itemTypes.ContainsKey(type);
         public bool HasEnum(string name) => _enums.ContainsKey(name);
         public bool HasObject(string name) => _classes.ContainsKey(name);
         public bool HasStruct(string name) => _structs.ContainsKey(name);
+        public bool HasExpression(string name) => _expressions.ContainsKey(name);
 
         public XmlEnumItem GetEnum(string name) => _enums.TryGetValue(name, out var item) ? item : null;
         public XmlClassItem GetObject(string name) => _classes.TryGetValue(name, out var item) ? item : null;
         public XmlClassItem GetStruct(string name) => _structs.TryGetValue(name, out var item) ? item : null;
+        public XmlExpressionItem GetExpression(string name) => _expressions.TryGetValue(name, out var item) ? item : null;
 
         private void LoadResources(string path)
         {
@@ -47,6 +50,7 @@ namespace DatabaseCodeGenerator.Schema
             var typeSerializer = new XmlSerializer(typeof(XmlTypeInfo));
             var enumSerializer = new XmlSerializer(typeof(XmlEnumItem));
             var classSerializer = new XmlSerializer(typeof(XmlClassItem));
+            var expressionSerializer = new XmlSerializer(typeof(XmlExpressionItem));
 
             var processedFiles = 0;
             foreach (var file in files)
@@ -90,6 +94,12 @@ namespace DatabaseCodeGenerator.Schema
                             var item = classSerializer.Deserialize(reader) as XmlClassItem;
                             CheckClass(item);
                             _configurations.Add(item.name, item);
+                        }
+                        else if (typeInfo.type == "expression")
+                        {
+                            var item = expressionSerializer.Deserialize(reader) as XmlExpressionItem;
+                            CheckExpression(item);
+                            _expressions.Add(item.name, item);
                         }
                         else
                         {
@@ -157,6 +167,20 @@ namespace DatabaseCodeGenerator.Schema
                         throw new InvalidSchemaException("Duplicate member name - " + data.name + "." + item.name);
                     memberNames.Add(name);
                 }
+            }
+        }
+
+        private void CheckExpression(XmlExpressionItem data)
+        {
+            Assert.IsNotNull(data);
+
+            var paramNames = new HashSet<string>();
+            foreach (var item in data.items)
+            {
+                if (string.IsNullOrEmpty(item.name))
+                    throw new InvalidSchemaException("Param name cannot be empty - " + data.name);
+                if (string.IsNullOrEmpty(item.type))
+                    throw new InvalidSchemaException("Param type cannot be empty - " + data.name + "." + item.name);
             }
         }
 
@@ -245,5 +269,6 @@ namespace DatabaseCodeGenerator.Schema
         private readonly Dictionary<string, XmlClassItem> _structs = new Dictionary<string, XmlClassItem>();
         private readonly Dictionary<string, XmlClassItem> _classes = new Dictionary<string, XmlClassItem>();
         private readonly Dictionary<string, XmlClassItem> _configurations = new Dictionary<string, XmlClassItem>();
+        private readonly Dictionary<string, XmlExpressionItem> _expressions = new Dictionary<string, XmlExpressionItem>();
     }
 }

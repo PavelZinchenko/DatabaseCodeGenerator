@@ -1,0 +1,92 @@
+﻿<#@ template language="C#" #>
+<#@ include file="FuncParams.tt" #>
+<#@ include file="GeneratedCodeWarning.tt" #>
+
+using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
+using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+using CodeWriter.ExpressionParser;
+<#
+	var returnType = GetFuncReturnType(ExpressionData);
+#>
+
+namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
+{
+	public class <#= Utils.ExpressionClassName(ExpressionData) #>
+	{
+<#
+		PushIndent("\t\t");
+
+		for(int i = 0; i < ExpressionData.items.Count; ++i)
+			WriteLine($"public string ParamName{i+1} {{ get; set; }} = \"{ExpressionData.items[i].name}\";");
+
+		PopIndent();
+#>
+
+		public <#= Utils.ExpressionClassName(ExpressionData) #>(string data, <#= returnType #> minvalue, <#= returnType #> maxvalue, IVariableResolver variableResolver)
+		{
+			_expressionText = data;
+			_minvalue = minvalue;
+			_maxvalue = maxvalue;
+			_variableResolver = variableResolver;
+		}
+
+		public <#= returnType #> Evaluate(<#= GetFuncParamList(ExpressionData) #>)
+		{
+			if (_expression == null) Build();
+<#
+			PushIndent("\t\t\t");
+
+			foreach(var item in ExpressionData.items)
+				WriteLine($"{Utils.PrivateMemberName(item.name)} = {item.name};");
+
+			PopIndent();
+#>
+			return ClampResult(_expression.Invoke().AsInt);
+		}
+
+		private void Build()
+		{
+			var builder = new ExpressionBuilder(_variableResolver);
+<#
+			PushIndent("\t\t\t");
+			
+			for (int i = 0; i < ExpressionData.items.Count; i++)
+				WriteLine($"builder.AddParameter(ParamName{i+1}, {Utils.GetterName(ExpressionData.items[i].name)});");
+
+			PopIndent();
+#>
+			_expression = builder.Build(_expressionText).Invoke;
+		}
+
+		private <#= returnType #> ClampResult(<#= returnType #> value)
+        {
+			if (value < _minvalue) return _minvalue;
+			if (value > _maxvalue) return _maxvalue;
+			return value;
+        }
+
+<#
+		PushIndent("\t\t");
+
+		foreach(var item in ExpressionData.items)
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(item.name)}() => {Utils.PrivateMemberName(item.name)};");
+
+		PopIndent();
+#>
+
+		private IVariableResolver _variableResolver;
+		private Expression<<#= Utils.VariantType #>> _expression;
+		private string _expressionText;
+		private <#= returnType #> _minvalue;
+		private <#= returnType #> _maxvalue;
+
+<#
+		foreach(var item in ExpressionData.items)
+		{
+#>
+		private <#= GetFuncParamType(item, Schema) #> <#= Utils.PrivateMemberName(item.name) #>;
+<#
+		}
+#>
+	}
+}

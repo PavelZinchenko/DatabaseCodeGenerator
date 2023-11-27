@@ -24,7 +24,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 		public <#= Utils.SerializableClassName(ObjectData.name) #>()
 		{
 			ItemType = <#= Constants.ItemTypeEnum + "." + ObjectData.typeid #>;
-			FileName = $"{ItemType}.json";
+			FileName = "<#= ObjectData.typeid #>.json";
 		}
 
 <#

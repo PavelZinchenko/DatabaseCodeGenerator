@@ -1,5 +1,7 @@
 ﻿<#@ template language="C#" #>
-<#@ include file="Serialization.tt" #>
+<#@ include file="FuncParams.tt" #>
+<#@ include file="WriteDeserializationCode.tt" #>
+<#@ include file="WriteDataClassMember.tt" #>
 <#@ include file="GeneratedCodeWarning.tt" #>
 
 using System.Linq;

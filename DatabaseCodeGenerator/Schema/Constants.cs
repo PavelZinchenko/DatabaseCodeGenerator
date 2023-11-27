@@ -18,6 +18,7 @@
         public const string TypeLayout = "layout";
         public const string TypeAudioClip = "audioclip";
         public const string TypePrefab = "prefab";
+        public const string TypeFormula = "expression";
 
         public const string ItemTypeEnum = "ItemType";
 

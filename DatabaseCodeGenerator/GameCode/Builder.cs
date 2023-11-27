@@ -23,6 +23,9 @@ namespace DatabaseCodeGenerator.GameCode
             foreach (var item in _schema.Enums)
                 GenerateEnum(item);
 
+            foreach (var item in _schema.Expressions)
+                GenerateExpression(item);
+
             foreach (var item in _schema.Objects)
             {
                 GenerateSerializableClass(item, ObjectType.Class);
@@ -69,6 +72,14 @@ namespace DatabaseCodeGenerator.GameCode
             var data = template.TransformText();
 
             _codeWriter.Write(Utils.SerializableNamespace, item.name, data);
+        }
+
+        private void GenerateExpression(XmlExpressionItem item)
+        {
+            var template = new ExpressionTemplate(item, _schema);
+            string data = template.TransformText();
+
+            _codeWriter.Write(Utils.ExpressionsNamespace, item.name, data);
         }
 
         private void GenerateDataClass(XmlClassItem item, ObjectType type)

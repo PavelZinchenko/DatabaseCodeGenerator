@@ -57,6 +57,11 @@
 				WriteLine("[DefaultValue(\"\")]");
 				WriteLine("public string " + member.name + ";");
 			}
+			else if (member.type == Constants.TypeFormula)
+			{
+				WriteLine("[DefaultValue(\"\")]");
+				WriteLine("public string " + member.name + ";");
+			}
 			else if (member.type == Constants.TypeLayout)
 			{
 				WriteLine("[DefaultValue(\"\")]");
@@ -145,6 +150,10 @@
 				WriteLine(prefix + "System.Drawing.Color " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeImage)
+			{
+				WriteLine(prefix + "string " + memberName + suffix);
+			}
+			else if (member.type == Constants.TypeFormula)
 			{
 				WriteLine(prefix + "string " + memberName + suffix);
 			}

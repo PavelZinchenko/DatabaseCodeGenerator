@@ -56,6 +56,10 @@
 			{
 				WriteLine("public string " + member.name + ";");
 			}
+			else if (member.type == Constants.TypeFormula)
+			{
+				WriteLine("public string " + member.name + ";");
+			}
 			else if (member.type == Constants.TypeVector)
 			{
 				WriteLine($"public {Context.VectorType} {member.name};");

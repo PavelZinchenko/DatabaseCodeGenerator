@@ -71,6 +71,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="EditorCode\Templates\EnumTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="EditorCode\Templates\MutableObjectTemplate.cs">
       <DependentUpon>MutableObjectTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -116,6 +121,11 @@
     </Compile>
     <Compile Include="GameCode\Templates\LegacyObjectTemplate.cs">
       <DependentUpon>LegacyObjectTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GameCode\Templates\ExpressionTemplate.cs">
+      <DependentUpon>ExpressionTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -204,6 +214,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GameCode\Templates\FuncParams.tt" />
+    <Content Include="GameCode\Templates\ExpressionTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ExpressionTemplate.cs</LastGenOutput>
+    </Content>
+    <None Include="GameCode\Templates\WriteSerializableClassMember.tt" />
+    <None Include="GameCode\Templates\WriteDataClassMember.tt" />
     <Content Include="MigrationCode\Templates\DatabaseUpgraderTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DatabaseUpgraderTemplate.cs</LastGenOutput>
@@ -230,7 +247,7 @@
       <LastGenOutput>SerializableTemplate.cs</LastGenOutput>
     </Content>
     <None Include="MigrationCode\Templates\Serialization.tt" />
-    <None Include="GameCode\Templates\Serialization.tt" />
+    <None Include="GameCode\Templates\WriteDeserializationCode.tt" />
     <None Include="EditorCode\Templates\GeneratedCodeWarning.tt" />
     <Content Include="EditorCode\Templates\DatabaseContentTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

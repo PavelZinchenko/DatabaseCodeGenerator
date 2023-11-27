@@ -48,6 +48,29 @@ namespace DatabaseCodeGenerator.Schema
         public List<XmlKeyValuePair> items = new List<XmlKeyValuePair>();
     }
 
+    [XmlRoot("data")]
+    public class XmlExpressionItem
+    {
+        [XmlAttribute]
+        public string name = string.Empty;
+        [XmlAttribute]
+        public string result = string.Empty;
+        [XmlAttribute]
+        public string typeid = string.Empty;
+        [XmlElement("param")]
+        public List<XmlExpressionParam> items = new List<XmlExpressionParam>();
+    }
+
+    public class XmlExpressionParam
+    {
+        [XmlAttribute]
+        public string name = string.Empty;
+        [XmlAttribute]
+        public string type = string.Empty;
+        [XmlAttribute]
+        public string typeid = string.Empty;
+    }
+
     public class XmlClassMember
     {
         [XmlAttribute]
@@ -68,6 +91,8 @@ namespace DatabaseCodeGenerator.Schema
         public string caseValue = string.Empty;
         [XmlAttribute]
         public string options = string.Empty;
+        [XmlAttribute]
+        public string arguments = string.Empty;
     }
 
     [XmlRoot("data")]

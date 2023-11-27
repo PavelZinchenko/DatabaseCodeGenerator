@@ -15,6 +15,13 @@ namespace DatabaseCodeGenerator.GameCode.Templates
         protected XmlEnumItem EnumData { get; }
     }
 
+    public partial class ExpressionTemplate
+    {
+        public ExpressionTemplate(XmlExpressionItem expressionData, DatabaseSchema schema) { ExpressionData = expressionData; Schema = schema; }
+        protected XmlExpressionItem ExpressionData { get; }
+        protected DatabaseSchema Schema { get; }
+    }
+
     public partial class ObjectTemplate
     {
         public ObjectTemplate(XmlClassItem objectData, DatabaseSchema schema, ObjectType type) { ObjectData = objectData; Schema = schema; ObjectType = type; }
