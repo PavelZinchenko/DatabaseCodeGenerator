@@ -323,7 +323,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n\t\tprivate class VariableResolver : IVariableResolver\r\n        {\r\n\t\t\tprivate ");
+            this.Write("\r\n\t\tprivate class VariableResolver : IVariableResolver\r\n\t\t{\r\n\t\t\tprivate ");
             
             #line 81 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));
@@ -337,10 +337,37 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" context)\r\n            {\r\n\t\t\t\t_context = context;\r\n            }\r\n\r\n\t\t\tpublic Exp" +
-                    "ression<Variant> Resolve(string name)\r\n            {\r\n");
+            this.Write(" context)\r\n\t\t\t{\r\n\t\t\t\t_context = context;\r\n\t\t\t}\r\n\r\n\t\t\tpublic IFunction<");
+            
+            #line 88 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.VariantType));
+            
+            #line default
+            #line hidden
+            this.Write("> ResolveFunction(string name)\r\n            {\r\n");
             
             #line 90 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in ObjectData.members)
+					WriteVariableResolverResolveFunction(item);
+
+				PopIndent();
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\treturn null;\r\n\t\t\t}\r\n\r\n\t\t\tpublic Expression<");
+            
+            #line 101 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Utils.VariantType));
+            
+            #line default
+            #line hidden
+            this.Write("> ResolveVariable(string name)\r\n\t\t\t{\r\n");
+            
+            #line 103 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
 
 				PushIndent("\t\t\t\t");
 
@@ -352,9 +379,9 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t\treturn null;\r\n            }\r\n\r\n");
+            this.Write("\t\t\t\treturn null;\r\n\t\t\t}\r\n\r\n");
             
-            #line 101 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+            #line 114 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
 
 			PushIndent("\t\t\t");
 
@@ -366,9 +393,9 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("        }\r\n");
+            this.Write("\t\t}\r\n");
             
-            #line 110 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+            #line 123 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
 
 		}
 
@@ -433,10 +460,17 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 		return Constants.TypeInt;
 }
 
+private string VariantToType(string name, string type)
+{
+	if (type == Constants.TypeFloat)
+		return name + ".AsFloat";
+	else
+		return name + ".AsInt";
+}
+
 private void WriteVariableResolverResolve(XmlClassMember member)
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
-
     var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
 	switch (member.type)
 	{
@@ -447,6 +481,18 @@ private void WriteVariableResolverResolve(XmlClassMember member)
 			break;
 		case Constants.TypeEnum:
 			// TODO
+			break;
+	}
+}
+
+private void WriteVariableResolverResolveFunction(XmlClassMember member)
+{
+	if (member.options.Contains(Constants.OptionObsolete)) return;
+    var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+	switch (member.type)
+	{
+		case Constants.TypeFormula:
+			WriteLine($"if (name == \"{memberName}\") return _context.{Utils.PrivateMemberName(memberName)};");
 			break;
 	}
 }
@@ -581,7 +627,8 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
 	{
 		var expression = schema.GetExpression(member.typeid);
         member.MinMaxInt(out var minvalue, out var maxvalue);
-		Write($"{memberName} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+
+        Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
         Write(" { ");
         
         var paramNamesArray = member.arguments?.Split(new char[] { ',', ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -594,7 +641,9 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
             }
         }
 
-        Write(" }.Evaluate;");
+        WriteLine(" };");
+
+		WriteLine($"{memberName} = {Utils.PrivateMemberName(memberName)}.Evaluate;");
 	}
     else
     {
@@ -690,6 +739,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 			throw new InvalidSchemaException("Unknown expression type in class member " + member.name);
 
 		var expression = schema.GetExpression(member.typeid);
+		WriteLine($"private readonly {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)} {Utils.PrivateMemberName(memberName)};");
 		WriteLine($"{prefix}delegate {GetFuncReturnType(expression)} {Utils.DelegateName(memberName)}({GetFuncParamList(expression, member.arguments)});");
 		WriteLine($"{prefix}{Utils.DelegateName(memberName)} {memberName}{suffix}");
 	}

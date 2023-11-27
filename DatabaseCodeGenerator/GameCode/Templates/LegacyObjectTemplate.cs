@@ -401,10 +401,17 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 		return Constants.TypeInt;
 }
 
+private string VariantToType(string name, string type)
+{
+	if (type == Constants.TypeFloat)
+		return name + ".AsFloat";
+	else
+		return name + ".AsInt";
+}
+
 private void WriteVariableResolverResolve(XmlClassMember member)
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
-
     var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
 	switch (member.type)
 	{
@@ -415,6 +422,18 @@ private void WriteVariableResolverResolve(XmlClassMember member)
 			break;
 		case Constants.TypeEnum:
 			// TODO
+			break;
+	}
+}
+
+private void WriteVariableResolverResolveFunction(XmlClassMember member)
+{
+	if (member.options.Contains(Constants.OptionObsolete)) return;
+    var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+	switch (member.type)
+	{
+		case Constants.TypeFormula:
+			WriteLine($"if (name == \"{memberName}\") return _context.{Utils.PrivateMemberName(memberName)};");
 			break;
 	}
 }
@@ -549,7 +568,8 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
 	{
 		var expression = schema.GetExpression(member.typeid);
         member.MinMaxInt(out var minvalue, out var maxvalue);
-		Write($"{memberName} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+
+        Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
         Write(" { ");
         
         var paramNamesArray = member.arguments?.Split(new char[] { ',', ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -562,7 +582,9 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
             }
         }
 
-        Write(" }.Evaluate;");
+        WriteLine(" };");
+
+		WriteLine($"{memberName} = {Utils.PrivateMemberName(memberName)}.Evaluate;");
 	}
     else
     {
@@ -658,6 +680,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 			throw new InvalidSchemaException("Unknown expression type in class member " + member.name);
 
 		var expression = schema.GetExpression(member.typeid);
+		WriteLine($"private readonly {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)} {Utils.PrivateMemberName(memberName)};");
 		WriteLine($"{prefix}delegate {GetFuncReturnType(expression)} {Utils.DelegateName(memberName)}({GetFuncParamList(expression, member.arguments)});");
 		WriteLine($"{prefix}{Utils.DelegateName(memberName)} {memberName}{suffix}");
 	}
