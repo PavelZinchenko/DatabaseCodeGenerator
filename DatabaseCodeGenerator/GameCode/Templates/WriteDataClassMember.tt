@@ -71,6 +71,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 			throw new InvalidSchemaException("Unknown expression type in class member " + member.name);
 
 		var expression = schema.GetExpression(member.typeid);
+		WriteLine($"private readonly {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)} {Utils.PrivateMemberName(memberName)};");
 		WriteLine($"{prefix}delegate {GetFuncReturnType(expression)} {Utils.DelegateName(memberName)}({GetFuncParamList(expression, member.arguments)});");
 		WriteLine($"{prefix}{Utils.DelegateName(memberName)} {memberName}{suffix}");
 	}

@@ -52,10 +52,17 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 		return Constants.TypeInt;
 }
 
+private string VariantToType(string name, string type)
+{
+	if (type == Constants.TypeFloat)
+		return name + ".AsFloat";
+	else
+		return name + ".AsInt";
+}
+
 private void WriteVariableResolverResolve(XmlClassMember member)
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
-
     var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
 	switch (member.type)
 	{
@@ -66,6 +73,18 @@ private void WriteVariableResolverResolve(XmlClassMember member)
 			break;
 		case Constants.TypeEnum:
 			// TODO
+			break;
+	}
+}
+
+private void WriteVariableResolverResolveFunction(XmlClassMember member)
+{
+	if (member.options.Contains(Constants.OptionObsolete)) return;
+    var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
+	switch (member.type)
+	{
+		case Constants.TypeFormula:
+			WriteLine($"if (name == \"{memberName}\") return _context.{Utils.PrivateMemberName(memberName)};");
 			break;
 	}
 }

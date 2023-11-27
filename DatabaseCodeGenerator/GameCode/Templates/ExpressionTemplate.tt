@@ -2,6 +2,7 @@
 <#@ include file="FuncParams.tt" #>
 <#@ include file="GeneratedCodeWarning.tt" #>
 
+using System.Collections.Generic;
 using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
 using CodeWriter.ExpressionParser;
@@ -11,7 +12,7 @@ using CodeWriter.ExpressionParser;
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 {
-	public class <#= Utils.ExpressionClassName(ExpressionData) #>
+	public class <#= Utils.ExpressionClassName(ExpressionData) #> : IFunction<<#= Utils.VariantType #>>
 	{
 <#
 		PushIndent("\t\t");
@@ -21,6 +22,31 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 
 		PopIndent();
 #>
+
+		public int ArgumentCount => <#= ExpressionData.items.Count #>;
+
+		private Expression<<#= Utils.VariantType #>> Expression
+		{
+			get
+			{
+				if (_expression == null)
+				{
+					var builder = new ExpressionBuilder(_variableResolver);
+<#
+					PushIndent("\t\t\t\t\t");
+			
+					for (int i = 0; i < ExpressionData.items.Count; i++)
+						WriteLine($"builder.AddParameter(ParamName{i+1}, {Utils.GetterName(ExpressionData.items[i].name)});");
+
+					PopIndent();
+#>
+					_expression = builder.Build(_expressionText).Invoke;
+				}
+
+				return _expression;
+			}
+		}
+
 
 		public <#= Utils.ExpressionClassName(ExpressionData) #>(string data, <#= returnType #> minvalue, <#= returnType #> maxvalue, IVariableResolver variableResolver)
 		{
@@ -32,7 +58,6 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 
 		public <#= returnType #> Evaluate(<#= GetFuncParamList(ExpressionData) #>)
 		{
-			if (_expression == null) Build();
 <#
 			PushIndent("\t\t\t");
 
@@ -41,29 +66,15 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 
 			PopIndent();
 #>
-			return ClampResult(_expression.Invoke().AsInt);
-		}
-
-		private void Build()
-		{
-			var builder = new ExpressionBuilder(_variableResolver);
-<#
-			PushIndent("\t\t\t");
-			
-			for (int i = 0; i < ExpressionData.items.Count; i++)
-				WriteLine($"builder.AddParameter(ParamName{i+1}, {Utils.GetterName(ExpressionData.items[i].name)});");
-
-			PopIndent();
-#>
-			_expression = builder.Build(_expressionText).Invoke;
+			return ClampResult(<#= VariantToType("Expression.Invoke()", returnType) #>);
 		}
 
 		private <#= returnType #> ClampResult(<#= returnType #> value)
-        {
+		{
 			if (value < _minvalue) return _minvalue;
 			if (value > _maxvalue) return _maxvalue;
 			return value;
-        }
+		}
 
 <#
 		PushIndent("\t\t");
@@ -73,6 +84,28 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 
 		PopIndent();
 #>
+
+		public Expression<<#= Utils.VariantType #>> Invoke(List<Expression<<#= Utils.VariantType #>>> arguments)
+		{
+			if (arguments.Count != ArgumentCount) 
+				throw new System.ArgumentException();
+
+			return () =>
+			{
+<#
+				PushIndent("\t\t\t\t");
+
+				for (int i = 0; i < ExpressionData.items.Count; i++)
+				{
+					var item = ExpressionData.items[i];
+					WriteLine($"{Utils.PrivateMemberName(item.name)} = " + VariantToType($"arguments[{i}].Invoke()", GetFuncParamType(item, Schema)) + ";");
+				}
+
+				PopIndent();
+#>
+				return ClampResult(<#= VariantToType("Expression.Invoke()", returnType) #>);
+			};
+		}
 
 		private IVariableResolver _variableResolver;
 		private Expression<<#= Utils.VariantType #>> _expression;

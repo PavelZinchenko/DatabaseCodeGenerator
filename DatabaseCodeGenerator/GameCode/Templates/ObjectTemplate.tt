@@ -77,16 +77,29 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 #>
 
 		private class VariableResolver : IVariableResolver
-        {
+		{
 			private <#= Utils.DataClassName(ObjectData) #> _context;
 
 			public VariableResolver(<#= Utils.DataClassName(ObjectData) #> context)
-            {
+			{
 				_context = context;
-            }
+			}
 
-			public Expression<Variant> Resolve(string name)
+			public IFunction<<#= Utils.VariantType #>> ResolveFunction(string name)
             {
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in ObjectData.members)
+					WriteVariableResolverResolveFunction(item);
+
+				PopIndent();
+#>
+				return null;
+			}
+
+			public Expression<<#= Utils.VariantType #>> ResolveVariable(string name)
+			{
 <#
 				PushIndent("\t\t\t\t");
 
@@ -96,7 +109,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 				PopIndent();
 #>
 				return null;
-            }
+			}
 
 <#
 			PushIndent("\t\t\t");
@@ -106,7 +119,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 			PopIndent();
 #>
-        }
+		}
 <#
 		}
 #>
