@@ -111,9 +111,4 @@
 				throw new InvalidSchemaException("Invalid class member type - " + member.type);
 			}
 		}
-
-		private static string PrivateMemberName(string name) 
-		{ 		
-			return "_" + char.ToLower(name[0]) + name.Substring(1); 
-		}
 #>

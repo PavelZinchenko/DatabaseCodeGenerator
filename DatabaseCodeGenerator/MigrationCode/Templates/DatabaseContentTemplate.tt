@@ -22,13 +22,13 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
         public int VersionMajor 
         {
             get => <#= Utils.DatabaseSettings #> != null ? <#= Utils.DatabaseSettings #>.DatabaseVersion : <#= Schema.Version.Major #>;
-            set => (<#= Utils.DatabaseSettings #> ?? (<#= Utils.DatabaseSettings #> = new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>())).<#= Utils.VersionMajor #> = value;
+            set => Create<#= Utils.DatabaseSettings #>().<#= Utils.VersionMajor #> = value;
         }
 
         public int VersionMinor
         {
             get => <#= Utils.DatabaseSettings #> != null ? <#= Utils.DatabaseSettings #>.DatabaseVersionMinor : 0;
-            set => (<#= Utils.DatabaseSettings #> ?? (<#= Utils.DatabaseSettings #> = new <#= Utils.SerializableClassName(Utils.DatabaseSettings) #>())).<#= Utils.VersionMinor #> = value;
+            set => Create<#= Utils.DatabaseSettings #>().<#= Utils.VersionMinor #> = value;
         }
 
         public void LoadJson(string name, string content)
@@ -58,9 +58,6 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
             {
                 var data = _serializer.FromJson<<#= Utils.SerializableClassName(item.name) #>>(content);
                 data.FileName = name;
-
-				if (<#= item.name #> != null)
-                    throw new DatabaseException("Duplicate <#= item.name #> file found - " + name);
                 <#= item.name #> = data;
             }
 <#
@@ -125,6 +122,15 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
         {
 #>
 		public <#= Utils.SerializableClassName(item.name) + " " + item.name #> { get; private set; }
+<#
+        }
+#>
+
+<#
+		foreach (var item in Schema.Configurations)
+        {
+#>
+		public <#= $"{Utils.SerializableClassName(item.name)} Create{item.name}() => {item.name} ?? ({item.name} = new {Utils.SerializableClassName(item.name)}());" #>
 <#
         }
 #>

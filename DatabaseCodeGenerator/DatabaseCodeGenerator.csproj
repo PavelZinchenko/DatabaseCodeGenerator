@@ -246,7 +246,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SerializableTemplate.cs</LastGenOutput>
     </Content>
-    <None Include="MigrationCode\Templates\Serialization.tt" />
+    <None Include="MigrationCode\Templates\WriteSerializableClassMember.tt" />
     <None Include="GameCode\Templates\WriteDeserializationCode.tt" />
     <None Include="EditorCode\Templates\GeneratedCodeWarning.tt" />
     <Content Include="EditorCode\Templates\DatabaseContentTemplate.tt">

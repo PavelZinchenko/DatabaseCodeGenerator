@@ -9,6 +9,7 @@ namespace DatabaseCodeGenerator.MigrationCode
         public static string ObjectGetterName(string name) { return "Get" + name; }
         public static string ObjectSetterName(string name) { return "Add" + name; }
         public static string ObjectListPropertyName(string name) { return name + "List"; }
+        public static string PrivateMemberName(string name) => "_" + char.ToLower(name[0]) + name.Substring(1);
 
         public const string FactoryMethodName = "Create";
         public const string DatabaseUpgraderClassName = "DatabaseUpgrader";
