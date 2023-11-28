@@ -209,7 +209,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\Serialization.tt"
+        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\WriteSerializableClassMember.tt"
 
 		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
@@ -321,11 +321,6 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
 			{
 				throw new InvalidSchemaException("Invalid class member type - " + member.type);
 			}
-		}
-
-		private static string PrivateMemberName(string name) 
-		{ 		
-			return "_" + char.ToLower(name[0]) + name.Substring(1); 
 		}
 
         

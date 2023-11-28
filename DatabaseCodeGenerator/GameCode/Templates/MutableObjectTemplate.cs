@@ -592,7 +592,7 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 private string VariantToType(string name, string type)
 {
 	if (type == Constants.TypeFloat)
-		return name + ".AsFloat";
+		return name + ".AsSingle";
 	else
 		return name + ".AsInt";
 }
