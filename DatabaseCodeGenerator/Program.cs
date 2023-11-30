@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 
 namespace DatabaseCodeGenerator
 {
@@ -16,6 +17,8 @@ namespace DatabaseCodeGenerator
 
             try
             {
+                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+
                 var filename = args[0];
                 var versions = new Schema.VersionList(filename);
                 if (!versions.TryGetLatest(out var latestVersion))

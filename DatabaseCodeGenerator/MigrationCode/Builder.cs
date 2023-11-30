@@ -89,14 +89,25 @@ namespace DatabaseCodeGenerator.MigrationCode
         {
             public static Context EditorCodeContext()
             {
-                return new Context { Namespace = EditorCode.Utils.RootNamespace, VectorType = EditorCode.Utils.VectorType };
+                return new Context
+                {
+                    Namespace = EditorCode.Utils.RootNamespace,
+                    VectorType = EditorCode.Utils.VectorType,
+                    GenerateAttributes = true,
+                };
             }
 
             public static Context GameCodeContext()
             {
-                return new Context { Namespace = GameCode.Utils.RootNamespace, VectorType = GameCode.Utils.VectorType };
+                return new Context 
+                { 
+                    Namespace = GameCode.Utils.RootNamespace, 
+                    VectorType = GameCode.Utils.VectorType,
+                    GenerateAttributes = false,
+                };
             }
 
+            public bool GenerateAttributes;
             public string Namespace;
             public string VectorType;
         }

@@ -4,6 +4,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 
 using System;
+<#
+	if (Context.GenerateAttributes) WriteLine("using System.ComponentModel;"); 
+#>
 using <#= Context.Namespace #>.<#= Utils.TypesNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Utils.EnumsNamespace #>;
 
@@ -35,7 +38,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
         foreach (var item in ObjectData.members)
         {
             if (!members.Add(item.name)) continue;
-			WriteSerializableClassMember(item, Schema);
+			WriteSerializableClassMember(item, Schema, Context.GenerateAttributes, ObjectType != ObjectType.Struct);
         }
 
 		PopIndent();
