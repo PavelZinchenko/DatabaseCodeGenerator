@@ -76,65 +76,74 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line default
             #line hidden
             this.Write("\r\n");
-            this.Write("\r\nusing System;\r\nusing ");
+            this.Write("\r\nusing System;\r\n");
             
             #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+
+	if (Context.GenerateAttributes) WriteLine("using System.ComponentModel;"); 
+
+            
+            #line default
+            #line hidden
+            this.Write("using ");
+            
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Context.Namespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 7 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.TypesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing ");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 8 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 11 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.EnumsNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.RootNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Schema.Version.ToNamespace()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 10 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableNamespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\t[Serializable]\r\n");
             
-            #line 13 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 16 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
 	if (ObjectType == ObjectType.Struct)
     {
@@ -144,14 +153,14 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("\tpublic struct ");
             
-            #line 17 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 20 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
     } else {
 
@@ -160,35 +169,35 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             #line hidden
             this.Write("\tpublic class ");
             
-            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write(" : SerializableItem\r\n\t{\r\n\t\tpublic ");
             
-            #line 24 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
             
             #line default
             #line hidden
             this.Write("()\r\n\t\t{\r\n\t\t\tItemType = ");
             
-            #line 26 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 29 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Constants.ItemTypeEnum + "." + ObjectData.typeid));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\tFileName = \"");
             
-            #line 27 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 30 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.typeid));
             
             #line default
             #line hidden
             this.Write(".json\";\r\n\t\t}\r\n\r\n");
             
-            #line 30 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
+            #line 33 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\SerializableTemplate.tt"
 
     }
 		PushIndent("\t\t");
@@ -197,7 +206,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
         foreach (var item in ObjectData.members)
         {
             if (!members.Add(item.name)) continue;
-			WriteSerializableClassMember(item, Schema);
+			WriteSerializableClassMember(item, Schema, Context.GenerateAttributes, ObjectType != ObjectType.Struct);
         }
 
 		PopIndent();
@@ -211,111 +220,140 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
         
         #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\WriteSerializableClassMember.tt"
 
-		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
+		private string GetDefaultValue(XmlClassMember member, DatabaseSchema schema)
 		{
-			var defaultValue = string.Empty;
-			if (!string.IsNullOrEmpty(member.@default))
+			if (string.IsNullOrEmpty(member.@default)) return string.Empty;
+
+			switch (member.type)
 			{
-				switch (member.type)
-				{
-				case Constants.TypeInt:
-				case Constants.TypeBool:
-					defaultValue = " = " + member.@default;
-					break;
+				case Constants.TypeEnum:
+					return member.typeid + "." + member.@default;
 				case Constants.TypeFloat:
-					defaultValue = " = " + member.@default + "f";
-					break;
+					return member.@default + "f";
 				default:
-					defaultValue = " = \"" + member.@default + "\"";
-					break;
-				}
+					return member.@default;
+			}
+		}
+
+		private bool IsStringType(XmlClassMember member)
+		{
+			switch (member.type)
+			{
+				case Constants.TypeString:
+				case Constants.TypeColor:
+				case Constants.TypeImage:
+				case Constants.TypeAudioClip:
+				case Constants.TypePrefab:
+				case Constants.TypeLayout:
+				case Constants.TypeFormula:
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema, bool addAttribute, bool addAssignment)
+		{
+			var defaultValue = GetDefaultValue(member, schema);
+			var assignDefaultValue = string.Empty;
+			var hasDefault = !string.IsNullOrEmpty(defaultValue);
+
+			if (IsStringType(member))
+			{
+				if (addAttribute) WriteLine($"[DefaultValue(\"{defaultValue}\")]");
+				if (addAssignment && hasDefault) assignDefaultValue = $" = \"{defaultValue}\"";
+			}
+			else if (hasDefault)
+			{
+				if (addAttribute) WriteLine($"[DefaultValue({defaultValue})]");
+				if (addAssignment) assignDefaultValue = $" = {defaultValue}";
 			}
 
 			if (member.type == Constants.TypeInt)
 			{
-				WriteLine("public int " + member.name + defaultValue + ";");
+				WriteLine("public int " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeFloat)
 			{
-				WriteLine("public float " + member.name + defaultValue + ";");
+				WriteLine("public float " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeBool)
 			{
-				WriteLine("public bool " + member.name + defaultValue + ";");
+				WriteLine("public bool " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeString)
 			{
-				WriteLine("public string " + member.name + defaultValue + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeColor)
 			{
-				WriteLine("public string " + member.name + defaultValue + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeImage)
 			{
-				WriteLine("public string " + member.name + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeAudioClip)
 			{
-				WriteLine("public string " + member.name + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypePrefab)
 			{
-				WriteLine("public string " + member.name + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeLayout)
 			{
-				WriteLine("public string " + member.name + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeFormula)
 			{
-				WriteLine("public string " + member.name + ";");
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeVector)
 			{
-				WriteLine($"public {Context.VectorType} {member.name};");
+				WriteLine($"public {Context.VectorType} {member.name}{assignDefaultValue};");
 			}
 			else if (member.type == Constants.TypeEnum)
 			{
 				if (!schema.HasEnum(member.typeid))
 					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine("public " + member.typeid + " " + member.name + ";");
+				WriteLine("public " + member.typeid + " " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeObject)
 			{
 				if (!schema.HasObject(member.typeid))
 					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
 
-				WriteLine("public int " + member.name + ";");
+				WriteLine("public int " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeObjectList)
 			{
 				if (!schema.HasObject(member.typeid))
 					throw new InvalidSchemaException("Unknown object type in class member " + member.name);
 
-				WriteLine("public int[] " + member.name + ";");
+				WriteLine("public int[] " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeStruct)
 			{
 				if (!schema.HasStruct(member.typeid))
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
-				WriteLine("public " + Utils.SerializableClassName(member.typeid) + " " + member.name + ";");
+				WriteLine("public " + Utils.SerializableClassName(member.typeid) + " " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeStructList)
 			{
 				if (!schema.HasStruct(member.typeid))
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
-				WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + ";");
+				WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
 				if (!schema.HasEnum(member.typeid))
 					throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-				WriteLine("public " + member.typeid + "[] " + member.name + ";");
+				WriteLine("public " + member.typeid + "[] " + member.name + assignDefaultValue + ";");
 			}
 			else
 			{
