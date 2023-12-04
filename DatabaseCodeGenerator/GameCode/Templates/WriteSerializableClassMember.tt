@@ -1,11 +1,28 @@
 ﻿<#@ template language="C#" #>
 <#@ import namespace="Schema" #><#+
 
+private string GetDefaultValue(XmlClassMember member, DatabaseSchema schema)
+{
+	if (string.IsNullOrEmpty(member.@default)) return string.Empty;
+
+	switch (member.type)
+	{
+		case Constants.TypeEnum:
+			return member.typeid + "." + member.@default;
+		case Constants.TypeFloat:
+			return member.@default + "f";
+		default:
+			return member.@default;
+	}
+}
+
 private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema schema)
 {
 	//if (member.options.Contains(Constants.OptionObsolete)) return;
-			
-	var defaultValue = string.Empty;
+
+	var defaultValue = GetDefaultValue(member, schema);
+	if (!string.IsNullOrEmpty(defaultValue)) defaultValue = " = " + defaultValue;
+	
 	if (!string.IsNullOrEmpty(member.@default))
 	{
 		switch (member.type)
@@ -45,41 +62,41 @@ private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema 
 	}
 	else if (member.type == Constants.TypeImage)
 	{
-		WriteLine("public string " + member.name + ";");
+		WriteLine("public string " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeAudioClip)
 	{
-		WriteLine("public string " + member.name + ";");
+		WriteLine("public string " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypePrefab)
 	{
-		WriteLine("public string " + member.name + ";");
+		WriteLine("public string " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeLayout)
 	{
-		WriteLine("public string " + member.name + ";");
+		WriteLine("public string " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeFormula)
 	{
-		WriteLine("public string " + member.name + ";");
+		WriteLine("public string " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeVector)
 	{
-		WriteLine($"public {Utils.VectorType} {member.name};");
+		WriteLine($"public {Utils.VectorType} {member.name}{defaultValue};");
 	}
 	else if (member.type == Constants.TypeEnum)
 	{
 		if (!schema.HasEnum(member.typeid))
 			throw new InvalidSchemaException("Unknown enum type in class member " + member.name);
 
-		WriteLine("public " + member.typeid + " " + member.name + ";");
+		WriteLine("public " + member.typeid + " " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeObject)
 	{
 		if (!schema.HasObject(member.typeid))
 			throw new InvalidSchemaException("Unknown object type in class member " + member.name);
 
-		WriteLine("public int " + member.name + ";");
+		WriteLine("public int " + member.name + defaultValue + ";");
 	}
 	else if (member.type == Constants.TypeObjectList)
 	{
