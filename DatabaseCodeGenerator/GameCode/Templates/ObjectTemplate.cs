@@ -417,6 +417,22 @@ private bool HasExpression(XmlClassItem objectData)
 	return false;
 }
 
+private string GetInternalType(XmlExpressionParam member, DatabaseSchema schema)
+{
+	if (member.type == Constants.TypeEnum)
+		return Constants.TypeInt;
+	else
+		return GetFuncParamType(member, schema);
+}
+
+private void WriteEnumResolver(XmlEnumItem data)
+{
+	foreach (var item in data.items)
+	{
+		WriteLine($"case \"{item.name}\": return () => (int){data.name}.{item.name};");
+	}
+}
+
 private string GetFuncParamType(XmlExpressionParam member, DatabaseSchema schema)
 {
 	if (member.type == Constants.TypeInt)
@@ -458,6 +474,16 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 		return Constants.TypeFloat;
 	else
 		return Constants.TypeInt;
+}
+
+private string ConvertToVariant(XmlExpressionParam item)
+{
+	string result = Utils.PrivateMemberName(item.name);
+
+	if (item.type == Constants.TypeEnum)
+		result = "(int)" + result;
+
+	return result;
 }
 
 private string VariantToType(string name, string type)
