@@ -17,7 +17,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
 	if (ObjectType == ObjectType.Struct)
     {
 #>
-	public struct <#= Utils.SerializableClassName(ObjectData.name) #>
+	public class <#= Utils.SerializableClassName(ObjectData.name) #>
 	{
 <#
     } else {
@@ -38,7 +38,7 @@ namespace <#= Utils.RootNamespace #>.<#= Schema.Version.ToNamespace() #>.<#= Uti
         foreach (var item in ObjectData.members)
         {
             if (!members.Add(item.name)) continue;
-			WriteSerializableClassMember(item, Schema, Context.GenerateAttributes, ObjectType != ObjectType.Struct);
+			WriteSerializableClassMember(item, Schema, Context.GenerateAttributes, true);
         }
 
 		PopIndent();

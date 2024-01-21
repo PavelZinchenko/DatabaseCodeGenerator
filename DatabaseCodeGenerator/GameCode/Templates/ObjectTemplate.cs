@@ -190,7 +190,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(".Loader loader)\r\n\t\t{\r\n\t\t\treturn new ");
+            this.Write(".Loader loader)\r\n\t\t{\r\n\t\t\treturn serializable == null ? DefaultValue : new ");
             
             #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.DataClassName(ObjectData)));

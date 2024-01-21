@@ -22,7 +22,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
-			return new <#= Utils.DataClassName(ObjectData) #>(serializable, loader);
+			return serializable == null ? DefaultValue : new <#= Utils.DataClassName(ObjectData) #>(serializable, loader);
 		}
 
 		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)

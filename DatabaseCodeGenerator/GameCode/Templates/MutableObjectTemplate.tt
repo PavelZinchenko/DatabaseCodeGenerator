@@ -19,6 +19,8 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		public static <#= Utils.DataClassName(ObjectData) #> <#= Utils.FactoryMethodName #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader)
 		{
+			if (serializable == null) return DefaultValue;
+
 <#
             SortMembers(ObjectData, out var baseMembers, out var extraMembers, out var switchEnumType);
 			var factoryName = "I" + Utils.DataClassName(ObjectData) + "Factory<T>";
