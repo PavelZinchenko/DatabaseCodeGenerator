@@ -8,8 +8,15 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>
 <#	
 		foreach (var item in EnumData.items) 
 		{
+			if (!string.IsNullOrEmpty(item.tooltip))
+			{
+#>
+		[TooltipText("<#= item.tooltip #>")]
+<#
+			}
+
 			if (string.IsNullOrEmpty(item.value)) 
-			{ 
+			{
 #>
 		<#= item.name + "," #>
 <#	

@@ -561,6 +561,8 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 		private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)
 		{
 			if (member.options.Contains(Constants.OptionObsolete)) return;
+			if (!string.IsNullOrEmpty(member.tooltip))
+				WriteLine($"[TooltipText(\"{member.tooltip}\")]");
 
 			var memberName = !string.IsNullOrEmpty(member.alias) ? member.alias : member.name;
 			var prefix = "public ";
@@ -642,7 +644,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
 				var dataClass = schema.GetStruct(member.typeid);
-				WriteLine($"{prefix}ObjectWrapper<{Utils.DataClassName(dataClass)}> {memberName}{suffix}");
+				WriteLine($"{prefix}ObjectWrapper<{Utils.DataClassName(dataClass)}> {memberName} = new({Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.DefaultValue){suffix}");
 			}
 			else if (member.type == Constants.TypeStructList)
 			{
@@ -787,7 +789,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine($"{memberName} = new ObjectWrapper<{Utils.DataClassName(dataClass)}>({Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.Create(serializable.{member.name}, database), {Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.DefaultValue);");
+                WriteLine($"{memberName}.Value = {Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.Create(serializable.{member.name}, database);");
             }
             else if (member.type == Constants.TypeStructList)
             {

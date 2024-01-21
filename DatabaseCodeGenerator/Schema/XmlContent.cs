@@ -31,11 +31,13 @@ namespace DatabaseCodeGenerator.Schema
         public string value = string.Empty;
     }
 
-    public class XmlKeyValuePair
+    public class XmlEnumValue
     {
         [XmlAttribute]
         public string name = string.Empty;
-        [XmlText]
+		[XmlAttribute]
+		public string tooltip = string.Empty;
+		[XmlText]
         public string value = string.Empty;
     }
 
@@ -45,7 +47,7 @@ namespace DatabaseCodeGenerator.Schema
         [XmlAttribute]
         public string name = string.Empty;
         [XmlElement("item")]
-        public List<XmlKeyValuePair> items = new List<XmlKeyValuePair>();
+        public List<XmlEnumValue> items = new List<XmlEnumValue>();
     }
 
     [XmlRoot("data")]
@@ -93,9 +95,11 @@ namespace DatabaseCodeGenerator.Schema
         public string options = string.Empty;
         [XmlAttribute]
         public string arguments = string.Empty;
-    }
+		[XmlAttribute]
+		public string tooltip = string.Empty;
+	}
 
-    [XmlRoot("data")]
+	[XmlRoot("data")]
     public class XmlClassItem
     {
         [XmlAttribute]

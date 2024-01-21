@@ -100,22 +100,41 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 	
 		foreach (var item in EnumData.items) 
 		{
+			if (!string.IsNullOrEmpty(item.tooltip))
+			{
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t[TooltipText(\"");
+            
+            #line 14 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.tooltip));
+            
+            #line default
+            #line hidden
+            this.Write("\")]\r\n");
+            
+            #line 15 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+
+			}
+
 			if (string.IsNullOrEmpty(item.value)) 
-			{ 
+			{
 
             
             #line default
             #line hidden
             this.Write("\t\t");
             
-            #line 14 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+            #line 21 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name + ","));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 15 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+            #line 22 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
 	
 			} else { 
 
@@ -124,14 +143,14 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             #line hidden
             this.Write("\t\t");
             
-            #line 18 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+            #line 25 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.name + " = " + item.value + ","));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 19 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
+            #line 26 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\EnumTemplate.tt"
  
 			}
 		}
