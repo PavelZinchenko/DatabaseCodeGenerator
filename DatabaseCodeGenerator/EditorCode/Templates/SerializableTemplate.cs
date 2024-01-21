@@ -128,7 +128,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             
             #line default
             #line hidden
-            this.Write("\tpublic struct ");
+            this.Write("\tpublic class ");
             
             #line 18 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\EditorCode\Templates\SerializableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.SerializableClassName(ObjectData.name)));
@@ -409,7 +409,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
 				var dataClass = schema.GetStruct(member.typeid);
-				WriteLine(prefix + Utils.DataClassName(dataClass) + " " + memberName + " = new " + Utils.DataClassName(dataClass) + "()" + suffix);
+				WriteLine($"{prefix}ObjectWrapper<{Utils.DataClassName(dataClass)}> {memberName}{suffix}");
 			}
 			else if (member.type == Constants.TypeStructList)
 			{
@@ -457,9 +457,8 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				case Constants.TypeObjectList:
 				case Constants.TypeStructList:
 				case Constants.TypeEnumFlags:
-					return "null";
 				case Constants.TypeStruct:
-					return "new " + Utils.SerializableClassName(member.typeid) + "()";
+					return "null";
 				default:
 					throw new InvalidSchemaException("Invalid class member type - " + member.type);
 			}
@@ -489,7 +488,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine("serializable." + member.name + " = " + memberName + "." + Utils.StructSerializationMethodName + "();");
+                WriteLine($"serializable.{member.name} = {memberName}.Value?.{Utils.StructSerializationMethodName}();");
             }
             else if (member.type == Constants.TypeStructList)
             {
@@ -555,13 +554,12 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = new " + Utils.DataClassName(dataClass) + "(serializable." + member.name + ", database);");
+                WriteLine($"{memberName} = new ObjectWrapper<{Utils.DataClassName(dataClass)}>({Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.Create(serializable.{member.name}, database), {Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.DefaultValue);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new " + 
-					Utils.DataClassName(dataClass) + "(item, database)).ToArray();");
+                WriteLine($"{memberName} = serializable.{member.name}?.Select(item => {Utils.DataClassName(dataClass)}.Create(item, database)).ToArray();");
             }
 			else if (member.type == Constants.TypeEnumFlags)
 			{

@@ -225,7 +225,7 @@
 					throw new InvalidSchemaException("Unknown struct type in class member " + member.name);
 
 				var dataClass = schema.GetStruct(member.typeid);
-				WriteLine(prefix + Utils.DataClassName(dataClass) + " " + memberName + " = new " + Utils.DataClassName(dataClass) + "()" + suffix);
+				WriteLine($"{prefix}ObjectWrapper<{Utils.DataClassName(dataClass)}> {memberName}{suffix}");
 			}
 			else if (member.type == Constants.TypeStructList)
 			{
@@ -273,9 +273,8 @@
 				case Constants.TypeObjectList:
 				case Constants.TypeStructList:
 				case Constants.TypeEnumFlags:
-					return "null";
 				case Constants.TypeStruct:
-					return "new " + Utils.SerializableClassName(member.typeid) + "()";
+					return "null";
 				default:
 					throw new InvalidSchemaException("Invalid class member type - " + member.type);
 			}
@@ -305,7 +304,7 @@
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine("serializable." + member.name + " = " + memberName + "." + Utils.StructSerializationMethodName + "();");
+                WriteLine($"serializable.{member.name} = {memberName}.Value?.{Utils.StructSerializationMethodName}();");
             }
             else if (member.type == Constants.TypeStructList)
             {
@@ -371,13 +370,12 @@
             else if (member.type == Constants.TypeStruct)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = new " + Utils.DataClassName(dataClass) + "(serializable." + member.name + ", database);");
+                WriteLine($"{memberName} = new ObjectWrapper<{Utils.DataClassName(dataClass)}>({Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.Create(serializable.{member.name}, database), {Utils.ClassesNamespace}.{Utils.DataClassName(dataClass)}.DefaultValue);");
             }
             else if (member.type == Constants.TypeStructList)
             {
 				var dataClass = schema.GetStruct(member.typeid);
-                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new " + 
-					Utils.DataClassName(dataClass) + "(item, database)).ToArray();");
+                WriteLine($"{memberName} = serializable.{member.name}?.Select(item => {Utils.DataClassName(dataClass)}.Create(item, database)).ToArray();");
             }
 			else if (member.type == Constants.TypeEnumFlags)
 			{

@@ -116,7 +116,7 @@ namespace <#= Utils.RootNamespace #>
 		foreach (var item in Schema.Configurations)
         {
 #>
-		public <#= Utils.DataClassName(item) #> <#= item.name #> => <#= SettingsDataMember(item.name) #> ?? (<#= SettingsDataMember(item.name) #> = new <#= Utils.DataClassName(item) #>(_content.<#= item.name #>, this));
+		public <#= Utils.DataClassName(item) #> <#= item.name #> => <#= SettingsDataMember(item.name) #> ?? (<#= SettingsDataMember(item.name) #> = <#= Utils.DataClassName(item) #>.Create(_content.<#= item.name #>, this));
 <#
         }
 #>
@@ -131,7 +131,7 @@ namespace <#= Utils.RootNamespace #>
             if (!<#= DataMember(item.name) #>.TryGetValue(id, out var item))
             {
                 var serializable = _content.<#= Utils.ObjectGetterName(item.name) #>(id);
-                item = new <#= Utils.DataClassName(item) #>(serializable, this);
+                item = <#= Utils.DataClassName(item) #>.Create(serializable, this);
                 <#= DataMember(item.name) #>.Add(id, item);
             }
             return item;

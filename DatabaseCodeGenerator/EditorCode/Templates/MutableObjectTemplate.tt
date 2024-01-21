@@ -46,12 +46,18 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 			}
 		}
 
+		public static <#= Utils.DataClassName(ObjectData) #> Create(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		{
+			if (serializable == null) return DefaultValue;
+			return new <#= Utils.DataClassName(ObjectData) #>(serializable, database);
+		}
+
 		public <#= Utils.DataClassName(ObjectData) #>()
 		{
 			_content = new <#= EmptyClassName() #>();
 		}
 
-		public <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
+		private <#= Utils.DataClassName(ObjectData) #>(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #> database)
 		{
 <#
 			if (ObjectType == ObjectType.Class)

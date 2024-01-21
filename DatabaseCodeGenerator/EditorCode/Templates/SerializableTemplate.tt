@@ -15,7 +15,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.SerializableNamespace #>
 	if (ObjectType == ObjectType.Struct)
     {
 #>
-	public struct <#= Utils.SerializableClassName(ObjectData.name) #>
+	public class <#= Utils.SerializableClassName(ObjectData.name) #>
 <#
     } else {
 #>
