@@ -170,7 +170,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
         foreach (var item in ObjectData.members)
         {
             if (!members.Add(item.name)) continue;
-			WriteSerializableClassMember(item, Schema, ObjectType != ObjectType.Struct);
+			WriteSerializableClassMember(item, Schema, true);
         }
 
 		PopIndent();
@@ -437,6 +437,12 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 		private string GetSerializableDefaultValue(XmlClassMember member, DatabaseSchema schema)
         {
+			var defaultValue = GetDefaultValue(member, schema);
+			if (!string.IsNullOrEmpty(defaultValue))
+			{
+				return IsStringType(member) ? $"\"{defaultValue}\"" : defaultValue;
+			}
+
 			switch (member.type)
 			{
 				case Constants.TypeInt:

@@ -100,8 +100,10 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 		}
 #>
 <#
+			var members = new HashSet<string>();
 			foreach (var item in ObjectData.members)
             {
+	            if (!members.Add(item.name)) continue;
 				if (baseMembers.Contains(item)) continue;
 #>
 			serializable.<#= item.name #> = <#= GetSerializableDefaultValue(item, Schema) #>;

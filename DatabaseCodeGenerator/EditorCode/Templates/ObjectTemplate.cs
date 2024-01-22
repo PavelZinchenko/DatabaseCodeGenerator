@@ -670,6 +670,12 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 		private string GetSerializableDefaultValue(XmlClassMember member, DatabaseSchema schema)
         {
+			var defaultValue = GetDefaultValue(member, schema);
+			if (!string.IsNullOrEmpty(defaultValue))
+			{
+				return IsStringType(member) ? $"\"{defaultValue}\"" : defaultValue;
+			}
+
 			switch (member.type)
 			{
 				case Constants.TypeInt:
