@@ -70,7 +70,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 		PopIndent();
 #>
 
-		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
+		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }<#= ObjectType == ObjectType.Struct ? "= new(new(), null);" : "" #>
 <#
 		if (hasExpression)
 		{

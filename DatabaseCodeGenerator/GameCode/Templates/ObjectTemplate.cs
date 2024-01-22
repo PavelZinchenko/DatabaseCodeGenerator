@@ -313,7 +313,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" DefaultValue { get; private set; }\r\n");
+            this.Write(" DefaultValue { get; private set; }");
+            
+            #line 73 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ObjectType == ObjectType.Struct ? "= new(new(), null);" : ""));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
             
             #line 74 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\ObjectTemplate.tt"
 

@@ -42,7 +42,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 #>
 		public readonly <#= ObjectData.name #>Stats Stats;
 
-		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }
+		public static <#= Utils.DataClassName(ObjectData) #> DefaultValue { get; private set; }<#= ObjectType == ObjectType.Struct ? " = new(new(), null);" : "" #>
 	}
 
 	public partial struct <#= ObjectData.name #>Stats 

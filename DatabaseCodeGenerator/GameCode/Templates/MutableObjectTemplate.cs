@@ -366,7 +366,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" DefaultValue { get; private set; }\r\n\t}\r\n\r\n\tpublic interface ");
+            this.Write(" DefaultValue { get; private set; }");
+            
+            #line 88 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ObjectType == ObjectType.Struct ? " = Create(new(), null);" : ""));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t}\r\n\r\n\tpublic interface ");
             
             #line 91 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(factoryName));

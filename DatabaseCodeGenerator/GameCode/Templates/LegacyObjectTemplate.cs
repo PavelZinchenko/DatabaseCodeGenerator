@@ -273,7 +273,14 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write(" DefaultValue { get; private set; }\r\n\t}\r\n\r\n\tpublic partial struct ");
+            this.Write(" DefaultValue { get; private set; }");
+            
+            #line 45 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ObjectType == ObjectType.Struct ? " = new(new(), null);" : ""));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t}\r\n\r\n\tpublic partial struct ");
             
             #line 48 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\LegacyObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ObjectData.name));
