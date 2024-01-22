@@ -598,11 +598,11 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
     if (member.type == Constants.TypeObject)
     {
 		var dataClass = schema.GetObject(member.typeid);
-        WriteLine(memberName + " = loader." + Utils.ObjectGetterName(member.typeid) + "(new ItemId<" + Utils.DataClassName(dataClass) + ">(serializable." + member.name + "));");
+        WriteLine($"{memberName} = loader?.{Utils.ObjectGetterName(member.typeid)}(new ItemId<{Utils.DataClassName(dataClass)}>(serializable.{member.name})) ?? {Utils.DataClassName(dataClass)}.DefaultValue;");
 		if (notnull)
 		{
-			WriteLine("if (" + memberName + " == null)");
-			WriteLine("    throw new DatabaseException(this.GetType().Name + \"." + memberName + " cannot be null - \" + serializable." + member.name + ");");
+			WriteLine($"if (loader != null && {memberName} == null)");
+			WriteLine($"    throw new DatabaseException(\"{this.GetType().Name}.{memberName} cannot be null - \" + serializable.{member.name});");
         }
     }
     else if (member.type == Constants.TypeObjectList)
