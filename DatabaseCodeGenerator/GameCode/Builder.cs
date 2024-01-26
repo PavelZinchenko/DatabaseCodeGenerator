@@ -15,8 +15,6 @@ namespace DatabaseCodeGenerator.GameCode
 
         public void Build()
         {
-            _codeWriter.DeleteGeneratedFiles();
-
             GenerateTypes();
             GenerateDatabase();
 
@@ -43,6 +41,8 @@ namespace DatabaseCodeGenerator.GameCode
                 GenerateSerializableClass(item, ObjectType.Configuration);
                 GenerateDataClass(item, ObjectType.Configuration);
             }
+            
+            _codeWriter.DeleteOldFiles();
         }
 
         private void GenerateTypes()

@@ -17,14 +17,14 @@ namespace DatabaseCodeGenerator.MigrationCode
 
         public void Build()
         {
-            _codeWriter.DeleteGeneratedFiles();
-
             GenerateCommonCode();
 
             foreach (var version in _versionList.Items)
             {
                 GenerateSchemaCode(DatabaseSchema.Load(_schemaRootFolder, version));
             }
+            
+            _codeWriter.DeleteOldFiles();
         }
 
         private void GenerateCommonCode()
