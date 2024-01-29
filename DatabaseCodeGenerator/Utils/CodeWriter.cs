@@ -23,12 +23,20 @@ namespace DatabaseCodeGenerator.Utils
             var fullpath = Path.Combine(_rootFolder, ns.Replace(".", "/"));
             Directory.CreateDirectory(fullpath);
             var path = Path.GetFullPath(Path.Combine(fullpath, filename + Ext));
-            // Line endings are a pain on different system, so normalize then for comparison
-            var oldContent = Regex.Replace(File.ReadAllText(path), @"[\r\n]+", "\r\n");
-            var newContent = Regex.Replace(content, @"[\r\n]+", "\r\n");
-            if (oldContent != newContent)
+            if (File.Exists(path))
             {
-                Console.WriteLine($"File updated: {path}");
+                // Line endings are a pain on different system, so normalize then for comparison
+                var oldContent = Regex.Replace(File.ReadAllText(path), @"[\r\n]+", "\r\n");
+                var newContent = Regex.Replace(content, @"[\r\n]+", "\r\n");
+                if (oldContent != newContent)
+                {
+                    Console.WriteLine($"File updated: {path}");
+                    File.WriteAllText(path, content);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"New file: {path}");
                 File.WriteAllText(path, content);
             }
             _writtenFiles.Add(path);
