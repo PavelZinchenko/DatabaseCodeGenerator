@@ -115,7 +115,7 @@ private void WriteVariableResolverResolveFunction(XmlClassMember member)
 	}
 }
 
-private void WriteVariableResolverGetter(XmlClassMember member)
+private void WriteVariableResolverGetter(XmlClassMember member, string contextName = "_context")
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
 
@@ -125,7 +125,7 @@ private void WriteVariableResolverGetter(XmlClassMember member)
 		case Constants.TypeInt:
 		case Constants.TypeFloat:
 		case Constants.TypeBool:
-			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => _context.{memberName};");
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => {contextName}.{memberName};");
 			break;
 		case Constants.TypeEnum:
 			// TODO
