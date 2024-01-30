@@ -156,6 +156,13 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
+            this.Write(" ");
+            
+            #line 21 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(hasExpression ? ": IDefaultVariablesResolver" : ""));
+            
+            #line default
+            #line hidden
             this.Write("\r\n\t{\r\n\t\tpartial void OnDataDeserialized(");
             
             #line 23 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
@@ -376,7 +383,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t\treturn null;\r\n\t\t\t}\r\n\r\n\t\t\tpublic virtual Expression<");
+            this.Write("\t\t\t\treturn ((IVariableResolver)Context).ResolveFunction(name);\r\n\t\t\t}\r\n\r\n\t\t\tpublic virtual Expression<");
             
             #line 100 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Utils.VariantType));
@@ -397,7 +404,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t\treturn null;\r\n\t\t\t}\r\n\r\n");
+            this.Write("\t\t\t\treturn ((IVariableResolver)Context).ResolveVariable(name);\r\n\t\t\t}\r\n\r\n");
             
             #line 113 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\MutableObjectTemplate.tt"
 

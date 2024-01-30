@@ -18,7 +18,7 @@ using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
-	public abstract partial class <#= Utils.DataClassName(ObjectData) #>
+	public abstract partial class <#= Utils.DataClassName(ObjectData) #> <#= hasExpression ? ": IDefaultVariablesResolver" : "" #>
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
@@ -94,7 +94,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 				PopIndent();
 #>
-				return null;
+				return ((IVariableResolver)Context).ResolveFunction(name);
 			}
 
 			public virtual Expression<<#= Utils.VariantType #>> ResolveVariable(string name)
@@ -107,7 +107,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 				PopIndent();
 #>
-				return null;
+				return ((IVariableResolver)Context).ResolveVariable(name);
 			}
 
 <#
