@@ -10,10 +10,15 @@ using System.Linq;
 using <#= Utils.RootNamespace #>.<#= Utils.EnumsNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Utils.SerializableNamespace #>;
 using <#= Utils.RootNamespace #>.<#= Utils.TypesNamespace #>;
+<#
+	var hasExpression = HasExpression(ObjectData);
+	if (hasExpression)
+		WriteLine("using CodeWriter.ExpressionParser;");
+#>
 
 namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 {
-	public abstract partial class <#= Utils.DataClassName(ObjectData) #>
+	public abstract partial class <#= Utils.DataClassName(ObjectData) #> <#= hasExpression ? ": IDefaultVariablesResolver" : "" #>
 	{
 		partial void OnDataDeserialized(<#= Utils.SerializableClassName(ObjectData.name) #> serializable, <#= Utils.DatabaseClassName #>.Loader loader);
 
@@ -58,6 +63,8 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
 			PushIndent("\t\t\t");
 
+			if (hasExpression)
+				WriteLine("var variableResolver = GetVariableResolver();");
 			foreach (var item in baseMembers)
 				WriteDeserializationCode(item, Schema);
 
@@ -66,6 +73,55 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 			OnDataDeserialized(serializable, loader);
 		}
+
+<#
+			if (hasExpression)
+			{
+#>
+		protected abstract IVariableResolver GetVariableResolver();
+
+		protected abstract class BaseVariableResolver : IVariableResolver
+		{
+			protected abstract <#= Utils.DataClassName(ObjectData) #> Context { get; }
+
+			public virtual IFunction<<#= Utils.VariantType #>> ResolveFunction(string name)
+            {
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in baseMembers)
+					WriteVariableResolverResolveFunction(item);
+
+				PopIndent();
+#>
+				return ((IVariableResolver)Context).ResolveFunction(name);
+			}
+
+			public virtual Expression<<#= Utils.VariantType #>> ResolveVariable(string name)
+			{
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in baseMembers)
+					WriteVariableResolverResolve(item);
+
+				PopIndent();
+#>
+				return ((IVariableResolver)Context).ResolveVariable(name);
+			}
+
+<#
+			PushIndent("\t\t\t");
+
+			foreach(var item in baseMembers)
+				WriteVariableResolverGetter(item, "Context");
+
+			PopIndent();
+#>
+		}
+<#
+			}
+#>
 
 <#
 		if (ObjectType == ObjectType.Class)
@@ -114,6 +170,9 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 <#
 			PushIndent("\t\t\t");
 
+			if (hasExpression)
+				WriteLine("var variableResolver = GetVariableResolver();");
+
 			foreach (var item in content.Value)
 				WriteDeserializationCode(item, Schema);
 
@@ -136,6 +195,68 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
 
 		PopIndent();
 #>
+
+<#
+		if (hasExpression)
+		{
+#>
+		private IVariableResolver _iVariableResolver;
+		protected override IVariableResolver GetVariableResolver() {
+			if(_iVariableResolver == null)
+				_iVariableResolver = new VariableResolver(this);
+			return _iVariableResolver;
+		}
+
+		private class VariableResolver : BaseVariableResolver
+		{
+			private <#= ExtraClassName(content.Key) #> _context;
+			
+			protected override <#= Utils.DataClassName(ObjectData) #> Context => _context;
+
+			public VariableResolver(<#= ExtraClassName(content.Key) #> context)
+			{
+				_context = context;
+			}
+
+			public override IFunction<<#= Utils.VariantType #>> ResolveFunction(string name)
+            {
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach (var item in content.Value)
+					WriteVariableResolverResolveFunction(item);
+
+				PopIndent();
+#>
+				return base.ResolveFunction(name);
+			}
+
+			public override Expression<<#= Utils.VariantType #>> ResolveVariable(string name)
+			{
+<#
+				PushIndent("\t\t\t\t");
+
+				foreach(var item in content.Value)
+					WriteVariableResolverResolve(item);
+
+				PopIndent();
+#>
+				return base.ResolveVariable(name);
+			}
+
+<#
+			PushIndent("\t\t\t");
+
+			foreach(var item in content.Value)
+				WriteVariableResolverGetter(item);
+
+			PopIndent();
+#>
+		}
+<#
+		}
+#>
+
     }
 <#
 	}
