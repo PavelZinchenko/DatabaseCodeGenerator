@@ -395,6 +395,10 @@ private string GetFuncParamType(XmlExpressionParam member, DatabaseSchema schema
 	{
 		return Constants.TypeBool;
 	}
+	else if (member.type == Constants.TypeChar)
+	{
+		return Constants.TypeChar;
+	}
 	else if (member.type == Constants.TypeFormula)
 	{
 		if (!schema.HasExpression(member.typeid))
@@ -471,7 +475,7 @@ private void WriteVariableResolverResolveFunction(XmlClassMember member)
 	}
 }
 
-private void WriteVariableResolverGetter(XmlClassMember member)
+private void WriteVariableResolverGetter(XmlClassMember member, string contextName = "_context")
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
 
@@ -481,7 +485,7 @@ private void WriteVariableResolverGetter(XmlClassMember member)
 		case Constants.TypeInt:
 		case Constants.TypeFloat:
 		case Constants.TypeBool:
-			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => _context.{memberName};");
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => {contextName}.{memberName};");
 			break;
 		case Constants.TypeEnum:
 			// TODO
@@ -571,6 +575,10 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
     {
         member.MinMaxInt(out var minvalue, out var maxvalue);
         WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
+    }
+    else if (member.type == Constants.TypeChar)
+    {
+        WriteLine(memberName + " = string.IsNullOrEmpty(serializable." + member.name + ") ? default : serializable." + member.name + "[0];");
     }
     else if (member.type == Constants.TypeFloat)
     {
@@ -678,6 +686,10 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 	else if (member.type == Constants.TypeBool)
 	{
 		WriteLine(prefix + "bool " + memberName + suffix);
+	}
+	else if (member.type == Constants.TypeChar)
+	{
+		WriteLine(prefix + "char " + memberName + suffix);
 	}
 	else if (member.type == Constants.TypeString)
 	{
@@ -798,7 +810,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

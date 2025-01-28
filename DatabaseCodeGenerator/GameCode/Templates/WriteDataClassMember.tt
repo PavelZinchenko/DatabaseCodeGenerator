@@ -37,6 +37,10 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 	{
 		WriteLine(prefix + "bool " + memberName + suffix);
 	}
+	else if (member.type == Constants.TypeChar)
+	{
+		WriteLine(prefix + "char " + memberName + suffix);
+	}
 	else if (member.type == Constants.TypeString)
 	{
 		WriteLine(prefix + "string " + memberName + suffix);

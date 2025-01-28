@@ -460,6 +460,10 @@ private string GetFuncParamType(XmlExpressionParam member, DatabaseSchema schema
 	{
 		return Constants.TypeBool;
 	}
+	else if (member.type == Constants.TypeChar)
+	{
+		return Constants.TypeChar;
+	}
 	else if (member.type == Constants.TypeFormula)
 	{
 		if (!schema.HasExpression(member.typeid))
@@ -536,7 +540,7 @@ private void WriteVariableResolverResolveFunction(XmlClassMember member)
 	}
 }
 
-private void WriteVariableResolverGetter(XmlClassMember member)
+private void WriteVariableResolverGetter(XmlClassMember member, string contextName = "_context")
 {
 	if (member.options.Contains(Constants.OptionObsolete)) return;
 
@@ -546,7 +550,7 @@ private void WriteVariableResolverGetter(XmlClassMember member)
 		case Constants.TypeInt:
 		case Constants.TypeFloat:
 		case Constants.TypeBool:
-			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => _context.{memberName};");
+			WriteLine($"private {Utils.VariantType} {Utils.GetterName(memberName)}() => {contextName}.{memberName};");
 			break;
 		case Constants.TypeEnum:
 			// TODO
@@ -601,7 +605,7 @@ private string GetFuncParamList(XmlExpressionItem expression, string paramNames 
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

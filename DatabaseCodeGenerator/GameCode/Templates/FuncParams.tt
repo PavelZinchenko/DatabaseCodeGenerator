@@ -39,6 +39,10 @@ private string GetFuncParamType(XmlExpressionParam member, DatabaseSchema schema
 	{
 		return Constants.TypeBool;
 	}
+	else if (member.type == Constants.TypeChar)
+	{
+		return Constants.TypeChar;
+	}
 	else if (member.type == Constants.TypeFormula)
 	{
 		if (!schema.HasExpression(member.typeid))

@@ -56,6 +56,10 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
         member.MinMaxInt(out var minvalue, out var maxvalue);
         WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
     }
+    else if (member.type == Constants.TypeChar)
+    {
+        WriteLine(memberName + " = string.IsNullOrEmpty(serializable." + member.name + ") ? default : serializable." + member.name + "[0];");
+    }
     else if (member.type == Constants.TypeFloat)
     {
         member.MinMaxFloat(out var minvalue, out var maxvalue);

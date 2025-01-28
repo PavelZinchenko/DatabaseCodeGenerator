@@ -799,6 +799,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				case Constants.TypePrefab:
 				case Constants.TypeLayout:
 				case Constants.TypeFormula:
+				case Constants.TypeChar:
 					return true;
 				default:
 					return false;
@@ -833,6 +834,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 			else if (member.type == Constants.TypeBool)
 			{
 				WriteLine("public bool " + member.name + assignDefaultValue + ";");
+			}
+			else if (member.type == Constants.TypeChar)
+			{
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
 			}
 			else if (member.type == Constants.TypeString)
 			{
@@ -937,6 +942,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 			else if (member.type == Constants.TypeBool)
 			{
 				WriteLine(prefix + "bool " + memberName + suffix);
+			}
+			else if (member.type == Constants.TypeChar)
+			{
+				WriteLine(prefix + "char " + memberName + suffix);
 			}
 			else if (member.type == Constants.TypeString)
 			{
@@ -1048,6 +1057,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				case Constants.TypeAudioClip:
 				case Constants.TypePrefab:
 				case Constants.TypeLayout:
+				case Constants.TypeChar:
 					return "string.Empty";
 				case Constants.TypeVector:
 					return "Vector2.Zero";
@@ -1106,6 +1116,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
             else if (member.type == Constants.TypeInt)
             {
                 WriteLine("serializable." + member.name + " = " + memberName + ".Value;");
+            }
+            else if (member.type == Constants.TypeChar)
+            {
+                WriteLine("serializable." + member.name + " = " + memberName + " == default ? string.Empty : " + memberName + ".ToString();");
             }
             else if (member.type == Constants.TypeFloat)
             {
@@ -1167,6 +1181,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
                 member.MinMaxInt(out var minvalue, out var maxvalue);
                 WriteLine(memberName + " = new NumericValue<int>(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
             }
+            else if (member.type == Constants.TypeChar)
+            {
+                WriteLine(memberName + " = string.IsNullOrEmpty(serializable." + member.name + ") ? default : serializable." + member.name + "[0];");
+            }
             else if (member.type == Constants.TypeFloat)
             {
                 member.MinMaxFloat(out var minvalue, out var maxvalue);
@@ -1212,7 +1230,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

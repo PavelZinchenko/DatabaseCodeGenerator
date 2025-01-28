@@ -281,6 +281,10 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
 			{
 				WriteLine("public bool " + member.name + assignDefaultValue + ";");
 			}
+			else if (member.type == Constants.TypeChar)
+			{
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
+			}
 			else if (member.type == Constants.TypeString)
 			{
 				WriteLine("public string " + member.name + assignDefaultValue + ";");
@@ -387,7 +391,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

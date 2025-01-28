@@ -61,6 +61,10 @@
 			{
 				WriteLine("public bool " + member.name + assignDefaultValue + ";");
 			}
+			else if (member.type == Constants.TypeChar)
+			{
+				WriteLine("public string " + member.name + assignDefaultValue + ";");
+			}
 			else if (member.type == Constants.TypeString)
 			{
 				WriteLine("public string " + member.name + assignDefaultValue + ";");
