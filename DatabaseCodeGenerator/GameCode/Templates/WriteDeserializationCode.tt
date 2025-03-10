@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" #>
-<#@ import namespace="Schema" #><#+
+﻿<#@ import namespace="Schema" #><#+
 
 private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
 {
@@ -88,9 +87,18 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
 	else if (member.type == Constants.TypeFormula)
 	{
 		var expression = schema.GetExpression(member.typeid);
-        member.MinMaxInt(out var minvalue, out var maxvalue);
+        var returnType = GetFuncReturnType(expression);
 
-        Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+        if (returnType != Constants.TypeBool)
+        {
+            member.MinMaxInt(out var minvalue, out var maxvalue);
+            Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+        }
+        else
+        {
+            Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, variableResolver)");
+        }
+
         Write(" { ");
         
         var paramNamesArray = member.arguments?.Split(new char[] { ',', ' ' }, System.StringSplitOptions.RemoveEmptyEntries);

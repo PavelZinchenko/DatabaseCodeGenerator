@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" #>
-<#@ import namespace="Schema" #><#+
+﻿<#@ import namespace="Schema" #><#+
 
 private string GetDefaultValue(XmlClassMember member, DatabaseSchema schema)
 {

@@ -182,7 +182,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteSerializableClassMember.tt"
+        #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteSerializableClassMember.tt"
 
 
 private string GetDefaultValue(XmlClassMember member, DatabaseSchema schema)

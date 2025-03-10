@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" #>
-<#@ import namespace="Schema" #><#+
+﻿<#@ import namespace="Schema" #><#+
 
 private bool HasExpression(XmlClassItem objectData)
 {
@@ -68,6 +67,8 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 {
 	if (expression.result == Constants.TypeFloat)
 		return Constants.TypeFloat;
+	else if (expression.result == Constants.TypeBool)
+		return Constants.TypeBool;
 	else
 		return Constants.TypeInt;
 }
@@ -86,6 +87,8 @@ private string VariantToType(string name, string type)
 {
 	if (type == Constants.TypeFloat)
 		return name + ".AsSingle";
+	else if (type == Constants.TypeBool)
+		return name + ".AsBool";
 	else
 		return name + ".AsInt";
 }

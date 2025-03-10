@@ -218,7 +218,7 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\WriteSerializableClassMember.tt"
+        #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\MigrationCode\Templates\WriteSerializableClassMember.tt"
 
 		private string GetDefaultValue(XmlClassMember member, DatabaseSchema schema)
 		{

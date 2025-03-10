@@ -755,7 +755,7 @@ namespace DatabaseCodeGenerator.GameCode.Templates
         #line default
         #line hidden
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\FuncParams.tt"
+        #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\FuncParams.tt"
 
 
 private bool HasExpression(XmlClassItem objectData)
@@ -825,6 +825,8 @@ private string GetFuncReturnType(XmlExpressionItem expression)
 {
 	if (expression.result == Constants.TypeFloat)
 		return Constants.TypeFloat;
+	else if (expression.result == Constants.TypeBool)
+		return Constants.TypeBool;
 	else
 		return Constants.TypeInt;
 }
@@ -843,6 +845,8 @@ private string VariantToType(string name, string type)
 {
 	if (type == Constants.TypeFloat)
 		return name + ".AsSingle";
+	else if (type == Constants.TypeBool)
+		return name + ".AsBool";
 	else
 		return name + ".AsInt";
 }
@@ -919,7 +923,7 @@ private string GetFuncParamList(XmlExpressionItem expression, string paramNames 
         #line default
         #line hidden
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteDeserializationCode.tt"
+        #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteDeserializationCode.tt"
 
 
 private void WriteDeserializationCode(XmlClassMember member, DatabaseSchema schema)
@@ -1009,9 +1013,18 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
 	else if (member.type == Constants.TypeFormula)
 	{
 		var expression = schema.GetExpression(member.typeid);
-        member.MinMaxInt(out var minvalue, out var maxvalue);
+        var returnType = GetFuncReturnType(expression);
 
-        Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+        if (returnType != Constants.TypeBool)
+        {
+            member.MinMaxInt(out var minvalue, out var maxvalue);
+            Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, {minvalue}, {maxvalue}, variableResolver)");
+        }
+        else
+        {
+            Write($"{Utils.PrivateMemberName(memberName)} = new {Utils.ExpressionsNamespace}.{Utils.ExpressionClassName(expression)}(serializable.{member.name}, variableResolver)");
+        }
+
         Write(" { ");
         
         var paramNamesArray = member.arguments?.Split(new char[] { ',', ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -1049,7 +1062,7 @@ private static string GetterName(string name)
         #line default
         #line hidden
         
-        #line 2 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteDataClassMember.tt"
+        #line 1 "D:\Projects\event-horizon-main\Assets\Modules\Database\.CodeGenerator\DatabaseCodeGenerator\GameCode\Templates\WriteDataClassMember.tt"
 
 
 private void WriteDataClassMember(XmlClassMember member, DatabaseSchema schema)

@@ -54,6 +54,10 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 		}
 
 
+<#
+        if (returnType != Constants.TypeBool)
+        {
+#>
 		public <#= Utils.ExpressionClassName(ExpressionData) #>(string data, <#= returnType #> minvalue, <#= returnType #> maxvalue, IVariableResolver variableResolver)
 		{
 			_expressionText = data;
@@ -61,6 +65,19 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 			_maxvalue = maxvalue;
 			_variableResolver = variableResolver;
 		}
+<#
+        }
+        else
+        {
+#>
+		public <#= Utils.ExpressionClassName(ExpressionData) #>(string data, IVariableResolver variableResolver)
+		{
+			_expressionText = data;
+			_variableResolver = variableResolver;
+		}
+<#
+        }
+#>
 
 		public <#= returnType #> Evaluate(<#= GetFuncParamList(ExpressionData) #>)
 		{
@@ -77,8 +94,15 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 
 		private <#= returnType #> ClampResult(<#= returnType #> value)
 		{
+<#
+            if (returnType != Constants.TypeBool)
+            {
+#>
 			if (value < _minvalue) return _minvalue;
 			if (value > _maxvalue) return _maxvalue;
+<#
+            }
+#>
 			return value;
 		}
 
@@ -116,10 +140,16 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ExpressionsNamespace #>
 		private IVariableResolver _variableResolver;
 		private Expression<<#= Utils.VariantType #>> _expression;
 		private string _expressionText;
+<#
+        if (returnType != Constants.TypeBool)
+        {
+#>
 		private <#= returnType #> _minvalue;
 		private <#= returnType #> _maxvalue;
 
 <#
+        }
+
 		foreach(var item in ExpressionData.items)
 		{
 #>
