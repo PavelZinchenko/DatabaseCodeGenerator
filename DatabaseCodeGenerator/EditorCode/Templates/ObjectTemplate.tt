@@ -24,7 +24,7 @@ namespace <#= Utils.RootNamespace #>.<#= Utils.ClassesNamespace #>
         {
 #>
 
-		public <#= Utils.DataClassName(ObjectData) #>() {}
+		public <#= Utils.DataClassName(ObjectData) #>() : this(new <#= Utils.SerializableClassName(ObjectData.name) #>(), null) {}
 <#
         }
 #>
