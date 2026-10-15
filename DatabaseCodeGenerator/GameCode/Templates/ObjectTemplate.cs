@@ -645,7 +645,7 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
     else if (member.type == Constants.TypeInt)
     {
         member.MinMaxInt(out var minvalue, out var maxvalue);
-        WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
+        WriteLine(memberName + " = Utilites.MathEx.Clamp(serializable." + member.name + ", " + minvalue + ", " + maxvalue + ");");
     }
     else if (member.type == Constants.TypeChar)
     {
@@ -654,7 +654,7 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
     else if (member.type == Constants.TypeFloat)
     {
         member.MinMaxFloat(out var minvalue, out var maxvalue);
-        WriteLine(memberName + " = UnityEngine.Mathf.Clamp(serializable." + member.name + ", " + minvalue + "f, " + maxvalue + "f);");
+        WriteLine(memberName + " = Utilites.MathEx.Clamp(serializable." + member.name + ", " + minvalue + "f, " + maxvalue + "f);");
     }
     else if (member.type == Constants.TypeColor)
     {
@@ -797,7 +797,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 	}
 	else if (member.type == Constants.TypeVector)
 	{
-		WriteLine(prefix + "UnityEngine.Vector2 " + memberName + suffix);
+		WriteLine(prefix + Utils.VectorType + " " + memberName + suffix);
 	}
 	else if (member.type == Constants.TypeFormula)
 	{

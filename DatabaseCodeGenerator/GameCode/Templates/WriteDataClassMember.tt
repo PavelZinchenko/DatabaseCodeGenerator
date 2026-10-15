@@ -66,7 +66,7 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 	}
 	else if (member.type == Constants.TypeVector)
 	{
-		WriteLine(prefix + "UnityEngine.Vector2 " + memberName + suffix);
+		WriteLine(prefix + Utils.VectorType + " " + memberName + suffix);
 	}
 	else if (member.type == Constants.TypeFormula)
 	{
