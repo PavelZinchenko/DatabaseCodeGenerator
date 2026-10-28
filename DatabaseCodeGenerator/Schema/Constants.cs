@@ -14,6 +14,7 @@
         public const string TypeEnumFlags = "enum_flags";
         public const string TypeImage = "image";
         public const string TypeVector = "vector";
+        public const string TypeVectorList = "vector_list";
         public const string TypeColor = "color";
         public const string TypeLayout = "layout";
         public const string TypeAudioClip = "audioclip";

@@ -352,6 +352,13 @@ namespace DatabaseCodeGenerator.MigrationCode.Templates
 
 				WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + assignDefaultValue + ";");
 			}
+			else if (member.type == Constants.TypeVectorList)
+			{
+				if (!string.IsNullOrEmpty(member.@default))
+					throw new InvalidSchemaException("vector_list has no default value - " + member.name);
+
+				WriteLine($"public {Context.VectorType}[] {member.name};");
+			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
 				if (!schema.HasEnum(member.typeid))

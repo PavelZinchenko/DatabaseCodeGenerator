@@ -638,6 +638,10 @@ private void WriteDeserializationCode(string memberName, XmlClassMember member, 
         WriteLine(memberName + " = new ImmutableCollection<" + Utils.DataClassName(dataClass) + ">(" + "serializable." + member.name + 
 			"?.Select(item => " + Utils.DataClassName(dataClass) + "." + Utils.FactoryMethodName + "(item, loader)));");
     }
+	else if (member.type == Constants.TypeVectorList)
+	{
+        WriteLine(memberName + " = new ImmutableCollection<" + Utils.VectorType + ">(serializable." + member.name + ");");
+	}
 	else if (member.type == Constants.TypeEnumFlags)
 	{
         WriteLine(memberName + " = new ImmutableSet<" + member.typeid + ">(" + "serializable." + member.name + ");");
@@ -849,6 +853,10 @@ private void WriteDataClassMember(string memberName, string prefix, string suffi
 		var dataClass = schema.GetStruct(member.typeid);
 
 		WriteLine(prefix + "ImmutableCollection<" + Utils.DataClassName(dataClass) + "> " + memberName + suffix);
+	}
+	else if (member.type == Constants.TypeVectorList)
+	{
+		WriteLine(prefix + "ImmutableCollection<" + Utils.VectorType + "> " + memberName + suffix);
 	}
 	else if (member.type == Constants.TypeEnumFlags)
 	{

@@ -317,6 +317,13 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 				WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + assignDefaultValue + ";");
 			}
+			else if (member.type == Constants.TypeVectorList)
+			{
+				if (!string.IsNullOrEmpty(member.@default))
+					throw new InvalidSchemaException("vector_list has no default value - " + member.name);
+
+				WriteLine($"public {Utils.VectorType}[] {member.name};");
+			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
 				if (!schema.HasEnum(member.typeid))
@@ -431,6 +438,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 
 				WriteLine(prefix + Utils.DataClassName(dataClass) + "[] " + memberName + suffix);
 			}
+			else if (member.type == Constants.TypeVectorList)
+			{
+				WriteLine(prefix + "ValueWrapper<" + Utils.VectorType + ">[] " + memberName + suffix);
+			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
 				if (!schema.HasEnum(member.typeid))
@@ -474,6 +485,7 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 					return "Vector2.Zero";
 				case Constants.TypeObjectList:
 				case Constants.TypeStructList:
+				case Constants.TypeVectorList:
 				case Constants.TypeEnumFlags:
 				case Constants.TypeStruct:
 					return "null";
@@ -517,6 +529,13 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
                 WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item." +
 					Utils.StructSerializationMethodName + "()).ToArray();");
             }
+			else if (member.type == Constants.TypeVectorList)
+			{
+                WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
+                WriteLine("    serializable." + member.name + " = null;");
+                WriteLine("else");
+                WriteLine("    serializable." + member.name + " = " + memberName + ".Select(item => item.Value).ToArray();");
+			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
                 WriteLine("if (" + memberName + " == null || " + memberName + ".Length == 0)");
@@ -583,6 +602,10 @@ namespace DatabaseCodeGenerator.EditorCode.Templates
 				var dataClass = schema.GetStruct(member.typeid);
                 WriteLine($"{memberName} = serializable.{member.name}?.Select(item => {Utils.DataClassName(dataClass)}.Create(item, database)).ToArray();");
             }
+			else if (member.type == Constants.TypeVectorList)
+			{
+                WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new ValueWrapper<" + Utils.VectorType + "> { Value = item }).ToArray();");
+			}
 			else if (member.type == Constants.TypeEnumFlags)
 			{
                 WriteLine(memberName + " = serializable." + member.name + "?.Select(item => new ValueWrapper<" + member.typeid + "> { Value = item }).ToArray();");

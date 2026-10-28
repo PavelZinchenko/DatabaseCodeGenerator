@@ -307,6 +307,13 @@ private void WriteSerializableClassMember(XmlClassMember member, DatabaseSchema 
 
 		WriteLine("public " + Utils.SerializableClassName(member.typeid) + "[] " + member.name + ";");
 	}
+	else if (member.type == Constants.TypeVectorList)
+	{
+		if (!string.IsNullOrEmpty(member.@default))
+			throw new InvalidSchemaException("vector_list has no default value - " + member.name);
+
+		WriteLine($"public {Utils.VectorType}[] {member.name};");
+	}
 	else if (member.type == Constants.TypeEnumFlags)
 	{
 		if (!schema.HasEnum(member.typeid))
